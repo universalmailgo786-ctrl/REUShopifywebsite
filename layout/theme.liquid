@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    <title>{{ page_title }}{% if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.page' | t }} {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    <script>document.documentElement.className = document.documentElement.className.replace('no-js','js');</script>
+
+    {%- comment -%} Brand design tokens driven by Theme Settings {%- endcomment -%}
+    <style>
+      :root{
+        --color-green: {{ settings.color_green }};
+        --color-rose: {{ settings.color_rose }};
+        --color-mauve: {{ settings.color_mauve }};
+        --color-cream: {{ settings.color_cream }};
+        --color-blush: {{ settings.color_blush }};
+        --color-lilac: {{ settings.color_lilac }};
+        --color-bg: {{ settings.color_bg }};
+        --color-surface: {{ settings.color_surface }};
+        --color-text: {{ settings.color_text }};
+        --color-text-muted: {{ settings.color_text | color_mix: settings.color_bg, 65 }};
+        --color-heading: {{ settings.color_heading }};
+        --color-on-green: {{ settings.color_cream }};
+        --color-line: {{ settings.color_text | color_mix: settings.color_bg, 14 }};
+        --font-display-stack: {{ settings.type_display_fallback }};
+        --font-body-stack: {{ settings.type_body_fallback }};
+      }
+    </style>
+
+    {{ content_for_header }}
+
+    {%- comment -%}
+      Self-host licensed webfonts here when supplied. See LAUNCH_BLOCKERS.md.
+      If Althy / Helvetica Now .woff2 files are added to /assets, uncomment the
+      @font-face blocks in base.css companion and set the stacks in Theme Settings.
+    {%- endcomment -%}
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'components.css' | asset_url | stylesheet_tag }}
+
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  </head>
+
+  <body class="template-{{ request.page_type | handle }}">
+    <a class="skip-link" href="#MainContent">{{ 'accessibility.skip_to_content' | t | default: 'Skip to content' }}</a>
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    {%- comment -%} Cart drawer lives globally so it is reachable from every page {%- endcomment -%}
+    {% section 'cart-drawer' %}
+    <div id="reu-live" class="visually-hidden" aria-live="polite"></div>
+
+    <script>
+      window.REU = window.REU || {};
+      window.REU.routes = {
+        cart_url: "{{ routes.cart_url }}",
+        cart_add_url: "{{ routes.cart_add_url }}",
+        cart_change_url: "{{ routes.cart_change_url }}",
+        predictive_search_url: "{{ routes.predictive_search_url }}"
+      };
+      window.REU.strings = {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        preorder: {{ 'products.product.preorder' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        added: {{ 'products.product.added' | t | json }},
+        cartError: {{ 'sections.cart.error' | t | json }}
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "current": {
+    "brand_tagline": "Live Better. Every Day.",
+    "brand_statement": "<p>REÚ makes daily wellness simple, enjoyable, and designed around women. Live Better. Every Day.</p>",
+    "logo_width": 130,
+    "color_green": "#223829",
+    "color_rose": "#BA6D64",
+    "color_mauve": "#8B6D93",
+    "color_cream": "#E3E1D5",
+    "color_blush": "#F4E2DB",
+    "color_lilac": "#EADEEA",
+    "color_bg": "#FFFFFF",
+    "color_surface": "#FFFFFF",
+    "color_text": "#2C3A30",
+    "color_heading": "#223829",
+    "type_display_fallback": "\"Althy\", \"Cormorant Garamond\", \"Playfair Display\", Georgia, \"Times New Roman\", serif",
+    "type_body_fallback": "\"Helvetica Now\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif",
+    "preorder_mode": true,
+    "preorder_ship_window": "",
+    "support_email": "",
+    "cart_type": "drawer",
+    "cart_show_note": false,
+    "card_show_vendor": false,
+    "card_image_ratio": "square"
+  },
+  "presets": {
+    "REU": {
+      "brand_tagline": "Live Better. Every Day.",
+      "color_green": "#223829",
+      "color_rose": "#BA6D64",
+      "color_mauve": "#8B6D93",
+      "color_cream": "#E3E1D5",
+      "color_blush": "#F4E2DB",
+      "color_lilac": "#EADEEA",
+      "preorder_mode": true
+    }
+  }
+}

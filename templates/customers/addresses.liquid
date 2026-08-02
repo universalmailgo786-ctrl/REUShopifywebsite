@@ -1,0 +1,32 @@
+<section class="section">
+  <div class="wrap wrap--narrow">
+    <a class="link-arrow" href="{{ routes.account_url }}">{% render 'icon', name: 'arrow-left' %} {{ 'customer.account.title' | t }}</a>
+    <h1 class="h2" style="margin:var(--space-md) 0">Addresses</h1>
+
+    {%- paginate customer.addresses by 5 -%}
+      {%- for address in customer.addresses -%}
+        <div class="card" style="padding:var(--space-md);margin-bottom:var(--space-sm)">
+          {%- if address == customer.default_address -%}<span class="badge">Default</span>{%- endif -%}
+          <p style="margin-top:.5rem">{{ address | format_address }}</p>
+        </div>
+      {%- endfor -%}
+    {%- endpaginate -%}
+
+    <details style="margin-top:var(--space-md)">
+      <summary class="btn btn--secondary" style="display:inline-flex">Add a new address</summary>
+      {%- form 'customer_address', customer.new_address -%}
+        <div class="grid cols-2" style="gap:1rem;margin-top:var(--space-md)">
+          <label class="field"><span>First name</span><input class="input" type="text" name="address[first_name]"></label>
+          <label class="field"><span>Last name</span><input class="input" type="text" name="address[last_name]"></label>
+        </div>
+        <label class="field"><span>Address</span><input class="input" type="text" name="address[address1]"></label>
+        <div class="grid cols-2" style="gap:1rem">
+          <label class="field"><span>City</span><input class="input" type="text" name="address[city]"></label>
+          <label class="field"><span>ZIP / Postal</span><input class="input" type="text" name="address[zip]"></label>
+        </div>
+        <label class="field"><span>Country</span><input class="input" type="text" name="address[country]"></label>
+        <button class="btn" type="submit">Save address</button>
+      {%- endform -%}
+    </details>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": { "type": "main-article" },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Newsletter",
+        "heading": "A better routine starts here",
+        "body": "Join the REÚ community for launch updates, wellness guidance, and thoughtful offers.",
+        "bg_scheme": "bg-cream"
+      }
+    }
+  },
+  "order": ["main", "newsletter"]
+}

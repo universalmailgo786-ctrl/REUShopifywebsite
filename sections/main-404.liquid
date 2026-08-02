@@ -1,0 +1,19 @@
+<section class="section bg-blush">
+  <div class="wrap wrap--narrow text-center" style="padding-block:var(--space-2xl)">
+    <p class="eyebrow text-center">404</p>
+    <h1 class="h1">{{ 'general.404.title' | t }}</h1>
+    <p class="lede" style="margin:1rem auto 0;max-width:34rem">{{ 'general.404.subtext' | t }}</p>
+    <form action="{{ routes.search_url }}" method="get" role="search" style="max-width:26rem;margin:1.5rem auto 0;display:flex;gap:.5rem">
+      <label class="visually-hidden" for="Search404">{{ 'general.search.search' | t }}</label>
+      <input class="input" id="Search404" type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}">
+      <button class="btn" type="submit">{{ 'general.search.search' | t }}</button>
+    </form>
+    <div style="display:flex;gap:.5rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap">
+      <a class="btn btn--secondary" href="{{ routes.all_products_collection_url }}">{{ 'general.404.shop' | t }}</a>
+      <a class="btn btn--secondary" href="{{ pages['quiz'].url | default: '/pages/quiz' }}">{{ 'general.404.quiz' | t }}</a>
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "404", "settings": [] }
+{% endschema %}

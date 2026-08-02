@@ -1,0 +1,84 @@
+{%- liquid
+  assign col = collection
+  assign sort_by = col.sort_by | default: col.default_sort_by
+-%}
+<section class="section">
+  <div class="wrap">
+    {% render 'breadcrumbs' %}
+    <div class="section-head">
+      <h1 class="h2">{{ col.title }}</h1>
+      {%- if col.description != blank -%}<div class="lede rte" style="margin-top:.5rem">{{ col.description }}</div>{%- endif -%}
+    </div>
+
+    <div class="collection-layout">
+      {%- comment -%} Desktop facets {%- endcomment -%}
+      <aside class="facets-desktop desktop-only" aria-label="Filters">
+        {% render 'facets', results: col, sort_by: sort_by %}
+      </aside>
+
+      <div>
+        <div class="facets-bar">
+          <button class="btn btn--secondary mobile-only" data-drawer-open="FacetsDrawer" aria-controls="FacetsDrawer">{% render 'icon', name: 'menu' %} {{ 'products.facets.filter_and_sort' | t }}</button>
+          <span class="text-muted">{{ 'products.facets.results' | t: count: col.products_count }}</span>
+          <form method="get" class="desktop-only">
+            {%- for f in col.filters -%}{%- for v in f.active_values -%}<input type="hidden" name="{{ v.param_name }}" value="{{ v.value }}">{%- endfor -%}{%- endfor -%}
+            <label class="visually-hidden" for="SortBy">{{ 'products.facets.sort_by' | t }}</label>
+            <select class="select" id="SortBy" name="sort_by" onchange="this.form.submit()">
+              {%- for option in col.sort_options -%}
+                <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+              {%- endfor -%}
+            </select>
+          </form>
+        </div>
+
+        {%- comment -%} Active filter chips {%- endcomment -%}
+        {%- assign has_active = false -%}
+        {%- for f in col.filters -%}{%- if f.active_values.size > 0 -%}{%- assign has_active = true -%}{%- endif -%}{%- endfor -%}
+        {%- if has_active -%}
+          <div class="active-filters">
+            {%- for f in col.filters -%}
+              {%- for v in f.active_values -%}
+                <a class="filter-chip" href="{{ v.url_to_remove }}">{{ f.label }}: {{ v.label }} {% render 'icon', name: 'close' %}</a>
+              {%- endfor -%}
+            {%- endfor -%}
+            <a class="filter-chip" href="{{ col.url }}">{{ 'products.facets.clear_all' | t }}</a>
+          </div>
+        {%- endif -%}
+
+        {%- if col.products.size > 0 -%}
+          {%- paginate col.products by 24 -%}
+            <div class="grid cols-3" role="list">
+              {%- for product in col.products -%}
+                <div role="listitem">{% render 'product-card', product: product %}</div>
+              {%- endfor -%}
+            </div>
+            {% render 'pagination', paginate: paginate %}
+          {%- endpaginate -%}
+        {%- else -%}
+          <div class="text-center section">
+            <p class="h3">{{ 'products.facets.no_results' | t }}</p>
+            <a class="btn btn--secondary" href="{{ col.url }}" style="margin-top:1rem">{{ 'products.facets.clear_all' | t }}</a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} Mobile filter drawer {%- endcomment -%}
+<div id="FacetsDrawer" class="drawer drawer--right mobile-only" data-drawer hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'products.facets.filter_and_sort' | t }}">
+  <div class="drawer__overlay" data-drawer-overlay></div>
+  <div class="drawer__panel">
+    <div class="drawer__header">
+      <span class="drawer__title">{{ 'products.facets.filter_and_sort' | t }}</span>
+      <button class="header-icon" data-drawer-close="FacetsDrawer" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+    <div class="drawer__body">
+      {% render 'facets', results: col, sort_by: sort_by, mobile: true %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Collection", "settings": [] }
+{% endschema %}

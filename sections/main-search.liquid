@@ -1,0 +1,38 @@
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h1 class="h2">{{ 'general.search.search' | t }}</h1>
+      <form action="{{ routes.search_url }}" method="get" role="search" style="margin-top:1rem;max-width:32rem;display:flex;gap:.5rem">
+        <label class="visually-hidden" for="SearchPage">{{ 'general.search.search' | t }}</label>
+        <input class="input" id="SearchPage" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+        <button class="btn" type="submit">{{ 'general.search.search' | t }}</button>
+      </form>
+    </div>
+
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <p class="text-muted">{{ 'general.search.results_count' | t: count: search.results_count }}</p>
+        {%- paginate search.results by 24 -%}
+          <div class="grid cols-4" style="margin-top:1rem">
+            {%- for item in search.results -%}
+              {%- case item.object_type -%}
+                {%- when 'product' -%}{% render 'product-card', product: item %}
+                {%- when 'article' -%}
+                  <article class="card"><a class="card__media" href="{{ item.url }}" tabindex="-1">{%- if item.image -%}{{ item.image | image_url: width: 500 | image_tag: loading: 'lazy', alt: item.title | escape }}{%- endif -%}</a><div class="card__body"><h2 class="h4"><a href="{{ item.url }}">{{ item.title }}</a></h2></div></article>
+                {%- when 'page' -%}
+                  <a class="card" href="{{ item.url }}"><div class="card__body"><h2 class="h4">{{ item.title }}</h2></div></a>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+          {% render 'pagination', paginate: paginate %}
+        {%- endpaginate -%}
+      {%- else -%}
+        <p class="h3">{{ 'general.search.no_results' | t: terms: search.terms }}</p>
+        <a class="btn btn--secondary" href="{{ routes.all_products_collection_url }}" style="margin-top:1rem">{{ 'general.404.shop' | t }}</a>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

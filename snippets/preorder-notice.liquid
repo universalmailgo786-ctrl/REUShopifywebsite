@@ -1,0 +1,24 @@
+{%- comment -%}
+  Honest pre-order disclosure beside a purchase action.
+  Prefers product metafield; falls back to theme setting. Never invents dates.
+  Params: product
+{%- endcomment -%}
+{%- liquid
+  assign window = product.metafields.custom.preorder_ship_window | default: settings.preorder_ship_window
+  assign email = settings.support_email
+-%}
+<div class="preorder-disclosure" data-preorder-disclosure>
+  {%- if window != blank -%}
+    <p>This is a pre-order item. Estimated shipping: <strong>{{ window }}</strong>.</p>
+  {%- else -%}
+    {%- comment -%} No confirmed date: show editor-only placeholder, never a false promise to customers {%- endcomment -%}
+    {%- if request.design_mode -%}
+      <p><em>⚠ Set an estimated shipping window in Theme settings → Pre-order, or on the product metafield <code>custom.preorder_ship_window</code>. This message is only shown in the editor.</em></p>
+    {%- endif -%}
+    <p>This is a pre-order item and ships from an upcoming production release.</p>
+  {%- endif -%}
+  <p>
+    You may cancel for a full refund any time before shipment
+    {%- if email != blank %} by contacting <a href="mailto:{{ email }}">{{ email }}</a>{% else %} by contacting our support team{% endif -%}.
+  </p>
+</div>

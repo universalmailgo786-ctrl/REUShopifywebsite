@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "main": { "type": "main-product" },
+    "reviews": { "type": "app-reviews", "settings": { "heading": "Reviews" } },
+    "recommendations": { "type": "product-recommendations", "settings": { "heading": "You may also like", "limit": 4 } }
+  },
+  "order": ["main", "reviews", "recommendations"]
+}

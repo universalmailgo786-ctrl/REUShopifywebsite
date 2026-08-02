@@ -1,0 +1,55 @@
+{%- liquid
+  assign s = section.settings
+  assign bg = s.bg_scheme
+-%}
+<section class="hero {{ bg }}">
+  <div class="wrap section">
+    <div class="hero__grid">
+      <div class="hero__content">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h1 class="h1">{{ s.heading }}</h1>{%- endif -%}
+        {%- if s.body != blank -%}<div class="lede" style="margin-top:1rem;max-width:34rem">{{ s.body }}</div>{%- endif -%}
+        <div class="hero__cta">
+          {%- if s.cta_label != blank -%}<a class="btn btn--lg" href="{{ s.cta_link | default: '#' }}">{{ s.cta_label }}</a>{%- endif -%}
+          {%- if s.cta2_label != blank -%}<a class="btn btn--secondary btn--lg" href="{{ s.cta2_link | default: '#' }}">{{ s.cta2_label }}</a>{%- endif -%}
+        </div>
+        {%- if settings.preorder_mode and s.disclosure != blank -%}
+          <p class="hero__disclosure">{{ s.disclosure }}</p>
+        {%- endif -%}
+      </div>
+      <div class="hero__media">
+        {%- if s.image != blank -%}
+          {{ s.image | image_url: width: 1200 | image_tag:
+            widths: '500,700,900,1200',
+            sizes: '(min-width:750px) 50vw, 100vw',
+            loading: 'eager', fetchpriority: 'high',
+            alt: s.image.alt | default: s.heading | escape }}
+        {%- else -%}
+          <img src="{{ 'reu-hero.jpg' | asset_url }}" width="1200" height="1500" alt="{{ s.heading | escape }}" fetchpriority="high">
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "settings": [
+    { "type": "select", "id": "bg_scheme", "label": "Background", "options": [
+      { "value": "bg-blush", "label": "Blush" }, { "value": "bg-cream", "label": "Cream" },
+      { "value": "bg-lilac", "label": "Lilac" }, { "value": "", "label": "White" }
+    ], "default": "bg-blush" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Wellness that moves with you" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Live Better. Every Day." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Premium, great-tasting supplements created for women who want daily wellness to feel simple, enjoyable, and entirely their own.</p>" },
+    { "type": "text", "id": "cta_label", "label": "Primary CTA", "default": "Shop Pre-Order" },
+    { "type": "url", "id": "cta_link", "label": "Primary CTA link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary CTA", "default": "Find My Routine" },
+    { "type": "url", "id": "cta2_link", "label": "Secondary CTA link" },
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "textarea", "id": "disclosure", "label": "Pre-order disclosure", "default": "This is a pre-order item. Cancel for a full refund any time before shipment by contacting our support team." }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

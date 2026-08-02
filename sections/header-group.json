@@ -1,0 +1,20 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "enabled": true,
+        "text": "Pre-orders are now open — reserve your REÚ routine today.",
+        "link_label": "View Pre-Order Details",
+        "link": "shopify://pages/shipping-policy"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": { "menu": "main-menu", "sticky": true }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

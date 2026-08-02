@@ -1,0 +1,46 @@
+{%- comment -%}
+  Storefront filtering UI. Params: results (collection/search), sort_by, mobile (bool)
+  Uses native Shopify filters (collection.filters) — no fake client-side filtering.
+{%- endcomment -%}
+<form method="get">
+  {%- if mobile -%}
+    <div class="facet-group">
+      <label class="option-group__label" for="MobileSort">{{ 'products.facets.sort_by' | t }}</label>
+      <select class="select" id="MobileSort" name="sort_by">
+        {%- for option in results.sort_options -%}
+          <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+        {%- endfor -%}
+      </select>
+    </div>
+  {%- endif -%}
+
+  {%- for f in results.filters -%}
+    {%- case f.type -%}
+      {%- when 'list', 'boolean' -%}
+        <details class="facet-group" {% if f.active_values.size > 0 %}open{% endif %}>
+          <summary>{{ f.label }} {% render 'icon', name: 'chevron-down' %}</summary>
+          <div style="padding-top:.5rem">
+            {%- for v in f.values -%}
+              <label class="facet-option">
+                <input type="checkbox" name="{{ v.param_name }}" value="{{ v.value }}" {% if v.active %}checked{% endif %} {% if v.count == 0 and v.active == false %}disabled{% endif %}>
+                <span>{{ v.label }} <span class="text-muted">({{ v.count }})</span></span>
+              </label>
+            {%- endfor -%}
+          </div>
+        </details>
+      {%- when 'price_range' -%}
+        <details class="facet-group" {% if f.min_value.value or f.max_value.value %}open{% endif %}>
+          <summary>{{ f.label }} {% render 'icon', name: 'chevron-down' %}</summary>
+          <div style="display:flex;gap:.5rem;padding-top:.5rem">
+            <input class="input" type="number" inputmode="decimal" name="{{ f.min_value.param_name }}" value="{{ f.min_value.value | money_without_currency | strip }}" placeholder="{{ 0 | money }}" aria-label="Minimum price">
+            <input class="input" type="number" inputmode="decimal" name="{{ f.max_value.param_name }}" value="{{ f.max_value.value | money_without_currency | strip }}" placeholder="{{ f.range_max | money }}" aria-label="Maximum price">
+          </div>
+        </details>
+    {%- endcase -%}
+  {%- endfor -%}
+
+  <div style="display:flex;gap:.5rem;margin-top:var(--space-md)">
+    <button type="submit" class="btn btn--block">{{ 'products.facets.apply' | t }}</button>
+    <a class="btn btn--secondary" href="{{ results.url }}">{{ 'products.facets.clear' | t }}</a>
+  </div>
+</form>

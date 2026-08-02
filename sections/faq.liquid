@@ -1,0 +1,84 @@
+{%- liquid
+  assign uid = section.id | replace: '-', '' | slice: 0, 8
+-%}
+<section class="section {{ section.settings.bg_scheme }}">
+  <div class="wrap wrap--narrow">
+    <div class="section-head{% if section.settings.center %} section-head--center{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="h2">{{ section.settings.heading }}</h2>
+      {%- if section.settings.body != blank -%}<p class="lede" style="margin-top:.75rem">{{ section.settings.body }}</p>{%- endif -%}
+    </div>
+
+    {%- assign current_cat = '' -%}
+    <div class="accordion" data-accordion>
+      {%- for block in section.blocks -%}
+        {%- if section.settings.show_categories and block.settings.category != blank and block.settings.category != current_cat -%}
+          <h3 class="h4" style="margin:1.5rem 0 .5rem">{{ block.settings.category }}</h3>
+          {%- assign current_cat = block.settings.category -%}
+        {%- endif -%}
+        <div class="accordion__item" {{ block.shopify_attributes }}>
+          <h3>
+            <button class="accordion__trigger" id="faq-t-{{ uid }}-{{ forloop.index }}" aria-expanded="false" aria-controls="faq-p-{{ uid }}-{{ forloop.index }}">
+              <span>{{ block.settings.question }}</span>{% render 'icon', name: 'plus' %}
+            </button>
+          </h3>
+          <div class="accordion__panel" id="faq-p-{{ uid }}-{{ forloop.index }}" role="region" aria-labelledby="faq-t-{{ uid }}-{{ forloop.index }}" hidden style="height:0">
+            <div class="rte">{{ block.settings.answer }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{%- if section.settings.faq_schema -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+    {
+      "@type": "Question",
+      "name": {{ block.settings.question | json }},
+      "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} }
+    }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FAQ" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Questions, answered" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Clear information before you choose." },
+    { "type": "checkbox", "id": "center", "label": "Center header", "default": true },
+    { "type": "checkbox", "id": "show_categories", "label": "Group by category", "default": false },
+    { "type": "checkbox", "id": "faq_schema", "label": "Output FAQ schema", "default": true, "info": "Only enable when the same questions and answers are visible on this page." },
+    { "type": "select", "id": "bg_scheme", "label": "Background", "options": [
+      { "value": "", "label": "White" }, { "value": "bg-cream", "label": "Cream" }
+    ], "default": "" }
+  ],
+  "blocks": [
+    { "type": "qa", "name": "Question", "settings": [
+      { "type": "text", "id": "category", "label": "Category (optional)" },
+      { "type": "text", "id": "question", "label": "Question", "default": "Is REÚ currently available?" },
+      { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>REÚ is currently available for pre-order.</p>" }
+    ]}
+  ],
+  "presets": [{
+    "name": "FAQ",
+    "blocks": [
+      { "type": "qa", "settings": { "question": "Is REÚ currently available?", "answer": "<p>REÚ is currently available for pre-order. The estimated shipping window is shown at checkout and on the Shipping Policy page.</p>" } },
+      { "type": "qa", "settings": { "question": "Can I cancel a pre-order?", "answer": "<p>Yes. Contact our support team before your order ships to request cancellation and a full refund.</p>" } },
+      { "type": "qa", "settings": { "question": "How do I choose the right product?", "answer": "<p>Take our quick Product Recommendation Quiz or explore products by wellness goal.</p>" } },
+      { "type": "qa", "settings": { "question": "Are REÚ products intended to diagnose or treat a condition?", "answer": "<p>No. REÚ products are not intended to diagnose, treat, cure, or prevent any disease. Speak with a qualified healthcare professional if you are pregnant, nursing, taking medication, or managing a health condition.</p>" } }
+    ]
+  }]
+}
+{% endschema %}

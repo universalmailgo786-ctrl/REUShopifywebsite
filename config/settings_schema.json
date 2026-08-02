@@ -1,0 +1,168 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "REU",
+    "theme_version": "1.0.0",
+    "theme_author": "REU",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image",
+        "info": "Use the supplied REÚ logo. Recommended transparent PNG."
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 80,
+        "max": 260,
+        "step": 5,
+        "unit": "px",
+        "label": "Logo width (desktop)",
+        "default": 130
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32 x 32 px recommended."
+      },
+      {
+        "type": "text",
+        "id": "brand_tagline",
+        "label": "Tagline",
+        "default": "Live Better. Every Day."
+      },
+      {
+        "type": "richtext",
+        "id": "brand_statement",
+        "label": "Footer brand statement",
+        "default": "<p>REÚ makes daily wellness simple, enjoyable, and designed around women. Live Better. Every Day.</p>"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "header", "content": "Brand palette" },
+      { "type": "color", "id": "color_green", "label": "Deep Green", "default": "#223829" },
+      { "type": "color", "id": "color_rose", "label": "Warm Rose", "default": "#BA6D64" },
+      { "type": "color", "id": "color_mauve", "label": "Muted Mauve", "default": "#8B6D93" },
+      { "type": "color", "id": "color_cream", "label": "Warm Cream", "default": "#E3E1D5" },
+      { "type": "color", "id": "color_blush", "label": "Blush", "default": "#F4E2DB" },
+      { "type": "color", "id": "color_lilac", "label": "Pale Lilac", "default": "#EADEEA" },
+      { "type": "header", "content": "Interface" },
+      { "type": "color", "id": "color_bg", "label": "Page background", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_surface", "label": "Card / surface", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_text", "label": "Body text", "default": "#2C3A30" },
+      { "type": "color", "id": "color_heading", "label": "Headings", "default": "#223829" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Brand fonts are Althy Regular (display) and Helvetica Now (body). If the licensed .woff2 files are supplied, self-host them and update the stacks below. Until then, tasteful fallbacks are used. See LAUNCH_BLOCKERS.md."
+      },
+      {
+        "type": "text",
+        "id": "type_display_fallback",
+        "label": "Display font stack",
+        "default": "\"Althy\", \"Cormorant Garamond\", \"Playfair Display\", Georgia, \"Times New Roman\", serif"
+      },
+      {
+        "type": "text",
+        "id": "type_body_fallback",
+        "label": "Body font stack",
+        "default": "\"Helvetica Now\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif"
+      }
+    ]
+  },
+  {
+    "name": "Pre-order",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Global fallback pre-order details. Product-level metafields (custom.preorder_ship_window) override these. Do not publish invented dates — see LAUNCH_BLOCKERS.md."
+      },
+      {
+        "type": "checkbox",
+        "id": "preorder_mode",
+        "label": "Store is in pre-order launch mode",
+        "default": true,
+        "info": "Shows Pre-Order labelling and disclosures across the theme."
+      },
+      {
+        "type": "text",
+        "id": "preorder_ship_window",
+        "label": "Estimated shipping window (fallback)",
+        "info": "Example: “ships early December”. Leave blank until confirmed in writing.",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "support_email",
+        "label": "Support email",
+        "info": "Used in cancellation / pre-order copy. Leave blank until confirmed.",
+        "default": ""
+      }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram URL" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok URL" },
+      { "type": "url", "id": "social_facebook", "label": "Facebook URL" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube URL" }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart behaviour",
+        "options": [
+          { "value": "drawer", "label": "Drawer" },
+          { "value": "page", "label": "Page" }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_note",
+        "label": "Enable order note",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Product cards",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "card_show_vendor",
+        "label": "Show vendor",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "Image ratio",
+        "options": [
+          { "value": "square", "label": "Square" },
+          { "value": "portrait", "label": "Portrait" }
+        ],
+        "default": "square"
+      }
+    ]
+  }
+]

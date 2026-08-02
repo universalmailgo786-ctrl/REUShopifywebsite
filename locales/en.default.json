@@ -1,0 +1,121 @@
+{
+  "general": {
+    "page": "Page",
+    "search": {
+      "search": "Search",
+      "placeholder": "Search products and articles",
+      "no_results": "No results found for “{{ terms }}”.",
+      "results_for": "Results for “{{ terms }}”",
+      "results_count": {
+        "one": "{{ count }} result",
+        "other": "{{ count }} results"
+      },
+      "reset": "Clear search"
+    },
+    "newsletter": {
+      "heading": "A better routine starts here",
+      "label": "Email",
+      "placeholder": "Enter your email",
+      "button": "Join the List",
+      "success": "Thanks for joining the REÚ community.",
+      "error": "Please enter a valid email address."
+    },
+    "pagination": { "previous": "Previous", "next": "Next", "page": "Page {{ number }}" },
+    "breadcrumbs": { "home": "Home", "aria_label": "Breadcrumb" },
+    "404": {
+      "title": "This page took a rest day",
+      "subtext": "The page you are looking for can’t be found. Let’s get you back to your routine.",
+      "shop": "Shop All",
+      "quiz": "Take the Quiz"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close": "Close",
+    "menu": "Menu",
+    "open_menu": "Open menu",
+    "cart": "Cart",
+    "search": "Search",
+    "account": "Account",
+    "previous": "Previous",
+    "next": "Next",
+    "loading": "Loading",
+    "star_reviews": "{{ rating }} out of 5 stars"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "preorder": "Pre-Order",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "added": "Added to cart",
+      "on_sale": "Sale",
+      "from_price": "From {{ price }}",
+      "quantity": "Quantity",
+      "increase": "Increase quantity",
+      "decrease": "Decrease quantity",
+      "view_details": "View details",
+      "vendor": "Vendor",
+      "pickup_unavailable": "Pickup currently unavailable",
+      "choose_options": "Choose options"
+    },
+    "facets": {
+      "filter": "Filter",
+      "filter_and_sort": "Filter and sort",
+      "sort_by": "Sort by",
+      "clear": "Clear",
+      "clear_all": "Clear all",
+      "apply": "Apply",
+      "results": "{{ count }} products",
+      "no_results": "No products match these filters."
+    }
+  },
+  "sections": {
+    "cart": {
+      "title": "Your cart",
+      "empty": "Your cart is empty",
+      "empty_cta": "Shop All",
+      "subtotal": "Subtotal",
+      "taxes_note": "Taxes and shipping calculated at checkout.",
+      "checkout": "Checkout",
+      "remove": "Remove",
+      "update": "Update",
+      "note": "Order note",
+      "error": "Something went wrong. Please try again.",
+      "preorder_line": "Pre-order item — ships together with your order."
+    },
+    "header": {
+      "announcement": "Announcement"
+    },
+    "footer": {
+      "copyright": "© {{ year }} {{ name }}. All rights reserved."
+    }
+  },
+  "customer": {
+    "login": { "title": "Login", "email": "Email", "password": "Password", "submit": "Sign in", "forgot": "Forgot your password?", "create": "Create account", "guest": "Continue as guest" },
+    "register": { "title": "Create account", "first_name": "First name", "last_name": "Last name", "email": "Email", "password": "Password", "submit": "Create" },
+    "account": { "title": "My account", "orders": "Order history", "logout": "Log out", "details": "Account details", "no_orders": "You haven’t placed any orders yet." },
+    "recover": { "title": "Reset your password", "submit": "Send reset link", "success": "We’ve sent you an email with a link to reset your password." },
+    "orders": { "order": "Order", "date": "Date", "status": "Status", "total": "Total" }
+  },
+  "blogs": {
+    "article": {
+      "by": "By",
+      "read_more": "Read article",
+      "back": "Back to Journal",
+      "related": "Keep reading",
+      "disclaimer": "This article is for general educational purposes and is not medical advice."
+    }
+  },
+  "contact": {
+    "success": "Thanks for your message. Our team will be in touch soon.",
+    "error": "Please review the highlighted fields and try again."
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "{{ value }} gift card for {{ shop }}",
+      "subtext": "Here is your REÚ gift card",
+      "shop_link": "Start shopping"
+    }
+  }
+}

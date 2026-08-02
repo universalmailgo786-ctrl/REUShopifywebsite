@@ -1,0 +1,38 @@
+{%- comment -%}
+  Inline SVG icon system. Usage: {% render 'icon', name: 'cart' %}
+  All icons are 24x24, stroke-based, currentColor.
+{%- endcomment -%}
+{%- liquid
+  assign n = name | default: 'arrow'
+-%}
+<svg class="icon icon-{{ n }}" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  {%- case n -%}
+    {%- when 'arrow' -%}<path d="M5 12h14M13 6l6 6-6 6"/>
+    {%- when 'arrow-left' -%}<path d="M19 12H5M11 6l-6 6 6 6"/>
+    {%- when 'chevron-down' -%}<path d="M6 9l6 6 6-6"/>
+    {%- when 'plus' -%}<path d="M12 5v14M5 12h14"/>
+    {%- when 'minus' -%}<path d="M5 12h14"/>
+    {%- when 'close' -%}<path d="M18 6L6 18M6 6l12 12"/>
+    {%- when 'menu' -%}<path d="M4 6h16M4 12h16M4 18h16"/>
+    {%- when 'search' -%}<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>
+    {%- when 'cart' -%}<path d="M6 6h15l-1.5 9h-12L6 6zM6 6L5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/>
+    {%- when 'user' -%}<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>
+    {%- when 'check' -%}<path d="M20 6L9 17l-5-5"/>
+    {%- when 'leaf' -%}<path d="M11 20A7 7 0 0 1 4 13c0-5 5-9 16-9 0 11-4 16-9 16z"/><path d="M8 17c2-4 5-6 9-7"/>
+    {%- when 'sparkle' -%}<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/>
+    {%- when 'heart' -%}<path d="M12 20s-7-4.5-9.3-9C1 7.5 3 4 6.5 4 9 4 12 6 12 6s3-2 5.5-2C21 4 23 7.5 21.3 11 19 15.5 12 20 12 20z"/>
+    {%- when 'shield' -%}<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/>
+    {%- when 'drop' -%}<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>
+    {%- when 'clock' -%}<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+    {%- when 'truck' -%}<path d="M3 6h11v9H3zM14 9h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/>
+    {%- when 'refresh' -%}<path d="M4 12a8 8 0 0 1 14-5l2 2M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M18 3v6h-6M6 21v-6h6"/>
+    {%- when 'mail' -%}<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>
+    {%- when 'instagram' -%}<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/>
+    {%- when 'tiktok' -%}<path d="M15 4c.5 2.5 2.3 4 4.5 4.2v3C17.6 11 16 10.2 15 9v6.2A5.2 5.2 0 1 1 9.8 10v3.1a2.2 2.2 0 1 0 2.2 2.2V4h3z"/>
+    {%- when 'facebook' -%}<path d="M15 4h-2.5A3.5 3.5 0 0 0 9 7.5V10H7v3h2v7h3v-7h2.2l.8-3H12V7.8c0-.5.3-.8.8-.8H15V4z"/>
+    {%- when 'youtube' -%}<rect x="3" y="6" width="18" height="12" rx="3"/><path d="M11 9.5l4 2.5-4 2.5z"/>
+    {%- when 'sun' -%}<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/>
+    {%- when 'star' -%}<path d="M12 3l2.9 6 6.6.6-5 4.3 1.5 6.5L12 17l-5.9 3.4L7.6 14l-5-4.3 6.6-.6L12 3z"/>
+    {%- else -%}<path d="M5 12h14M13 6l6 6-6 6"/>
+  {%- endcase -%}
+</svg>

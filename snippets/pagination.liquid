@@ -1,0 +1,17 @@
+{%- if paginate.pages > 1 -%}
+<nav class="pagination" aria-label="Pagination" style="display:flex;gap:.4rem;justify-content:center;margin-top:var(--space-lg);flex-wrap:wrap">
+  {%- if paginate.previous -%}
+    <a class="filter-chip" href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">{% render 'icon', name: 'arrow-left' %}</a>
+  {%- endif -%}
+  {%- for part in paginate.parts -%}
+    {%- if part.is_link -%}
+      <a class="filter-chip" href="{{ part.url }}">{{ part.title }}</a>
+    {%- else -%}
+      <span class="filter-chip" {% if part.title == paginate.current_page %}aria-current="page" style="background:var(--color-green);color:#fff"{% endif %}>{{ part.title }}</span>
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if paginate.next -%}
+    <a class="filter-chip" href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">{% render 'icon', name: 'arrow' %}</a>
+  {%- endif -%}
+</nav>
+{%- endif -%}

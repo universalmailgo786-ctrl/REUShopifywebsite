@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "hub": {
+      "type": "collections-hub",
+      "blocks": {
+        "pouch": { "type": "collection_card", "settings": { "fallback_asset": "reu-format-pouch.jpg", "title": "Pouch Collection", "text": "Full-size favourites for your everyday routine.", "cta": "Shop Pouches", "link": "shopify://collections/pouch-collection" } },
+        "sachet": { "type": "collection_card", "settings": { "fallback_asset": "reu-format-sachet.jpg", "title": "Sachet Collection", "text": "Convenient single serves for movement, travel, and busy days.", "cta": "Shop Sachets", "link": "shopify://collections/sachet-collection" } },
+        "g1": { "type": "goal_link", "settings": { "title": "Hydration" } },
+        "g2": { "type": "goal_link", "settings": { "title": "Beauty & Collagen" } },
+        "g3": { "type": "goal_link", "settings": { "title": "Daily Wellness" } },
+        "g4": { "type": "goal_link", "settings": { "title": "Greens & Nutrition" } },
+        "g5": { "type": "goal_link", "settings": { "title": "Energy & Performance" } },
+        "g6": { "type": "goal_link", "settings": { "title": "Weight Management" } },
+        "g7": { "type": "goal_link", "settings": { "title": "Protein & Recovery" } }
+      },
+      "block_order": ["pouch", "sachet", "g1", "g2", "g3", "g4", "g5", "g6", "g7"]
+    }
+  },
+  "order": ["hub"]
+}

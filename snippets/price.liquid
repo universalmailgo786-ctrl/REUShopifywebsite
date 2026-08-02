@@ -1,0 +1,19 @@
+{%- comment -%}
+  Price display. Params: product (or variant), context: 'card' | 'product'
+{%- endcomment -%}
+{%- liquid
+  assign target = variant | default: product
+  if product and product.price_varies and context != 'product'
+    assign show_from = true
+  endif
+-%}
+<span class="price-block">
+  {%- if show_from -%}
+    <span class="price-from">{{ 'products.product.from_price' | t: price: product.price | money }}</span>
+  {%- else -%}
+    <span data-price>{{ target.price | money }}</span>
+    {%- if target.compare_at_price > target.price -%}
+      <s class="product__compare" data-compare-price>{{ target.compare_at_price | money }}</s>
+    {%- endif -%}
+  {%- endif -%}
+</span>

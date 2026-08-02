@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {%- if settings.favicon != blank -%}<link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">{%- endif -%}
+    {%- assign gc_value = gift_card.initial_value | money -%}
+    <title>{{ 'gift_cards.issued.title' | t: value: gc_value, shop: shop.name }}</title>
+    <style>:root{--color-green:{{ settings.color_green }};--color-cream:{{ settings.color_cream }};--color-bg:{{ settings.color_bg }};--color-text:{{ settings.color_text }};--color-heading:{{ settings.color_heading }};--color-surface:{{ settings.color_surface }};--color-line:{{ settings.color_text | color_mix: settings.color_bg, 14 }};--color-blush:{{ settings.color_blush }};--color-lilac:{{ settings.color_lilac }};--color-rose:{{ settings.color_rose }};--color-mauve:{{ settings.color_mauve }};--color-text-muted:{{ settings.color_text | color_mix: settings.color_bg, 65 }};--color-on-green:{{ settings.color_cream }};--font-display-stack:{{ settings.type_display_fallback }};--font-body-stack:{{ settings.type_body_fallback }};}</style>
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'components.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+  </head>
+  <body class="template-gift-card">
+    <main class="section">{{ content_for_layout }}</main>
+  </body>
+</html>

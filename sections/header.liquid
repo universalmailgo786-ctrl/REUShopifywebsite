@@ -1,0 +1,99 @@
+{%- liquid
+  assign menu = section.settings.menu
+  assign sticky = section.settings.sticky
+-%}
+<header class="site-header{% if sticky %} is-sticky{% endif %}" style="--logo-w: {{ settings.logo_width }}px">
+  <div class="wrap">
+    <div class="site-header__inner">
+      <button class="header-icon menu-toggle" data-drawer-open="MobileMenu" aria-label="{{ 'accessibility.open_menu' | t }}" aria-controls="MobileMenu">
+        {% render 'icon', name: 'menu' %}
+      </button>
+
+      <a class="site-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} — home">
+        {%- if settings.logo != blank -%}
+          {{ settings.logo | image_url: width: 520 | image_tag: widths: '130,260,390,520', alt: shop.name, loading: 'eager', fetchpriority: 'high' }}
+        {%- else -%}
+          <img src="{{ 'reu-logo.png' | asset_url }}" width="1817" height="1001" alt="{{ shop.name }}" fetchpriority="high">
+        {%- endif -%}
+      </a>
+
+      <nav class="site-header__nav" aria-label="Primary">
+        {%- for link in menu.links -%}
+          {%- if link.links.size > 0 -%}
+            <div class="has-dropdown">
+              <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %} aria-haspopup="true">{{ link.title }} {% render 'icon', name: 'chevron-down' %}</a>
+              <div class="dropdown">
+                {%- for child in link.links -%}<a href="{{ child.url }}">{{ child.title }}</a>{%- endfor -%}
+              </div>
+            </div>
+          {%- else -%}
+            <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+
+      <div class="site-header__actions">
+        <button class="header-icon" data-drawer-open="SearchDrawer" aria-label="{{ 'accessibility.search' | t }}" aria-controls="SearchDrawer">{% render 'icon', name: 'search' %}</button>
+        {%- if shop.customer_accounts_enabled -%}
+          <a class="header-icon" href="{{ routes.account_url }}" aria-label="{{ 'accessibility.account' | t }}">{% render 'icon', name: 'user' %}</a>
+        {%- endif -%}
+        <button class="header-icon" data-drawer-open="CartDrawer" aria-label="{{ 'accessibility.cart' | t }}" aria-controls="CartDrawer">
+          {% render 'icon', name: 'cart' %}
+          <span class="cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+{%- comment -%} Mobile menu drawer {%- endcomment -%}
+<div id="MobileMenu" class="drawer drawer--left" data-drawer hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'accessibility.menu' | t }}">
+  <div class="drawer__overlay" data-drawer-overlay></div>
+  <div class="drawer__panel">
+    <div class="drawer__header">
+      <span class="drawer__title">{{ 'accessibility.menu' | t }}</span>
+      <button class="header-icon" data-drawer-close="MobileMenu" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+    <nav class="drawer__body mobile-nav" aria-label="Mobile">
+      {%- for link in menu.links -%}
+        <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
+        {%- if link.links.size > 0 -%}
+          <div class="mobile-nav__sub">
+            {%- for child in link.links -%}<a href="{{ child.url }}">{{ child.title }}</a>{%- endfor -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+  </div>
+</div>
+
+{%- comment -%} Search drawer with predictive results {%- endcomment -%}
+<div id="SearchDrawer" class="drawer drawer--right" data-drawer hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+  <div class="drawer__overlay" data-drawer-overlay></div>
+  <div class="drawer__panel">
+    <div class="drawer__header">
+      <span class="drawer__title">{{ 'general.search.search' | t }}</span>
+      <button class="header-icon" data-drawer-close="SearchDrawer" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+    <div class="drawer__body" data-predictive>
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <label class="visually-hidden" for="search-input">{{ 'general.search.search' | t }}</label>
+        <div style="display:flex;gap:.5rem">
+          <input class="input" id="search-input" type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" autocomplete="off">
+          <button class="btn" type="submit">{% render 'icon', name: 'search' %}</button>
+        </div>
+      </form>
+      <div data-predictive-results hidden style="margin-top:1rem"></div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "checkbox", "id": "sticky", "label": "Sticky header", "default": true }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "quiz": {
+      "type": "quiz",
+      "blocks": {
+        "hydration": { "type": "result", "settings": { "goal": "hydration" } },
+        "beauty": { "type": "result", "settings": { "goal": "beauty" } },
+        "wellness": { "type": "result", "settings": { "goal": "wellness" } },
+        "greens": { "type": "result", "settings": { "goal": "greens" } },
+        "performance": { "type": "result", "settings": { "goal": "performance" } },
+        "weight": { "type": "result", "settings": { "goal": "weight" } },
+        "protein": { "type": "result", "settings": { "goal": "protein" } }
+      },
+      "block_order": ["hydration", "beauty", "wellness", "greens", "performance", "weight", "protein"]
+    }
+  },
+  "order": ["quiz"]
+}

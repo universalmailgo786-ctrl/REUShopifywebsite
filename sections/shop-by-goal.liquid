@@ -1,0 +1,64 @@
+<section class="section {{ section.settings.bg_scheme }}">
+  <div class="wrap">
+    <div class="section-head">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="h2">{{ section.settings.heading }}</h2>
+      {%- if section.settings.body != blank -%}<p class="lede" style="margin-top:.75rem">{{ section.settings.body }}</p>{%- endif -%}
+    </div>
+    <div class="snap-row">
+      {%- for block in section.blocks -%}
+        <a class="goal-card" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 600 | image_tag: widths: '300,450,600', sizes: '(min-width:750px) 20vw, 80vw', loading: 'lazy', alt: block.settings.title | escape }}
+          {%- elsif block.settings.fallback_asset != blank -%}
+            <img src="{{ block.settings.fallback_asset | asset_url }}" width="1800" height="1200" alt="{{ block.settings.title | escape }}" loading="lazy">
+          {%- endif -%}
+          <div>
+            <h3 class="h4">{{ block.settings.title }}</h3>
+            <span class="link-arrow" style="color:#fff;border-color:#fff">{{ block.settings.cta | default: 'Shop' }} {% render 'icon', name: 'arrow' %}</span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.cta_label != blank -%}
+      <div style="margin-top:1.75rem"><a class="btn btn--secondary" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label }}</a></div>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Shop by goal",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop by goal" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Start with what you want to feel" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Your routine should begin with your goals—not a crowded shelf. Choose the support that matters most to you today." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Explore All Goals" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "select", "id": "bg_scheme", "label": "Background", "options": [
+      { "value": "", "label": "White" }, { "value": "bg-cream", "label": "Cream" }, { "value": "bg-lilac", "label": "Lilac" }
+    ], "default": "" }
+  ],
+  "blocks": [
+    { "type": "goal", "name": "Goal", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Hydration" },
+      { "type": "text", "id": "cta", "label": "CTA", "default": "Shop Hydration" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ]}
+  ],
+  "max_blocks": 8,
+  "presets": [{
+    "name": "Shop by goal",
+    "blocks": [
+      { "type": "goal", "settings": { "title": "Hydration", "cta": "Shop Hydration" } },
+      { "type": "goal", "settings": { "title": "Beauty", "cta": "Shop Beauty" } },
+      { "type": "goal", "settings": { "title": "Daily Wellness", "cta": "Shop Wellness" } },
+      { "type": "goal", "settings": { "title": "Greens", "cta": "Shop Greens" } },
+      { "type": "goal", "settings": { "title": "Performance", "cta": "Shop Performance" } },
+      { "type": "goal", "settings": { "title": "Weight Management", "cta": "Shop Support" } }
+    ]
+  }]
+}
+{% endschema %}

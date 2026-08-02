@@ -1,0 +1,12 @@
+{% layout 'gift_card' %}
+<div class="wrap wrap--narrow text-center">
+  {%- if settings.logo != blank -%}<img src="{{ settings.logo | image_url: width: 400 }}" width="400" height="220" alt="{{ shop.name }}" style="margin:0 auto var(--space-lg);width:150px;height:auto">{%- endif -%}
+  <p class="eyebrow text-center">Gift card</p>
+  <h1 class="h2">{{ 'gift_cards.issued.subtext' | t | default: 'Here is your REÚ gift card' }}</h1>
+  <div class="card" style="padding:var(--space-lg);margin:var(--space-lg) auto;max-width:26rem">
+    <p class="product__price" style="justify-content:center">{{ gift_card.balance | money }}</p>
+    <div style="margin-top:var(--space-md)">{{ gift_card.qr_identifier }}</div>
+    <p class="text-muted" style="margin-top:var(--space-md);font-family:monospace;letter-spacing:.1em">{{ gift_card.code | format_code }}</p>
+  </div>
+  <a class="btn" href="{{ shop.url }}">{{ 'gift_cards.issued.shop_link' | t | default: 'Start shopping' }}</a>
+</div>

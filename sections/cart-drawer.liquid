@@ -1,0 +1,58 @@
+{%- comment -%} Global cart drawer. Re-rendered via Section Rendering API on add/change. {%- endcomment -%}
+<div id="CartDrawer" class="drawer drawer--right" data-drawer hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}">
+  <div class="drawer__overlay" data-drawer-overlay></div>
+  <div class="drawer__panel">
+    <div class="drawer__header">
+      <h2 class="drawer__title">{{ 'sections.cart.title' | t }}</h2>
+      <button class="header-icon" data-drawer-close="CartDrawer" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+
+    <div data-cart-drawer-content>
+      {%- if cart.item_count == 0 -%}
+        <div class="drawer__body">
+          <p class="lede">{{ 'sections.cart.empty' | t }}</p>
+          <a class="btn btn--block" href="{{ routes.all_products_collection_url }}">{{ 'sections.cart.empty_cta' | t }}</a>
+        </div>
+      {%- else -%}
+        <div class="drawer__body">
+          {%- for item in cart.items -%}
+            <div class="cart-line" data-cart-line="{{ forloop.index }}">
+              <a class="cart-line__img" href="{{ item.url }}">
+                {%- if item.image -%}{%- assign line_alt = item.title | escape -%}{{ item.image | image_url: width: 128 | image_tag: loading: 'lazy', widths: '64,128', alt: line_alt }}{%- endif -%}
+              </a>
+              <div>
+                <a class="cart-line__title" href="{{ item.url }}">{{ item.product.title }}</a>
+                {%- unless item.variant.title contains 'Default' -%}<div class="cart-line__meta">{{ item.variant.title }}</div>{%- endunless -%}
+                {%- if settings.preorder_mode -%}<div class="cart-line__meta"><span class="badge badge--preorder">{{ 'products.product.preorder' | t }}</span></div>{%- endif -%}
+                <div class="qty-control" data-qty style="margin-top:.5rem">
+                  <button type="button" data-line-change data-line="{{ forloop.index }}" data-qty="{{ item.quantity | minus: 1 }}" aria-label="{{ 'products.product.decrease' | t }}">–</button>
+                  <input type="number" value="{{ item.quantity }}" min="0" aria-label="{{ 'products.product.quantity' | t }}" readonly>
+                  <button type="button" data-line-change data-line="{{ forloop.index }}" data-qty="{{ item.quantity | plus: 1 }}" aria-label="{{ 'products.product.increase' | t }}">+</button>
+                </div>
+              </div>
+              <div style="text-align:right">
+                <div class="cart-line__title">{{ item.final_line_price | money }}</div>
+                <button class="filter-chip" style="margin-top:.5rem" data-line-change data-line="{{ forloop.index }}" data-qty="0">{{ 'sections.cart.remove' | t }}</button>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+        <div class="drawer__footer">
+          {%- if settings.cart_show_note -%}
+            <label class="field"><span class="visually-hidden">{{ 'sections.cart.note' | t }}</span>
+              <textarea class="textarea" name="note" form="cart-drawer-form" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note }}</textarea>
+            </label>
+          {%- endif -%}
+          <div class="cart-subtotal"><span>{{ 'sections.cart.subtotal' | t }}</span><strong>{{ cart.total_price | money }}</strong></div>
+          <p class="form-note">{{ 'sections.cart.taxes_note' | t }}</p>
+          <form action="{{ routes.cart_url }}" method="post" id="cart-drawer-form">
+            <button type="submit" name="checkout" class="btn btn--block btn--lg">{{ 'sections.cart.checkout' | t }}</button>
+          </form>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+{ "name": "Cart drawer" }
+{% endschema %}

@@ -1,0 +1,193 @@
+{%- liquid
+  assign p = product
+  assign preorder = false
+  if settings.preorder_mode and p.available
+    assign preorder = true
+  endif
+  assign mf = p.metafields.custom
+  assign current = p.selected_or_first_available_variant
+-%}
+<section class="section" data-product-root data-preorder="{{ preorder }}">
+  <div class="wrap">
+    {% render 'breadcrumbs' %}
+
+    <div class="product" data-sticky-anchor>
+      {%- comment -%} 2. Media gallery {%- endcomment -%}
+      <div class="product__media">
+        <div class="gallery" data-gallery>
+          <div class="gallery__main">
+            {%- if p.featured_media -%}
+              {{ p.featured_media | image_url: width: 1200 | image_tag:
+                widths: '500,700,900,1200', sizes: '(min-width:990px) 50vw, 100vw',
+                loading: 'eager', fetchpriority: 'high', id: 'gallery-main',
+                alt: p.featured_media.alt | default: p.title | escape }}
+            {%- else -%}{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}{%- endif -%}
+          </div>
+          {%- if p.media.size > 1 -%}
+            <div class="gallery__thumbs" role="list">
+              {%- for media in p.media -%}
+                <button class="gallery__thumb" type="button" role="listitem" data-media-id="{{ media.id }}"
+                        aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+                        aria-label="{{ media.alt | default: p.title | escape }}"
+                        onclick="var m=document.getElementById('gallery-main'); m.src=this.querySelector('img').src.replace(/width=\d+/,'width=1200'); m.srcset=''; this.parentNode.querySelectorAll('[aria-current]').forEach(function(b){b.setAttribute('aria-current','false')}); this.setAttribute('aria-current','true');">
+                  {{ media | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80,160', alt: media.alt | default: p.title | escape }}
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} Info column {%- endcomment -%}
+      <div class="product__info">
+        {%- comment -%} 3. Title + flavour {%- endcomment -%}
+        <h1 class="h2" style="margin-bottom:.25rem">{{ p.title }}</h1>
+        {%- if mf.flavor != blank -%}<p class="text-muted" style="font-size:1.05rem">{{ mf.flavor }}{% if mf.goal != blank %} · {{ mf.goal }}{% endif %}</p>{%- endif -%}
+
+        {%- comment -%} 4. Verified rating OR honest launch badge {%- endcomment -%}
+        <div style="margin:.75rem 0">
+          {%- if p.metafields.reviews.rating.value != blank -%}
+            {%- assign rating = p.metafields.reviews.rating.value -%}
+            <span class="badge" aria-label="{{ 'accessibility.star_reviews' | t: rating: rating.rating }}">{% render 'icon', name: 'star' %} {{ rating.rating }} / 5 · {{ p.metafields.reviews.rating_count.value | default: 0 }} reviews</span>
+          {%- elsif preorder -%}
+            <span class="badge badge--preorder">{{ 'products.product.preorder' | t }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} 5. Price + payment timing {%- endcomment -%}
+        <div class="product__price">{% render 'price', product: p, variant: current, context: 'product' %}</div>
+        {%- if preorder -%}<p class="form-note">Payment timing is confirmed at checkout.</p>{%- endif -%}
+
+        {%- comment -%} 6. One-sentence value proposition {%- endcomment -%}
+        {%- if mf.short_description != blank -%}
+          <p class="lede" style="margin-top:1rem">{{ mf.short_description }}</p>
+        {%- endif -%}
+
+        {%- comment -%} Purchase form: 7 variant selector, 8 quantity, 9 pre-order button {%- endcomment -%}
+        <form data-product-form action="{{ routes.cart_add_url }}" method="post" style="margin-top:1.25rem">
+          {%- unless p.has_only_default_variant -%}
+            {%- for option in p.options_with_values -%}
+              <div class="option-group" data-option-index="{{ forloop.index0 }}">
+                <span class="option-group__label">{{ option.name }}</span>
+                <div class="option-pills">
+                  {%- for value in option.values -%}
+                    {%- assign oid = 'opt-' | append: forloop.parentloop.index0 | append: '-' | append: forloop.index0 -%}
+                    <input type="radio" id="{{ oid }}" name="option-{{ forloop.parentloop.index0 }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
+                    <label for="{{ oid }}">{{ value }}</label>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <input type="hidden" name="id" value="{{ current.id }}">
+
+          <div class="purchase-row">
+            <div class="qty-control" data-qty>
+              <button type="button" data-qty-step="-1" aria-label="{{ 'products.product.decrease' | t }}">–</button>
+              <input type="number" name="quantity" value="1" min="1" aria-label="{{ 'products.product.quantity' | t }}">
+              <button type="button" data-qty-step="1" aria-label="{{ 'products.product.increase' | t }}">+</button>
+            </div>
+            <button type="submit" class="btn btn--lg" style="flex:1" data-add-btn {% unless current.available %}disabled{% endunless %}>
+              {%- if current.available -%}{% if preorder %}{{ 'products.product.preorder' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endif %}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+            </button>
+          </div>
+
+          {%- comment -%} 10. Estimated shipping + cancellation disclosure beside CTA {%- endcomment -%}
+          {%- if preorder -%}{% render 'preorder-notice', product: p %}{%- endif -%}
+        </form>
+
+        {%- comment -%} 12. Payment / support reassurance {%- endcomment -%}
+        <ul class="reassurance">
+          <li>{% render 'icon', name: 'truck' %}<span>{% if mf.preorder_ship_window != blank %}Estimated shipping: {{ mf.preorder_ship_window }}.{% else %}Shipping window shown at checkout.{% endif %}</span></li>
+          <li>{% render 'icon', name: 'refresh' %}<span>Cancel a pre-order for a full refund any time before shipment.</span></li>
+          <li>{% render 'icon', name: 'shield' %}<span>Secure checkout. Questions? {% if settings.support_email != blank %}<a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>{% else %}Contact our support team.{% endif %}</span></li>
+        </ul>
+
+        {%- comment -%} 13–21 Accordions. Only the first opens by default. Empty rows hide cleanly. {%- endcomment -%}
+        <div class="accordion" data-accordion style="margin-top:var(--space-lg)">
+          {%- assign rows = 'key_benefits:Why you’ll love it,how_to_use:How to Use,ingredients:Ingredients,supplement_facts:Supplement Facts,format_details:Flavour & Format,warnings_allergens:Warnings & Allergens' | split: ',' -%}
+          {%- for row in rows -%}
+            {%- assign parts = row | split: ':' -%}
+            {%- assign key = parts[0] -%}
+            {%- assign label = parts[1] -%}
+            {%- assign val = mf[key] -%}
+            {%- if val != blank -%}
+              <div class="accordion__item">
+                <h3><button class="accordion__trigger" id="acc-{{ key }}" aria-expanded="false" aria-controls="acc-p-{{ key }}"><span>{{ label }}</span>{% render 'icon', name: 'plus' %}</button></h3>
+                <div class="accordion__panel" id="acc-p-{{ key }}" role="region" aria-labelledby="acc-{{ key }}" hidden style="height:0"><div class="rte">{{ val | metafield_tag }}</div></div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- comment -%} Pre-Order & Shipping accordion {%- endcomment -%}
+          <div class="accordion__item">
+            <h3><button class="accordion__trigger" id="acc-preorder" aria-expanded="false" aria-controls="acc-p-preorder"><span>Pre-Order &amp; Shipping</span>{% render 'icon', name: 'plus' %}</button></h3>
+            <div class="accordion__panel" id="acc-p-preorder" role="region" aria-labelledby="acc-preorder" hidden style="height:0">
+              <div class="rte">{% render 'preorder-notice', product: p %}<p><a href="{{ pages['shipping-policy'].url }}">Read the full Shipping &amp; Pre-Order Policy</a></p></div>
+            </div>
+          </div>
+
+          {%- comment -%} Returns accordion {%- endcomment -%}
+          <div class="accordion__item">
+            <h3><button class="accordion__trigger" id="acc-returns" aria-expanded="false" aria-controls="acc-p-returns"><span>Returns</span>{% render 'icon', name: 'plus' %}</button></h3>
+            <div class="accordion__panel" id="acc-p-returns" role="region" aria-labelledby="acc-returns" hidden style="height:0">
+              <div class="rte"><p>Because supplements are ingestible goods, opened products cannot be returned unless defective, damaged, incorrect, or otherwise required by law. See our <a href="{{ pages['refund-policy'].url }}">Refund &amp; Cancellation Policy</a>.</p></div>
+            </div>
+          </div>
+        </div>
+
+        {% render 'supplement-disclaimer', compact: true %}
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} Product JSON for JS variant handling {%- endcomment -%}
+  <script type="application/json" data-product-json>{{ p | json }}</script>
+</section>
+
+{%- comment -%} 11. Sticky mobile pre-order bar {%- endcomment -%}
+<div class="sticky-bar" data-sticky-bar>
+  <div class="sticky-bar__img">
+    {%- if p.featured_media -%}{{ p.featured_media | image_url: width: 88 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+  </div>
+  <div class="sticky-bar__info">
+    <div class="sticky-bar__title">{{ p.title }}</div>
+    <div class="sticky-bar__meta"><span data-price>{{ current.price | money }}</span>{%- unless p.has_only_default_variant %} · <span data-sticky-variant>{{ current.title }}</span>{% endunless -%}</div>
+  </div>
+  <button type="button" class="btn" onclick="document.querySelector('[data-product-form] [data-add-btn]').click()" {% unless current.available %}disabled{% endunless %}>
+    {%- if preorder -%}{{ 'products.product.preorder' | t }}{%- else -%}{{ 'products.product.add_to_cart' | t }}{%- endif -%}
+  </button>
+</div>
+
+{%- comment -%} Product JSON-LD (real data only) {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ p.title | json }},
+  "description": {{ p.description | strip_html | truncatewords: 60 | json }},
+  "image": [{% for media in p.media limit: 3 %}{{ media | image_url: width: 1200 | prepend: 'https:' | json }}{% unless forloop.last %},{% endunless %}{% endfor %}],
+  {% if p.vendor != blank %}"brand": { "@type": "Brand", "name": {{ p.vendor | json }} },{% endif %}
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ current.price | divided_by: 100.0 }}",
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "availability": "https://schema.org/{% if p.available %}{% if preorder %}PreOrder{% else %}InStock{% endif %}{% else %}OutOfStock{% endif %}",
+    "url": {{ shop.url | append: p.url | json }}
+    {% if current.sku != blank %}, "sku": {{ current.sku | json }}{% endif %}
+  }
+  {%- if p.metafields.reviews.rating.value != blank -%},
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "{{ p.metafields.reviews.rating.value.rating }}", "reviewCount": "{{ p.metafields.reviews.rating_count.value | default: 0 }}" }
+  {%- endif -%}
+}
+</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "paragraph", "content": "Product copy is driven by the product’s custom metafields. Empty accordions hide automatically. See README for metafield definitions." }
+  ]
+}
+{% endschema %}

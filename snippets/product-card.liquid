@@ -1,0 +1,55 @@
+{%- comment -%}
+  Product card. Params: product (object). Uses metafields when present, never invents data.
+  Honest pre-order labelling driven by settings.preorder_mode + availability.
+{%- endcomment -%}
+{%- liquid
+  assign p = product
+  assign preorder = false
+  if settings.preorder_mode and p.available
+    assign preorder = true
+  endif
+  assign flavor = p.metafields.custom.flavor | default: ''
+  assign format = p.metafields.custom.format | default: ''
+  assign img = p.featured_media
+-%}
+<article class="product-card">
+  <a class="product-card__media media-ratio" href="{{ p.url }}" tabindex="-1" aria-hidden="true">
+    {%- if img -%}
+      {{ img | image_url: width: 700 | image_tag:
+        widths: '200,300,400,600,700',
+        sizes: '(min-width:990px) 25vw, 45vw',
+        loading: 'lazy',
+        alt: img.alt | default: p.title | escape }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+    <span class="product-card__badges">
+      {%- if preorder -%}<span class="badge badge--preorder">{{ 'products.product.preorder' | t }}</span>{%- endif -%}
+      {%- unless p.available -%}<span class="badge">{{ 'products.product.sold_out' | t }}</span>{%- endunless -%}
+    </span>
+  </a>
+  <div class="product-card__body">
+    {%- if settings.card_show_vendor and p.vendor != blank -%}
+      <span class="product-card__meta">{{ p.vendor }}</span>
+    {%- endif -%}
+    <h3 class="product-card__title"><a href="{{ p.url }}">{{ p.title }}</a></h3>
+    {%- if flavor != blank or format != blank -%}
+      <span class="product-card__meta">
+        {{ flavor }}{% if flavor != blank and format != blank %} · {% endif %}{{ format }}
+      </span>
+    {%- endif -%}
+    {%- comment -%} Show rating only when a verified review metafield exists {%- endcomment -%}
+    {%- if p.metafields.reviews.rating.value != blank -%}
+      {%- assign rating = p.metafields.reviews.rating.value -%}
+      <span class="product-card__meta" aria-label="{{ 'accessibility.star_reviews' | t: rating: rating.rating }}">
+        {% render 'icon', name: 'star' %} {{ rating.rating }} ({{ p.metafields.reviews.rating_count.value | default: 0 }})
+      </span>
+    {%- endif -%}
+    <span class="product-card__price">{% render 'price', product: p %}</span>
+    <span class="product-card__cta">
+      <a class="btn btn--secondary btn--block" href="{{ p.url }}">
+        {%- if preorder -%}{{ 'products.product.preorder' | t }}{%- else -%}{{ 'products.product.view_details' | t }}{%- endif -%}
+      </a>
+    </span>
+  </div>
+</article>

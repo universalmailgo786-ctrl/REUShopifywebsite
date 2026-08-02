@@ -1,0 +1,53 @@
+{%- comment -%}
+  Optional countdown for a REAL, fixed limited-time promotion. Disabled by default.
+  Requires a merchant-set end date/time. Never auto-resets. Shows an expired state.
+{%- endcomment -%}
+{%- if section.settings.enabled and section.settings.end_at != blank -%}
+<section class="section {{ section.settings.bg_scheme }}">
+  <div class="wrap wrap--narrow text-center">
+    {%- if section.settings.heading != blank -%}<h2 class="h3">{{ section.settings.heading }}</h2>{%- endif -%}
+    <div data-countdown data-end="{{ section.settings.end_at | escape }}">
+      <div data-countdown-live class="product__price" style="justify-content:center;gap:1.5rem" role="timer" aria-live="off"></div>
+      <div data-countdown-expired hidden>
+        <p class="lede">{{ section.settings.expired_text | default: 'This offer has ended.' }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var el=document.querySelector('[data-countdown]'); if(!el) return;
+  var end=new Date(el.getAttribute('data-end')).getTime();
+  var live=el.querySelector('[data-countdown-live]'); var expired=el.querySelector('[data-countdown-expired]');
+  if(isNaN(end)){el.hidden=true;return;}
+  function pad(n){return (n<10?'0':'')+n;}
+  function tick(){
+    var d=end-Date.now();
+    if(d<=0){live.hidden=true;expired.hidden=false;clearInterval(t);return;}
+    var days=Math.floor(d/86400000),h=Math.floor(d%86400000/3600000),m=Math.floor(d%3600000/60000),s=Math.floor(d%60000/1000);
+    live.innerHTML=['<span>'+days+'<small style="display:block;font-size:.7rem;font-family:var(--font-body)">days</small></span>',
+      '<span>'+pad(h)+'<small style="display:block;font-size:.7rem;font-family:var(--font-body)">hrs</small></span>',
+      '<span>'+pad(m)+'<small style="display:block;font-size:.7rem;font-family:var(--font-body)">min</small></span>',
+      '<span>'+pad(s)+'<small style="display:block;font-size:.7rem;font-family:var(--font-body)">sec</small></span>'].join('');
+  }
+  tick(); var t=setInterval(tick,1000);
+})();
+</script>
+{%- elsif request.design_mode -%}
+<section class="section"><div class="wrap"><p class="notice">Countdown timer is off or missing an end date. Enable it and set a real, fixed end date/time only for genuine limited-time promotions.</p></div></section>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Countdown timer",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Enable", "default": false },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Limited-time offer ends in" },
+    { "type": "text", "id": "end_at", "label": "End date/time (ISO, with timezone)", "info": "Example: 2026-12-31T23:59:59-05:00. Must be a real deadline." },
+    { "type": "text", "id": "expired_text", "label": "Expired message", "default": "This offer has ended." },
+    { "type": "select", "id": "bg_scheme", "label": "Background", "options": [
+      { "value": "bg-cream", "label": "Cream" }, { "value": "bg-blush", "label": "Blush" }, { "value": "", "label": "White" }
+    ], "default": "bg-cream" }
+  ],
+  "presets": [{ "name": "Countdown timer" }]
+}
+{% endschema %}

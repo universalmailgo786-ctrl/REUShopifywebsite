@@ -1,0 +1,27 @@
+<section class="section">
+  <div class="wrap wrap--narrow">
+    <a class="link-arrow" href="{{ routes.account_url }}">{% render 'icon', name: 'arrow-left' %} {{ 'customer.account.title' | t }}</a>
+    <h1 class="h2" style="margin:var(--space-md) 0">{{ order.name }}</h1>
+    <p class="text-muted">{{ order.created_at | date: '%B %-d, %Y' }} · {{ order.financial_status_label }} · {{ order.fulfillment_status_label }}</p>
+
+    <div style="overflow-x:auto;margin-top:var(--space-lg)">
+      <table style="width:100%;border-collapse:collapse;min-width:520px">
+        <thead><tr>
+          <th style="text-align:left;padding:.6rem;border-bottom:var(--border)">Product</th>
+          <th style="text-align:right;padding:.6rem;border-bottom:var(--border)">Qty</th>
+          <th style="text-align:right;padding:.6rem;border-bottom:var(--border)">Total</th>
+        </tr></thead>
+        <tbody>
+          {%- for line in order.line_items -%}
+            <tr>
+              <td style="padding:.6rem;border-bottom:var(--border)">{{ line.title }}</td>
+              <td style="padding:.6rem;border-bottom:var(--border);text-align:right">{{ line.quantity }}</td>
+              <td style="padding:.6rem;border-bottom:var(--border);text-align:right">{{ line.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+    <div class="cart-subtotal" style="margin-top:var(--space-md)"><span>Total</span><strong>{{ order.total_price | money }}</strong></div>
+  </div>
+</section>

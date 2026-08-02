@@ -1,0 +1,28 @@
+<section class="section">
+  <div class="wrap wrap--narrow">
+    <h1 class="h2" style="margin-bottom:var(--space-lg)">{{ 'customer.login.title' | t }}</h1>
+
+    <div id="RecoverPassword" style="display:none">
+      <h2 class="h3">{{ 'customer.recover.title' | t }}</h2>
+      {%- form 'recover_customer_password' -%}
+        {%- if form.posted_successfully? -%}<p class="form-message form-message--success">{{ 'customer.recover.success' | t }}</p>{%- endif -%}
+        <label class="field"><span>{{ 'customer.login.email' | t }}</span><input class="input" type="email" name="email" required></label>
+        <button class="btn" type="submit">{{ 'customer.recover.submit' | t }}</button>
+        <button type="button" class="link-arrow" style="margin-left:1rem;background:none;border:0;cursor:pointer" onclick="document.getElementById('RecoverPassword').style.display='none';document.getElementById('LoginForm').style.display='block';">Cancel</button>
+      {%- endform -%}
+    </div>
+
+    <div id="LoginForm">
+      {%- form 'customer_login' -%}
+        {{ form.errors | default_errors }}
+        <label class="field"><span>{{ 'customer.login.email' | t }}</span><input class="input" type="email" name="customer[email]" required autocomplete="email"></label>
+        <label class="field"><span>{{ 'customer.login.password' | t }}</span><input class="input" type="password" name="customer[password]" autocomplete="current-password"></label>
+        <button class="btn" type="submit">{{ 'customer.login.submit' | t }}</button>
+        <button type="button" class="link-arrow" style="margin-left:1rem;background:none;border:0;cursor:pointer" onclick="document.getElementById('LoginForm').style.display='none';document.getElementById('RecoverPassword').style.display='block';">{{ 'customer.login.forgot' | t }}</button>
+      {%- endform -%}
+      {%- if shop.customer_accounts_optional? -%}
+        <p style="margin-top:var(--space-md)"><a class="link-arrow" href="{{ routes.account_register_url }}">{{ 'customer.login.create' | t }}</a></p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>

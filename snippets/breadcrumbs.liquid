@@ -1,0 +1,31 @@
+{%- comment -%} Accessible breadcrumbs with BreadcrumbList JSON-LD {%- endcomment -%}
+<nav class="breadcrumbs" aria-label="{{ 'general.breadcrumbs.aria_label' | t }}">
+  <a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a>
+  {%- case request.page_type -%}
+    {%- when 'product' -%}
+      {%- if collection.url -%}
+        {% render 'icon', name: 'chevron-down' %}<a href="{{ collection.url }}">{{ collection.title }}</a>
+      {%- endif -%}
+      {% render 'icon', name: 'chevron-down' %}<span aria-current="page">{{ product.title }}</span>
+    {%- when 'collection' -%}
+      {% render 'icon', name: 'chevron-down' %}<span aria-current="page">{{ collection.title }}</span>
+    {%- when 'article' -%}
+      {% render 'icon', name: 'chevron-down' %}<a href="{{ blog.url }}">{{ blog.title }}</a>
+      {% render 'icon', name: 'chevron-down' %}<span aria-current="page">{{ article.title }}</span>
+    {%- when 'page' -%}
+      {% render 'icon', name: 'chevron-down' %}<span aria-current="page">{{ page.title }}</span>
+    {%- endcase -%}
+</nav>
+{%- if request.page_type == 'product' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": {{ 'general.breadcrumbs.home' | t | json }}, "item": {{ shop.url | append: routes.root_url | json }} }
+    {%- if collection.url %}, { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": {{ shop.url | append: collection.url | json }} }{% endif %},
+    { "@type": "ListItem", "position": {% if collection.url %}3{% else %}2{% endif %}, "name": {{ product.title | json }} }
+  ]
+}
+</script>
+{%- endif -%}

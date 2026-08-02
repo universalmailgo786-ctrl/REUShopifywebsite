@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "hero": { "type": "page-hero", "settings": { "eyebrow": "Policies", "heading": "Privacy Policy", "body": "<p>Do not publish a generic template. Complete this policy for your final app stack, ad pixels, analytics tools, markets, legal entity, and contact address before launch.</p>", "bg_scheme": "bg-cream" } },
+    "body": {
+      "type": "rich-text",
+      "settings": {
+        "narrow": true,
+        "content": "<p><strong>Draft outline — required sections to complete:</strong></p><ul><li>Identity and contact details of the business</li><li>Information collected directly, automatically, and from Shopify / service providers</li><li>Order, payment, account, device, analytics, marketing, and customer-support data</li><li>Quiz answers, and the rule that sensitive health information is not requested unless legally reviewed</li><li>Purposes and legal bases where applicable</li><li>Cookies, analytics, advertising pixels, and consent controls</li><li>Sharing with Shopify, payment providers, fulfillment, email, reviews, chat, analytics, and advertising partners</li><li>International transfers and retention periods</li><li>Customer rights by jurisdiction</li><li>Children’s privacy and minimum purchase age</li><li>Security statement without absolute guarantees</li><li>Policy changes and contact method</li></ul>"
+      }
+    }
+  },
+  "order": ["hero", "body"]
+}
