@@ -1,0 +1,40 @@
+<section class="section">
+  <div class="wrap">
+    <div class="quiz-teaser">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2 class="h2">{{ section.settings.heading | newline_to_br }}</h2>
+        {%- if section.settings.body != blank -%}<p class="lede" style="margin-top:1rem">{{ section.settings.body }}</p>{%- endif -%}
+        {%- if section.settings.cta_label != blank -%}
+          <div style="margin-top:1.5rem">
+            <a class="btn btn--on-dark" href="{{ section.settings.cta_link | default: routes.root_url }}">{{ section.settings.cta_label }} <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.microcopy != blank -%}<p class="quiz-teaser__micro">{{ section.settings.microcopy }}</p>{%- endif -%}
+      </div>
+      <div class="quiz-teaser__visual">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1200 | image_tag: widths: '600,900,1200', sizes: '(min-width:900px) 40vw, 100vw', loading: 'lazy', alt: section.settings.heading | escape }}
+        {%- else -%}
+          <img src="{{ 'reu-hydration-watermelon.jpg' | asset_url }}" width="2000" height="1333" alt="" loading="lazy">
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Quiz teaser",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Find your REÚ" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Not sure where\nto begin?" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Answer a few quick questions about your goals, lifestyle, and preferences. We’ll guide you toward the products that best match what you want from your daily wellness routine." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Take the 60-Second Quiz" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "text", "id": "microcopy", "label": "Microcopy", "default": "Personalized product guidance, not medical advice." },
+    { "type": "image_picker", "id": "image", "label": "Image" }
+  ],
+  "presets": [{ "name": "Quiz teaser" }]
+}
+{% endschema %}

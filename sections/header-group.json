@@ -6,8 +6,9 @@
       "type": "announcement-bar",
       "settings": {
         "enabled": true,
-        "text": "Pre-orders are now open — reserve your REÚ routine today.",
-        "link_label": "Shop Pre-Order",
+        "text": "Pre-Orders Are Now Open — Reserve Your REÚ Routine",
+        "secondary": "",
+        "link_label": "View Pre-Order Details",
         "link": "shopify://collections/all"
       }
     },

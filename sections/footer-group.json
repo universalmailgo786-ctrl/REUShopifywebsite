@@ -4,25 +4,21 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "blocks": {
-        "shop": {
-          "type": "menu",
-          "settings": {
-            "heading": "Shop",
-            "menu": "footer-shop"
-          }
-        }
-      },
-      "block_order": [
-        "shop"
-      ],
       "settings": {
-        "show_newsletter": true,
+        "statement": "Premium wellness made simple, enjoyable, and designed around women. Live Better. Every Day.",
+        "tagline": "Live Better. Every Day.",
+        "shop_heading": "Shop",
+        "menu_shop": "footer-shop",
+        "discover_heading": "Discover",
+        "menu_discover": "footer-learn",
+        "care_heading": "Customer Care",
+        "menu_care": "footer-support",
+        "support_email": "",
+        "support_hours": "",
+        "disclaimer": "Information on this website is provided for general educational purposes and is not medical advice. Always follow the product label and consult a qualified healthcare professional when appropriate.",
         "show_payment_icons": true
       }
     }
   },
-  "order": [
-    "footer"
-  ]
+  "order": ["footer"]
 }

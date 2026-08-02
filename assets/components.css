@@ -143,16 +143,7 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
 @media (min-width: 990px) { .sticky-bar { display: none !important; } }
 
 /* -------------------- Product cards -------------------- */
-.product-card { display: flex; flex-direction: column; height: 100%; }
-.product-card__media { position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--color-cream); aspect-ratio: 1; }
-.product-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
-.product-card:hover .product-card__media img { transform: scale(1.04); }
-.product-card__badges { position: absolute; top: .6rem; left: .6rem; display: flex; gap: .35rem; flex-wrap: wrap; }
-.product-card__body { padding-top: var(--space-sm); display: flex; flex-direction: column; gap: .3rem; flex: 1; }
-.product-card__title { font-family: var(--font-display); font-size: 1.1rem; line-height: 1.2; }
-.product-card__meta { font-size: .85rem; color: var(--color-text-muted); }
-.product-card__price { font-weight: 600; color: var(--color-green); margin-top: auto; padding-top: .4rem; }
-.product-card__cta { margin-top: .6rem; }
+/* Product card visual system lives in home.css / collection templates */
 
 /* -------------------- Collection / facets -------------------- */
 .collection-layout { display: grid; gap: var(--space-lg); }
@@ -180,46 +171,11 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
 .quiz__safety { margin-top: var(--space-md); }
 .quiz__result { text-align: center; }
 
-/* -------------------- Footer -------------------- */
-.site-footer { background: var(--color-green); color: var(--color-cream); padding-block: var(--space-xl) var(--space-lg); }
-.site-footer a { color: var(--color-cream); opacity: .85; }
-.site-footer a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
-.footer-grid { display: grid; gap: var(--space-lg); grid-template-columns: 1fr; }
-@media (min-width: 750px) { .footer-grid { grid-template-columns: 1.4fr repeat(3, 1fr); } }
-.footer-col h3 { font-family: var(--font-body); font-size: .82rem; text-transform: uppercase; letter-spacing: .12em; color: var(--color-blush); margin-bottom: var(--space-sm); }
-.footer-col ul { display: grid; gap: .55rem; }
-.footer-brand img { width: 150px; margin-bottom: var(--space-sm); filter: brightness(0) invert(1); opacity: .95; }
-.footer-newsletter input { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.25); color: #fff; }
-.footer-newsletter input::placeholder { color: rgba(255,255,255,.6); }
-.footer-social { display: flex; gap: .75rem; margin-top: var(--space-md); }
-.footer-social a { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.3); border-radius: var(--radius-pill); display: inline-flex; align-items: center; justify-content: center; opacity: 1; }
-.footer-social a:hover { background: rgba(255,255,255,.1); }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,.15); margin-top: var(--space-lg); padding-top: var(--space-md); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; font-size: .85rem; opacity: .8; }
+/* -------------------- Payment icons -------------------- */
 .payment-icons { display: flex; gap: .4rem; flex-wrap: wrap; }
 .payment-icons svg { height: 24px; width: auto; border-radius: 4px; }
 
-/* -------------------- Hero -------------------- */
-.hero { position: relative; overflow: hidden; }
-.hero__grid { display: grid; gap: var(--space-lg); align-items: center; }
-@media (min-width: 750px) { .hero__grid { grid-template-columns: 1fr 1fr; min-height: 60vh; } }
-.hero__media { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/5; }
-.hero__media img { width: 100%; height: 100%; object-fit: cover; }
-.hero__cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: var(--space-md); }
-.hero__disclosure { font-size: .85rem; color: var(--color-text-muted); margin-top: var(--space-md); max-width: 34rem; }
-
-/* -------------------- Icon feature rows -------------------- */
+/* Legacy homepage helpers (primary homepage styles live in home.css) */
 .feature-row { display: grid; gap: var(--space-md); text-align: center; }
 .feature-row .icon-circle { width: 52px; height: 52px; border-radius: var(--radius-pill); background: var(--color-lilac); color: var(--color-green); display: inline-flex; align-items: center; justify-content: center; margin-bottom: .75rem; }
 .feature-row .icon-circle .icon { width: 24px; height: 24px; }
-
-/* Goal cards */
-.goal-card { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/5; display: flex; align-items: flex-end; color: #fff; padding: var(--space-md); background: var(--color-mauve); }
-.goal-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
-.goal-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 35%, rgba(34,56,41,.75)); z-index: -1; }
-.goal-card h3 { color: #fff; }
-
-/* Split / format cards */
-.format-card { border-radius: var(--radius-lg); overflow: hidden; border: var(--border); background: var(--color-surface); display: flex; flex-direction: column; }
-.format-card__media { aspect-ratio: 4/3; background: var(--color-cream); }
-.format-card__media img { width: 100%; height: 100%; object-fit: cover; }
-.format-card__body { padding: var(--space-md); display: flex; flex-direction: column; gap: .5rem; flex: 1; }

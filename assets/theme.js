@@ -299,12 +299,55 @@
     io.observe(anchor);
   }
 
+  /* -------------------- transparent header on homepage -------------------- */
+  function initHeaderScroll() {
+    var header = $('[data-site-header]');
+    if (!header || !document.body.classList.contains('template-index')) return;
+    if (header.getAttribute('data-scroll-ready') === '1') return;
+    header.setAttribute('data-scroll-ready', '1');
+    function onScroll() {
+      header.classList.toggle('is-scrolled', window.scrollY > 24);
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  /* -------------------- media banner play/pause -------------------- */
+  function initMediaBanner(ctx) {
+    $all('[data-media-banner]', ctx || document).forEach(function (root) {
+      if (root.getAttribute('data-media-ready') === '1') return;
+      var video = root.querySelector('video');
+      var btn = root.querySelector('[data-media-play]');
+      if (!video || !btn) return;
+      root.setAttribute('data-media-ready', '1');
+      var playIcon = btn.querySelector('[data-media-play-icon]');
+      var pauseIcon = btn.querySelector('[data-media-pause-icon]');
+      function sync() {
+        var playing = !video.paused;
+        btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+        btn.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
+        if (playIcon) playIcon.hidden = playing;
+        if (pauseIcon) pauseIcon.hidden = !playing;
+      }
+      btn.addEventListener('click', function () {
+        if (video.paused) video.play();
+        else video.pause();
+        sync();
+      });
+      video.addEventListener('play', sync);
+      video.addEventListener('pause', sync);
+      sync();
+    });
+  }
+
   /* -------------------- init + Shopify design mode -------------------- */
   function initAll(ctx) {
     initAccordions(ctx);
     initProduct(ctx);
     initSearch(ctx);
     initStickyBar();
+    initHeaderScroll();
+    initMediaBanner(ctx);
   }
   document.addEventListener('DOMContentLoaded', function () { initAll(document); });
 
