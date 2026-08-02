@@ -148,8 +148,10 @@ h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
 .bg-green .lede, .bg-green .text-muted { color: color-mix(in srgb, var(--color-on-green) 78%, transparent); }
 
 .btn {
-  --btn-bg: var(--color-green);
+  --btn-bg: var(--reu-deep-green, var(--color-green));
   --btn-fg: #fff;
+  --btn-hover-bg: var(--reu-warm-rose, #BA6D64);
+  --btn-hover-fg: #fff;
   display: inline-flex; align-items: center; justify-content: center; gap: .65em;
   min-height: var(--tap);
   padding: .85em 1.55em;
@@ -164,29 +166,55 @@ h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
   background: var(--btn-bg);
   color: var(--btn-fg);
   cursor: pointer;
-  transition: transform var(--dur) var(--ease), background var(--dur) var(--ease), color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  transition: transform var(--dur) var(--ease), background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
-.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.btn:hover {
+  background: var(--btn-hover-bg);
+  border-color: var(--btn-hover-bg);
+  color: var(--btn-hover-fg);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
 .btn:active { transform: translateY(0); }
 .btn__arrow {
   width: 1.55rem; height: 1.55rem; border-radius: 50%;
   display: inline-flex; align-items: center; justify-content: center;
   background: rgba(255,255,255,.18); flex: none;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 .btn__arrow .icon { width: .85rem; height: .85rem; }
 .btn--secondary {
-  --btn-bg: transparent; --btn-fg: var(--color-green);
-  border-color: var(--color-green);
-  background: color-mix(in srgb, var(--color-cream) 55%, transparent);
+  --btn-bg: transparent;
+  --btn-fg: var(--reu-deep-green, var(--color-green));
+  --btn-hover-bg: var(--reu-deep-green, var(--color-green));
+  --btn-hover-fg: #fff;
+  border-color: var(--reu-deep-green, var(--color-green));
+  background: color-mix(in srgb, var(--reu-warm-cream, var(--color-cream)) 55%, transparent);
 }
-.btn--secondary:hover { background: var(--color-green); color: #fff; }
-.btn--secondary .btn__arrow { background: color-mix(in srgb, var(--color-green) 12%, transparent); }
+.btn--secondary:hover {
+  background: var(--btn-hover-bg);
+  border-color: var(--btn-hover-bg);
+  color: var(--btn-hover-fg);
+}
+.btn--secondary .btn__arrow { background: color-mix(in srgb, var(--reu-deep-green, var(--color-green)) 12%, transparent); }
+.btn--secondary:hover .btn__arrow { background: rgba(255,255,255,.18); color: #fff; }
 .btn--on-dark {
-  --btn-bg: #fff; --btn-fg: var(--color-green); border-color: #fff;
+  --btn-bg: #fff;
+  --btn-fg: var(--reu-deep-green, var(--color-green));
+  --btn-hover-bg: var(--reu-warm-rose, #BA6D64);
+  --btn-hover-fg: #fff;
+  border-color: #fff;
 }
-.btn--on-dark .btn__arrow { background: color-mix(in srgb, var(--color-green) 10%, transparent); color: var(--color-green); }
+.btn--on-dark .btn__arrow { background: color-mix(in srgb, var(--reu-deep-green, var(--color-green)) 10%, transparent); color: var(--reu-deep-green, var(--color-green)); }
+.btn--on-dark:hover .btn__arrow { background: rgba(255,255,255,.2); color: #fff; }
 .btn--block { display: flex; width: 100%; }
 .btn[disabled], .btn[aria-disabled="true"] { opacity: .55; cursor: not-allowed; transform: none; }
+.btn[disabled]:hover, .btn[aria-disabled="true"]:hover {
+  background: var(--btn-bg);
+  border-color: var(--btn-bg);
+  color: var(--btn-fg);
+  box-shadow: none;
+}
 .link-arrow {
   display: inline-flex; align-items: center; gap: .45em;
   font-weight: 500; color: var(--color-green);

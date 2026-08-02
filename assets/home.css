@@ -80,19 +80,21 @@
   height: 100%;
   object-fit: cover;
   object-position: 78% center;
+  filter: none;
+  image-rendering: auto;
 }
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(30,38,31,.82) 0%,
-      rgba(30,38,31,.62) 28%,
-      rgba(30,38,31,.28) 52%,
-      rgba(30,38,31,.08) 72%,
-      rgba(30,38,31,.12) 100%
-    );
+  pointer-events: none;
+  /* Soft left shade only for text contrast — do not blur or muddy the photo */
+  background: linear-gradient(
+    90deg,
+    rgba(30,38,31,.45) 0%,
+    rgba(30,38,31,.18) 34%,
+    rgba(30,38,31,0) 58%,
+    rgba(30,38,31,0) 100%
+  );
 }
 .hero__content {
   position: relative;
@@ -100,12 +102,32 @@
   padding: clamp(7.5rem, 14vw, 10rem) 0 clamp(3.5rem, 8vw, 5.5rem);
   max-width: min(40rem, 48%);
   margin-right: auto;
+  color: #fff;
+  text-shadow: 0 1px 18px rgba(30,38,31,.28);
 }
-.hero__content .eyebrow { color: var(--color-blush); }
-.hero__content .h1 { color: #fff; margin-bottom: 1rem; }
-.hero__content .lede { color: rgba(255,255,255,.88); margin-bottom: 1.5rem; }
+.hero__content .eyebrow,
+.hero__content .h1,
+.hero__content .lede,
+.hero__content .hero__disclosure {
+  color: #fff !important;
+}
+.hero__content .h1 { margin-bottom: 1rem; }
+.hero__content .lede { margin-bottom: 1.5rem; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 1rem; }
-.hero__disclosure { font-size: .85rem; color: rgba(255,255,255,.78); max-width: 34rem; }
+.hero__disclosure { font-size: .85rem; max-width: 34rem; opacity: .92; }
+.hero__actions .btn--secondary {
+  --btn-fg: #fff;
+  --btn-hover-bg: #fff;
+  --btn-hover-fg: var(--reu-deep-green, #223829);
+  border-color: #fff;
+  background: transparent;
+  color: #fff;
+}
+.hero__actions .btn--secondary:hover {
+  background: #fff;
+  border-color: #fff;
+  color: var(--reu-deep-green, #223829);
+}
 @media (max-width: 989px) {
   .hero__content { max-width: min(36rem, 58%); }
   .hero__media img, .hero__media video { object-position: 82% center; }
@@ -119,10 +141,9 @@
   .hero__overlay {
     background: linear-gradient(
       180deg,
-      rgba(30,38,31,.2) 0%,
-      rgba(30,38,31,.35) 35%,
-      rgba(30,38,31,.78) 68%,
-      rgba(30,38,31,.9) 100%
+      rgba(30,38,31,0) 0%,
+      rgba(30,38,31,.12) 42%,
+      rgba(30,38,31,.55) 100%
     );
   }
   .hero__content {
