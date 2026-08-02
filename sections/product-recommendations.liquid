@@ -1,20 +1,60 @@
-{%- liquid
-  assign rec = recommendations
--%}
-{%- if rec.performed and rec.products_count > 0 -%}
-<section class="section {{ section.settings.bg_scheme }}">
-  <div class="wrap">
-    <div class="section-head">
-      <h2 class="h3">{{ section.settings.heading }}</h2>
-    </div>
-    <div class="snap-row">
-      {%- for product in rec.products limit: section.settings.limit -%}
-        {% render 'product-card', product: product %}
-      {%- endfor -%}
-    </div>
+{%- comment -%}
+  Product recommendations. Loads via Section Rendering API when JS is available.
+  Falls back to products from the first related collection when recommendations are empty.
+{%- endcomment -%}
+<section
+  id="shopify-section-{{ section.id }}"
+  class="section {{ section.settings.bg_scheme }}"
+  data-product-recommendations
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.limit }}"
+>
+  <div class="wrap" data-recommendations-body>
+    {%- if recommendations.performed and recommendations.products_count > 0 -%}
+      <div class="section-head">
+        <h2 class="h3">{{ section.settings.heading }}</h2>
+      </div>
+      <div class="snap-row">
+        {%- for product in recommendations.products limit: section.settings.limit -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      </div>
+    {%- elsif product.collections.size > 0 -%}
+      {%- assign related_collection = product.collections.first -%}
+      {%- if related_collection.products_count > 1 -%}
+        <div class="section-head">
+          <h2 class="h3">{{ section.settings.heading }}</h2>
+        </div>
+        <div class="snap-row">
+          {%- assign shown = 0 -%}
+          {%- for related in related_collection.products -%}
+            {%- if related.id == product.id -%}{% continue %}{%- endif -%}
+            {%- if shown >= section.settings.limit -%}{% break %}{%- endif -%}
+            {% render 'product-card', product: related %}
+            {%- assign shown = shown | plus: 1 -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
   </div>
 </section>
-{%- endif -%}
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-product-recommendations][data-url]');
+    if (!root || !root.getAttribute('data-url')) return;
+    if (root.querySelector('.product-card')) return;
+    fetch(root.getAttribute('data-url'))
+      .then(function (r) { return r.text(); })
+      .then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var next = doc.querySelector('[data-recommendations-body]');
+        var current = root.querySelector('[data-recommendations-body]');
+        if (next && current && next.innerHTML.trim()) current.innerHTML = next.innerHTML;
+      })
+      .catch(function () {});
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Product recommendations",
@@ -25,6 +65,7 @@
       { "value": "", "label": "White" }, { "value": "bg-cream", "label": "Cream" }
     ], "default": "bg-cream" }
   ],
+  "enabled_on": { "templates": ["product"] },
   "presets": [{ "name": "Product recommendations" }]
 }
 {% endschema %}

@@ -1,8 +1,24 @@
 {
   "sections": {
-    "main": { "type": "main-product" },
-    "reviews": { "type": "app-reviews", "settings": { "heading": "Reviews" } },
-    "recommendations": { "type": "product-recommendations", "settings": { "heading": "You may also like", "limit": 4 } }
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "app-reviews",
+      "settings": {
+        "heading": "Reviews",
+        "bg_scheme": ""
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "limit": 4,
+        "bg_scheme": "bg-cream"
+      }
+    }
   },
   "order": ["main", "reviews", "recommendations"]
 }

@@ -67,12 +67,13 @@
         <form data-product-form action="{{ routes.cart_add_url }}" method="post" style="margin-top:1.25rem">
           {%- unless p.has_only_default_variant -%}
             {%- for option in p.options_with_values -%}
-              <div class="option-group" data-option-index="{{ forloop.index0 }}">
+              {%- assign option_index = forloop.index0 -%}
+              <div class="option-group" data-option-index="{{ option_index }}">
                 <span class="option-group__label">{{ option.name }}</span>
                 <div class="option-pills">
                   {%- for value in option.values -%}
-                    {%- assign oid = 'opt-' | append: forloop.parentloop.index0 | append: '-' | append: forloop.index0 -%}
-                    <input type="radio" id="{{ oid }}" name="option-{{ forloop.parentloop.index0 }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
+                    {%- assign oid = 'opt-' | append: option_index | append: '-' | append: forloop.index0 -%}
+                    <input type="radio" id="{{ oid }}" name="option-{{ option_index }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
                     <label for="{{ oid }}">{{ value }}</label>
                   {%- endfor -%}
                 </div>
@@ -137,6 +138,17 @@
           </div>
         </div>
 
+        {%- if p.collections.size > 0 -%}
+          <div style="margin-top:var(--space-md)">
+            <p class="product-card__meta" style="margin-bottom:.5rem">Shop collections</p>
+            <div class="snap-row" style="gap:.5rem">
+              {%- for col in p.collections limit: 6 -%}
+                <a class="filter-chip" href="{{ col.url }}">{{ col.title }}</a>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
         {% render 'supplement-disclaimer', compact: true %}
       </div>
     </div>
@@ -185,9 +197,17 @@
 
 {% schema %}
 {
-  "name": "Product",
+  "name": "Product information",
+  "tag": "section",
+  "class": "section-main-product",
   "settings": [
     { "type": "paragraph", "content": "Product copy is driven by the product’s custom metafields. Empty accordions hide automatically. See README for metafield definitions." }
-  ]
+  ],
+  "blocks": [
+    { "type": "@app" }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
 }
 {% endschema %}

@@ -1,10 +1,16 @@
 {%- comment -%} Accessible breadcrumbs with BreadcrumbList JSON-LD {%- endcomment -%}
+{%- liquid
+  assign crumb_collection = collection
+  if request.page_type == 'product' and crumb_collection == blank and product.collections.size > 0
+    assign crumb_collection = product.collections.first
+  endif
+-%}
 <nav class="breadcrumbs" aria-label="{{ 'general.breadcrumbs.aria_label' | t }}">
   <a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a>
   {%- case request.page_type -%}
     {%- when 'product' -%}
-      {%- if collection.url -%}
-        {% render 'icon', name: 'chevron-down' %}<a href="{{ collection.url }}">{{ collection.title }}</a>
+      {%- if crumb_collection != blank and crumb_collection.url != blank -%}
+        {% render 'icon', name: 'chevron-down' %}<a href="{{ crumb_collection.url }}">{{ crumb_collection.title }}</a>
       {%- endif -%}
       {% render 'icon', name: 'chevron-down' %}<span aria-current="page">{{ product.title }}</span>
     {%- when 'collection' -%}
@@ -14,7 +20,7 @@
       {% render 'icon', name: 'chevron-down' %}<span aria-current="page">{{ article.title }}</span>
     {%- when 'page' -%}
       {% render 'icon', name: 'chevron-down' %}<span aria-current="page">{{ page.title }}</span>
-    {%- endcase -%}
+  {%- endcase -%}
 </nav>
 {%- if request.page_type == 'product' -%}
 <script type="application/ld+json">
@@ -23,8 +29,8 @@
   "@type": "BreadcrumbList",
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": {{ 'general.breadcrumbs.home' | t | json }}, "item": {{ shop.url | append: routes.root_url | json }} }
-    {%- if collection.url %}, { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": {{ shop.url | append: collection.url | json }} }{% endif %},
-    { "@type": "ListItem", "position": {% if collection.url %}3{% else %}2{% endif %}, "name": {{ product.title | json }} }
+    {%- if crumb_collection.url != blank %}, { "@type": "ListItem", "position": 2, "name": {{ crumb_collection.title | json }}, "item": {{ shop.url | append: crumb_collection.url | json }} }{% endif %},
+    { "@type": "ListItem", "position": {% if crumb_collection.url != blank %}3{% else %}2{% endif %}, "name": {{ product.title | json }} }
   ]
 }
 </script>

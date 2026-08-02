@@ -1,0 +1,19 @@
+Handle,Title,Vendor,Type,Tags,Published,Status,Collection,Option1 Name,Option1 Value,Variant SKU,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Requires Shipping,Variant Taxable
+collagen-mixed-berry,Collagen — Mixed Berry,REÚ,Collagen,"Pre-Order, Beauty & Collagen, Beauty, Mixed Berry, Collagen, Format:Pouch, Format:Sachet",true,active,Beauty & Collagen,Format,Pouch,,continue,manual,0.00,true,true
+collagen-mixed-berry,,,,,,,,Format,Sachet,,continue,manual,0.00,true,true
+hydration-electrolytes-lemon-lime,Hydration Electrolytes — Lemon Lime,REÚ,Hydration Electrolytes,"Pre-Order, Hydration, Energy & Performance, Lemon Lime, Hydration Electrolytes, Format:Pouch, Format:Sachet",true,active,Hydration,Format,Pouch,,continue,manual,0.00,true,true
+hydration-electrolytes-lemon-lime,,,,,,,,Format,Sachet,,continue,manual,0.00,true,true
+hydration-electrolytes-watermelon,Hydration Electrolytes — Watermelon,REÚ,Hydration Electrolytes,"Pre-Order, Hydration, Watermelon, Hydration Electrolytes, Format:Pouch, Format:Sachet",true,active,Hydration,Format,Pouch,,continue,manual,0.00,true,true
+hydration-electrolytes-watermelon,,,,,,,,Format,Sachet,,continue,manual,0.00,true,true
+hydration-electrolytes-coconut,Hydration Electrolytes — Coconut,REÚ,Hydration Electrolytes,"Pre-Order, Hydration, Coconut, Hydration Electrolytes, Format:Pouch, Format:Sachet",true,active,Hydration,Format,Pouch,,continue,manual,0.00,true,true
+hydration-electrolytes-coconut,,,,,,,,Format,Sachet,,continue,manual,0.00,true,true
+greens-pineapple,Greens — Pineapple,REÚ,Greens,"Pre-Order, Greens & Nutrition, Greens, Pineapple, Format:Pouch, Format:Sachet",true,active,Greens & Nutrition,Format,Pouch,,continue,manual,0.00,true,true
+greens-pineapple,,,,,,,,Format,Sachet,,continue,manual,0.00,true,true
+daily-wellness-peach-mango,Daily Wellness — Peach Mango,REÚ,Daily Wellness,"Pre-Order, Daily Wellness, Peach Mango, Format:Pouch, Format:Sachet",true,active,Daily Wellness,Format,Pouch,,continue,manual,0.00,true,true
+daily-wellness-peach-mango,,,,,,,,Format,Sachet,,continue,manual,0.00,true,true
+gummies-mixed-berry,Gummies — Mixed Berry,REÚ,Gummies,"Pre-Order, Daily Wellness, Beauty & Collagen, Mixed Berry, Gummies, Format:Pouch, Format:Sachet",true,active,Daily Wellness,Format,Pouch,,continue,manual,0.00,true,true
+gummies-mixed-berry,,,,,,,,Format,Sachet,,continue,manual,0.00,true,true
+weight-management-pink-lemonade,Weight Management — Pink Lemonade,REÚ,Weight Management,"Pre-Order, Weight Management, Pink Lemonade, Format:Pouch, Format:Sachet",true,active,Weight Management,Format,Pouch,,continue,manual,0.00,true,true
+weight-management-pink-lemonade,,,,,,,,Format,Sachet,,continue,manual,0.00,true,true
+premium-protein-chocolate,Premium Protein — Chocolate,REÚ,Premium Protein,"Pre-Order, Protein & Recovery, Energy & Performance, Chocolate, Premium Protein, Format:Pouch, Format:Sachet",true,active,Protein & Recovery,Format,Pouch,,continue,manual,0.00,true,true
+premium-protein-chocolate,,,,,,,,Format,Sachet,,continue,manual,0.00,true,true
