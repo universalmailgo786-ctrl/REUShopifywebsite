@@ -3,15 +3,35 @@
     "hub": {
       "type": "collections-hub",
       "blocks": {
-        "pouch": { "type": "collection_card", "settings": { "fallback_asset": "reu-format-pouch.jpg", "title": "Pouch Collection", "text": "Full-size favourites for your everyday routine.", "cta": "Shop Pouches", "link": "shopify://collections/pouch-collection" } },
-        "sachet": { "type": "collection_card", "settings": { "fallback_asset": "reu-format-sachet.jpg", "title": "Sachet Collection", "text": "Convenient single serves for movement, travel, and busy days.", "cta": "Shop Sachets", "link": "shopify://collections/sachet-collection" } },
-        "g1": { "type": "goal_link", "settings": { "title": "Hydration" } },
-        "g2": { "type": "goal_link", "settings": { "title": "Beauty & Collagen" } },
-        "g3": { "type": "goal_link", "settings": { "title": "Daily Wellness" } },
-        "g4": { "type": "goal_link", "settings": { "title": "Greens & Nutrition" } },
-        "g5": { "type": "goal_link", "settings": { "title": "Energy & Performance" } },
-        "g6": { "type": "goal_link", "settings": { "title": "Weight Management" } },
-        "g7": { "type": "goal_link", "settings": { "title": "Protein & Recovery" } }
+        "pouch": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "pouch-collection",
+            "fallback_asset": "reu-format-pouch.jpg",
+            "title": "Pouch Collection",
+            "text": "Full-size favourites for your everyday routine.",
+            "cta": "Shop Pouches",
+            "link": "shopify://collections/pouch-collection"
+          }
+        },
+        "sachet": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "sachet-collection",
+            "fallback_asset": "reu-format-sachet.jpg",
+            "title": "Sachet Collection",
+            "text": "Convenient single serves for movement, travel, and busy days.",
+            "cta": "Shop Sachets",
+            "link": "shopify://collections/sachet-collection"
+          }
+        },
+        "g1": { "type": "goal_link", "settings": { "title": "Hydration", "link": "shopify://collections/hydration" } },
+        "g2": { "type": "goal_link", "settings": { "title": "Beauty & Collagen", "link": "shopify://collections/beauty-collagen" } },
+        "g3": { "type": "goal_link", "settings": { "title": "Daily Wellness", "link": "shopify://collections/daily-wellness" } },
+        "g4": { "type": "goal_link", "settings": { "title": "Greens & Nutrition", "link": "shopify://collections/greens-nutrition" } },
+        "g5": { "type": "goal_link", "settings": { "title": "Energy & Performance", "link": "shopify://collections/energy-performance" } },
+        "g6": { "type": "goal_link", "settings": { "title": "Weight Management", "link": "shopify://collections/weight-management" } },
+        "g7": { "type": "goal_link", "settings": { "title": "Protein & Recovery", "link": "shopify://collections/protein-recovery" } }
       },
       "block_order": ["pouch", "sachet", "g1", "g2", "g3", "g4", "g5", "g6", "g7"]
     }

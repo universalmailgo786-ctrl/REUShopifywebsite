@@ -32,17 +32,18 @@
         "heading": "Start with what you want to feel",
         "body": "Your routine should begin with your goals—not a crowded shelf. Choose the support that matters most to you today.",
         "cta_label": "Explore All Goals",
-        "cta_link": "shopify://collections/all"
+        "cta_link": "shopify://pages/collections"
       },
       "blocks": {
-        "g1": { "type": "goal", "settings": { "fallback_asset": "reu-hydration-lemon-lime.jpg", "title": "Hydration", "cta": "Shop Hydration" } },
-        "g2": { "type": "goal", "settings": { "fallback_asset": "reu-collagen-mixed-berry.jpg", "title": "Beauty", "cta": "Shop Beauty" } },
-        "g3": { "type": "goal", "settings": { "fallback_asset": "reu-daily-wellness-peach-mango.jpg", "title": "Daily Wellness", "cta": "Shop Wellness" } },
-        "g4": { "type": "goal", "settings": { "fallback_asset": "reu-greens-pineapple.jpg", "title": "Greens", "cta": "Shop Greens" } },
-        "g5": { "type": "goal", "settings": { "fallback_asset": "reu-protein-chocolate.jpg", "title": "Performance", "cta": "Shop Performance" } },
-        "g6": { "type": "goal", "settings": { "fallback_asset": "reu-weight-pink-lemonade.jpg", "title": "Weight Management", "cta": "Shop Support" } }
+        "g1": { "type": "goal", "settings": { "fallback_asset": "reu-hydration-lemon-lime.jpg", "title": "Hydration", "cta": "Shop Hydration", "link": "shopify://collections/hydration" } },
+        "g2": { "type": "goal", "settings": { "fallback_asset": "reu-collagen-mixed-berry.jpg", "title": "Beauty & Collagen", "cta": "Shop Beauty", "link": "shopify://collections/beauty-collagen" } },
+        "g3": { "type": "goal", "settings": { "fallback_asset": "reu-daily-wellness-peach-mango.jpg", "title": "Daily Wellness", "cta": "Shop Wellness", "link": "shopify://collections/daily-wellness" } },
+        "g4": { "type": "goal", "settings": { "fallback_asset": "reu-greens-pineapple.jpg", "title": "Greens & Nutrition", "cta": "Shop Greens", "link": "shopify://collections/greens-nutrition" } },
+        "g5": { "type": "goal", "settings": { "fallback_asset": "reu-protein-chocolate.jpg", "title": "Energy & Performance", "cta": "Shop Performance", "link": "shopify://collections/energy-performance" } },
+        "g6": { "type": "goal", "settings": { "fallback_asset": "reu-weight-pink-lemonade.jpg", "title": "Weight Management", "cta": "Shop Support", "link": "shopify://collections/weight-management" } },
+        "g7": { "type": "goal", "settings": { "fallback_asset": "reu-protein-chocolate.jpg", "title": "Protein & Recovery", "cta": "Shop Protein", "link": "shopify://collections/protein-recovery" } }
       },
-      "block_order": ["g1", "g2", "g3", "g4", "g5", "g6"]
+      "block_order": ["g1", "g2", "g3", "g4", "g5", "g6", "g7"]
     },
     "featured": {
       "type": "featured-products",
@@ -50,6 +51,13 @@
         "eyebrow": "Featured",
         "heading": "Your daily essentials",
         "body": "Meet the REÚ favourites designed to fit smoothly into mornings, workouts, workdays, and everything between.",
+        "collection": "all",
+        "products": [
+          "collagen-mixed-berry",
+          "hydration-electrolytes-lemon-lime",
+          "daily-wellness-peach-mango",
+          "premium-protein-chocolate"
+        ],
         "limit": 4,
         "cta_label": "Shop All Products",
         "cta_link": "shopify://collections/all"

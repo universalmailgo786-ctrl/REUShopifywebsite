@@ -1,6 +1,12 @@
 {%- liquid
-  assign col = section.settings.collection
-  assign products = col.products | default: section.settings.products
+  assign products = section.settings.products
+  if products == blank or products.size == 0
+    if section.settings.collection != blank
+      assign products = section.settings.collection.products
+    else
+      assign products = collections.all.products
+    endif
+  endif
 -%}
 <section class="section {{ section.settings.bg_scheme }}">
   <div class="wrap">
