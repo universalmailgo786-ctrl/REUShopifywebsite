@@ -25,13 +25,13 @@
             "link": "shopify://collections/sachet-collection"
           }
         },
-        "g1": { "type": "goal_link", "settings": { "title": "Hydration", "link": "shopify://collections/hydration" } },
-        "g2": { "type": "goal_link", "settings": { "title": "Beauty & Collagen", "link": "shopify://collections/beauty-collagen" } },
-        "g3": { "type": "goal_link", "settings": { "title": "Daily Wellness", "link": "shopify://collections/daily-wellness" } },
-        "g4": { "type": "goal_link", "settings": { "title": "Greens & Nutrition", "link": "shopify://collections/greens-nutrition" } },
-        "g5": { "type": "goal_link", "settings": { "title": "Energy & Performance", "link": "shopify://collections/energy-performance" } },
-        "g6": { "type": "goal_link", "settings": { "title": "Weight Management", "link": "shopify://collections/weight-management" } },
-        "g7": { "type": "goal_link", "settings": { "title": "Protein & Recovery", "link": "shopify://collections/protein-recovery" } }
+        "g1": { "type": "goal_link", "settings": { "title": "Hydration", "collection": "hydration", "link": "shopify://collections/hydration" } },
+        "g2": { "type": "goal_link", "settings": { "title": "Beauty & Collagen", "collection": "beauty-collagen", "link": "shopify://collections/beauty-collagen" } },
+        "g3": { "type": "goal_link", "settings": { "title": "Daily Wellness", "collection": "daily-wellness", "link": "shopify://collections/daily-wellness" } },
+        "g4": { "type": "goal_link", "settings": { "title": "Greens & Nutrition", "collection": "greens-nutrition", "link": "shopify://collections/greens-nutrition" } },
+        "g5": { "type": "goal_link", "settings": { "title": "Energy & Performance", "collection": "energy-performance", "link": "shopify://collections/energy-performance" } },
+        "g6": { "type": "goal_link", "settings": { "title": "Weight Management", "collection": "weight-management", "link": "shopify://collections/weight-management" } },
+        "g7": { "type": "goal_link", "settings": { "title": "Protein & Recovery", "collection": "protein-recovery", "link": "shopify://collections/protein-recovery" } }
       },
       "block_order": ["pouch", "sachet", "g1", "g2", "g3", "g4", "g5", "g6", "g7"]
     }

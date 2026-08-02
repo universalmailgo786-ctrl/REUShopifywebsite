@@ -1,11 +1,30 @@
 {%- liquid
-  assign products = section.settings.products
-  if products == blank or products.size == 0
-    if section.settings.collection != blank
-      assign products = section.settings.collection.products
-    else
-      assign products = collections.all.products
-    endif
+  comment
+    Resolve products in this order:
+    1) Explicit product list from theme editor
+    2) Selected collection
+    3) Hardcoded REÚ catalogue handles (all_products)
+    4) collections.all
+  endcomment
+
+  assign products = section.settings.products | where: 'title'
+  if products.size == 0 and section.settings.collection != blank
+    assign products = section.settings.collection.products
+  endif
+
+  if products.size == 0
+    assign fallback_handles = 'collagen-mixed-berry,hydration-electrolytes-lemon-lime,hydration-electrolytes-watermelon,hydration-electrolytes-coconut,greens-pineapple,daily-wellness-peach-mango,gummies-mixed-berry,weight-management-pink-lemonade,premium-protein-chocolate' | split: ','
+    assign resolved = ''
+    for handle in fallback_handles
+      assign p = all_products[handle]
+      if p != blank and p.title != blank
+        if resolved == blank
+          assign resolved = p.handle
+        else
+          assign resolved = resolved | append: ',' | append: p.handle
+        endif
+      endif
+    endfor
   endif
 -%}
 <section class="section {{ section.settings.bg_scheme }}">
@@ -15,23 +34,43 @@
       <h2 class="h2">{{ section.settings.heading }}</h2>
       {%- if section.settings.body != blank -%}<p class="lede" style="margin-top:.75rem">{{ section.settings.body }}</p>{%- endif -%}
     </div>
+
     {%- if products.size > 0 -%}
       <div class="snap-row">
         {%- for product in products limit: section.settings.limit -%}
+          {%- if product != blank and product.title != blank -%}
+            {% render 'product-card', product: product %}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- elsif resolved != blank -%}
+      <div class="snap-row">
+        {%- assign shown = 0 -%}
+        {%- assign handles = resolved | split: ',' -%}
+        {%- for handle in handles -%}
+          {%- if shown >= section.settings.limit -%}{% break %}{%- endif -%}
+          {%- assign product = all_products[handle] -%}
+          {%- if product != blank and product.title != blank -%}
+            {% render 'product-card', product: product %}
+            {%- assign shown = shown | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- elsif collections.all.products.size > 0 -%}
+      <div class="snap-row">
+        {%- for product in collections.all.products limit: section.settings.limit -%}
           {% render 'product-card', product: product %}
         {%- endfor -%}
       </div>
     {%- else -%}
-      <div class="grid cols-4">
-        {%- for i in (1..4) -%}
-          <div class="product-card"><div class="product-card__media">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
-            <div class="product-card__body"><p class="text-muted">Select a collection in the theme editor to feature products.</p></div>
-          </div>
-        {%- endfor -%}
+      <div class="notice" style="margin-top:1rem">
+        <p><strong>No products are visible on the storefront yet.</strong></p>
+        <p class="text-muted" style="margin-top:.5rem">In Shopify Admin → Products, set each product to <strong>Active</strong> (not Draft), then refresh this page. Collections only show Active products.</p>
       </div>
     {%- endif -%}
+
     {%- if section.settings.cta_label != blank -%}
-      <div style="margin-top:1.75rem"><a class="btn" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label }}</a></div>
+      <div style="margin-top:1.75rem"><a class="btn" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">{{ section.settings.cta_label }}</a></div>
     {%- endif -%}
   </div>
 </section>

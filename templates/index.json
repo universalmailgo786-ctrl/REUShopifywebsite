@@ -51,13 +51,6 @@
         "eyebrow": "Featured",
         "heading": "Your daily essentials",
         "body": "Meet the REÚ favourites designed to fit smoothly into mornings, workouts, workdays, and everything between.",
-        "collection": "all",
-        "products": [
-          "collagen-mixed-berry",
-          "hydration-electrolytes-lemon-lime",
-          "daily-wellness-peach-mango",
-          "premium-protein-chocolate"
-        ],
         "limit": 4,
         "cta_label": "Shop All Products",
         "cta_link": "shopify://collections/all"

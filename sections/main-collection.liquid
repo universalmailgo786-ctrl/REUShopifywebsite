@@ -57,7 +57,8 @@
         {%- else -%}
           <div class="text-center section">
             <p class="h3">{{ 'products.facets.no_results' | t }}</p>
-            <a class="btn btn--secondary" href="{{ col.url }}" style="margin-top:1rem">{{ 'products.facets.clear_all' | t }}</a>
+            <p class="text-muted" style="margin-top:.75rem;max-width:36rem;margin-inline:auto">If you just imported products, make sure they are set to <strong>Active</strong> (not Draft) and that this collection’s conditions or product list includes them.</p>
+            <a class="btn btn--secondary" href="{{ routes.all_products_collection_url }}" style="margin-top:1rem">View all products</a>
           </div>
         {%- endif -%}
       </div>

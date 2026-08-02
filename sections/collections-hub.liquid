@@ -37,7 +37,16 @@
       <div class="snap-row">
         {%- for block in section.blocks -%}
           {%- if block.type == 'goal_link' -%}
-            <a class="filter-chip" style="justify-content:center;padding:.9rem 1.4rem" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.title }}</a>
+            {%- liquid
+              assign goal_href = block.settings.link
+              if goal_href == blank and block.settings.collection != blank
+                assign goal_href = block.settings.collection.url
+              endif
+              if goal_href == blank
+                assign goal_href = '#'
+              endif
+            -%}
+            <a class="filter-chip" style="justify-content:center;padding:.9rem 1.4rem" href="{{ goal_href }}" {{ block.shopify_attributes }}>{{ block.settings.title }}</a>
           {%- endif -%}
         {%- endfor -%}
       </div>
@@ -68,7 +77,8 @@
     ]},
     { "type": "goal_link", "name": "Goal link", "settings": [
       { "type": "text", "id": "title", "label": "Title", "default": "Hydration" },
-      { "type": "url", "id": "link", "label": "Link" }
+      { "type": "collection", "id": "collection", "label": "Collection" },
+      { "type": "url", "id": "link", "label": "Fallback link" }
     ]}
   ],
   "presets": [{
