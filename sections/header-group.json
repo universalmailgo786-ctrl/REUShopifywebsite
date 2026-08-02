@@ -7,8 +7,8 @@
       "settings": {
         "enabled": true,
         "text": "Pre-orders are now open — reserve your REÚ routine today.",
-        "link_label": "View Pre-Order Details",
-        "link": "shopify://pages/shipping-policy"
+        "link_label": "Shop Pre-Order",
+        "link": "shopify://collections/all"
       }
     },
     "header": {

@@ -125,7 +125,7 @@
           <div class="accordion__item">
             <h3><button class="accordion__trigger" id="acc-preorder" aria-expanded="false" aria-controls="acc-p-preorder"><span>Pre-Order &amp; Shipping</span>{% render 'icon', name: 'plus' %}</button></h3>
             <div class="accordion__panel" id="acc-p-preorder" role="region" aria-labelledby="acc-preorder" hidden style="height:0">
-              <div class="rte">{% render 'preorder-notice', product: p %}<p><a href="{{ pages['shipping-policy'].url }}">Read the full Shipping &amp; Pre-Order Policy</a></p></div>
+              <div class="rte">{% render 'preorder-notice', product: p %}</div>
             </div>
           </div>
 
@@ -133,7 +133,7 @@
           <div class="accordion__item">
             <h3><button class="accordion__trigger" id="acc-returns" aria-expanded="false" aria-controls="acc-p-returns"><span>Returns</span>{% render 'icon', name: 'plus' %}</button></h3>
             <div class="accordion__panel" id="acc-p-returns" role="region" aria-labelledby="acc-returns" hidden style="height:0">
-              <div class="rte"><p>Because supplements are ingestible goods, opened products cannot be returned unless defective, damaged, incorrect, or otherwise required by law. See our <a href="{{ pages['refund-policy'].url }}">Refund &amp; Cancellation Policy</a>.</p></div>
+              <div class="rte"><p>Because supplements are ingestible goods, opened products cannot be returned unless defective, damaged, incorrect, or otherwise required by law. Contact support for return help.</p></div>
             </div>
           </div>
         </div>

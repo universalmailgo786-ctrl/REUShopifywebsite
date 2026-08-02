@@ -9,8 +9,8 @@
         "body": "<p>Premium, great-tasting supplements created for women who want daily wellness to feel simple, enjoyable, and entirely their own.</p>",
         "cta_label": "Shop Pre-Order",
         "cta_link": "shopify://collections/all",
-        "cta2_label": "Find My Routine",
-        "cta2_link": "shopify://pages/quiz",
+        "cta2_label": "",
+        "cta2_link": "",
         "disclosure": "This is a pre-order item. Your order is expected to ship within the window shown at checkout. You may cancel for a full refund any time before shipment by contacting our support team."
       }
     },
@@ -31,8 +31,8 @@
         "eyebrow": "Shop by goal",
         "heading": "Start with what you want to feel",
         "body": "Your routine should begin with your goals—not a crowded shelf. Choose the support that matters most to you today.",
-        "cta_label": "Explore All Goals",
-        "cta_link": "shopify://pages/collections"
+        "cta_label": "Shop All Products",
+        "cta_link": "shopify://collections/all"
       },
       "blocks": {
         "g1": { "type": "goal", "settings": { "fallback_asset": "reu-hydration-lemon-lime.jpg", "title": "Hydration", "cta": "Shop Hydration", "link": "shopify://collections/hydration" } },
@@ -54,17 +54,6 @@
         "limit": 4,
         "cta_label": "Shop All Products",
         "cta_link": "shopify://collections/all"
-      }
-    },
-    "quiz": {
-      "type": "quiz-teaser",
-      "settings": {
-        "eyebrow": "Not sure where to begin?",
-        "heading": "Meet your REÚ routine",
-        "body": "Answer a few quick questions about your goals, lifestyle, and preferences. We will guide you toward the products that best match what you want from your daily wellness routine.",
-        "cta_label": "Take the 60-Second Quiz",
-        "cta_link": "shopify://pages/quiz",
-        "microcopy": "Personalized guidance, not medical advice. Your answers are used only to create your product recommendations unless you separately opt into marketing."
       }
     },
     "benefits": {
@@ -89,8 +78,8 @@
         "eyebrow": "One routine. Two ways to enjoy it.",
         "heading": "Choose the format that fits your day",
         "body": "Keep your daily favourites at home in a full-size pouch, or take the same REÚ experience with you in convenient single-serve sachets.",
-        "cta_label": "Compare Formats",
-        "cta_link": "shopify://pages/collections"
+        "cta_label": "Shop All Products",
+        "cta_link": "shopify://collections/all"
       },
       "blocks": {
         "pouch": { "type": "format", "settings": { "fallback_asset": "reu-format-pouch.jpg", "title": "Your everyday staple", "text": "Keep your favourite formula ready for a consistent at-home routine.", "cta": "Shop Pouches", "link": "shopify://collections/pouch-collection" } },
@@ -107,8 +96,8 @@
         "eyebrow": "More than supplements",
         "heading": "A ritual that feels like you",
         "body": "<p>REÚ brings intention to everyday wellness with products that feel considered, modern, and easy to make your own. No complicated routines. No unnecessary pressure. Just simple support for showing up as your best self, one day at a time.</p>",
-        "cta_label": "Our Story",
-        "cta_link": "shopify://pages/about-us",
+        "cta_label": "Shop Pre-Order",
+        "cta_link": "shopify://collections/all",
         "bg_scheme": ""
       }
     },
@@ -138,18 +127,6 @@
         "bg_scheme": "bg-blush"
       }
     },
-    "journal": {
-      "type": "blog-featured",
-      "settings": {
-        "eyebrow": "Wellness education",
-        "heading": "Wellness, made clearer",
-        "body": "Practical reads to help you understand ingredients, build routines, and choose products with greater confidence.",
-        "blog": "news",
-        "limit": 3,
-        "cta_label": "Visit the Journal",
-        "bg_scheme": "bg-cream"
-      }
-    },
     "preorder": {
       "type": "preorder-reassurance",
       "settings": {
@@ -169,10 +146,10 @@
         "faq_schema": true
       },
       "blocks": {
-        "q1": { "type": "qa", "settings": { "question": "Is REÚ currently available?", "answer": "<p>REÚ is currently available for pre-order. The estimated shipping window is shown at checkout and on our Shipping Policy page.</p>" } },
-        "q2": { "type": "qa", "settings": { "question": "When will my card be charged?", "answer": "<p>Your payment timing is displayed clearly before you confirm your purchase. See our Shipping &amp; Pre-Order Policy for full details.</p>" } },
+        "q1": { "type": "qa", "settings": { "question": "Is REÚ currently available?", "answer": "<p>REÚ is currently available for pre-order. The estimated shipping window is shown at checkout.</p>" } },
+        "q2": { "type": "qa", "settings": { "question": "When will my card be charged?", "answer": "<p>Your payment timing is displayed clearly before you confirm your purchase.</p>" } },
         "q3": { "type": "qa", "settings": { "question": "Can I cancel a pre-order?", "answer": "<p>Yes. Contact our support team before your order ships to request cancellation and a full refund.</p>" } },
-        "q4": { "type": "qa", "settings": { "question": "How do I choose the right product?", "answer": "<p>Take our quick Product Recommendation Quiz or explore products by wellness goal.</p>" } },
+        "q4": { "type": "qa", "settings": { "question": "How do I choose the right product?", "answer": "<p>Explore products by wellness goal or browse the full catalogue.</p>" } },
         "q5": { "type": "qa", "settings": { "question": "Are REÚ products intended to diagnose or treat a condition?", "answer": "<p>No. REÚ products are not intended to diagnose, treat, cure, or prevent any disease. Speak with a qualified healthcare professional if you are pregnant, nursing, taking medication, or managing a health condition.</p>" } }
       },
       "block_order": ["q1", "q2", "q3", "q4", "q5"]
@@ -193,7 +170,7 @@
     }
   },
   "order": [
-    "hero", "trust", "goals", "featured", "quiz", "benefits", "formats",
-    "lifestyle", "standards", "reviews", "journal", "preorder", "faq", "newsletter", "social"
+    "hero", "trust", "goals", "featured", "benefits", "formats",
+    "lifestyle", "standards", "reviews", "preorder", "faq", "newsletter", "social"
   ]
 }
