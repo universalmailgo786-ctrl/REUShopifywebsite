@@ -16,8 +16,12 @@
     "type_display_fallback": "\"Althy\", \"Cormorant Garamond\", \"Playfair Display\", Georgia, \"Times New Roman\", serif",
     "type_body_fallback": "\"Helvetica Now\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif",
     "preorder_mode": true,
-    "preorder_ship_window": "",
-    "support_email": "",
+    "preorder_ship_window": "September – October 2026",
+    "support_email": "hello@livewithreu.com",
+    "social_instagram": "",
+    "social_tiktok": "",
+    "social_facebook": "",
+    "social_youtube": "",
     "cart_type": "drawer",
     "cart_show_note": false,
     "card_show_vendor": false,
@@ -32,7 +36,9 @@
       "color_cream": "#E3E1D5",
       "color_blush": "#F4E2DB",
       "color_lilac": "#EADEEA",
-      "preorder_mode": true
+      "preorder_mode": true,
+      "preorder_ship_window": "September – October 2026",
+      "support_email": "hello@livewithreu.com"
     }
   }
 }

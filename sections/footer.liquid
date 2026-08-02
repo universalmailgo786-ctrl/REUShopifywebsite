@@ -2,6 +2,11 @@
   assign menu_shop = section.settings.menu_shop
   assign menu_discover = section.settings.menu_discover
   assign menu_care = section.settings.menu_care
+  assign support_email = section.settings.support_email | default: settings.support_email
+  assign ig = settings.social_instagram | default: '#'
+  assign tt = settings.social_tiktok | default: '#'
+  assign fb = settings.social_facebook | default: '#'
+  assign yt = settings.social_youtube | default: '#'
 -%}
 <footer class="site-footer">
   <div class="wrap">
@@ -15,9 +20,9 @@
           {%- endif -%}
         </a>
         <p class="site-footer__statement">{{ section.settings.statement }}</p>
-        {%- if section.settings.support_email != blank or section.settings.support_hours != blank -%}
+        {%- if support_email != blank or section.settings.support_hours != blank -%}
           <p class="text-muted" style="color:rgba(255,255,255,.7);font-size:.92rem;margin-top:1rem">
-            {%- if section.settings.support_email != blank -%}<a href="mailto:{{ section.settings.support_email }}">{{ section.settings.support_email }}</a><br>{%- endif -%}
+            {%- if support_email != blank -%}<a href="mailto:{{ support_email }}">{{ support_email }}</a><br>{%- endif -%}
             {%- if section.settings.support_hours != blank -%}{{ section.settings.support_hours }}{%- endif -%}
           </p>
         {%- endif -%}
@@ -29,6 +34,9 @@
           {%- for link in menu_shop.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
         {%- else -%}
           <a href="{{ routes.all_products_collection_url }}">Shop All</a>
+          <a href="/collections/pouch-collection">Pouch Collection</a>
+          <a href="/collections/sachet-collection">Sachet Collection</a>
+          <a href="/pages/quiz">Take the Quiz</a>
         {%- endif -%}
       </div>
 
@@ -36,6 +44,11 @@
         <h3>{{ section.settings.discover_heading }}</h3>
         {%- if menu_discover != blank -%}
           {%- for link in menu_discover.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+        {%- else -%}
+          <a href="/pages/about-us">About REÚ</a>
+          <a href="/blogs/news">The REÚ Journal</a>
+          <a href="/pages/faq">FAQ</a>
+          <a href="/pages/contact">Contact Us</a>
         {%- endif -%}
       </div>
 
@@ -43,6 +56,12 @@
         <h3>{{ section.settings.care_heading }}</h3>
         {%- if menu_care != blank -%}
           {%- for link in menu_care.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+        {%- else -%}
+          <a href="/pages/pre-order-information">Pre-Order Information</a>
+          <a href="/policies/shipping-policy">Shipping Policy</a>
+          <a href="/policies/refund-policy">Refund Policy</a>
+          <a href="/policies/privacy-policy">Privacy Policy</a>
+          <a href="/policies/terms-of-service">Terms &amp; Conditions</a>
         {%- endif -%}
       </div>
     </div>
@@ -54,10 +73,10 @@
     <div class="site-footer__bottom">
       <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.tagline }}</p>
       <div class="site-footer__social">
-        {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}" aria-label="Instagram" rel="noopener">{% render 'icon', name: 'instagram' %}</a>{%- endif -%}
-        {%- if settings.social_tiktok != blank -%}<a href="{{ settings.social_tiktok }}" aria-label="TikTok" rel="noopener">{% render 'icon', name: 'tiktok' %}</a>{%- endif -%}
-        {%- if settings.social_facebook != blank -%}<a href="{{ settings.social_facebook }}" aria-label="Facebook" rel="noopener">{% render 'icon', name: 'facebook' %}</a>{%- endif -%}
-        {%- if settings.social_youtube != blank -%}<a href="{{ settings.social_youtube }}" aria-label="YouTube" rel="noopener">{% render 'icon', name: 'youtube' %}</a>{%- endif -%}
+        <a href="{{ ig }}" aria-label="Instagram">{% render 'icon', name: 'instagram' %}</a>
+        <a href="{{ tt }}" aria-label="TikTok">{% render 'icon', name: 'tiktok' %}</a>
+        <a href="{{ fb }}" aria-label="Facebook">{% render 'icon', name: 'facebook' %}</a>
+        <a href="{{ yt }}" aria-label="YouTube">{% render 'icon', name: 'youtube' %}</a>
       </div>
       {%- if section.settings.show_payment_icons -%}
         <div class="payment-icons">{{ shop.enabled_payment_types | payment_type_svg_tag }}</div>
@@ -77,8 +96,8 @@
     { "type": "link_list", "id": "menu_discover", "label": "Discover menu", "default": "footer-learn" },
     { "type": "text", "id": "care_heading", "label": "Customer care heading", "default": "Customer Care" },
     { "type": "link_list", "id": "menu_care", "label": "Customer care menu", "default": "footer-support" },
-    { "type": "text", "id": "support_email", "label": "Support email", "info": "Leave blank until confirmed." },
-    { "type": "text", "id": "support_hours", "label": "Support hours", "info": "Leave blank until confirmed." },
+    { "type": "text", "id": "support_email", "label": "Support email", "default": "hello@livewithreu.com" },
+    { "type": "text", "id": "support_hours", "label": "Support hours", "default": "Mon–Fri, 9am–5pm EST" },
     { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "Information on this website is provided for general educational purposes and is not medical advice. Always follow the product label and consult a qualified healthcare professional when appropriate." },
     { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true }
   ]
