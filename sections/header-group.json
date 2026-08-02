@@ -5,7 +5,7 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
-        "enabled": true,
+        "enabled": false,
         "text": "Pre-Orders Are Now Open — Reserve Your REÚ Routine",
         "secondary": "Estimated shipping: September – October 2026",
         "link_label": "View Pre-Order Details",
