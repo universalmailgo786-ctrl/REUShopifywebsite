@@ -1,34 +1,74 @@
-<section class="section bg-green">
-  <div class="wrap">
-    <div class="section-head section-head--center" style="max-width:42rem">
+{%- liquid
+  assign bg = section.settings.image
+-%}
+<section class="goals-routine" data-goals-carousel>
+  <div class="goals-routine__media" aria-hidden="true">
+    {%- if bg != blank -%}
+      {{ bg | image_url: width: 2400 | image_tag: widths: '900,1400,2000,2400', sizes: '100vw', loading: 'lazy', alt: '' }}
+    {%- else -%}
+      <img src="{{ 'reu-goals-lifestyle.jpg' | asset_url }}" width="1024" height="682" alt="" loading="lazy">
+    {%- endif -%}
+  </div>
+  <div class="goals-routine__overlay" aria-hidden="true"></div>
+
+  <div class="wrap goals-routine__inner">
+    <div class="goals-routine__head">
       {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
       <h2 class="h2">{{ section.settings.heading | newline_to_br }}</h2>
-      {%- if section.settings.body != blank -%}<p class="lede" style="margin:1rem auto 0">{{ section.settings.body }}</p>{%- endif -%}
+      {%- if section.settings.body != blank -%}<p class="lede">{{ section.settings.body }}</p>{%- endif -%}
     </div>
-    <div class="snap-row goals-row">
-      {%- for block in section.blocks -%}
-        {%- assign col = block.settings.collection -%}
-        {%- assign href = block.settings.link -%}
-        {%- if href == blank and col != blank -%}{%- assign href = col.url -%}{%- endif -%}
-        <a class="goal-card" href="{{ href | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
-          <div class="goal-card__media">
-            {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 800 | image_tag: widths: '400,600,800', sizes: '(min-width:990px) 16vw, 80vw', loading: 'lazy', alt: block.settings.title | escape }}
-            {%- elsif block.settings.fallback_asset != blank -%}
-              <img src="{{ block.settings.fallback_asset | asset_url }}" width="1800" height="1200" alt="{{ block.settings.title | escape }}" loading="lazy">
-            {%- elsif col.featured_image -%}
-              {{ col.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.title | escape }}
-            {%- else -%}
-              {{ 'collection-1' | placeholder_svg_tag }}
-            {%- endif -%}
-          </div>
-          <div class="goal-card__body">
-            <h3 class="h4">{{ block.settings.title }}</h3>
-            {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
-            <span class="link-arrow">{{ block.settings.cta | default: 'Shop' }} {% render 'icon', name: 'arrow' %}</span>
-          </div>
-        </a>
-      {%- endfor -%}
+
+    <div class="goals-carousel">
+      <button type="button" class="goals-carousel__nav goals-carousel__nav--prev" data-goals-prev aria-label="Previous goals">
+        {% render 'icon', name: 'arrow-left' %}
+      </button>
+
+      <div class="goals-carousel__track" data-goals-track tabindex="0" role="list">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign col = block.settings.collection
+            assign href = block.settings.link
+            if href == blank and col != blank
+              assign href = col.url
+            endif
+            assign step_num = block.settings.number
+            if step_num == blank
+              assign step_num = forloop.index
+              if forloop.index < 10
+                assign step_num = step_num | prepend: '0'
+              endif
+            endif
+          -%}
+          <article class="goal-step" role="listitem" {{ block.shopify_attributes }}>
+            <div class="goal-step__top">
+              <span class="goal-step__num">{{ step_num }}</span>
+              <h3 class="goal-step__title">{{ block.settings.title }}</h3>
+              {%- if block.settings.text != blank -%}
+                <p class="goal-step__text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+            <div class="goal-step__media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 700 | image_tag: widths: '320,480,700', sizes: '(min-width:990px) 18vw, 70vw', loading: 'lazy', alt: block.settings.title | escape }}
+              {%- elsif block.settings.fallback_asset != blank -%}
+                <img src="{{ block.settings.fallback_asset | asset_url }}" width="1200" height="1200" alt="{{ block.settings.title | escape }}" loading="lazy">
+              {%- elsif col.featured_image -%}
+                {{ col.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: block.settings.title | escape }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag }}
+              {%- endif -%}
+            </div>
+            <a class="goal-step__link" href="{{ href | default: routes.all_products_collection_url }}">
+              {{ block.settings.cta | default: 'View details' }}
+              <span class="goal-step__link-icon">{% render 'icon', name: 'arrow' %}</span>
+            </a>
+          </article>
+        {%- endfor -%}
+      </div>
+
+      <button type="button" class="goals-carousel__nav goals-carousel__nav--next" data-goals-next aria-label="Next goals">
+        {% render 'icon', name: 'arrow' %}
+      </button>
     </div>
   </div>
 </section>
@@ -37,17 +77,19 @@
   "name": "Shop by goal",
   "tag": "section",
   "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background lifestyle image" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop by goal" },
     { "type": "textarea", "id": "heading", "label": "Heading", "default": "Start with what\nyou want to feel." },
     { "type": "textarea", "id": "body", "label": "Body", "default": "Your routine should begin with your goals—not a crowded shelf. Choose the support that matters most to you today." }
   ],
   "blocks": [
     { "type": "goal", "name": "Goal", "settings": [
-      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "number", "label": "Step number", "default": "01" },
+      { "type": "image_picker", "id": "image", "label": "Product / packaging image" },
       { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename" },
       { "type": "text", "id": "title", "label": "Title", "default": "Hydration" },
       { "type": "textarea", "id": "text", "label": "Text", "default": "Refresh your routine and replenish with ease." },
-      { "type": "text", "id": "cta", "label": "CTA", "default": "Shop Hydration" },
+      { "type": "text", "id": "cta", "label": "CTA", "default": "View details" },
       { "type": "collection", "id": "collection", "label": "Collection" },
       { "type": "url", "id": "link", "label": "Fallback link" }
     ]}
@@ -56,12 +98,12 @@
   "presets": [{
     "name": "Shop by goal",
     "blocks": [
-      { "type": "goal", "settings": { "fallback_asset": "reu-hydration-lemon-lime.jpg", "title": "Hydration", "text": "Refresh your routine and replenish with ease.", "cta": "Shop Hydration" } },
-      { "type": "goal", "settings": { "fallback_asset": "reu-collagen-mixed-berry.jpg", "title": "Beauty & Collagen", "text": "Daily collagen support for a ritual you will look forward to.", "cta": "Shop Beauty" } },
-      { "type": "goal", "settings": { "fallback_asset": "reu-daily-wellness-peach-mango.jpg", "title": "Daily Wellness", "text": "Simple everyday support for feeling your best.", "cta": "Shop Wellness" } },
-      { "type": "goal", "settings": { "fallback_asset": "reu-greens-pineapple.jpg", "title": "Greens & Nutrition", "text": "A bright, convenient way to add greens to your day.", "cta": "Shop Greens" } },
-      { "type": "goal", "settings": { "fallback_asset": "reu-protein-chocolate.jpg", "title": "Energy & Performance", "text": "Fuel movement, energy, and recovery.", "cta": "Shop Performance" } },
-      { "type": "goal", "settings": { "fallback_asset": "reu-weight-pink-lemonade.jpg", "title": "Weight Management", "text": "Build a more intentional daily routine.", "cta": "Shop Support" } }
+      { "type": "goal", "settings": { "number": "01", "fallback_asset": "reu-hydration-lemon-lime.jpg", "title": "Hydration", "text": "Refresh your routine and replenish with ease.", "cta": "View details" } },
+      { "type": "goal", "settings": { "number": "02", "fallback_asset": "reu-collagen-mixed-berry.jpg", "title": "Beauty & Collagen", "text": "Daily collagen support for a ritual you will look forward to.", "cta": "View details" } },
+      { "type": "goal", "settings": { "number": "03", "fallback_asset": "reu-daily-wellness-peach-mango.jpg", "title": "Daily Wellness", "text": "Simple everyday support for feeling your best.", "cta": "View details" } },
+      { "type": "goal", "settings": { "number": "04", "fallback_asset": "reu-greens-pineapple.jpg", "title": "Greens & Nutrition", "text": "A bright, convenient way to add greens to your day.", "cta": "View details" } },
+      { "type": "goal", "settings": { "number": "05", "fallback_asset": "reu-protein-chocolate.jpg", "title": "Energy & Performance", "text": "Fuel movement, energy, and recovery.", "cta": "View details" } },
+      { "type": "goal", "settings": { "number": "06", "fallback_asset": "reu-weight-pink-lemonade.jpg", "title": "Weight Management", "text": "Build a more intentional daily routine.", "cta": "View details" } }
     ]
   }]
 }

@@ -299,6 +299,42 @@
     io.observe(anchor);
   }
 
+  /* -------------------- shop-by-goal carousel -------------------- */
+  function initGoalsCarousel(ctx) {
+    $all('[data-goals-carousel]', ctx || document).forEach(function (root) {
+      if (root.getAttribute('data-goals-ready') === '1') return;
+      var track = root.querySelector('[data-goals-track]');
+      var prev = root.querySelector('[data-goals-prev]');
+      var next = root.querySelector('[data-goals-next]');
+      if (!track || !prev || !next) return;
+      root.setAttribute('data-goals-ready', '1');
+
+      function cardStep() {
+        var card = track.querySelector('.goal-step');
+        if (!card) return track.clientWidth * 0.8;
+        var styles = window.getComputedStyle(track);
+        var gap = parseFloat(styles.columnGap || styles.gap || '16') || 16;
+        return card.getBoundingClientRect().width + gap;
+      }
+
+      function syncButtons() {
+        var max = track.scrollWidth - track.clientWidth - 2;
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= max;
+      }
+
+      prev.addEventListener('click', function () {
+        track.scrollBy({ left: -cardStep(), behavior: 'smooth' });
+      });
+      next.addEventListener('click', function () {
+        track.scrollBy({ left: cardStep(), behavior: 'smooth' });
+      });
+      track.addEventListener('scroll', syncButtons, { passive: true });
+      window.addEventListener('resize', syncButtons);
+      syncButtons();
+    });
+  }
+
   /* -------------------- transparent header on homepage -------------------- */
   function initHeaderScroll() {
     var header = $('[data-site-header]');
@@ -348,6 +384,7 @@
     initStickyBar();
     initHeaderScroll();
     initMediaBanner(ctx);
+    initGoalsCarousel(ctx);
   }
   document.addEventListener('DOMContentLoaded', function () { initAll(document); });
 

@@ -36,12 +36,12 @@
         "body": "Your routine should begin with your goals—not a crowded shelf. Choose the support that matters most to you today."
       },
       "blocks": {
-        "g1": { "type": "goal", "settings": { "fallback_asset": "reu-hydration-lemon-lime.jpg", "title": "Hydration", "text": "Refresh your routine and replenish with ease.", "cta": "Shop Hydration", "collection": "hydration" } },
-        "g2": { "type": "goal", "settings": { "fallback_asset": "reu-collagen-mixed-berry.jpg", "title": "Beauty & Collagen", "text": "Daily collagen support for a ritual you will look forward to.", "cta": "Shop Beauty", "collection": "beauty-collagen" } },
-        "g3": { "type": "goal", "settings": { "fallback_asset": "reu-daily-wellness-peach-mango.jpg", "title": "Daily Wellness", "text": "Simple everyday support for feeling your best.", "cta": "Shop Wellness", "collection": "daily-wellness" } },
-        "g4": { "type": "goal", "settings": { "fallback_asset": "reu-greens-pineapple.jpg", "title": "Greens & Nutrition", "text": "A bright, convenient way to add greens to your day.", "cta": "Shop Greens", "collection": "greens-nutrition" } },
-        "g5": { "type": "goal", "settings": { "fallback_asset": "reu-protein-chocolate.jpg", "title": "Energy & Performance", "text": "Fuel movement, energy, and recovery.", "cta": "Shop Performance", "collection": "energy-performance" } },
-        "g6": { "type": "goal", "settings": { "fallback_asset": "reu-weight-pink-lemonade.jpg", "title": "Weight Management", "text": "Build a more intentional daily routine.", "cta": "Shop Support", "collection": "weight-management" } }
+        "g1": { "type": "goal", "settings": { "number": "01", "fallback_asset": "reu-hydration-lemon-lime.jpg", "title": "Hydration", "text": "Refresh your routine and replenish with ease.", "cta": "View details", "collection": "hydration" } },
+        "g2": { "type": "goal", "settings": { "number": "02", "fallback_asset": "reu-collagen-mixed-berry.jpg", "title": "Beauty & Collagen", "text": "Daily collagen support for a ritual you will look forward to.", "cta": "View details", "collection": "beauty-collagen" } },
+        "g3": { "type": "goal", "settings": { "number": "03", "fallback_asset": "reu-daily-wellness-peach-mango.jpg", "title": "Daily Wellness", "text": "Simple everyday support for feeling your best.", "cta": "View details", "collection": "daily-wellness" } },
+        "g4": { "type": "goal", "settings": { "number": "04", "fallback_asset": "reu-greens-pineapple.jpg", "title": "Greens & Nutrition", "text": "A bright, convenient way to add greens to your day.", "cta": "View details", "collection": "greens-nutrition" } },
+        "g5": { "type": "goal", "settings": { "number": "05", "fallback_asset": "reu-protein-chocolate.jpg", "title": "Energy & Performance", "text": "Fuel movement, energy, and recovery.", "cta": "View details", "collection": "energy-performance" } },
+        "g6": { "type": "goal", "settings": { "number": "06", "fallback_asset": "reu-weight-pink-lemonade.jpg", "title": "Weight Management", "text": "Build a more intentional daily routine.", "cta": "View details", "collection": "weight-management" } }
       },
       "block_order": ["g1", "g2", "g3", "g4", "g5", "g6"]
     },
