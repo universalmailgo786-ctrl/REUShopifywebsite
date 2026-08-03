@@ -1835,3 +1835,21 @@
   transform: translateY(-2px);
 }
 .site-footer__totop .icon { width: 1.1rem; height: 1.1rem; }
+
+.site-footer__credit {
+  margin: 1.15rem 0 0;
+  font-size: .8rem;
+  color: color-mix(in srgb, #fff 55%, transparent);
+  text-align: left;
+}
+@media (min-width: 900px) {
+  .site-footer__credit { text-align: center; }
+}
+.site-footer__credit a {
+  color: color-mix(in srgb, #fff 78%, transparent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.site-footer__credit a:hover {
+  color: var(--reu-warm-rose, #BA6D64);
+}
