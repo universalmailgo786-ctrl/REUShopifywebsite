@@ -3,67 +3,73 @@
   assign menu_discover = section.settings.menu_discover
   assign menu_care = section.settings.menu_care
   assign support_email = section.settings.support_email | default: settings.support_email
-  assign ig = settings.social_instagram | default: '#'
-  assign tt = settings.social_tiktok | default: '#'
-  assign fb = settings.social_facebook | default: '#'
-  assign yt = settings.social_youtube | default: '#'
+  assign support_phone = section.settings.support_phone
+  assign help_label = section.settings.help_label | default: 'Help Center'
+  assign help_link = section.settings.help_link
+  if help_link == blank
+    assign help_link = pages.faq.url | default: '/pages/faq'
+  endif
+  assign ig = settings.social_instagram
+  assign tt = settings.social_tiktok
+  assign fb = settings.social_facebook
+  assign yt = settings.social_youtube
 -%}
 <footer class="site-footer">
   <div class="wrap">
-    <div class="site-footer__grid">
-      <div class="site-footer__brand">
-        <a class="site-footer__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
-          {%- if settings.logo != blank -%}
-            {{ settings.logo | image_url: width: 320 | image_tag: widths: '160,240,320', alt: shop.name, loading: 'lazy' }}
-          {%- else -%}
-            <img src="{{ 'reu-logo.png' | asset_url }}" width="1817" height="1001" alt="{{ shop.name }}" loading="lazy">
-          {%- endif -%}
-        </a>
-        <p class="site-footer__statement">{{ section.settings.statement }}</p>
-        {%- if support_email != blank or section.settings.support_hours != blank -%}
-          <p class="text-muted" style="color:rgba(255,255,255,.7);font-size:.92rem;margin-top:1rem">
-            {%- if support_email != blank -%}<a href="mailto:{{ support_email }}">{{ support_email }}</a><br>{%- endif -%}
-            {%- if section.settings.support_hours != blank -%}{{ section.settings.support_hours }}{%- endif -%}
-          </p>
+    <div class="site-footer__top">
+      <a class="site-footer__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+        {%- if settings.logo != blank -%}
+          {{ settings.logo | image_url: width: 360 | image_tag: widths: '180,240,320,360', alt: shop.name, loading: 'lazy' }}
+        {%- else -%}
+          <img src="{{ 'reu-logo.png' | asset_url }}" width="1817" height="1001" alt="{{ shop.name }}" loading="lazy">
+        {%- endif -%}
+      </a>
+
+      <div class="site-footer__contact">
+        <p class="site-footer__label">{{ section.settings.contact_heading | default: 'Contact us' }}</p>
+        {%- if support_phone != blank -%}
+          <a class="site-footer__phone" href="tel:{{ support_phone | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', '' }}">{{ support_phone }}</a>
+        {%- endif -%}
+        {%- if support_email != blank -%}
+          <a class="site-footer__email" href="mailto:{{ support_email }}">{{ support_email }}</a>
+        {%- endif -%}
+        {%- if help_label != blank -%}
+          <a class="site-footer__help" href="{{ help_link }}">
+            {{ help_label }}
+            <span class="site-footer__help-icon" aria-hidden="true">{% render 'icon', name: 'arrow-up-right' %}</span>
+          </a>
         {%- endif -%}
       </div>
 
-      <div class="site-footer__col">
-        <h3>{{ section.settings.shop_heading }}</h3>
-        {%- if menu_shop != blank -%}
-          {%- for link in menu_shop.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+      <nav class="site-footer__nav" aria-label="{{ section.settings.discover_heading | default: 'Discover' }}">
+        {%- if menu_discover != blank and menu_discover.links.size > 0 -%}
+          {%- for link in menu_discover.links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="{{ routes.root_url }}pages/about-us">About REÚ</a>
+          <a href="{{ routes.root_url }}blogs/news">The REÚ Journal</a>
+          <a href="{{ routes.root_url }}pages/faq">FAQs</a>
+          <a href="{{ routes.root_url }}pages/contact">Contact us</a>
+        {%- endif -%}
+      </nav>
+
+      <nav class="site-footer__nav" aria-label="{{ section.settings.shop_heading | default: 'Shop' }}">
+        {%- if menu_shop != blank and menu_shop.links.size > 0 -%}
+          {%- for link in menu_shop.links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- elsif menu_care != blank and menu_care.links.size > 0 -%}
+          {%- for link in menu_care.links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
         {%- else -%}
           <a href="{{ routes.all_products_collection_url }}">Shop All</a>
           <a href="{{ routes.collections_url }}/pouch-collection">Pouch Collection</a>
           <a href="{{ routes.collections_url }}/sachet-collection">Sachet Collection</a>
           <a href="{{ routes.root_url }}pages/quiz">Take the Quiz</a>
         {%- endif -%}
-      </div>
-
-      <div class="site-footer__col">
-        <h3>{{ section.settings.discover_heading }}</h3>
-        {%- if menu_discover != blank -%}
-          {%- for link in menu_discover.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
-        {%- else -%}
-          <a href="{{ routes.root_url }}pages/about-us">About REÚ</a>
-          <a href="{{ routes.root_url }}blogs/news">The REÚ Journal</a>
-          <a href="{{ routes.root_url }}pages/faq">FAQ</a>
-          <a href="{{ routes.root_url }}pages/contact">Contact Us</a>
-        {%- endif -%}
-      </div>
-
-      <div class="site-footer__col">
-        <h3>{{ section.settings.care_heading }}</h3>
-        {%- if menu_care != blank -%}
-          {%- for link in menu_care.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
-        {%- else -%}
-          <a href="{{ routes.root_url }}pages/pre-order-information">Pre-Order Information</a>
-          <a href="{{ routes.root_url }}policies/shipping-policy">Shipping Policy</a>
-          <a href="{{ routes.root_url }}policies/refund-policy">Refund Policy</a>
-          <a href="{{ routes.root_url }}policies/privacy-policy">Privacy Policy</a>
-          <a href="{{ routes.root_url }}policies/terms-of-service">Terms &amp; Conditions</a>
-        {%- endif -%}
-      </div>
+      </nav>
     </div>
 
     {%- if section.settings.disclaimer != blank -%}
@@ -71,16 +77,36 @@
     {%- endif -%}
 
     <div class="site-footer__bottom">
-      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.tagline }}</p>
+      <p class="site-footer__copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.tagline }}</p>
+
       <div class="site-footer__social">
-        <a href="{{ ig }}" aria-label="Instagram">{% render 'icon', name: 'instagram' %}</a>
-        <a href="{{ tt }}" aria-label="TikTok">{% render 'icon', name: 'tiktok' %}</a>
-        <a href="{{ fb }}" aria-label="Facebook">{% render 'icon', name: 'facebook' %}</a>
-        <a href="{{ yt }}" aria-label="YouTube">{% render 'icon', name: 'youtube' %}</a>
+        {%- if fb != blank -%}
+          <a href="{{ fb }}" aria-label="Facebook" target="_blank" rel="noopener">{% render 'icon', name: 'facebook' %}</a>
+        {%- endif -%}
+        {%- if ig != blank -%}
+          <a href="{{ ig }}" aria-label="Instagram" target="_blank" rel="noopener">{% render 'icon', name: 'instagram' %}</a>
+        {%- endif -%}
+        {%- if tt != blank -%}
+          <a href="{{ tt }}" aria-label="TikTok" target="_blank" rel="noopener">{% render 'icon', name: 'tiktok' %}</a>
+        {%- endif -%}
+        {%- if yt != blank -%}
+          <a href="{{ yt }}" aria-label="YouTube" target="_blank" rel="noopener">{% render 'icon', name: 'youtube' %}</a>
+        {%- endif -%}
+        {%- if fb == blank and ig == blank and tt == blank and yt == blank -%}
+          <a href="{{ routes.root_url }}pages/contact" aria-label="Contact">{% render 'icon', name: 'mail' %}</a>
+          <a href="{{ routes.root_url }}pages/faq" aria-label="FAQ">{% render 'icon', name: 'sparkle' %}</a>
+        {%- endif -%}
       </div>
-      {%- if section.settings.show_payment_icons -%}
-        <div class="payment-icons">{{ shop.enabled_payment_types | payment_type_svg_tag }}</div>
-      {%- endif -%}
+
+      <nav class="site-footer__legal" aria-label="Legal">
+        <a href="{{ routes.root_url }}policies/privacy-policy">Privacy Policy</a>
+        <a href="{{ routes.root_url }}pages/contact">Contact</a>
+        <a href="{{ routes.root_url }}policies/terms-of-service">Terms and Conditions</a>
+      </nav>
+
+      <a class="site-footer__totop" href="#MainContent" aria-label="Back to top">
+        {% render 'icon', name: 'chevron-up' %}
+      </a>
     </div>
   </div>
 </footer>
@@ -88,18 +114,19 @@
 {
   "name": "Footer",
   "settings": [
-    { "type": "textarea", "id": "statement", "label": "Brand statement", "default": "Premium wellness made simple, enjoyable, and designed around women. Live Better. Every Day." },
     { "type": "text", "id": "tagline", "label": "Tagline line", "default": "Live Better. Every Day." },
-    { "type": "text", "id": "shop_heading", "label": "Shop column heading", "default": "Shop" },
-    { "type": "link_list", "id": "menu_shop", "label": "Shop menu", "default": "footer-shop" },
-    { "type": "text", "id": "discover_heading", "label": "Discover column heading", "default": "Discover" },
-    { "type": "link_list", "id": "menu_discover", "label": "Discover menu", "default": "footer-learn" },
-    { "type": "text", "id": "care_heading", "label": "Customer care heading", "default": "Customer Care" },
-    { "type": "link_list", "id": "menu_care", "label": "Customer care menu", "default": "footer-support" },
+    { "type": "text", "id": "contact_heading", "label": "Contact heading", "default": "Contact us" },
+    { "type": "text", "id": "support_phone", "label": "Support phone" },
     { "type": "text", "id": "support_email", "label": "Support email", "default": "hello@livewithreu.com" },
-    { "type": "text", "id": "support_hours", "label": "Support hours", "default": "Mon–Fri, 9am–5pm EST" },
-    { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "Information on this website is provided for general educational purposes and is not medical advice. Always follow the product label and consult a qualified healthcare professional when appropriate." },
-    { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true }
+    { "type": "text", "id": "help_label", "label": "Help link label", "default": "Help Center" },
+    { "type": "url", "id": "help_link", "label": "Help link" },
+    { "type": "text", "id": "shop_heading", "label": "Shop column label", "default": "Shop" },
+    { "type": "link_list", "id": "menu_shop", "label": "Shop menu", "default": "footer-shop" },
+    { "type": "text", "id": "discover_heading", "label": "Discover column label", "default": "Discover" },
+    { "type": "link_list", "id": "menu_discover", "label": "Discover menu", "default": "footer-learn" },
+    { "type": "text", "id": "care_heading", "label": "Customer care label", "default": "Customer Care" },
+    { "type": "link_list", "id": "menu_care", "label": "Customer care menu", "default": "footer-support" },
+    { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "Information on this website is provided for general educational purposes and is not medical advice. Always follow the product label and consult a qualified healthcare professional when appropriate." }
   ]
 }
 {% endschema %}
