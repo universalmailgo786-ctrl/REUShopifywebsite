@@ -212,6 +212,7 @@
         "j1": {
           "type": "card",
           "settings": {
+            "fallback_asset": "reu-journal-1.jpg",
             "title": "How to Build a Wellness Routine You Can Actually Keep",
             "text": "Simple habits work best when they fit the life you already live."
           }
@@ -219,6 +220,7 @@
         "j2": {
           "type": "card",
           "settings": {
+            "fallback_asset": "reu-journal-2.jpg",
             "title": "Electrolytes Explained",
             "text": "A straightforward introduction to hydration support and when it may fit your routine."
           }
@@ -226,6 +228,7 @@
         "j3": {
           "type": "card",
           "settings": {
+            "fallback_asset": "reu-journal-3.jpg",
             "title": "Pouch or Sachet?",
             "text": "Choose the format that works best for home, travel, or both."
           }
