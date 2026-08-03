@@ -124,6 +124,19 @@
         "microcopy": "Personalized product guidance, not medical advice."
       }
     },
+    "lifestyle": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "left",
+        "fallback_asset": "reu-daily-wellness-peach-mango.jpg",
+        "eyebrow": "More than supplements",
+        "heading": "A ritual that\nfeels like you.",
+        "body": "<p>REÚ brings intention to everyday wellness with products that feel considered, modern, and easy to make your own.</p><p>No complicated routines. No unnecessary pressure. Just simple support for showing up as your best self, one day at a time.</p>",
+        "cta_label": "Our Story",
+        "cta_link": "shopify://pages/about-us",
+        "bg_scheme": ""
+      }
+    },
     "reviews": {
       "type": "reviews",
       "settings": {
@@ -226,6 +239,7 @@
     "standards",
     "featured",
     "quiz",
+    "lifestyle",
     "reviews",
     "journal",
     "faq",
