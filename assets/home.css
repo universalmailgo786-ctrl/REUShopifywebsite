@@ -1114,8 +1114,7 @@
 
 /* ——— Shop REÚ / Featured products ——— */
 .shop-reu {
-  background: #E3E1D5;
-  background: var(--color-cream, #E3E1D5);
+  background: #dfe8df;
 }
 .shop-reu__head {
   display: grid;
@@ -1243,7 +1242,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background: #dfe8df;
+  background: #E3E1D5;
+  background: var(--color-cream, #E3E1D5);
   border-radius: calc(var(--card-radius) + 8px);
   overflow: hidden;
   min-height: 100%;
@@ -1252,7 +1252,7 @@
   position: relative;
   display: block;
   aspect-ratio: 1;
-  background: color-mix(in srgb, #dfe8df 70%, #fff);
+  background: color-mix(in srgb, #E3E1D5 70%, #fff);
   overflow: hidden;
 }
 .shop-reu-card__media img,
