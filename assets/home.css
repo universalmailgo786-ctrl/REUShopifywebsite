@@ -1503,7 +1503,7 @@
 .preorder-split__media img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/5; }
 
 .newsletter {
-  background: #fff;
+  background: #dfe8df;
 }
 .newsletter__layout {
   display: grid;
