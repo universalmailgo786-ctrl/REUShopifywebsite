@@ -22,5 +22,6 @@
   <span class="search-result-card__body">
     <span class="search-result-card__title">{{ p.title }}</span>
     <span class="search-result-card__price">{% render 'price', product: p %}</span>
+    {% render 'reu-product-countdown', product: p, style: 'card' %}
   </span>
 </a>

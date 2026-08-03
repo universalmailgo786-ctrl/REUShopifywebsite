@@ -50,6 +50,9 @@
         var next = doc.querySelector('[data-recommendations-body]');
         var current = root.querySelector('[data-recommendations-body]');
         if (next && current && next.innerHTML.trim()) current.innerHTML = next.innerHTML;
+        if (window.REU && typeof window.REU.initCountdowns === 'function') {
+          window.REU.initCountdowns(current || root);
+        }
       })
       .catch(function () {});
   })();

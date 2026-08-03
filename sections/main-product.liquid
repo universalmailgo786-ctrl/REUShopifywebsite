@@ -95,6 +95,8 @@
 
           <input type="hidden" name="id" value="{{ current.id }}">
 
+          {% render 'reu-product-countdown', product: p, style: 'product' %}
+
           <div class="purchase-row">
             <div class="qty-control" data-qty>
               <button type="button" data-qty-step="-1" aria-label="{{ 'products.product.decrease' | t }}">–</button>

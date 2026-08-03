@@ -1,0 +1,85 @@
+{%- comment -%}
+  REÚ product countdown timer.
+  Params:
+    - product (required)
+    - style: 'card' (default) | 'product'
+  Metafields:
+    - custom.countdown_end (date_time)
+    - custom.countdown_label (single_line_text_field)
+    - custom.countdown_enabled (boolean)
+{%- endcomment -%}
+{%- if settings.countdown_enable and product != blank -%}
+  {%- liquid
+    assign end_mf = product.metafields.custom.countdown_end
+    assign enabled_mf = product.metafields.custom.countdown_enabled
+    assign label_mf = product.metafields.custom.countdown_label
+    assign show_timer = false
+
+    if end_mf != blank and end_mf.value != blank
+      assign show_timer = true
+    endif
+    if enabled_mf != blank and enabled_mf.value == false
+      assign show_timer = false
+    endif
+
+    if show_timer
+      assign end_ts = end_mf.value | date: '%s'
+      if end_ts == blank or end_ts == '0'
+        assign show_timer = false
+      endif
+    endif
+
+    assign label = settings.countdown_default_label | default: 'Pre-Order Offer Ends In'
+    if label_mf != blank and label_mf.value != blank
+      assign label = label_mf.value
+    endif
+    assign expired_msg = settings.countdown_expired_message | default: 'Offer Ended'
+    assign expired_behavior = settings.countdown_expired_behavior | default: 'message'
+    assign style_name = style | default: 'card'
+  -%}
+
+  {%- if show_timer -%}
+    <div
+      class="reu-countdown reu-countdown--{{ style_name }}"
+      data-reu-countdown
+      data-product-id="{{ product.id }}"
+      data-end-ts="{{ end_ts }}"
+      data-expired-behavior="{{ expired_behavior | escape }}"
+      data-expired-message="{{ expired_msg | escape }}"
+      style="
+        --reu-cd-bg: {{ settings.countdown_bg | default: '#F4E2DB' }};
+        --reu-cd-text: {{ settings.countdown_text | default: '#223829' }};
+        --reu-cd-accent: {{ settings.countdown_accent | default: '#BA6D64' }};
+      "
+      aria-live="polite"
+    >
+      {%- if label != blank -%}
+        <p class="reu-countdown__label">{{ label }}</p>
+      {%- endif -%}
+
+      <div class="reu-countdown__units" data-reu-countdown-units>
+        <div class="reu-countdown__unit">
+          <span class="reu-countdown__value" data-days>00</span>
+          <span class="reu-countdown__key">Days</span>
+        </div>
+        <span class="reu-countdown__sep" aria-hidden="true">·</span>
+        <div class="reu-countdown__unit">
+          <span class="reu-countdown__value" data-hours>00</span>
+          <span class="reu-countdown__key">Hrs</span>
+        </div>
+        <span class="reu-countdown__sep" aria-hidden="true">·</span>
+        <div class="reu-countdown__unit">
+          <span class="reu-countdown__value" data-mins>00</span>
+          <span class="reu-countdown__key">Min</span>
+        </div>
+        <span class="reu-countdown__sep" aria-hidden="true">·</span>
+        <div class="reu-countdown__unit">
+          <span class="reu-countdown__value" data-secs>00</span>
+          <span class="reu-countdown__key">Sec</span>
+        </div>
+      </div>
+
+      <p class="reu-countdown__ended" data-reu-countdown-ended hidden>{{ expired_msg }}</p>
+    </div>
+  {%- endif -%}
+{%- endif -%}
