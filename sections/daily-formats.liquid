@@ -1,39 +1,11 @@
 {%- liquid
-  assign eyebrow = section.settings.eyebrow
-  assign accent = section.settings.heading_accent | default: 'benefits'
   assign desktop_img = section.settings.image_desktop
   assign mobile_img = section.settings.image_mobile
 -%}
 <section
   class="daily-formats section"
-  aria-labelledby="DailyFormatsHeading-{{ section.id }}"
+  {% if section.settings.image_alt != blank %}aria-label="{{ section.settings.image_alt | escape }}"{% endif %}
 >
-  <div class="wrap daily-formats__inner">
-    <p class="daily-formats__eyebrow">
-      {%- if section.settings.show_sparkle -%}
-        <span class="daily-formats__sparkle" aria-hidden="true">{% render 'icon', name: 'sparkle' %}</span>
-      {%- endif -%}
-      <span>{{ eyebrow }}</span>
-    </p>
-
-    <div class="daily-formats__row">
-      <h2 class="daily-formats__heading" id="DailyFormatsHeading-{{ section.id }}">
-        {%- if section.settings.heading_before != blank -%}{{ section.settings.heading_before }}{%- endif -%}
-        {%- if accent != blank -%}<em class="daily-formats__accent">{{ accent }}</em>{%- endif -%}
-        {%- if section.settings.heading_after != blank -%}{{ section.settings.heading_after }}{%- endif -%}
-      </h2>
-
-      <div class="daily-formats__aside">
-        {%- if section.settings.highlight != blank -%}
-          <p class="daily-formats__highlight">{{ section.settings.highlight }}</p>
-        {%- endif -%}
-        {%- if section.settings.body != blank -%}
-          <p class="daily-formats__body">{{ section.settings.body }}</p>
-        {%- endif -%}
-      </div>
-    </div>
-  </div>
-
   <figure class="daily-formats__banner">
     <picture>
       {%- if mobile_img != blank -%}
@@ -57,7 +29,7 @@
             widths: '900,1400,1800,2400,2800',
             sizes: '100vw',
             loading: 'lazy',
-            alt: section.settings.image_alt | default: section.settings.highlight
+            alt: section.settings.image_alt
         }}
       {%- else -%}
         <img
@@ -81,49 +53,6 @@
   "tag": "section",
   "class": "section-daily-formats",
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "show_sparkle",
-      "label": "Show sparkle in eyebrow",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "Daily wellness, simplified"
-    },
-    {
-      "type": "text",
-      "id": "heading_before",
-      "label": "Heading before accent",
-      "default": "Purposeful "
-    },
-    {
-      "type": "text",
-      "id": "heading_accent",
-      "label": "Accent word (italic)",
-      "default": "benefits",
-      "info": "Styled in italic Warm Rose."
-    },
-    {
-      "type": "text",
-      "id": "heading_after",
-      "label": "Heading after accent",
-      "default": " for energy, hydration and everyday balance"
-    },
-    {
-      "type": "text",
-      "id": "highlight",
-      "label": "Highlight",
-      "default": "2 WAYS"
-    },
-    {
-      "type": "textarea",
-      "id": "body",
-      "label": "Supporting text",
-      "default": "Choose full-size pouches for your daily routine or convenient single-serve sachets for wellness on the go."
-    },
     {
       "type": "header",
       "content": "Banner images"

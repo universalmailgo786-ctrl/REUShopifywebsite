@@ -101,13 +101,6 @@
     "formats": {
       "type": "daily-formats",
       "settings": {
-        "show_sparkle": true,
-        "eyebrow": "Daily wellness, simplified",
-        "heading_before": "Purposeful ",
-        "heading_accent": "benefits",
-        "heading_after": " for energy, hydration and everyday balance",
-        "highlight": "2 WAYS",
-        "body": "Choose full-size pouches for your daily routine or convenient single-serve sachets for wellness on the go.",
         "image_alt": "REÚ pouches and single-serve sachets"
       }
     },
