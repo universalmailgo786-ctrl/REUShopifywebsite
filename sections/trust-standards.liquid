@@ -16,11 +16,12 @@
       {%- else -%}
         <img
           src="{{ 'reu-standard-visual.jpg' | asset_url }}"
-          width="1800"
-          height="1200"
+          width="2048"
+          height="1364"
           alt="{{ section.settings.heading | default: 'REÚ Greens Pineapple pouch and sachet' | escape }}"
-          loading="lazy"
+          loading="eager"
           decoding="async"
+          fetchpriority="high"
         >
       {%- endif -%}
     </div>
