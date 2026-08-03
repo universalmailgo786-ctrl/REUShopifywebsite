@@ -18,7 +18,8 @@
       "settings": {
         "eyebrow": "Why REÚ",
         "heading": "Wellness without\nthe guesswork.",
-        "body": "High-quality wellness should feel clear, enjoyable, and realistic enough for every day. REÚ creates great-tasting products designed to fit naturally into women’s real lives."
+        "body": "High-quality wellness should feel clear, enjoyable, and realistic enough for every day. REÚ creates great-tasting products designed to fit naturally into women’s real lives.",
+        "image_alt": "Woman holding REÚ greens, hydration, and protein pouches"
       },
       "blocks": {
         "b1": { "type": "benefit", "settings": { "icon": "sparkle", "title": "Thoughtfully Made", "text": "Products created with quality and everyday use in mind." } },

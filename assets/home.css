@@ -152,29 +152,112 @@
   }
 }
 
-.brand-intro__grid { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-@media (min-width: 990px) { .brand-intro__grid { grid-template-columns: 1fr 1.05fr; } }
+/* ——— Why REÚ / Brand introduction ——— */
+.brand-intro.section {
+  padding-block: calc(var(--section-y) * 0.8);
+}
+.brand-intro .eyebrow {
+  font-size: clamp(.55rem, .8vw, .65rem);
+  margin-bottom: .55rem;
+}
+.brand-intro .h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.9rem);
+}
+.brand-intro__grid {
+  display: grid;
+  gap: clamp(1.6rem, 4vw, 2.8rem);
+  align-items: stretch;
+}
+@media (min-width: 990px) {
+  .brand-intro__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: clamp(2rem, 4vw, 3.6rem);
+    align-items: center;
+  }
+}
+.brand-intro__body {
+  margin-top: .8rem;
+  font-size: clamp(.9rem, 1.1vw, 1rem);
+  max-width: 34rem;
+}
+.brand-intro__cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .7rem;
+  margin-top: clamp(1.2rem, 2.8vw, 1.8rem);
+}
+@media (min-width: 560px) {
+  .brand-intro__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.brand-intro__card {
+  background: #BA6D64;
+  background: var(--color-rose, #BA6D64);
+  border-radius: calc(var(--card-radius) * 0.9);
+  padding: .9rem .9rem 1rem;
+  border: 1px solid color-mix(in srgb, #BA6D64 80%, #000);
+  color: #fff;
+}
+.brand-intro__card-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #BA6D64;
+  color: var(--color-rose, #BA6D64);
+  margin-bottom: .55rem;
+}
+.brand-intro__card-icon .icon {
+  width: .9rem;
+  height: .9rem;
+}
+.brand-intro__card h3 {
+  margin-bottom: .28rem;
+  font-size: clamp(.9rem, 1.2vw, 1rem);
+  color: #fff !important;
+}
+.brand-intro__card p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: .78rem;
+  line-height: 1.4;
+}
 .brand-intro__visual {
-  position: relative; min-height: 340px; border-radius: calc(var(--card-radius) + 8px);
-  background: var(--color-cream); overflow: hidden;
+  position: relative;
+  border-radius: calc(var(--card-radius) + 4px);
+  overflow: hidden;
+  background: var(--color-cream);
+  min-height: 220px;
+  aspect-ratio: 1 / 1;
 }
-.brand-intro__visual img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-.benefit-cards { display: grid; gap: 1rem; margin-top: clamp(1.75rem, 4vw, 2.5rem); }
-@media (min-width: 750px) { .benefit-cards { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 1100px) { .benefit-cards.benefit-cards--4 { grid-template-columns: repeat(4, 1fr); } }
-.benefit-card {
-  background: color-mix(in srgb, var(--color-cream) 55%, #e8efe6);
-  border-radius: var(--card-radius); padding: 1.25rem 1.2rem 1.35rem;
-  border: 1px solid color-mix(in srgb, var(--color-green) 8%, transparent);
+@media (min-width: 990px) {
+  .brand-intro__visual {
+    min-height: 0;
+    height: auto;
+    width: 100%;
+    max-width: 520px;
+    aspect-ratio: 1 / 1;
+    align-self: center;
+    justify-self: end;
+  }
 }
-.benefit-card__icon {
-  width: 2.4rem; height: 2.4rem; border-radius: 50%;
-  display: inline-flex; align-items: center; justify-content: center;
-  background: #fff; color: var(--color-green); margin-bottom: .85rem;
+.brand-intro__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
 }
-.benefit-card__icon .icon { width: 1.15rem; height: 1.15rem; }
-.benefit-card h3 { margin-bottom: .4rem; font-size: 1.15rem; }
-.benefit-card p { color: var(--color-text-muted); font-size: .95rem; }
+@media (max-width: 989px) {
+  .brand-intro__visual {
+    max-height: none;
+    width: min(100%, 420px);
+    margin-inline: auto;
+  }
+}
 
 .goals-routine {
   position: relative;

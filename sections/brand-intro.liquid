@@ -1,60 +1,161 @@
-<section class="section">
+<section class="brand-intro section" aria-labelledby="BrandIntroHeading-{{ section.id }}">
   <div class="wrap">
     <div class="brand-intro__grid">
-      <div>
-        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
-        <h2 class="h2">{{ section.settings.heading | newline_to_br }}</h2>
-        {%- if section.settings.body != blank -%}<p class="lede" style="margin-top:1rem">{{ section.settings.body }}</p>{%- endif -%}
+      <div class="brand-intro__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="h2" id="BrandIntroHeading-{{ section.id }}">{{ section.settings.heading | newline_to_br }}</h2>
+        {%- if section.settings.body != blank -%}
+          <p class="lede brand-intro__body">{{ section.settings.body }}</p>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="brand-intro__cards">
+            {%- for block in section.blocks -%}
+              <article class="brand-intro__card" {{ block.shopify_attributes }}>
+                <div class="brand-intro__card-icon" aria-hidden="true">{% render 'icon', name: block.settings.icon %}</div>
+                {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
+                {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+              </article>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
       </div>
+
       <div class="brand-intro__visual">
         {%- if section.settings.image != blank -%}
-          {{ section.settings.image | image_url: width: 1400 | image_tag: widths: '600,900,1400', sizes: '(min-width:990px) 45vw, 100vw', loading: 'lazy', alt: section.settings.heading | escape }}
+          {{ section.settings.image
+            | image_url: width: 1600
+            | image_tag:
+              widths: '600,900,1200,1600',
+              sizes: '(min-width: 990px) 48vw, 100vw',
+              loading: 'lazy',
+              alt: section.settings.image_alt | default: section.settings.heading
+          }}
         {%- else -%}
-          <img src="{{ 'reu-collagen-mixed-berry.jpg' | asset_url }}" width="2000" height="1333" alt="" loading="lazy">
+          <img
+            src="{{ 'reu-why-visual.jpg' | asset_url }}"
+            width="1024"
+            height="1024"
+            alt="{{ section.settings.image_alt | default: 'REÚ wellness products' | escape }}"
+            loading="lazy"
+          >
         {%- endif -%}
       </div>
     </div>
-    <div class="benefit-cards{% if section.blocks.size > 3 %} benefit-cards--4{% endif %}">
-      {%- for block in section.blocks -%}
-        <article class="benefit-card" {{ block.shopify_attributes }}>
-          <div class="benefit-card__icon">{% render 'icon', name: block.settings.icon %}</div>
-          <h3>{{ block.settings.title }}</h3>
-          <p>{{ block.settings.text }}</p>
-        </article>
-      {%- endfor -%}
-    </div>
   </div>
 </section>
+
 {% schema %}
 {
   "name": "Brand introduction",
   "tag": "section",
+  "class": "section-brand-intro",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why REÚ" },
-    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Wellness without\nthe guesswork." },
-    { "type": "textarea", "id": "body", "label": "Body", "default": "High-quality wellness should feel clear, enjoyable, and realistic enough for every day. REÚ creates great-tasting products designed to fit naturally into women’s real lives." },
-    { "type": "image_picker", "id": "image", "label": "Product composition image" }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Why REÚ"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Wellness without\nthe guesswork."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "High-quality wellness should feel clear, enjoyable, and realistic enough for every day. REÚ creates great-tasting products designed to fit naturally into women’s real lives."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Right image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Woman holding REÚ greens, hydration, and protein pouches"
+    }
   ],
   "blocks": [
-    { "type": "benefit", "name": "Benefit", "settings": [
-      { "type": "select", "id": "icon", "label": "Icon", "options": [
-        { "value": "sparkle", "label": "Sparkle" }, { "value": "check", "label": "Check" },
-        { "value": "heart", "label": "Heart" }, { "value": "sun", "label": "Sun" },
-        { "value": "leaf", "label": "Leaf" }
-      ], "default": "sparkle" },
-      { "type": "text", "id": "title", "label": "Title", "default": "Thoughtfully Made" },
-      { "type": "textarea", "id": "text", "label": "Text", "default": "Products created with quality and everyday use in mind." }
-    ]}
+    {
+      "type": "benefit",
+      "name": "Benefit card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "check", "label": "Check" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "sun", "label": "Sun" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "shield", "label": "Shield" }
+          ],
+          "default": "sparkle"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Thoughtfully Made"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Products created with quality and everyday use in mind."
+        }
+      ]
+    }
   ],
   "max_blocks": 4,
-  "presets": [{
-    "name": "Brand introduction",
-    "blocks": [
-      { "type": "benefit", "settings": { "icon": "sparkle", "title": "Thoughtfully Made", "text": "Products created with quality and everyday use in mind." } },
-      { "type": "benefit", "settings": { "icon": "check", "title": "Clear by Design", "text": "Straightforward product information so you can choose with confidence." } },
-      { "type": "benefit", "settings": { "icon": "heart", "title": "Easy to Enjoy", "text": "Great-tasting formats made to fit your routine." } },
-      { "type": "benefit", "settings": { "icon": "sun", "title": "Created for Women", "text": "A modern wellness experience shaped around women’s real lives." } }
-    ]
-  }]
+  "presets": [
+    {
+      "name": "Brand introduction",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Thoughtfully Made",
+            "text": "Products created with quality and everyday use in mind."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "check",
+            "title": "Clear by Design",
+            "text": "Straightforward product information so you can choose with confidence."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "Easy to Enjoy",
+            "text": "Great-tasting formats made to fit your routine."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "sun",
+            "title": "Created for Women",
+            "text": "A modern wellness experience shaped around women’s real lives."
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
