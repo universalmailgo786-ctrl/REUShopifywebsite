@@ -99,17 +99,17 @@
       "block_order": ["t1", "t2", "t3", "t4", "t5", "t6"]
     },
     "formats": {
-      "type": "format-discovery",
+      "type": "daily-formats",
       "settings": {
-        "eyebrow": "Choose your format",
-        "heading": "One routine.\nTwo ways to enjoy it.",
-        "body": "Keep your daily favourites at home in a full-size pouch or take the same REÚ experience with you in convenient single-serve sachets."
-      },
-      "blocks": {
-        "pouch": { "type": "format", "settings": { "fallback_asset": "reu-format-pouch.jpg", "title": "Pouch Collection", "text": "Your everyday staple for a consistent at-home routine.", "cta": "Shop Pouches", "collection": "pouch-collection" } },
-        "sachet": { "type": "format", "settings": { "fallback_asset": "reu-format-sachet.jpg", "title": "Sachet Collection", "text": "Single-serve convenience for work, travel, gym bags, and busy days.", "cta": "Shop Sachets", "collection": "sachet-collection" } }
-      },
-      "block_order": ["pouch", "sachet"]
+        "show_sparkle": true,
+        "eyebrow": "Daily wellness, simplified",
+        "heading_before": "Purposeful ",
+        "heading_accent": "benefits",
+        "heading_after": " for energy, hydration and everyday balance",
+        "highlight": "2 WAYS",
+        "body": "Choose full-size pouches for your daily routine or convenient single-serve sachets for wellness on the go.",
+        "image_alt": "REÚ pouches and single-serve sachets"
+      }
     },
     "featured": {
       "type": "featured-products",
@@ -244,9 +244,9 @@
     "hero",
     "brand_intro",
     "goals",
+    "formats",
     "routine",
     "standards",
-    "formats",
     "featured",
     "quiz",
     "lifestyle",

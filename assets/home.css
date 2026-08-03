@@ -438,6 +438,127 @@
   }
 }
 
+/* ——— Daily formats banner (2 ways) ——— */
+.daily-formats {
+  background: #fff;
+}
+.daily-formats__inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vw, 1.85rem);
+}
+.daily-formats__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(.68rem, 1vw, .78rem);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--color-rose);
+}
+.daily-formats__sparkle {
+  display: inline-flex;
+  width: .95rem;
+  height: .95rem;
+  color: var(--color-rose);
+}
+.daily-formats__sparkle .icon {
+  width: 100%;
+  height: 100%;
+}
+.daily-formats__row {
+  display: grid;
+  gap: 1.15rem 2.5rem;
+  align-items: end;
+}
+@media (min-width: 900px) {
+  .daily-formats__row {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.9fr);
+    gap: 2rem 3rem;
+  }
+}
+.daily-formats__heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.85rem, 3.8vw, 3.15rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--color-green);
+  max-width: 16ch;
+}
+.daily-formats__accent {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-rose);
+}
+.daily-formats__aside {
+  max-width: 28rem;
+}
+@media (min-width: 900px) {
+  .daily-formats__aside {
+    justify-self: end;
+    text-align: left;
+    padding-bottom: .15rem;
+  }
+}
+.daily-formats__highlight {
+  margin: 0 0 .55rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-green);
+}
+.daily-formats__body {
+  margin: 0;
+  font-size: clamp(.92rem, 1.15vw, 1.02rem);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  max-width: 34ch;
+}
+.daily-formats__banner {
+  margin: 0;
+  width: 100%;
+  border-radius: calc(var(--card-radius) + 2px);
+  overflow: hidden;
+  background: var(--color-cream);
+  line-height: 0;
+}
+.daily-formats__banner picture,
+.daily-formats__banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.daily-formats__banner img {
+  object-fit: contain;
+  object-position: center;
+  image-rendering: auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+@media (max-width: 749px) {
+  .daily-formats__heading {
+    max-width: none;
+    font-size: clamp(1.75rem, 7.2vw, 2.25rem);
+  }
+  .daily-formats__aside {
+    max-width: none;
+  }
+  .daily-formats__body {
+    max-width: none;
+  }
+  .daily-formats__banner {
+    border-radius: 1.25rem;
+  }
+}
+
 .goals-routine {
   position: relative;
   overflow: hidden;
