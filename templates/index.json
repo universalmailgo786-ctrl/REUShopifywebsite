@@ -356,6 +356,51 @@
         "bg_scheme": "bg-cream"
       }
     },
+    "moving_reviews": {
+      "type": "reu-moving-reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "name": "Sample routine 01", "quote": "The mixed-berry flavour makes my routine feel like something I genuinely look forward to.", "product": "Collagen — Mixed Berry" } },
+        "r2": { "type": "review", "settings": { "name": "Sample routine 02", "quote": "I keep the sachets in my work bag, so my routine can move with me.", "product": "Sachet Collection" } },
+        "r3": { "type": "review", "settings": { "name": "Sample routine 03", "quote": "The pouch beside my shaker makes everyday consistency feel much simpler.", "product": "Pouch Collection" } },
+        "r4": { "type": "review", "settings": { "name": "Sample routine 04", "quote": "The quiz gave me a clear starting point without making wellness feel overwhelming.", "product": "REÚ Recommendation Quiz" } },
+        "r5": { "type": "review", "settings": { "name": "Sample routine 05", "quote": "I like having a pouch at home and sachets ready for travel days.", "product": "Pouches and Sachets" } },
+        "r6": { "type": "review", "settings": { "name": "Sample routine 06", "quote": "Bright flavours and clear directions make REÚ easy to fit into my day.", "product": "REÚ Daily Wellness" } },
+        "r7": { "type": "review", "settings": { "name": "Sample routine 07", "quote": "The Watermelon Hydration flavour feels refreshing and is easy to prepare before a busy day.", "product": "Hydration Electrolytes — Watermelon" } },
+        "r8": { "type": "review", "settings": { "name": "Sample routine 08", "quote": "Coconut sachets are convenient to keep at my desk for days when I am away from home.", "product": "Hydration Electrolytes — Coconut" } },
+        "r9": { "type": "review", "settings": { "name": "Sample routine 09", "quote": "Lemon Lime has become my preferred option around workouts because I enjoy the crisp citrus taste.", "product": "Hydration Electrolytes — Lemon Lime" } },
+        "r10": { "type": "review", "settings": { "name": "Sample routine 10", "quote": "The Pineapple Greens pouch makes my morning setup feel simple and organised.", "product": "Greens — Pineapple" } },
+        "r11": { "type": "review", "settings": { "name": "Sample routine 11", "quote": "Peach Mango is bright, enjoyable and easy to include in my everyday routine.", "product": "Daily Wellness — Peach Mango" } },
+        "r12": { "type": "review", "settings": { "name": "Sample routine 12", "quote": "The Chocolate Protein flavour is smooth and fits naturally into my post-workout routine.", "product": "Premium Protein — Chocolate" } },
+        "r13": { "type": "review", "settings": { "name": "Sample routine 13", "quote": "Pink Lemonade adds a refreshing option when I want something different from plain water.", "product": "Weight Management — Pink Lemonade" } },
+        "r14": { "type": "review", "settings": { "name": "Sample routine 14", "quote": "Being able to choose between pouches and sachets makes the range work around my schedule.", "product": "Pouches and Sachets" } },
+        "r15": { "type": "review", "settings": { "name": "Sample routine 15", "quote": "The packaging feels clear and premium, and every product and flavour is easy to recognise.", "product": "REÚ Collection" } },
+        "r16": { "type": "review", "settings": { "name": "Sample routine 16", "quote": "I appreciate that the product pages explain the format, directions and pre-order details clearly.", "product": "REÚ Store Experience" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16"],
+      "settings": {
+        "eyebrow": "Trusted wellness reviews",
+        "heading": "Real routines shared by real women.",
+        "heading_before": "Real routines shared by ",
+        "heading_accent": "real women",
+        "heading_after": ".",
+        "body": "See how REÚ is becoming part of simple, enjoyable everyday wellness routines.",
+        "image_alt": "Woman holding REÚ sachet beside a branded water bottle",
+        "overlay_strength": 30,
+        "section_bg": "#223829",
+        "card_bg": "#E3E1D5",
+        "text_color": "#E3E1D5",
+        "accent_color": "#BA6D64",
+        "review_text_color": "#223829",
+        "section_height": 640,
+        "padding_desktop": 72,
+        "padding_mobile": 48,
+        "column_gap": 16,
+        "animation_speed": 40,
+        "pause_on_hover": true,
+        "reduced_motion_fallback": true,
+        "show_sample_labels": true
+      }
+    },
     "newsletter": {
       "type": "newsletter",
       "settings": {
@@ -385,6 +430,7 @@
     "faq",
     "media_banner",
     "social",
+    "moving_reviews",
     "newsletter"
   ]
 }

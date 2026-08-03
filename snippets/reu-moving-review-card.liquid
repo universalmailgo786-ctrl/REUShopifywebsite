@@ -1,0 +1,71 @@
+{%- comment -%}
+  Review card for Trusted wellness reviews marquee.
+  Accepts: block, section, show_sample, duplicate (optional)
+{%- endcomment -%}
+{%- liquid
+  assign is_dup = duplicate | default: false
+  assign card_id = 'ReuMrCard-' | append: section.id | append: '-' | append: block.id
+  if is_dup
+    assign card_id = card_id | append: '-dup'
+  endif
+-%}
+<article
+  class="reu-mr-card"
+  id="{{ card_id }}"
+  {% unless is_dup %}{{ block.shopify_attributes }}{% endunless %}
+  {% if is_dup %}tabindex="-1"{% else %}tabindex="0"{% endif %}
+>
+  <div class="reu-mr-card__top">
+    <span class="reu-mr-card__quote" aria-hidden="true">“</span>
+    {%- if show_sample -%}
+      <span class="reu-mr-card__sample">Sample</span>
+    {%- endif -%}
+  </div>
+
+  {%- if block.settings.quote != blank -%}
+    <p class="reu-mr-card__text">{{ block.settings.quote }}</p>
+  {%- endif -%}
+
+  {%- if block.settings.product != blank -%}
+    <p class="reu-mr-card__product">
+      {%- if block.settings.product_link != blank -%}
+        <a href="{{ block.settings.product_link }}">{{ block.settings.product }}</a>
+      {%- else -%}
+        {{ block.settings.product }}
+      {%- endif -%}
+    </p>
+  {%- endif -%}
+
+  <div class="reu-mr-card__footer">
+    <div class="reu-mr-card__person">
+      <span class="reu-mr-card__avatar" aria-hidden="true">
+        {%- if block.settings.avatar != blank -%}
+          {{
+            block.settings.avatar
+            | image_url: width: 96
+            | image_tag:
+              widths: '48,72,96',
+              sizes: '40px',
+              loading: 'lazy',
+              alt: ''
+          }}
+        {%- else -%}
+          <span class="reu-mr-card__avatar-fallback">
+            {{ block.settings.name | default: 'R' | slice: 0 | upcase }}
+          </span>
+        {%- endif -%}
+      </span>
+      <span class="reu-mr-card__meta">
+        {%- if block.settings.name != blank -%}
+          <span class="reu-mr-card__name">{{ block.settings.name }}</span>
+        {%- endif -%}
+        {%- if block.settings.role != blank -%}
+          <span class="reu-mr-card__role">{{ block.settings.role }}</span>
+        {%- endif -%}
+        {%- if block.settings.verified -%}
+          <span class="reu-mr-card__verified">Verified</span>
+        {%- endif -%}
+      </span>
+    </div>
+  </div>
+</article>

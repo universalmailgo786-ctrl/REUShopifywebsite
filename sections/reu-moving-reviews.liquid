@@ -1,0 +1,251 @@
+{{ 'reu-moving-reviews.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign speed = section.settings.animation_speed | default: 40
+  assign pause_hover = section.settings.pause_on_hover
+  assign show_sample = section.settings.show_sample_labels
+  assign reduced_fallback = section.settings.reduced_motion_fallback
+  assign overlay = section.settings.overlay_strength | default: 35
+  assign col_gap = section.settings.column_gap | default: 16
+  assign section_h = section.settings.section_height | default: 640
+  assign pad_d = section.settings.padding_desktop | default: 72
+  assign pad_m = section.settings.padding_mobile | default: 48
+
+  assign bg = section.settings.section_bg | default: '#223829'
+  assign card_bg = section.settings.card_bg | default: '#E3E1D5'
+  assign text_color = section.settings.text_color | default: '#E3E1D5'
+  assign accent = section.settings.accent_color | default: '#BA6D64'
+  assign review_text = section.settings.review_text_color | default: '#223829'
+
+  assign reviews = section.blocks | where: 'type', 'review'
+-%}
+
+<section
+  id="ReuMovingReviews-{{ section.id }}"
+  class="reu-mr"
+  style="
+    --reu-mr-bg: {{ bg }};
+    --reu-mr-card: {{ card_bg }};
+    --reu-mr-text: {{ text_color }};
+    --reu-mr-accent: {{ accent }};
+    --reu-mr-review: {{ review_text }};
+    --reu-mr-duration: {{ speed }}s;
+    --reu-mr-height: {{ section_h }}px;
+    --reu-mr-gap: {{ col_gap }}px;
+    --reu-mr-overlay: {{ overlay | divided_by: 100.0 }};
+    --reu-mr-pad-d: {{ pad_d }}px;
+    --reu-mr-pad-m: {{ pad_m }}px;
+  "
+  data-reu-moving-reviews
+  data-pause-hover="{{ pause_hover }}"
+  data-reduced-fallback="{{ reduced_fallback }}"
+  aria-labelledby="ReuMovingReviewsHeading-{{ section.id }}"
+>
+  <div class="wrap reu-mr__wrap">
+    <div class="reu-mr__layout">
+      <div class="reu-mr__intro">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="reu-mr__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        <h2 class="reu-mr__heading" id="ReuMovingReviewsHeading-{{ section.id }}">
+          {%- if section.settings.heading_before != blank or section.settings.heading_accent != blank or section.settings.heading_after != blank -%}
+            {{ section.settings.heading_before }}
+            {%- if section.settings.heading_accent != blank -%}
+              <em class="reu-mr__accent">{{ section.settings.heading_accent }}</em>
+            {%- endif -%}
+            {{ section.settings.heading_after }}
+          {%- else -%}
+            {{ section.settings.heading }}
+          {%- endif -%}
+        </h2>
+
+        {%- if section.settings.body != blank -%}
+          <p class="reu-mr__body">{{ section.settings.body }}</p>
+        {%- endif -%}
+
+        <div class="reu-mr__media">
+          {%- if section.settings.image_mobile != blank -%}
+            <picture>
+              <source
+                media="(max-width: 749px)"
+                srcset="{{ section.settings.image_mobile | image_url: width: 900 }} 900w, {{ section.settings.image_mobile | image_url: width: 1400 }} 1400w"
+              >
+              {%- if section.settings.image != blank -%}
+                {{
+                  section.settings.image
+                  | image_url: width: 2000
+                  | image_tag:
+                    widths: '800,1200,1600,2000',
+                    sizes: '(min-width:990px) 46vw, 100vw',
+                    loading: 'lazy',
+                    alt: section.settings.image_alt | escape
+                }}
+              {%- else -%}
+                {{
+                  section.settings.image_mobile
+                  | image_url: width: 1400
+                  | image_tag:
+                    widths: '600,900,1400',
+                    sizes: '100vw',
+                    loading: 'lazy',
+                    alt: section.settings.image_alt | escape
+                }}
+              {%- endif -%}
+            </picture>
+          {%- elsif section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 2000
+              | image_tag:
+                widths: '800,1200,1600,2000',
+                sizes: '(min-width:990px) 46vw, 100vw',
+                loading: 'lazy',
+                alt: section.settings.image_alt | escape
+            }}
+          {%- else -%}
+            <img
+              src="{{ 'reu-moving-reviews-visual.jpg' | asset_url }}"
+              width="1902"
+              height="827"
+              alt="{{ section.settings.image_alt | escape }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {%- endif -%}
+          <span class="reu-mr__media-overlay" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      {%- if reviews.size > 0 -%}
+        <div class="reu-mr__marquee" data-reu-mr-marquee>
+          {%- comment -%} Column 1: odd blocks (1-based: 1,3,5...) {%- endcomment -%}
+          <div class="reu-mr__col reu-mr__col--down" data-reu-mr-col data-dir="down" tabindex="-1">
+            <div class="reu-mr__rail" data-reu-mr-rail>
+              <div class="reu-mr__track">
+                {%- for block in reviews -%}
+                  {%- assign idx = forloop.index0 | modulo: 2 -%}
+                  {%- if idx == 0 -%}
+                    {% render 'reu-moving-review-card', block: block, section: section, show_sample: show_sample %}
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+              <div class="reu-mr__track" aria-hidden="true">
+                {%- for block in reviews -%}
+                  {%- assign idx = forloop.index0 | modulo: 2 -%}
+                  {%- if idx == 0 -%}
+                    {% render 'reu-moving-review-card', block: block, section: section, show_sample: show_sample, duplicate: true %}
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+
+          {%- comment -%} Column 2: even blocks {%- endcomment -%}
+          <div class="reu-mr__col reu-mr__col--up" data-reu-mr-col data-dir="up" tabindex="-1">
+            <div class="reu-mr__rail" data-reu-mr-rail>
+              <div class="reu-mr__track">
+                {%- for block in reviews -%}
+                  {%- assign idx = forloop.index0 | modulo: 2 -%}
+                  {%- if idx == 1 -%}
+                    {% render 'reu-moving-review-card', block: block, section: section, show_sample: show_sample %}
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+              <div class="reu-mr__track" aria-hidden="true">
+                {%- for block in reviews -%}
+                  {%- assign idx = forloop.index0 | modulo: 2 -%}
+                  {%- if idx == 1 -%}
+                    {% render 'reu-moving-review-card', block: block, section: section, show_sample: show_sample, duplicate: true %}
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+
+          {%- comment -%} Static reduced-motion grid {%- endcomment -%}
+          <div class="reu-mr__static" data-reu-mr-static hidden>
+            {%- for block in reviews -%}
+              {% render 'reu-moving-review-card', block: block, section: section, show_sample: show_sample %}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'reu-moving-reviews.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Trusted wellness reviews",
+  "tag": "section",
+  "class": "section-reu-moving-reviews",
+  "max_blocks": 20,
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Trusted wellness reviews" },
+    { "type": "text", "id": "heading", "label": "Fallback heading", "default": "Real routines shared by real women." },
+    { "type": "text", "id": "heading_before", "label": "Heading before accent", "default": "Real routines shared by " },
+    { "type": "text", "id": "heading_accent", "label": "Italic / highlighted words", "default": "real women" },
+    { "type": "text", "id": "heading_after", "label": "Heading after accent", "default": "." },
+    { "type": "textarea", "id": "body", "label": "Supporting text", "default": "See how REÚ is becoming part of simple, enjoyable everyday wellness routines." },
+
+    { "type": "header", "content": "Imagery" },
+    { "type": "image_picker", "id": "image", "label": "Desktop image" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Mobile image" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Woman holding REÚ sachet beside a branded water bottle" },
+    { "type": "range", "id": "overlay_strength", "min": 0, "max": 70, "step": 5, "unit": "%", "label": "Image overlay strength", "default": 30 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "section_bg", "label": "Section background", "default": "#223829" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#E3E1D5" },
+    { "type": "color", "id": "text_color", "label": "Heading text", "default": "#E3E1D5" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#BA6D64" },
+    { "type": "color", "id": "review_text_color", "label": "Review text", "default": "#223829" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "section_height", "min": 420, "max": 900, "step": 20, "unit": "px", "label": "Review columns height", "default": 640 },
+    { "type": "range", "id": "padding_desktop", "min": 40, "max": 120, "step": 4, "unit": "px", "label": "Desktop vertical padding", "default": 72 },
+    { "type": "range", "id": "padding_mobile", "min": 32, "max": 80, "step": 4, "unit": "px", "label": "Mobile vertical padding", "default": 48 },
+    { "type": "range", "id": "column_gap", "min": 12, "max": 32, "step": 2, "unit": "px", "label": "Column gap", "default": 16 },
+
+    { "type": "header", "content": "Animation" },
+    { "type": "range", "id": "animation_speed", "min": 25, "max": 60, "step": 1, "unit": "s", "label": "Animation duration", "default": 40 },
+    { "type": "checkbox", "id": "pause_on_hover", "label": "Pause on hover", "default": true },
+    { "type": "checkbox", "id": "reduced_motion_fallback", "label": "Use static grid for reduced motion", "default": true },
+    { "type": "checkbox", "id": "show_sample_labels", "label": "Show SAMPLE labels", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "avatar", "label": "Customer image" },
+        { "type": "text", "id": "name", "label": "Customer name", "default": "Sample routine" },
+        { "type": "text", "id": "role", "label": "Role or location" },
+        { "type": "textarea", "id": "quote", "label": "Review text", "default": "A preview of how REÚ can become part of simple, enjoyable everyday routines." },
+        { "type": "text", "id": "product", "label": "Product name" },
+        { "type": "url", "id": "product_link", "label": "Product link" },
+        { "type": "checkbox", "id": "verified", "label": "Verified review", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trusted wellness reviews",
+      "blocks": [
+        { "type": "review", "settings": { "name": "Sample routine 01", "quote": "The mixed-berry flavour makes my routine feel like something I genuinely look forward to.", "product": "Collagen — Mixed Berry" } },
+        { "type": "review", "settings": { "name": "Sample routine 02", "quote": "I keep the sachets in my work bag, so my routine can move with me.", "product": "Sachet Collection" } },
+        { "type": "review", "settings": { "name": "Sample routine 03", "quote": "The pouch beside my shaker makes everyday consistency feel much simpler.", "product": "Pouch Collection" } },
+        { "type": "review", "settings": { "name": "Sample routine 04", "quote": "The quiz gave me a clear starting point without making wellness feel overwhelming.", "product": "REÚ Recommendation Quiz" } },
+        { "type": "review", "settings": { "name": "Sample routine 05", "quote": "I like having a pouch at home and sachets ready for travel days.", "product": "Pouches and Sachets" } },
+        { "type": "review", "settings": { "name": "Sample routine 06", "quote": "Bright flavours and clear directions make REÚ easy to fit into my day.", "product": "REÚ Daily Wellness" } },
+        { "type": "review", "settings": { "name": "Sample routine 07", "quote": "The Watermelon Hydration flavour feels refreshing and is easy to prepare before a busy day.", "product": "Hydration Electrolytes — Watermelon" } },
+        { "type": "review", "settings": { "name": "Sample routine 08", "quote": "Coconut sachets are convenient to keep at my desk for days when I am away from home.", "product": "Hydration Electrolytes — Coconut" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
