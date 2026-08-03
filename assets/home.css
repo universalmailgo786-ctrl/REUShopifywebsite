@@ -1166,6 +1166,12 @@
   color: #213929;
   color: var(--color-green, #223829);
 }
+.shop-reu__accent {
+  font-style: italic;
+  font-weight: 400;
+  color: #BA6C63;
+  color: var(--color-rose, #BA6D64);
+}
 .shop-reu__body {
   margin: .85rem 0 0;
   max-width: 38rem;

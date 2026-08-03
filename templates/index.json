@@ -107,6 +107,9 @@
       "settings": {
         "eyebrow": "Shop REÚ",
         "heading": "Your daily essentials.",
+        "heading_before": "Your ",
+        "heading_accent": "daily essentials",
+        "heading_after": ".",
         "body": "Meet the REÚ favourites designed to fit smoothly into mornings, workouts, workdays, and everything between.",
         "limit": 6,
         "cta_label": "Shop All Products",
