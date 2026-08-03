@@ -32,47 +32,47 @@
         {%- endif -%}
       </div>
     </div>
-
-    <figure class="daily-formats__banner">
-      <picture>
-        {%- if mobile_img != blank -%}
-          <source
-            media="(max-width: 749px)"
-            srcset="{{ mobile_img | image_url: width: 600 }} 600w, {{ mobile_img | image_url: width: 900 }} 900w, {{ mobile_img | image_url: width: 1200 }} 1200w"
-            sizes="100vw"
-          >
-        {%- else -%}
-          <source
-            media="(max-width: 749px)"
-            srcset="{{ 'reu-formats-banner-mobile.jpg' | asset_url }}"
-            sizes="100vw"
-          >
-        {%- endif -%}
-
-        {%- if desktop_img != blank -%}
-          {{ desktop_img
-            | image_url: width: 2400
-            | image_tag:
-              widths: '900,1400,1800,2400',
-              sizes: 'min(100vw, var(--page-width))',
-              loading: 'lazy',
-              alt: section.settings.image_alt | default: section.settings.highlight
-          }}
-        {%- else -%}
-          <img
-            src="{{ 'reu-formats-banner-desktop.jpg' | asset_url }}"
-            srcset="{{ 'reu-formats-banner-desktop.jpg' | asset_url }} 2560w"
-            sizes="(min-width: 1320px) 1256px, 100vw"
-            width="2560"
-            height="1100"
-            alt="{{ section.settings.image_alt | default: 'REÚ pouches and sachets' | escape }}"
-            loading="lazy"
-            decoding="async"
-          >
-        {%- endif -%}
-      </picture>
-    </figure>
   </div>
+
+  <figure class="daily-formats__banner">
+    <picture>
+      {%- if mobile_img != blank -%}
+        <source
+          media="(max-width: 749px)"
+          srcset="{{ mobile_img | image_url: width: 600 }} 600w, {{ mobile_img | image_url: width: 900 }} 900w, {{ mobile_img | image_url: width: 1200 }} 1200w"
+          sizes="100vw"
+        >
+      {%- else -%}
+        <source
+          media="(max-width: 749px)"
+          srcset="{{ 'reu-formats-banner-mobile.jpg' | asset_url }}"
+          sizes="100vw"
+        >
+      {%- endif -%}
+
+      {%- if desktop_img != blank -%}
+        {{ desktop_img
+          | image_url: width: 2800
+          | image_tag:
+            widths: '900,1400,1800,2400,2800',
+            sizes: '100vw',
+            loading: 'lazy',
+            alt: section.settings.image_alt | default: section.settings.highlight
+        }}
+      {%- else -%}
+        <img
+          src="{{ 'reu-formats-banner-desktop.jpg' | asset_url }}"
+          srcset="{{ 'reu-formats-banner-desktop.jpg' | asset_url }} 2560w"
+          sizes="100vw"
+          width="2560"
+          height="1100"
+          alt="{{ section.settings.image_alt | default: 'REÚ pouches and sachets' | escape }}"
+          loading="lazy"
+          decoding="async"
+        >
+      {%- endif -%}
+    </picture>
+  </figure>
 </section>
 
 {% schema %}

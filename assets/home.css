@@ -441,11 +441,14 @@
 /* ——— Daily formats banner (2 ways) ——— */
 .daily-formats {
   background: #fff;
+  padding-inline: 0;
+  overflow-x: clip;
 }
 .daily-formats__inner {
   display: flex;
   flex-direction: column;
   gap: clamp(1.25rem, 3vw, 1.85rem);
+  margin-bottom: clamp(1.25rem, 3vw, 1.85rem);
 }
 .daily-formats__eyebrow {
   display: inline-flex;
@@ -524,7 +527,7 @@
 .daily-formats__banner {
   margin: 0;
   width: 100%;
-  border-radius: calc(var(--card-radius) + 2px);
+  border-radius: 0;
   overflow: hidden;
   background: var(--color-cream);
   line-height: 0;
@@ -536,12 +539,12 @@
   height: auto;
 }
 .daily-formats__banner img {
+  width: 100%;
+  max-width: none;
+  height: auto;
   object-fit: contain;
   object-position: center;
   image-rendering: auto;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  transform: translateZ(0);
 }
 @media (max-width: 749px) {
   .daily-formats__heading {
@@ -553,9 +556,6 @@
   }
   .daily-formats__body {
     max-width: none;
-  }
-  .daily-formats__banner {
-    border-radius: 1.25rem;
   }
 }
 
