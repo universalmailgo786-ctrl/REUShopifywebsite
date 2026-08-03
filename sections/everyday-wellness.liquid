@@ -1,9 +1,23 @@
 {%- liquid
-  assign collection = section.settings.collection
-  assign products = collection.products
   assign limit = section.settings.limit | default: 12
   assign accent = section.settings.heading_accent | default: 'feeling your best'
   assign bg = section.settings.background_image
+  assign collection = section.settings.collection
+  assign products = collection.products
+
+  if products == blank or products.size == 0
+    assign collection = collections['pouch-collection']
+    assign products = collection.products
+  endif
+
+  if products == blank or products.size == 0
+    assign collection = collections['sachet-collection']
+    assign products = collection.products
+  endif
+
+  if products == blank or products.size == 0
+    assign products = collections.all.products
+  endif
 -%}
 <section
   class="everyday-wellness"
@@ -112,7 +126,6 @@
 {% schema %}
 {
   "name": "Everyday wellness",
-  "tag": "section",
   "class": "section-everyday-wellness",
   "settings": [
     {
