@@ -1,0 +1,60 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hub": {
+      "type": "collections-hub",
+      "settings": {
+        "eyebrow": "SHOP BY COLLECTION",
+        "heading": "One routine. Two ways to enjoy it.",
+        "body": "Keep your daily favourites at home in full-size pouches, take convenient single serves with you, or build a routine with both.",
+        "show_comparison": true,
+        "closing_heading": "Still deciding?",
+        "closing_body": "Tell us what your day looks like and we will recommend a product and format to begin with.",
+        "closing_cta_label": "Find My REÚ Routine",
+        "closing_cta_link": "shopify://pages/find-your-reu",
+        "bg_scheme": "bg-cream"
+      },
+      "blocks": {
+        "pouch": {
+          "type": "collection_card",
+          "settings": {
+            "collection_handle": "pouch-collection",
+            "fallback_asset": "reu-collection-pouch.jpg",
+            "title": "Pouch Collection",
+            "subheading": "Your everyday staple",
+            "text": "Full-size favourites made for a consistent, great-tasting routine at home.",
+            "cta": "Shop Pouches",
+            "link": "shopify://collections/pouch-collection"
+          }
+        },
+        "sachet": {
+          "type": "collection_card",
+          "settings": {
+            "collection_handle": "sachet-collection",
+            "fallback_asset": "reu-collection-sachet.jpg",
+            "title": "Sachet Collection",
+            "subheading": "Wellness, wherever you go",
+            "text": "Convenient single serves for work, travel, gym bags and busy days.",
+            "cta": "Shop Sachets",
+            "link": "shopify://collections/sachet-collection"
+          }
+        }
+      },
+      "block_order": [
+        "pouch",
+        "sachet"
+      ]
+    }
+  },
+  "order": [
+    "hub"
+  ]
+}

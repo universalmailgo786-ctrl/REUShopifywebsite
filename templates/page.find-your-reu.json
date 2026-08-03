@@ -1,0 +1,100 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "quiz": {
+      "type": "quiz",
+      "settings": {
+        "eyebrow": "FIND YOUR REÚ",
+        "heading": "Your routine starts with you.",
+        "intro": "Tell us what you want from your wellness routine. In about 60 seconds, we will recommend a starting product and format based on your answers.",
+        "consent": "This quiz provides general product guidance and is not medical advice. Marketing consent is optional and is not required to see results.",
+        "goal_page_url": "shopify://pages/collections"
+      },
+      "blocks": {
+        "hydration": {
+          "type": "result",
+          "settings": {
+            "goal": "hydration",
+            "primary_handle": "hydration-electrolytes-lemon-lime-pouch",
+            "secondary_handle": "hydration-electrolytes-watermelon-pouch",
+            "explore_link": "shopify://collections/all"
+          }
+        },
+        "beauty": {
+          "type": "result",
+          "settings": {
+            "goal": "beauty",
+            "primary_handle": "collagen-mixed-berry-pouch",
+            "secondary_handle": "daily-wellness-peach-mango-pouch",
+            "explore_link": "shopify://collections/all"
+          }
+        },
+        "wellness": {
+          "type": "result",
+          "settings": {
+            "goal": "wellness",
+            "primary_handle": "daily-wellness-peach-mango-pouch",
+            "secondary_handle": "gummies-mixed-berry-pouch",
+            "explore_link": "shopify://collections/all"
+          }
+        },
+        "greens": {
+          "type": "result",
+          "settings": {
+            "goal": "greens",
+            "primary_handle": "greens-pineapple-pouch",
+            "secondary_handle": "daily-wellness-peach-mango-pouch",
+            "explore_link": "shopify://collections/all"
+          }
+        },
+        "performance": {
+          "type": "result",
+          "settings": {
+            "goal": "performance",
+            "primary_handle": "hydration-electrolytes-lemon-lime-pouch",
+            "secondary_handle": "premium-protein-chocolate-pouch",
+            "explore_link": "shopify://collections/all"
+          }
+        },
+        "weight": {
+          "type": "result",
+          "settings": {
+            "goal": "weight",
+            "primary_handle": "weight-management-pink-lemonade-pouch",
+            "secondary_handle": "hydration-electrolytes-watermelon-pouch",
+            "explore_link": "shopify://collections/all"
+          }
+        },
+        "protein": {
+          "type": "result",
+          "settings": {
+            "goal": "protein",
+            "primary_handle": "premium-protein-chocolate-pouch",
+            "secondary_handle": "hydration-electrolytes-lemon-lime-pouch",
+            "explore_link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "hydration",
+        "beauty",
+        "wellness",
+        "greens",
+        "performance",
+        "weight",
+        "protein"
+      ]
+    }
+  },
+  "order": [
+    "quiz"
+  ]
+}

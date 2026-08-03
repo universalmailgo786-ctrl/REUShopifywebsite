@@ -40,19 +40,20 @@
 
       {%- comment -%} Info column {%- endcomment -%}
       <div class="product__info">
-        {%- comment -%} 3. Title + flavour {%- endcomment -%}
-        <h1 class="h2" style="margin-bottom:.25rem">{{ p.title }}</h1>
-        {%- if mf.flavor != blank -%}<p class="text-muted" style="font-size:1.05rem">{{ mf.flavor }}{% if mf.goal != blank %} · {{ mf.goal }}{% endif %}</p>{%- endif -%}
-
-        {%- comment -%} 4. Verified rating OR honest launch badge {%- endcomment -%}
-        <div style="margin:.75rem 0">
+        {%- comment -%} 3. PRE-ORDER / First release badge before title {%- endcomment -%}
+        <div style="margin:0 0 .65rem">
           {%- if p.metafields.reviews.rating.value != blank -%}
             {%- assign rating = p.metafields.reviews.rating.value -%}
             <span class="badge" aria-label="{{ 'accessibility.star_reviews' | t: rating: rating.rating }}">{% render 'icon', name: 'star' %} {{ rating.rating }} / 5 · {{ p.metafields.reviews.rating_count.value | default: 0 }} reviews</span>
           {%- elsif preorder -%}
             <span class="badge badge--preorder">{{ 'products.product.preorder' | t }}</span>
+            <span class="badge" style="margin-left:.35rem">First release</span>
           {%- endif -%}
         </div>
+
+        {%- comment -%} 4. Title + flavour {%- endcomment -%}
+        <h1 class="h2" style="margin-bottom:.25rem">{{ p.title }}</h1>
+        {%- if mf.flavor != blank -%}<p class="text-muted" style="font-size:1.05rem">{{ mf.flavor }}{% if mf.goal != blank %} · {{ mf.goal }}{% endif %}</p>{%- endif -%}
 
         {%- comment -%} 5. Price + payment timing {%- endcomment -%}
         <div class="product__price">{% render 'price', product: p, variant: current, context: 'product' %}</div>
@@ -108,20 +109,32 @@
             </button>
           </div>
 
-          {%- comment -%} 10. Estimated shipping + cancellation disclosure beside CTA {%- endcomment -%}
-          {%- if preorder -%}{% render 'preorder-notice', product: p %}{%- endif -%}
+          {%- if preorder -%}
+            {% render 'preorder-notice', product: p %}
+            <p class="form-note" style="margin-top:.75rem">This product is available for pre-order and is not ready for immediate shipment. The current estimated shipping window and payment timing are shown before checkout. You may cancel an unshipped pre-order for a full refund by contacting our support team.</p>
+          {%- endif -%}
         </form>
 
-        {%- comment -%} 12. Payment / support reassurance {%- endcomment -%}
+        {%- comment -%} Payment / support reassurance {%- endcomment -%}
         <ul class="reassurance">
           <li>{% render 'icon', name: 'truck' %}<span>{% if mf.preorder_ship_window != blank %}Estimated shipping: {{ mf.preorder_ship_window }}.{% else %}Shipping window shown at checkout.{% endif %}</span></li>
           <li>{% render 'icon', name: 'refresh' %}<span>Cancel a pre-order for a full refund any time before shipment.</span></li>
           <li>{% render 'icon', name: 'shield' %}<span>Secure checkout. Questions? {% if settings.support_email != blank %}<a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>{% else %}Contact our support team.{% endif %}</span></li>
         </ul>
 
-        {%- comment -%} 13–21 Accordions. Only the first opens by default. Empty rows hide cleanly. {%- endcomment -%}
+        <div class="product-day-ritual" style="margin-top:var(--space-lg)">
+          <h2 class="h4">Make it part of your day</h2>
+          {%- if mf.how_to_use != blank or mf.directions != blank -%}
+            <div class="rte" style="margin-top:.5rem">
+              {%- if mf.how_to_use != blank -%}{{ mf.how_to_use | metafield_tag }}{%- else -%}{{ mf.directions | metafield_tag }}{%- endif -%}
+            </div>
+          {%- endif -%}
+          <p class="form-note" style="margin-top:.5rem">Follow the serving size, mixing method, timing and frequency printed on the verified product label. Do not exceed the recommended use.</p>
+        </div>
+
+        {%- comment -%} Accordions. Empty rows hide cleanly. {%- endcomment -%}
         <div class="accordion" data-accordion style="margin-top:var(--space-lg)">
-          {%- assign rows = 'key_benefits:Why you’ll love it,how_to_use:How to Use,ingredients:Ingredients,supplement_facts:Supplement Facts,format_details:Flavour & Format,warnings_allergens:Warnings & Allergens' | split: ',' -%}
+          {%- assign rows = 'key_benefits:Why you’ll love it,benefits:Benefits,how_to_use:How to Use,ingredients:Ingredients,supplement_facts:Supplement Facts,format_details:Flavour & Format,warnings_allergens:Warnings & Allergens' | split: ',' -%}
           {%- for row in rows -%}
             {%- assign parts = row | split: ':' -%}
             {%- assign key = parts[0] -%}

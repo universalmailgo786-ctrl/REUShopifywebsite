@@ -1,0 +1,77 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="section">
+  <div class="wrap wrap--narrow">
+    <div class="section-head">
+      {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+      <h1 class="h2">{{ s.heading }}</h1>
+      {%- if s.body != blank -%}<p class="lede" style="margin-top:.75rem">{{ s.body }}</p>{%- endif -%}
+    </div>
+
+    {%- form 'contact', id: 'ContactForm' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="form-message form-message--success" role="status">{{ s.success_message | default: 'Thank you—your message has been received. A member of the REÚ team will reply using the email address you provided.' }}</p>
+      {%- elsif form.errors -%}
+        <p class="form-message form-message--error" role="alert">{{ s.error_message | default: 'We could not send your message. Check the highlighted fields and try again. If the problem continues, contact us using the support email shown on this page.' }}</p>
+        {{ form.errors | default_errors }}
+      {%- endif -%}
+
+      <div class="grid cols-2" style="gap:1rem">
+        <label class="field"><span>Name</span><input class="input" type="text" name="contact[name]" value="{{ form.name }}" required autocomplete="name"></label>
+        <label class="field"><span>Email</span><input class="input" type="email" name="contact[email]" value="{{ form.email }}" required autocomplete="email"></label>
+      </div>
+      <label class="field"><span>Order number (optional)</span><input class="input" type="text" name="contact[order number]" autocomplete="off"></label>
+      <label class="field"><span>Topic</span>
+        <select class="select" name="contact[topic]" required>
+          {%- assign topics = 'Product question,Pre-order status,Change or cancel order,Shipping,Return or refund,Wholesale,Press or partnership,Other' | split: ',' -%}
+          {%- for t in topics -%}<option value="{{ t }}">{{ t }}</option>{%- endfor -%}
+        </select>
+      </label>
+      <label class="field"><span>Message</span><textarea class="textarea" name="contact[body]" required>{{ form.body }}</textarea></label>
+      <label class="facet-option" style="margin-bottom:1rem"><input type="checkbox" name="contact[consent]" value="I agree to be contacted about my enquiry." required><span>I agree to be contacted about my enquiry and have read the privacy notice.</span></label>
+
+      <p class="notice" style="margin-bottom:1rem">{{ s.privacy_note | default: 'Please do not submit sensitive medical information. Product guidance is general and does not replace professional medical advice.' }}</p>
+      <button type="submit" class="btn btn--lg">Send Message</button>
+    {%- endform -%}
+
+    {%- if s.show_support_details -%}
+      <div class="card" style="padding:var(--space-md);margin-top:var(--space-lg)">
+        <h2 class="h4">Support details</h2>
+        <ul class="stack" style="margin-top:.75rem">
+          {%- if settings.support_email != blank -%}<li>{% render 'icon', name: 'mail' %} <a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a></li>{%- endif -%}
+          {%- if s.hours != blank -%}<li>{% render 'icon', name: 'clock' %} {{ s.hours }}</li>{%- endif -%}
+          {%- if s.response_time != blank -%}<li>{% render 'icon', name: 'refresh' %} Response time: {{ s.response_time }}</li>{%- endif -%}
+        </ul>
+        {%- if request.design_mode and settings.support_email == blank -%}<p class="form-note" style="margin-top:.5rem">Set a support email in Theme settings → Pre-order. Dummy contact details are never shown.</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div style="margin-top:var(--space-lg)">
+      <h2 class="h4">Quick help</h2>
+      <ul class="stack" style="margin-top:.75rem">
+        <li><a class="link-arrow" href="{{ routes.root_url }}policies/shipping-policy">Pre-order and shipping {% render 'icon', name: 'arrow' %}</a></li>
+        <li><a class="link-arrow" href="{{ routes.root_url }}policies/refund-policy">Returns and cancellations {% render 'icon', name: 'arrow' %}</a></li>
+        <li><a class="link-arrow" href="{{ pages.faq.url | default: '/pages/faq' }}">Common questions {% render 'icon', name: 'arrow' %}</a></li>
+        <li><a class="link-arrow" href="{{ pages['find-your-reu'].url | default: pages.quiz.url | default: '/pages/find-your-reu' }}">Find a product {% render 'icon', name: 'arrow' %}</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "CONTACT REÚ" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "We’re here to help." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Questions about products, pre-orders, your routine or an existing order? Send us a message and our team will respond during published support hours." },
+    { "type": "textarea", "id": "privacy_note", "label": "Privacy note", "default": "Please do not submit sensitive medical information. Product guidance is general and does not replace professional medical advice." },
+    { "type": "textarea", "id": "success_message", "label": "Success message", "default": "Thank you—your message has been received. A member of the REÚ team will reply using the email address you provided." },
+    { "type": "textarea", "id": "error_message", "label": "Error message", "default": "We could not send your message. Check the highlighted fields and try again. If the problem continues, contact us using the support email shown on this page." },
+    { "type": "checkbox", "id": "show_support_details", "label": "Show support details", "default": true },
+    { "type": "text", "id": "hours", "label": "Support hours", "info": "Leave blank until confirmed." },
+    { "type": "text", "id": "response_time", "label": "Response time", "info": "Leave blank until confirmed." }
+  ],
+  "presets": [{ "name": "Contact form" }]
+}
+{% endschema %}

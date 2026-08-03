@@ -1,0 +1,138 @@
+<section class="section {{ section.settings.bg_scheme }}">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1 class="h2">{{ section.settings.heading }}</h1>
+      {%- if section.settings.body != blank -%}<p class="lede" style="margin-top:.75rem;max-width:42rem;margin-inline:auto">{{ section.settings.body }}</p>{%- endif -%}
+    </div>
+
+    <div class="grid cols-2 collections-hub__cards">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'collection_card' -%}
+          {%- liquid
+            assign col = block.settings.collection
+            if col == blank and block.settings.collection_handle != blank
+              assign col = collections[block.settings.collection_handle]
+            endif
+            assign href = col.url
+            if href == blank
+              assign href = block.settings.link
+            endif
+            if href == blank
+              assign href = routes.all_products_collection_url
+            endif
+          -%}
+          <article class="format-card" {{ block.shopify_attributes }}>
+            <a class="format-card__media" href="{{ href }}" aria-hidden="true" tabindex="-1">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: widths: '400,600,900', sizes: '(min-width:750px) 45vw, 100vw', loading: 'lazy', alt: block.settings.title | escape }}
+              {%- elsif block.settings.fallback_asset != blank -%}
+                <img src="{{ block.settings.fallback_asset | asset_url }}" width="1800" height="1200" alt="{{ block.settings.title | escape }}" loading="lazy">
+              {%- elsif col.featured_image -%}
+                {{ col.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: col.title | escape }}
+              {%- endif -%}
+            </a>
+            <div class="format-card__body">
+              <h2 class="h3">{{ block.settings.title | default: col.title }}</h2>
+              {%- if block.settings.subheading != blank -%}<p class="eyebrow" style="margin:0">{{ block.settings.subheading }}</p>{%- endif -%}
+              <p class="text-muted">{{ block.settings.text }}</p>
+              <div style="margin-top:auto;padding-top:.75rem"><a class="btn" href="{{ href }}">{{ block.settings.cta }} <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a></div>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_comparison -%}
+      <div class="format-compare" style="margin-top:var(--space-xl)">
+        <div class="section-head section-head--center">
+          <h2 class="h3">{{ section.settings.compare_heading | default: 'Format comparison' }}</h2>
+        </div>
+        <div class="format-compare__table-wrap" role="region" aria-label="Format comparison" tabindex="0">
+          <table class="format-compare__table">
+            <thead>
+              <tr>
+                <th scope="col">Feature</th>
+                <th scope="col">Pouches</th>
+                <th scope="col">Sachets</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Best for</th>
+                <td>A consistent home routine</td>
+                <td>Work, travel, workouts and busy days</td>
+              </tr>
+              <tr>
+                <th scope="row">Format</th>
+                <td>Full-size package</td>
+                <td>Individual single serve</td>
+              </tr>
+              <tr>
+                <th scope="row">Storage</th>
+                <td>Pantry or wellness station</td>
+                <td>Handbag, desk, gym bag or carry-on</td>
+              </tr>
+              <tr>
+                <th scope="row">Choice</th>
+                <td>Available across the REÚ range</td>
+                <td>Available across the REÚ range, subject to confirmed inventory</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="section-head section-head--center" style="margin-top:var(--space-xl)">
+      <h2 class="h3">{{ section.settings.closing_heading | default: 'Still deciding?' }}</h2>
+      {%- if section.settings.closing_body != blank -%}
+        <p class="lede" style="margin-top:.75rem;max-width:40rem;margin-inline:auto">{{ section.settings.closing_body }}</p>
+      {%- endif -%}
+      {%- if section.settings.closing_cta_label != blank -%}
+        <div style="margin-top:1.25rem">
+          <a class="btn" href="{{ section.settings.closing_cta_link | default: pages['find-your-reu'].url | default: '/pages/find-your-reu' }}">{{ section.settings.closing_cta_label }} <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Collections hub",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "SHOP BY COLLECTION" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One routine. Two ways to enjoy it." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Keep your daily favourites at home in full-size pouches, take convenient single serves with you, or build a routine with both." },
+    { "type": "checkbox", "id": "show_comparison", "label": "Show format comparison", "default": true },
+    { "type": "text", "id": "compare_heading", "label": "Comparison heading", "default": "Format comparison" },
+    { "type": "text", "id": "closing_heading", "label": "Closing heading", "default": "Still deciding?" },
+    { "type": "textarea", "id": "closing_body", "label": "Closing body", "default": "Tell us what your day looks like and we will recommend a product and format to begin with." },
+    { "type": "text", "id": "closing_cta_label", "label": "Closing CTA", "default": "Find My REÚ Routine" },
+    { "type": "url", "id": "closing_cta_link", "label": "Closing CTA link" },
+    { "type": "select", "id": "bg_scheme", "label": "Background", "options": [
+      { "value": "", "label": "White" }, { "value": "bg-cream", "label": "Cream" }, { "value": "bg-blush", "label": "Blush" }
+    ], "default": "bg-cream" }
+  ],
+  "blocks": [
+    { "type": "collection_card", "name": "Collection card", "settings": [
+      { "type": "collection", "id": "collection", "label": "Collection" },
+      { "type": "text", "id": "collection_handle", "label": "Collection handle fallback", "info": "e.g. pouches, pouch-collection, sachets, sachet-collection" },
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Pouch Collection" },
+      { "type": "text", "id": "subheading", "label": "Subheading", "default": "Your everyday staple" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "Full-size favourites made for a consistent, great-tasting routine at home." },
+      { "type": "text", "id": "cta", "label": "CTA", "default": "Shop Pouches" },
+      { "type": "url", "id": "link", "label": "Fallback link" }
+    ]}
+  ],
+  "presets": [{
+    "name": "Collections hub",
+    "blocks": [
+      { "type": "collection_card", "settings": { "collection_handle": "pouch-collection", "fallback_asset": "reu-collection-pouch.jpg", "title": "Pouch Collection", "subheading": "Your everyday staple", "text": "Full-size favourites made for a consistent, great-tasting routine at home.", "cta": "Shop Pouches", "link": "/collections/pouch-collection" } },
+      { "type": "collection_card", "settings": { "collection_handle": "sachet-collection", "fallback_asset": "reu-collection-sachet.jpg", "title": "Sachet Collection", "subheading": "Wellness, wherever you go", "text": "Convenient single serves for work, travel, gym bags and busy days.", "cta": "Shop Sachets", "link": "/collections/sachet-collection" } }
+    ]
+  }]
+}
+{% endschema %}

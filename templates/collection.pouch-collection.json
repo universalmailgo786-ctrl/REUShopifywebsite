@@ -12,13 +12,12 @@
     "main": {
       "type": "main-collection",
       "settings": {
-        "show_discovery": true,
-        "show_quiz_strip": true,
-        "eyebrow": "SHOP REÚ",
-        "heading": "Wellness that fits your day.",
-        "body": "Explore great-tasting daily wellness products created for women. Shop by goal, flavour or format and find the routine that feels right for you.",
-        "grid_heading": "Find your everyday essentials",
-        "grid_body": "Choose the goal, flavour and format that fit naturally into your routine."
+        "eyebrow": "POUCH COLLECTION",
+        "heading": "Your everyday ritual, ready when you are.",
+        "body": "Explore full-size REÚ favourites created for a consistent, great-tasting wellness routine at home.",
+        "grid_heading": "Find your pouch",
+        "grid_body": "Start with your goal, then choose the flavour you will look forward to.",
+        "show_benefits": true
       }
     }
   },

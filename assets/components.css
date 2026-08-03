@@ -245,3 +245,56 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
 .feature-row { display: grid; gap: var(--space-md); text-align: center; }
 .feature-row .icon-circle { width: 52px; height: 52px; border-radius: var(--radius-pill); background: var(--color-lilac); color: var(--color-green); display: inline-flex; align-items: center; justify-content: center; margin-bottom: .75rem; }
 .feature-row .icon-circle .icon { width: 24px; height: 24px; }
+
+/* Remaining-pages helpers */
+.collection-hero { margin-bottom: var(--space-md); }
+.discovery-bar { margin: 1.25rem 0 1.75rem; padding: 1rem 1.1rem; background: var(--color-blush, #F4E2DB); border-radius: var(--card-radius, 16px); }
+.discovery-bar__prompt { margin: 0 0 .75rem; font-family: var(--font-body); font-weight: 500; color: var(--color-green, #223829); }
+.discovery-bar__chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+.collection-benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem 1rem;
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+}
+@media (min-width: 750px) {
+  .collection-benefits { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.collection-benefits li {
+  margin: 0;
+  padding: .85rem 1rem;
+  background: var(--color-cream, #E3E1D5);
+  border-radius: 12px;
+  color: var(--color-green, #223829);
+  font-size: .92rem;
+  line-height: 1.35;
+}
+.format-compare__table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.format-compare__table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid var(--color-line, #d8ddd6);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.format-compare__table th,
+.format-compare__table td {
+  padding: .9rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-line, #d8ddd6);
+  vertical-align: top;
+  color: var(--color-text, #2C3A30);
+  font-size: .95rem;
+}
+.format-compare__table thead th {
+  background: var(--color-cream, #E3E1D5);
+  color: var(--color-green, #223829);
+  font-weight: 600;
+}
+.format-compare__table tbody th { font-weight: 600; color: var(--color-green, #223829); width: 22%; }
+.quiz__why { padding-left: 1.1rem; color: var(--color-text, #2C3A30); }
+.quiz__why li { margin: .35rem 0; }

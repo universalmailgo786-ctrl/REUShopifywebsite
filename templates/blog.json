@@ -10,24 +10,11 @@
 {
   "sections": {
     "main": {
-      "type": "main-product",
+      "type": "main-blog",
       "settings": {}
-    },
-    "reviews": {
-      "type": "app-reviews",
-      "settings": {
-        "heading": "Reviews",
-        "bg_scheme": ""
-      }
-    },
-    "recommendations": {
-      "type": "product-recommendations",
-      "settings": {
-        "heading": "Complete your routine",
-        "limit": 4,
-        "bg_scheme": "bg-cream"
-      }
     }
   },
-  "order": ["main", "reviews", "recommendations"]
+  "order": [
+    "main"
+  ]
 }

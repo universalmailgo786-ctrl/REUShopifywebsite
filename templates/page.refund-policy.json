@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Policies",
+        "heading": "Refund & Cancellation Policy",
+        "body": "<p>Last updated: [EDITABLE — DATE]. Complete merchant details and obtain jurisdiction-specific legal review before launch.</p>",
+        "bg_scheme": "bg-cream",
+        "use_h1": true
+      }
+    },
+    "body": {
+      "type": "rich-text",
+      "settings": {
+        "narrow": true,
+        "heading": "",
+        "content": "<h2>Pre-order cancellations</h2>\n<p>You may cancel an unshipped pre-order for a full refund by contacting REÚ with your order number. Once an order has shipped, the return rules below apply.</p>\n<h2>Returns</h2>\n<p>Eligible return requests must be made within [EDITABLE — RETURN WINDOW] of delivery. Products must be unopened, unused, in their original packaging and accompanied by proof of purchase. Because supplements are ingestible goods, opened products cannot be returned unless they are defective, damaged, incorrect or otherwise covered by applicable law.</p>\n<h2>Non-returnable items</h2>\n<p>Opened supplements, gift cards, final-sale items where permitted and items outside the published return period are not eligible unless required by law.</p>\n<h2>Damaged or incorrect orders</h2>\n<p>Contact support within [EDITABLE — CLAIM PERIOD] and include your order number and clear photos of the product, packaging and shipping label. We will review the issue and provide an appropriate replacement or refund.</p>\n<h2>Refund timing</h2>\n<p>Approved refunds are returned to the original payment method. Bank and card-processing times vary. Shipping charges are refunded only where required by law or where the error is ours.</p>\n<h2>Return shipping</h2>\n<p>Do not send products without authorisation. The support team will confirm eligibility, the correct return destination and whether a return label is provided. [EDITABLE — WHO PAYS RETURN SHIPPING].</p>\n<h2>How to request help</h2>\n<p>Use the Contact page and select <strong>Return or refund</strong>. Include the order number and reason for the request. Support email: [EDITABLE — SUPPORT EMAIL].</p>"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "body"
+  ]
+}

@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Policies",
+        "heading": "Privacy Policy",
+        "body": "<p>Last updated: [EDITABLE — DATE]. Complete merchant details and obtain jurisdiction-specific legal review before launch.</p>",
+        "bg_scheme": "bg-cream",
+        "use_h1": true
+      }
+    },
+    "body": {
+      "type": "rich-text",
+      "settings": {
+        "narrow": true,
+        "heading": "",
+        "content": "<p>REÚ respects your privacy. This policy explains what information we collect, why we use it, when we share it and the choices available to you when you browse our website, place an order, take our quiz or contact us.</p>\n<h2>Information we collect</h2>\n<p>We may collect information you provide directly, including your name, contact details, billing and shipping information, order details, account information, customer-support messages, product reviews, newsletter preferences and quiz responses. Payment-card details are processed by Shopify and authorised payment providers; REÚ does not receive complete card numbers.</p>\n<p>We may also collect device and usage information such as IP address, browser, device type, pages viewed, referring pages, interactions, approximate location and cookie identifiers.</p>\n<h2>How we use information</h2>\n<p>We use information to operate the store; process and fulfil orders; manage pre-orders; provide customer support; prevent fraud; communicate order and production updates; improve products and site performance; provide quiz recommendations; comply with legal obligations; and send marketing only where permitted.</p>\n<h2>Product recommendation quiz</h2>\n<p>Quiz responses are used to generate general product guidance. The quiz is not medical advice and should not be used to determine medical suitability. Marketing consent is separate and optional. Sensitive health responses must not be used for targeted advertising.</p>\n<h2>Cookies and analytics</h2>\n<p>We may use necessary cookies for store operation and, with consent where required, analytics and advertising technologies. Visitors can manage non-essential cookies through the site’s consent controls and browser settings. The final policy must name the actual analytics, advertising, review, chat and email tools installed at launch: [EDITABLE — APP / PIXEL LIST].</p>\n<h2>Sharing information</h2>\n<p>We may share information with Shopify, payment providers, fulfilment and shipping partners, customer-support tools, email providers, review platforms, analytics providers, professional advisers and authorities where required. Providers receive only the information reasonably required for their services.</p>\n<h2>Retention and security</h2>\n<p>We retain information for as long as needed for the purposes described, legal compliance, dispute resolution and legitimate business records. We use reasonable safeguards, but no online system can guarantee absolute security.</p>\n<h2>Your choices and rights</h2>\n<p>Depending on your location, you may have rights to access, correct, delete, restrict or object to certain processing, receive a copy of your information, withdraw consent or appeal a decision. You may unsubscribe from marketing at any time using the link in an email.</p>\n<h2>Children</h2>\n<p>This store is not directed to children. The merchant must publish the applicable minimum purchase age for each sales market: [EDITABLE — MINIMUM AGE].</p>\n<h2>International transfers</h2>\n<p>Shopify and service providers may process information in countries other than your own. Appropriate safeguards will be used where required by law.</p>\n<h2>Changes and contact</h2>\n<p>We may update this policy when our practices, services or legal obligations change. The current version will display its effective date. Privacy requests can be submitted through the Contact page or [EDITABLE — PRIVACY EMAIL]. Legal entity and address: [EDITABLE — LEGAL NAME / ADDRESS / JURISDICTION].</p>"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "body"
+  ]
+}

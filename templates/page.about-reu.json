@@ -1,0 +1,121 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "OUR STORY",
+        "heading": "Wellness made for the way women really live.",
+        "body": "<p>REÚ was created to make daily wellness feel simpler, more enjoyable and easier to make your own.</p>",
+        "cta_label": "Find My Routine",
+        "cta_link": "shopify://pages/find-your-reu",
+        "bg_scheme": "bg-blush"
+      }
+    },
+    "story": {
+      "type": "rich-text",
+      "settings": {
+        "narrow": true,
+        "heading": "Our story",
+        "content": "<p>Wellness can feel crowded with complicated routines, unclear promises and products that are difficult to sustain. REÚ began with a more thoughtful idea: create high-quality, great-tasting supplements for women and present them through a modern experience built on clarity and confidence.</p><p>We consider every part of the journey—from formula and flavour to packaging and guidance—to help wellness fit more naturally into everyday life. Whether your focus is hydration, beauty, greens, performance, protein or a more consistent routine, REÚ is here to help you begin with intention and keep moving in a way that feels like you.</p>"
+      }
+    },
+    "mission": {
+      "type": "rich-text",
+      "settings": {
+        "narrow": true,
+        "heading": "Our mission",
+        "content": "<p>To empower women to feel their best every day by making high-quality wellness simple, enjoyable and effective.</p>"
+      }
+    },
+    "values": {
+      "type": "values-grid",
+      "settings": {
+        "eyebrow": "Our values",
+        "heading": "What guides REÚ"
+      },
+      "blocks": {
+        "v1": {
+          "type": "value",
+          "settings": {
+            "title": "Quality",
+            "text": "We choose products and partners with care and publish only verified product information."
+          }
+        },
+        "v2": {
+          "type": "value",
+          "settings": {
+            "title": "Transparency",
+            "text": "We make ingredients, directions, policies and expectations easy to understand."
+          }
+        },
+        "v3": {
+          "type": "value",
+          "settings": {
+            "title": "Innovation",
+            "text": "We look for smarter, more enjoyable ways to support modern routines."
+          }
+        },
+        "v4": {
+          "type": "value",
+          "settings": {
+            "title": "Simplicity",
+            "text": "We remove unnecessary friction from choosing, using and reordering wellness products."
+          }
+        },
+        "v5": {
+          "type": "value",
+          "settings": {
+            "title": "Empowerment",
+            "text": "We offer guidance that supports women’s choices without pressure or unrealistic promises."
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5"
+      ]
+    },
+    "standard": {
+      "type": "rich-text",
+      "settings": {
+        "narrow": true,
+        "heading": "What belongs in your routine should never be a mystery.",
+        "content": "<p>Confidence starts with clarity. Every product page clearly explains what is inside, how to use it and what to expect—using supplier-verified information only.</p><ul><li>Clearly listed ingredients</li><li>Easy-to-follow directions</li><li>Transparent product information</li><li>Thoughtfully created formats</li><li>Great-tasting options</li><li>Designed for everyday routines</li></ul>"
+      }
+    },
+    "closing": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Your body. Your goals. Your REÚ.",
+        "body": "<p>Wellness is personal. Your routine should be too.</p>",
+        "cta_label": "Find My Routine",
+        "cta_link": "shopify://pages/find-your-reu",
+        "cta2_label": "Shop All Products",
+        "cta2_link": "shopify://collections/all",
+        "bg_scheme": "bg-cream",
+        "use_h1": false
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "story",
+    "mission",
+    "values",
+    "standard",
+    "closing"
+  ]
+}

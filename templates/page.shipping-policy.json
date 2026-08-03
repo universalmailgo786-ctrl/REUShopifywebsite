@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Policies",
+        "heading": "Shipping & Pre-Order Policy",
+        "body": "<p>Last updated: [EDITABLE — DATE]. Complete merchant details and obtain jurisdiction-specific legal review before launch.</p>",
+        "bg_scheme": "bg-cream",
+        "use_h1": true
+      }
+    },
+    "body": {
+      "type": "rich-text",
+      "settings": {
+        "narrow": true,
+        "heading": "",
+        "content": "<h2>Pre-order status</h2>\n<p>Products marked PRE-ORDER are not ready for immediate shipment. Placing a pre-order reserves products from an upcoming production release.</p>\n<h2>Estimated shipping window</h2>\n<p>The current estimated shipping window must be displayed on every product page, in the cart, before checkout and in the order confirmation. It is an estimate based on information from production and fulfilment partners and is not a guaranteed delivery date. Current window: [EDITABLE — SHIP WINDOW].</p>\n<h2>Payment</h2>\n<p>[EDITABLE — PAYMENT MODEL: full amount / deposit / payment on fulfilment]. The configured payment timing appears clearly before the customer confirms the order.</p>\n<h2>Updates and delays</h2>\n<p>We send order and production updates to the email address used at checkout. If the estimated shipping window changes, we will provide a revised estimate and explain the option to continue waiting or cancel the unshipped order for a prompt full refund.</p>\n<h2>Address changes</h2>\n<p>Contact support as soon as possible. Address changes cannot be guaranteed after an order enters fulfilment.</p>\n<h2>Split shipments</h2>\n<p>[EDITABLE — SPLIT SHIPMENT RULE for pre-order and in-stock items]. This rule is also repeated in the cart.</p>\n<h2>Shipping destinations and rates</h2>\n<p>Available destinations, services and prices appear at checkout. Customers are responsible for providing a complete deliverable address. Destinations: [EDITABLE — COUNTRIES / REGIONS].</p>\n<h2>Tracking</h2>\n<p>Tracking information is emailed after shipment. Carrier scans may take time to appear after a label is created.</p>\n<h2>International duties</h2>\n<p>[EDITABLE — DUTIES / TAXES RULE].</p>\n<h2>Contact</h2>\n<p>Questions about shipping or pre-orders can be sent through the Contact page.</p>"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "body"
+  ]
+}

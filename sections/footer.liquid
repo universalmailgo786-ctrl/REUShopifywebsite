@@ -47,10 +47,10 @@
             <a href="{{ link.url }}">{{ link.title }}</a>
           {%- endfor -%}
         {%- else -%}
-          <a href="{{ routes.root_url }}pages/about-us">About REÚ</a>
-          <a href="{{ routes.root_url }}blogs/news">The REÚ Journal</a>
-          <a href="{{ routes.root_url }}pages/faq">FAQs</a>
-          <a href="{{ routes.root_url }}pages/contact">Contact us</a>
+          <a href="{{ pages['about-reu'].url | default: pages.about.url | default: '/pages/about-reu' }}">About REÚ</a>
+          <a href="{{ blogs.journal.url | default: blogs.news.url | default: '/blogs/journal' }}">The REÚ Journal</a>
+          <a href="{{ pages.faq.url | default: '/pages/faq' }}">FAQs</a>
+          <a href="{{ pages.contact.url | default: '/pages/contact' }}">Contact us</a>
         {%- endif -%}
       </nav>
 
@@ -65,9 +65,9 @@
           {%- endfor -%}
         {%- else -%}
           <a href="{{ routes.all_products_collection_url }}">Shop All</a>
-          <a href="{{ routes.collections_url }}/pouch-collection">Pouch Collection</a>
-          <a href="{{ routes.collections_url }}/sachet-collection">Sachet Collection</a>
-          <a href="{{ routes.root_url }}pages/quiz">Take the Quiz</a>
+          <a href="{{ collections.pouches.url | default: collections['pouch-collection'].url | default: '/collections/pouches' }}">Pouch Collection</a>
+          <a href="{{ collections.sachets.url | default: collections['sachet-collection'].url | default: '/collections/sachets' }}">Sachet Collection</a>
+          <a href="{{ pages['find-your-reu'].url | default: pages.quiz.url | default: '/pages/find-your-reu' }}">Take the Quiz</a>
         {%- endif -%}
       </nav>
     </div>
@@ -100,8 +100,10 @@
 
       <nav class="site-footer__legal" aria-label="Legal">
         <a href="{{ routes.root_url }}policies/privacy-policy">Privacy Policy</a>
-        <a href="{{ routes.root_url }}pages/contact">Contact</a>
+        <a href="{{ routes.root_url }}policies/refund-policy">Refunds</a>
+        <a href="{{ routes.root_url }}policies/shipping-policy">Shipping</a>
         <a href="{{ routes.root_url }}policies/terms-of-service">Terms and Conditions</a>
+        <a href="{{ pages.contact.url | default: '/pages/contact' }}">Contact</a>
       </nav>
 
       <a class="site-footer__totop" href="#MainContent" aria-label="Back to top">

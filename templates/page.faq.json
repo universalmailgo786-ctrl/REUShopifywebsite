@@ -1,0 +1,207 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "QUESTIONS, ANSWERED",
+        "heading": "Clear information before you choose.",
+        "body": "<p>Browse product, pre-order, shipping and routine questions or contact us if you need more help.</p>",
+        "bg_scheme": "bg-blush"
+      }
+    },
+    "faq": {
+      "type": "page-faq",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Frequently asked questions",
+        "body": "",
+        "center": false,
+        "show_categories": true,
+        "faq_schema": true,
+        "bg_scheme": ""
+      },
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "category": "Products and routines",
+            "question": "What is REÚ?",
+            "answer": "<p>REÚ is a premium wellness supplement brand created for women. Our products are designed to make everyday wellness simple, enjoyable and easier to fit into real life.</p>"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "category": "Products and routines",
+            "question": "How do I choose the right product?",
+            "answer": "<p>Start with your main wellness goal, browse the Shop, or take our Product Recommendation Quiz for a guided starting point.</p>"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "category": "Products and routines",
+            "question": "What is the difference between pouches and sachets?",
+            "answer": "<p>Pouches are designed for a consistent at-home routine. Sachets provide convenient single serves for work, travel, workouts and busy days. Confirm serving equivalence and directions on each product page.</p>"
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "category": "Products and routines",
+            "question": "How should I use my product?",
+            "answer": "<p>Always follow the directions shown on the verified product label and product page. Do not exceed the recommended serving.</p>"
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "category": "Products and routines",
+            "question": "Where can I find ingredients and allergens?",
+            "answer": "<p>Every published product page includes supplier-verified ingredients, Supplement Facts, allergen information, directions and warnings.</p>"
+          }
+        },
+        "q6": {
+          "type": "qa",
+          "settings": {
+            "category": "Products and routines",
+            "question": "Can I use more than one REÚ product?",
+            "answer": "<p>Suitability depends on the verified ingredients and your circumstances. Compare labels and speak with a qualified healthcare professional if you take medication, have a health condition or are unsure.</p>"
+          }
+        },
+        "q7": {
+          "type": "qa",
+          "settings": {
+            "category": "Products and routines",
+            "question": "Are REÚ products suitable during pregnancy or nursing?",
+            "answer": "<p>Speak with a qualified healthcare professional before using any supplement during pregnancy or while nursing.</p>"
+          }
+        },
+        "q8": {
+          "type": "qa",
+          "settings": {
+            "category": "Products and routines",
+            "question": "Are products vegan, gluten-free or free from added sugar?",
+            "answer": "<p>Dietary attributes vary by product and appear on the product page only when supported by supplier documentation.</p>"
+          }
+        },
+        "q9": {
+          "type": "qa",
+          "settings": {
+            "category": "Pre-orders and payment",
+            "question": "Are products currently in stock?",
+            "answer": "<p>Products marked PRE-ORDER are not ready for immediate shipment. Their current estimated shipping window is shown on the product page and before checkout.</p>"
+          }
+        },
+        "q10": {
+          "type": "qa",
+          "settings": {
+            "category": "Pre-orders and payment",
+            "question": "When will pre-orders ship?",
+            "answer": "<p>The latest estimated shipping window appears on every pre-order product page and in the Shipping &amp; Pre-Order Policy. We will email customers if that estimate changes.</p>"
+          }
+        },
+        "q11": {
+          "type": "qa",
+          "settings": {
+            "category": "Pre-orders and payment",
+            "question": "When will I be charged?",
+            "answer": "<p>The payment timing is displayed clearly before purchase and must match the configured Shopify pre-order and payment settings.</p>"
+          }
+        },
+        "q12": {
+          "type": "qa",
+          "settings": {
+            "category": "Pre-orders and payment",
+            "question": "Can I cancel a pre-order?",
+            "answer": "<p>Yes. You may cancel an unshipped pre-order for a full refund by contacting support with your order number.</p>"
+          }
+        },
+        "q13": {
+          "type": "qa",
+          "settings": {
+            "category": "Pre-orders and payment",
+            "question": "What happens if production is delayed?",
+            "answer": "<p>We will send an update with a revised estimate and explain your option to continue waiting or cancel the unshipped order for a prompt full refund.</p>"
+          }
+        },
+        "q14": {
+          "type": "qa",
+          "settings": {
+            "category": "Shipping, returns and support",
+            "question": "Can pre-order and in-stock products be purchased together?",
+            "answer": "<p>The final rule depends on the configured fulfilment workflow and is published in the cart and Shipping Policy before launch.</p>"
+          }
+        },
+        "q15": {
+          "type": "qa",
+          "settings": {
+            "category": "Shipping, returns and support",
+            "question": "How can I track my order?",
+            "answer": "<p>Once your order ships, we will email tracking details to the address used at checkout.</p>"
+          }
+        },
+        "q16": {
+          "type": "qa",
+          "settings": {
+            "category": "Shipping, returns and support",
+            "question": "What if my order is damaged or incorrect?",
+            "answer": "<p>Contact support within the published claim period with your order number and clear photos. We will review the issue and provide an appropriate replacement or refund.</p>"
+          }
+        },
+        "q17": {
+          "type": "qa",
+          "settings": {
+            "category": "Shipping, returns and support",
+            "question": "How do I contact REÚ?",
+            "answer": "<p>Use the Contact page or the verified support email shown in the footer.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8",
+        "q9",
+        "q10",
+        "q11",
+        "q12",
+        "q13",
+        "q14",
+        "q15",
+        "q16",
+        "q17"
+      ]
+    },
+    "cta": {
+      "type": "page-hero",
+      "settings": {
+        "heading": "Still unsure?",
+        "body": "<p>Find a starting point that fits your day.</p>",
+        "cta_label": "Find My Routine",
+        "cta_link": "shopify://pages/find-your-reu",
+        "bg_scheme": "bg-cream",
+        "use_h1": false
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "faq",
+    "cta"
+  ]
+}
