@@ -1,0 +1,180 @@
+{%- liquid
+  assign collection = section.settings.collection
+  assign products = collection.products
+  assign limit = section.settings.limit | default: 12
+  assign accent = section.settings.heading_accent | default: 'feeling your best'
+  assign bg = section.settings.background_image
+-%}
+<section
+  class="everyday-wellness"
+  data-wellness-carousel
+  aria-labelledby="EverydayWellnessHeading-{{ section.id }}"
+>
+  <div class="everyday-wellness__media" aria-hidden="true">
+    {%- if bg != blank -%}
+      {{ bg
+        | image_url: width: 2800
+        | image_tag:
+          widths: '900,1400,2000,2800',
+          sizes: '100vw',
+          loading: 'lazy',
+          alt: ''
+      }}
+    {%- else -%}
+      <img
+        src="{{ 'reu-everyday-wellness-bg.jpg' | asset_url }}"
+        width="2560"
+        height="1105"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      >
+    {%- endif -%}
+  </div>
+  <div class="everyday-wellness__overlay" aria-hidden="true"></div>
+
+  <div class="everyday-wellness__content">
+    <div class="wrap everyday-wellness__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="everyday-wellness__eyebrow">
+          {%- if section.settings.show_sparkle -%}
+            <span class="everyday-wellness__sparkle" aria-hidden="true">{% render 'icon', name: 'sparkle' %}</span>
+          {%- endif -%}
+          <span>{{ section.settings.eyebrow }}</span>
+        </p>
+      {%- endif -%}
+      <h2 class="everyday-wellness__heading" id="EverydayWellnessHeading-{{ section.id }}">
+        {%- if section.settings.heading_before != blank -%}{{ section.settings.heading_before }}{%- endif -%}
+        {%- if accent != blank -%}<em class="everyday-wellness__accent">{{ accent }}</em>{%- endif -%}
+        {%- if section.settings.heading_after != blank -%}{{ section.settings.heading_after }}{%- endif -%}
+      </h2>
+    </div>
+
+    <div class="everyday-wellness__carousel wrap">
+      <button
+        type="button"
+        class="everyday-wellness__nav everyday-wellness__nav--prev"
+        data-wellness-prev
+        aria-label="Previous products"
+      >
+        {% render 'icon', name: 'arrow-left' %}
+      </button>
+
+      <div class="everyday-wellness__track" data-wellness-track tabindex="0" role="list">
+        {%- if products != blank and products.size > 0 -%}
+          {%- for product in products limit: limit -%}
+            <article class="everyday-wellness__card" role="listitem">
+              <a class="everyday-wellness__card-link" href="{{ product.url }}">
+                <div class="everyday-wellness__card-media">
+                  {%- if product.featured_media -%}
+                    {{ product.featured_media
+                      | image_url: width: 800
+                      | image_tag:
+                        widths: '320,480,640,800',
+                        sizes: '(min-width: 990px) 18vw, (min-width: 750px) 28vw, 70vw',
+                        loading: 'lazy',
+                        alt: product.title
+                    }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'everyday-wellness__placeholder' }}
+                  {%- endif -%}
+                </div>
+                <div class="everyday-wellness__card-copy">
+                  <h3 class="everyday-wellness__card-title">{{ product.title }}</h3>
+                  <p class="everyday-wellness__card-price">{{ product.price | money }}</p>
+                </div>
+              </a>
+              <a class="btn btn--on-dark everyday-wellness__card-btn" href="{{ product.url }}">
+                <span>{{ section.settings.button_label | default: 'Pre-Order' }}</span>
+                <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span>
+              </a>
+            </article>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="everyday-wellness__empty" role="listitem">
+            <p>Select a collection with products published to the Online Store.</p>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <button
+        type="button"
+        class="everyday-wellness__nav everyday-wellness__nav--next"
+        data-wellness-next
+        aria-label="Next products"
+      >
+        {% render 'icon', name: 'arrow' %}
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Everyday wellness",
+  "tag": "section",
+  "class": "section-everyday-wellness",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background lifestyle image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sparkle",
+      "label": "Show sparkle in eyebrow",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Everyday wellness"
+    },
+    {
+      "type": "text",
+      "id": "heading_before",
+      "label": "Heading before accent",
+      "default": "Discover products for "
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Accent phrase (italic)",
+      "default": "feeling your best"
+    },
+    {
+      "type": "text",
+      "id": "heading_after",
+      "label": "Heading after accent",
+      "default": ""
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Product collection"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 4,
+      "max": 24,
+      "step": 1,
+      "label": "Max products",
+      "default": 12
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Product button label",
+      "default": "Pre-Order"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Everyday wellness"
+    }
+  ]
+}
+{% endschema %}

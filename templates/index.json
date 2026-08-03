@@ -65,6 +65,19 @@
       },
       "block_order": ["g1", "g2"]
     },
+    "everyday_wellness": {
+      "type": "everyday-wellness",
+      "settings": {
+        "show_sparkle": true,
+        "eyebrow": "Everyday wellness",
+        "heading_before": "Discover products for ",
+        "heading_accent": "feeling your best",
+        "heading_after": "",
+        "collection": "pouch-collection",
+        "limit": 12,
+        "button_label": "Pre-Order"
+      }
+    },
     "routine": {
       "type": "routine-steps",
       "settings": {
@@ -231,6 +244,7 @@
     "hero",
     "brand_intro",
     "goals",
+    "everyday_wellness",
     "routine",
     "standards",
     "featured",

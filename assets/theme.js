@@ -335,6 +335,113 @@
     });
   }
 
+  /* -------------------- everyday wellness carousel -------------------- */
+  function initWellnessCarousel(ctx) {
+    $all('[data-wellness-carousel]', ctx || document).forEach(function (root) {
+      if (root.getAttribute('data-wellness-ready') === '1') return;
+      var track = root.querySelector('[data-wellness-track]');
+      var prev = root.querySelector('[data-wellness-prev]');
+      var next = root.querySelector('[data-wellness-next]');
+      var carousel = root.querySelector('.everyday-wellness__carousel');
+      if (!track || !prev || !next) return;
+      root.setAttribute('data-wellness-ready', '1');
+
+      var autoplayMs = 4500;
+      var autoTimer = null;
+      var paused = false;
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function cardStep() {
+        var card = track.querySelector('.everyday-wellness__card');
+        if (!card) return track.clientWidth * 0.8;
+        return card.getBoundingClientRect().width;
+      }
+
+      function maxScroll() {
+        return Math.max(0, track.scrollWidth - track.clientWidth);
+      }
+
+      function syncButtons() {
+        var max = maxScroll() - 2;
+        var atStart = track.scrollLeft <= 2;
+        var atEnd = track.scrollLeft >= max;
+        prev.disabled = atStart;
+        next.disabled = atEnd;
+        prev.setAttribute('aria-disabled', atStart ? 'true' : 'false');
+        next.setAttribute('aria-disabled', atEnd ? 'true' : 'false');
+      }
+
+      function go(dir, behavior) {
+        var step = cardStep();
+        var max = maxScroll();
+        if (dir > 0 && track.scrollLeft >= max - 2) {
+          track.scrollTo({ left: 0, behavior: behavior || 'smooth' });
+        } else if (dir < 0 && track.scrollLeft <= 2) {
+          track.scrollTo({ left: max, behavior: behavior || 'smooth' });
+        } else {
+          track.scrollBy({ left: dir * step, behavior: behavior || 'smooth' });
+        }
+      }
+
+      function stopAutoplay() {
+        if (autoTimer) {
+          window.clearInterval(autoTimer);
+          autoTimer = null;
+        }
+      }
+
+      function startAutoplay() {
+        stopAutoplay();
+        if (reduceMotion || paused || maxScroll() <= 2) return;
+        autoTimer = window.setInterval(function () {
+          if (paused) return;
+          go(1, 'smooth');
+        }, autoplayMs);
+      }
+
+      prev.addEventListener('click', function () {
+        go(-1, 'smooth');
+        startAutoplay();
+      });
+      next.addEventListener('click', function () {
+        go(1, 'smooth');
+        startAutoplay();
+      });
+
+      if (carousel) {
+        carousel.addEventListener('mouseenter', function () {
+          paused = true;
+          stopAutoplay();
+        });
+        carousel.addEventListener('mouseleave', function () {
+          paused = false;
+          startAutoplay();
+        });
+      }
+
+      track.addEventListener('scroll', syncButtons, { passive: true });
+      track.addEventListener('pointerdown', function () {
+        paused = true;
+        stopAutoplay();
+      });
+      track.addEventListener('pointerup', function () {
+        paused = false;
+        startAutoplay();
+      });
+      window.addEventListener('resize', function () {
+        syncButtons();
+        startAutoplay();
+      });
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) stopAutoplay();
+        else startAutoplay();
+      });
+
+      syncButtons();
+      startAutoplay();
+    });
+  }
+
   /* -------------------- transparent header on homepage -------------------- */
   function initHeaderScroll() {
     var header = $('[data-site-header]');
@@ -385,6 +492,7 @@
     initHeaderScroll();
     initMediaBanner(ctx);
     initGoalsCarousel(ctx);
+    initWellnessCarousel(ctx);
   }
   document.addEventListener('DOMContentLoaded', function () { initAll(document); });
 

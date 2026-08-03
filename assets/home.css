@@ -470,6 +470,280 @@
   image-rendering: auto;
 }
 
+/* ——— Everyday wellness product showcase ——— */
+.everyday-wellness {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  padding-block: clamp(2.75rem, 7vw, 5rem) clamp(2.5rem, 6vw, 4.25rem);
+  min-height: clamp(34rem, 70vw, 42rem);
+}
+.everyday-wellness__media {
+  position: absolute;
+  inset: 0;
+}
+.everyday-wellness__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center right;
+}
+.everyday-wellness__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      100deg,
+      color-mix(in srgb, var(--color-green) 88%, #000) 0%,
+      color-mix(in srgb, var(--color-green) 72%, transparent) 42%,
+      color-mix(in srgb, var(--color-green) 55%, transparent) 100%
+    ),
+    linear-gradient(
+      to top,
+      color-mix(in srgb, var(--color-green) 92%, #000) 0%,
+      color-mix(in srgb, var(--color-green) 35%, transparent) 42%,
+      transparent 70%
+    );
+}
+.everyday-wellness__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 5vw, 3.25rem);
+}
+.everyday-wellness__head {
+  max-width: 40rem;
+}
+.everyday-wellness__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin: 0 0 .85rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(.68rem, 1vw, .78rem);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, #fff 86%, var(--color-blush));
+}
+.everyday-wellness__sparkle {
+  display: inline-flex;
+  width: .95rem;
+  height: .95rem;
+}
+.everyday-wellness__sparkle .icon {
+  width: 100%;
+  height: 100%;
+}
+.everyday-wellness__heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 4.2vw, 3.35rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.everyday-wellness__accent {
+  font-style: italic;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--color-blush) 78%, #fff);
+}
+.everyday-wellness__carousel {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: .65rem;
+}
+.everyday-wellness__nav {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, #fff 45%, transparent);
+  background: color-mix(in srgb, var(--color-green) 35%, transparent);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex: none;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+.everyday-wellness__nav .icon {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+.everyday-wellness__nav:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-rose) 70%, transparent);
+  border-color: color-mix(in srgb, #fff 70%, transparent);
+}
+.everyday-wellness__nav:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+.everyday-wellness__track {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding-block: 2.5rem .75rem;
+}
+.everyday-wellness__track::-webkit-scrollbar { display: none; }
+.everyday-wellness__card {
+  flex: 0 0 83%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .85rem;
+  padding: .5rem 1.15rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  border-right: 1px solid color-mix(in srgb, #fff 22%, transparent);
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+  transition: z-index 0s;
+  overflow: visible;
+}
+.everyday-wellness__card:last-child {
+  border-right: 0;
+}
+.everyday-wellness__card:hover,
+.everyday-wellness__card:focus-within {
+  z-index: 8;
+}
+.everyday-wellness__card-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+.everyday-wellness__card-link:focus-visible {
+  outline: 2px solid var(--color-blush);
+  outline-offset: 4px;
+}
+@media (min-width: 750px) {
+  .everyday-wellness__card {
+    flex-basis: calc(100% / 3);
+  }
+}
+@media (min-width: 990px) {
+  .everyday-wellness__card {
+    flex-basis: calc(100% / 4);
+  }
+}
+.everyday-wellness__card-media {
+  position: relative;
+  aspect-ratio: 1;
+  width: min(100%, 17.55rem);
+  margin-inline: auto;
+  display: grid;
+  place-items: center;
+  border-radius: 0;
+  background: transparent;
+  transition: none;
+  transform-origin: center center;
+}
+.everyday-wellness__card-media img,
+.everyday-wellness__placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transition: transform .35s var(--ease);
+  transform-origin: center center;
+  will-change: transform;
+}
+.everyday-wellness__card:hover .everyday-wellness__card-media img,
+.everyday-wellness__card:focus-within .everyday-wellness__card-media img,
+.everyday-wellness__card:hover .everyday-wellness__placeholder,
+.everyday-wellness__card:focus-within .everyday-wellness__placeholder {
+  transform: scale(1.755);
+}
+@media (hover: none) {
+  .everyday-wellness__card:hover .everyday-wellness__card-media img,
+  .everyday-wellness__card:focus-within .everyday-wellness__card-media img,
+  .everyday-wellness__card:hover .everyday-wellness__placeholder,
+  .everyday-wellness__card:focus-within .everyday-wellness__placeholder {
+    transform: none;
+  }
+}
+.everyday-wellness__card-copy {
+  text-align: center;
+  width: 100%;
+  padding-inline: .35rem;
+}
+.everyday-wellness__card-title {
+  margin: 0 0 .4rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  line-height: 1.2;
+  color: #fff;
+}
+.everyday-wellness__card-price {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: color-mix(in srgb, #fff 88%, var(--color-blush));
+}
+.everyday-wellness__card-btn {
+  margin-top: .15rem;
+  min-height: 2.6rem;
+  padding: .65em 1.2em;
+  font-size: .88rem;
+}
+.everyday-wellness__card-btn .btn__arrow {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+.everyday-wellness__empty {
+  flex: 1;
+  padding: 1.5rem;
+  color: color-mix(in srgb, #fff 80%, transparent);
+}
+@media (max-width: 749px) {
+  .everyday-wellness {
+    min-height: 0;
+    padding-block: 2.5rem 2.25rem;
+  }
+  .everyday-wellness__media img {
+    object-position: 72% center;
+  }
+  .everyday-wellness__carousel {
+    gap: .4rem;
+    padding-inline: 0;
+  }
+  .everyday-wellness__nav {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  .everyday-wellness__card {
+    padding-inline: .9rem;
+  }
+  .everyday-wellness__card-media {
+    width: min(100%, 15.6rem);
+  }
+  .everyday-wellness__card:hover .everyday-wellness__card-media img,
+  .everyday-wellness__card:focus-within .everyday-wellness__card-media img,
+  .everyday-wellness__card:hover .everyday-wellness__placeholder,
+  .everyday-wellness__card:focus-within .everyday-wellness__placeholder {
+    transform: scale(1.586);
+  }
+}
+
 .goals-routine {
   position: relative;
   overflow: hidden;
