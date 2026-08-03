@@ -102,15 +102,13 @@
         "type": "text",
         "id": "preorder_ship_window",
         "label": "Estimated shipping window (fallback)",
-        "info": "Example: “ships early December”. Leave blank until confirmed in writing.",
-        "default": ""
+        "info": "Example: “ships early December”. Leave blank until confirmed in writing."
       },
       {
         "type": "text",
         "id": "support_email",
         "label": "Support email",
-        "info": "Used in cancellation / pre-order copy. Leave blank until confirmed.",
-        "default": ""
+        "info": "Used in cancellation / pre-order copy. Leave blank until confirmed."
       }
     ]
   },
@@ -162,6 +160,61 @@
           { "value": "portrait", "label": "Portrait" }
         ],
         "default": "square"
+      }
+    ]
+  },
+  {
+    "name": "Product countdown",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Shows a shared deadline timer on product cards and product pages. Create product metafields: custom.countdown_end (Date and time), custom.countdown_label (Single line text), custom.countdown_enabled (True or false). Product metafields override these defaults. Leave countdown_end empty to hide the timer for that product."
+      },
+      {
+        "type": "checkbox",
+        "id": "countdown_enable",
+        "label": "Enable product countdown timers",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "countdown_default_label",
+        "label": "Default label",
+        "default": "Pre-Order Offer Ends In"
+      },
+      {
+        "type": "text",
+        "id": "countdown_expired_message",
+        "label": "Expired message",
+        "default": "Offer Ended"
+      },
+      {
+        "type": "select",
+        "id": "countdown_expired_behavior",
+        "label": "When deadline expires",
+        "options": [
+          { "value": "message", "label": "Show expired message" },
+          { "value": "hide", "label": "Hide timer" }
+        ],
+        "default": "message"
+      },
+      {
+        "type": "color",
+        "id": "countdown_bg",
+        "label": "Timer background",
+        "default": "#F4E2DB"
+      },
+      {
+        "type": "color",
+        "id": "countdown_text",
+        "label": "Timer text",
+        "default": "#223829"
+      },
+      {
+        "type": "color",
+        "id": "countdown_accent",
+        "label": "Timer accent",
+        "default": "#BA6D64"
       }
     ]
   }
