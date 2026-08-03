@@ -85,22 +85,6 @@
         "button_label": "Pre-Order"
       }
     },
-    "routine": {
-      "type": "routine-steps",
-      "settings": {
-        "eyebrow": "Build your routine",
-        "heading": "A simple routine made\nfor real life.",
-        "cta_label": "Find My Routine",
-        "cta_link": "shopify://pages/quiz"
-      },
-      "blocks": {
-        "s1": { "type": "step", "settings": { "number": "01", "title": "Choose Your Goal", "text": "Begin with the area of wellness that matters most to you." } },
-        "s2": { "type": "step", "settings": { "number": "02", "title": "Find Your Formula", "text": "Explore hydration, collagen, greens, daily wellness, protein, and more." } },
-        "s3": { "type": "step", "settings": { "number": "03", "title": "Choose Your Format", "text": "Keep a pouch at home or take convenient sachets wherever you go." } },
-        "s4": { "type": "step", "settings": { "number": "04", "title": "Make It Yours", "text": "Follow the product directions and build a ritual that fits your day." } }
-      },
-      "block_order": ["s1", "s2", "s3", "s4"]
-    },
     "standards": {
       "type": "trust-standards",
       "settings": {
@@ -252,7 +236,6 @@
     "brand_intro",
     "goals",
     "everyday_wellness",
-    "routine",
     "standards",
     "featured",
     "quiz",
