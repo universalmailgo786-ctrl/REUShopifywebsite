@@ -1,4 +1,7 @@
-{%- assign blog = blogs[section.settings.blog] -%}
+{%- assign blog = blank -%}
+{%- if section.settings.blog != blank -%}
+  {%- assign blog = blogs[section.settings.blog] -%}
+{%- endif -%}
 <section class="section bg-sage">
   <div class="wrap">
     <div class="section-head section-head--row">
@@ -12,7 +15,7 @@
       {%- endif -%}
     </div>
     <div class="journal-grid">
-      {%- if blog != blank and blog.articles_count > 0 -%}
+      {%- if blog != blank and blog.articles_count > 0 and section.blocks.size == 0 -%}
         {%- for article in blog.articles limit: section.settings.limit -%}
           <article class="journal-card">
             <a class="journal-card__media" href="{{ article.url }}">
@@ -29,13 +32,30 @@
       {%- else -%}
         {%- for block in section.blocks -%}
           <article class="journal-card" {{ block.shopify_attributes }}>
-            <div class="journal-card__media">
+            {%- if block.settings.link != blank -%}
+              <a class="journal-card__media" href="{{ block.settings.link }}">
+            {%- else -%}
+              <div class="journal-card__media">
+            {%- endif -%}
               {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: block.settings.title | escape }}
+                {{ block.settings.image | image_url: width: 900 | image_tag: widths: '400,600,900', sizes: '(min-width:900px) 30vw, 100vw', loading: 'lazy', alt: block.settings.title | escape }}
+              {%- elsif block.settings.fallback_asset != blank -%}
+                <img
+                  src="{{ block.settings.fallback_asset | asset_url }}"
+                  width="1448"
+                  height="1086"
+                  alt="{{ block.settings.title | escape }}"
+                  loading="lazy"
+                  decoding="async"
+                >
               {%- else -%}
                 {{ 'image' | placeholder_svg_tag }}
               {%- endif -%}
-            </div>
+            {%- if block.settings.link != blank -%}
+              </a>
+            {%- else -%}
+              </div>
+            {%- endif -%}
             <h3>{% if block.settings.link != blank %}<a href="{{ block.settings.link }}">{{ block.settings.title }}</a>{% else %}{{ block.settings.title }}{% endif %}</h3>
             <p class="text-muted">{{ block.settings.text }}</p>
           </article>
@@ -60,6 +80,7 @@
   "blocks": [
     { "type": "card", "name": "Launch card", "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename" },
       { "type": "text", "id": "title", "label": "Title", "default": "How to Build a Wellness Routine You Can Actually Keep" },
       { "type": "textarea", "id": "text", "label": "Text", "default": "Simple habits work best when they fit the life you already live." },
       { "type": "url", "id": "link", "label": "Link" }
@@ -68,9 +89,9 @@
   "presets": [{
     "name": "Journal featured",
     "blocks": [
-      { "type": "card", "settings": { "title": "How to Build a Wellness Routine You Can Actually Keep", "text": "Simple habits work best when they fit the life you already live." } },
-      { "type": "card", "settings": { "title": "Electrolytes Explained", "text": "A straightforward introduction to hydration support and when it may fit your routine." } },
-      { "type": "card", "settings": { "title": "Pouch or Sachet?", "text": "Choose the format that works best for home, travel, or both." } }
+      { "type": "card", "settings": { "fallback_asset": "reu-journal-1.jpg", "title": "How to Build a Wellness Routine You Can Actually Keep", "text": "Simple habits work best when they fit the life you already live." } },
+      { "type": "card", "settings": { "fallback_asset": "reu-journal-2.jpg", "title": "Electrolytes Explained", "text": "A straightforward introduction to hydration support and when it may fit your routine." } },
+      { "type": "card", "settings": { "fallback_asset": "reu-journal-3.jpg", "title": "Pouch or Sachet?", "text": "Choose the format that works best for home, travel, or both." } }
     ]
   }]
 }

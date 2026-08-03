@@ -1423,8 +1423,22 @@
 .journal-grid { display: grid; gap: 1.25rem; }
 @media (min-width: 900px) { .journal-grid { grid-template-columns: repeat(3, 1fr); } }
 .journal-card { display: flex; flex-direction: column; gap: .75rem; }
-.journal-card__media { aspect-ratio: 4/3; border-radius: var(--card-radius); overflow: hidden; background: var(--color-cream); }
-.journal-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.journal-card__media {
+  aspect-ratio: 4/3;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  background: color-mix(in srgb, #fff 55%, var(--color-cream, #E3E1D5));
+  display: block;
+}
+.journal-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform .45s var(--ease, ease);
+}
+.journal-card:hover .journal-card__media img { transform: scale(1.04); }
 .journal-card h3 { font-size: 1.35rem; }
 
 .faq-split { display: grid; gap: 2rem; align-items: start; }

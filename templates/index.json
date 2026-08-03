@@ -24,26 +24,55 @@
     },
     "brand_intro": {
       "type": "brand-intro",
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Thoughtfully Made",
+            "text": "Products created with quality and everyday use in mind."
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "check",
+            "title": "Clear by Design",
+            "text": "Straightforward product information so you can choose with confidence."
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "Easy to Enjoy",
+            "text": "Great-tasting formats made to fit your routine."
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "sun",
+            "title": "Created for Women",
+            "text": "A modern wellness experience shaped around women’s real lives."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
       "settings": {
         "eyebrow": "Why REÚ",
         "heading": "Wellness without\nthe guesswork.",
         "body": "High-quality wellness should feel clear, enjoyable, and realistic enough for every day. REÚ creates great-tasting products designed to fit naturally into women’s real lives.",
         "image_alt": "Woman holding REÚ greens, hydration, and protein pouches"
-      },
-      "blocks": {
-        "b1": { "type": "benefit", "settings": { "icon": "sparkle", "title": "Thoughtfully Made", "text": "Products created with quality and everyday use in mind." } },
-        "b2": { "type": "benefit", "settings": { "icon": "check", "title": "Clear by Design", "text": "Straightforward product information so you can choose with confidence." } },
-        "b3": { "type": "benefit", "settings": { "icon": "heart", "title": "Easy to Enjoy", "text": "Great-tasting formats made to fit your routine." } },
-        "b4": { "type": "benefit", "settings": { "icon": "sun", "title": "Created for Women", "text": "A modern wellness experience shaped around women’s real lives." } }
-      },
-      "block_order": ["b1", "b2", "b3", "b4"]
+      }
     },
     "goals": {
       "type": "shop-by-collection",
-      "settings": {
-        "heading": "Shop By Collection",
-        "subheading": "One routine. Two ways to enjoy it."
-      },
       "blocks": {
         "g1": {
           "type": "collection_card",
@@ -72,7 +101,14 @@
           }
         }
       },
-      "block_order": ["g1", "g2"]
+      "block_order": [
+        "g1",
+        "g2"
+      ],
+      "settings": {
+        "heading": "Shop By Collection",
+        "subheading": "One routine. Two ways to enjoy it."
+      }
     },
     "everyday_wellness": {
       "type": "everyday-wellness",
@@ -87,20 +123,63 @@
     },
     "standards": {
       "type": "trust-standards",
+      "blocks": {
+        "t1": {
+          "type": "standard",
+          "settings": {
+            "icon": "check",
+            "title": "Clearly Listed Ingredients"
+          }
+        },
+        "t2": {
+          "type": "standard",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Easy-to-Follow Directions"
+          }
+        },
+        "t3": {
+          "type": "standard",
+          "settings": {
+            "icon": "shield",
+            "title": "Transparent Product Information"
+          }
+        },
+        "t4": {
+          "type": "standard",
+          "settings": {
+            "icon": "leaf",
+            "title": "Thoughtfully Created"
+          }
+        },
+        "t5": {
+          "type": "standard",
+          "settings": {
+            "icon": "heart",
+            "title": "Great-Tasting Formats"
+          }
+        },
+        "t6": {
+          "type": "standard",
+          "settings": {
+            "icon": "sun",
+            "title": "Designed for Everyday Routines"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6"
+      ],
       "settings": {
         "eyebrow": "The REÚ Standard",
         "heading": "What belongs in your routine\nshould never be a mystery.",
         "body": "We believe confidence starts with clarity. Every REÚ product clearly explains what is inside, how to use it, and what to expect—using verified product information only."
-      },
-      "blocks": {
-        "t1": { "type": "standard", "settings": { "icon": "check", "title": "Clearly Listed Ingredients" } },
-        "t2": { "type": "standard", "settings": { "icon": "sparkle", "title": "Easy-to-Follow Directions" } },
-        "t3": { "type": "standard", "settings": { "icon": "shield", "title": "Transparent Product Information" } },
-        "t4": { "type": "standard", "settings": { "icon": "leaf", "title": "Thoughtfully Created" } },
-        "t5": { "type": "standard", "settings": { "icon": "heart", "title": "Great-Tasting Formats" } },
-        "t6": { "type": "standard", "settings": { "icon": "sun", "title": "Designed for Everyday Routines" } }
-      },
-      "block_order": ["t1", "t2", "t3", "t4", "t5", "t6"]
+      }
     },
     "featured": {
       "type": "featured-products",
@@ -129,23 +208,90 @@
     },
     "journal": {
       "type": "journal-featured",
+      "blocks": {
+        "j1": {
+          "type": "card",
+          "settings": {
+            "title": "How to Build a Wellness Routine You Can Actually Keep",
+            "text": "Simple habits work best when they fit the life you already live."
+          }
+        },
+        "j2": {
+          "type": "card",
+          "settings": {
+            "title": "Electrolytes Explained",
+            "text": "A straightforward introduction to hydration support and when it may fit your routine."
+          }
+        },
+        "j3": {
+          "type": "card",
+          "settings": {
+            "title": "Pouch or Sachet?",
+            "text": "Choose the format that works best for home, travel, or both."
+          }
+        }
+      },
+      "block_order": [
+        "j1",
+        "j2",
+        "j3"
+      ],
       "settings": {
         "eyebrow": "The REÚ Journal",
         "heading": "Wellness, made clearer.",
         "body": "Practical guidance to help you understand ingredients, build better routines, and choose products with greater confidence.",
         "blog": "news",
         "limit": 3,
-        "cta_label": "Visit the Journal"
-      },
-      "blocks": {
-        "j1": { "type": "card", "settings": { "title": "How to Build a Wellness Routine You Can Actually Keep", "text": "Simple habits work best when they fit the life you already live." } },
-        "j2": { "type": "card", "settings": { "title": "Electrolytes Explained", "text": "A straightforward introduction to hydration support and when it may fit your routine." } },
-        "j3": { "type": "card", "settings": { "title": "Pouch or Sachet?", "text": "Choose the format that works best for home, travel, or both." } }
-      },
-      "block_order": ["j1", "j2", "j3"]
+        "cta_label": "Visit the Journal",
+        "cta_link": "shopify://blogs/news"
+      }
     },
     "faq": {
       "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "question": "Is REÚ currently available?",
+            "answer": "<p>REÚ is currently available for pre-order. Products are expected to ship between September and October 2026.</p>"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "question": "When will I be charged?",
+            "answer": "<p>Full payment is collected at checkout when you place your pre-order.</p>"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "question": "Can I cancel my pre-order?",
+            "answer": "<p>Yes. Contact hello@livewithreu.com before your order ships to request cancellation and a full refund.</p>"
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "question": "How do I choose the right product?",
+            "answer": "<p>Take our Product Recommendation Quiz or explore the collection by wellness goal.</p>"
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "question": "Can REÚ products treat a medical condition?",
+            "answer": "<p>No. REÚ products are not intended to diagnose, treat, cure, or prevent any disease.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
       "settings": {
         "eyebrow": "Questions, answered",
         "heading": "Your essential guide\nto choosing REÚ.",
@@ -153,15 +299,7 @@
         "cta_label": "View All FAQs",
         "cta_link": "shopify://pages/faq",
         "faq_schema": true
-      },
-      "blocks": {
-        "q1": { "type": "qa", "settings": { "question": "Is REÚ currently available?", "answer": "<p>REÚ is currently available for pre-order. Products are expected to ship between September and October 2026.</p>" } },
-        "q2": { "type": "qa", "settings": { "question": "When will I be charged?", "answer": "<p>Full payment is collected at checkout when you place your pre-order.</p>" } },
-        "q3": { "type": "qa", "settings": { "question": "Can I cancel my pre-order?", "answer": "<p>Yes. Contact hello@livewithreu.com before your order ships to request cancellation and a full refund.</p>" } },
-        "q4": { "type": "qa", "settings": { "question": "How do I choose the right product?", "answer": "<p>Take our Product Recommendation Quiz or explore the collection by wellness goal.</p>" } },
-        "q5": { "type": "qa", "settings": { "question": "Can REÚ products treat a medical condition?", "answer": "<p>No. REÚ products are not intended to diagnose, treat, cure, or prevent any disease.</p>" } }
-      },
-      "block_order": ["q1", "q2", "q3", "q4", "q5"]
+      }
     },
     "media_banner": {
       "type": "media-banner",
@@ -172,19 +310,48 @@
     },
     "social": {
       "type": "social-feed",
+      "blocks": {
+        "s1": {
+          "type": "image",
+          "settings": {
+            "fallback_asset": "reu-hydration-watermelon.jpg",
+            "alt": "REÚ Hydration"
+          }
+        },
+        "s2": {
+          "type": "image",
+          "settings": {
+            "fallback_asset": "reu-collagen-mixed-berry.jpg",
+            "alt": "REÚ Collagen"
+          }
+        },
+        "s3": {
+          "type": "image",
+          "settings": {
+            "fallback_asset": "reu-greens-pineapple.jpg",
+            "alt": "REÚ Greens"
+          }
+        },
+        "s4": {
+          "type": "image",
+          "settings": {
+            "fallback_asset": "reu-format-sachet.jpg",
+            "alt": "REÚ Sachets"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
       "settings": {
         "eyebrow": "Follow along",
         "heading": "@REÚ",
         "handle": "Follow us on Instagram",
         "bg_scheme": "bg-cream"
-      },
-      "blocks": {
-        "s1": { "type": "image", "settings": { "fallback_asset": "reu-hydration-watermelon.jpg", "alt": "REÚ Hydration" } },
-        "s2": { "type": "image", "settings": { "fallback_asset": "reu-collagen-mixed-berry.jpg", "alt": "REÚ Collagen" } },
-        "s3": { "type": "image", "settings": { "fallback_asset": "reu-greens-pineapple.jpg", "alt": "REÚ Greens" } },
-        "s4": { "type": "image", "settings": { "fallback_asset": "reu-format-sachet.jpg", "alt": "REÚ Sachets" } }
-      },
-      "block_order": ["s1", "s2", "s3", "s4"]
+      }
     },
     "newsletter": {
       "type": "newsletter",
