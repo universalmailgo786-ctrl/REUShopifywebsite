@@ -63,6 +63,18 @@
           <p class="lede" style="margin-top:1rem">{{ mf.short_description }}</p>
         {%- endif -%}
 
+        {%- if mf.also_available_handle != blank -%}
+          {%- assign alt_product = all_products[mf.also_available_handle] -%}
+          {%- if alt_product != blank -%}
+            <p class="also-format" style="margin-top:1rem">
+              <a class="link-arrow" href="{{ alt_product.url }}">
+                {{ mf.also_available_label | default: 'Also Available in Another Format' }}
+                {% render 'icon', name: 'arrow' %}
+              </a>
+            </p>
+          {%- endif -%}
+        {%- endif -%}
+
         {%- comment -%} Purchase form: 7 variant selector, 8 quantity, 9 pre-order button {%- endcomment -%}
         <form data-product-form action="{{ routes.cart_add_url }}" method="post" style="margin-top:1.25rem">
           {%- unless p.has_only_default_variant -%}

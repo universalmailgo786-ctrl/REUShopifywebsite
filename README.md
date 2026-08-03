@@ -76,6 +76,8 @@ Define these (Settings → Custom data → Products). All optional — empty row
 | `custom.supplement_facts` | Rich text | "Supplement Facts" accordion |
 | `custom.warnings_allergens` | Rich text | "Warnings & Allergens" accordion |
 | `custom.format_details` | Rich text | "Flavour & Format" accordion |
+| `custom.also_available_handle` | Single line text | Matching other-format product handle |
+| `custom.also_available_label` | Single line text | “Also Available in Another Format” link label |
 
 Review rating (optional, only shows when present): `reviews.rating` (rating type) + `reviews.rating_count` (integer) — matches the Shopify Product Reviews / Judge.me convention.
 
