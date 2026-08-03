@@ -3,22 +3,35 @@
   if section.settings.video != blank
     assign has_video = true
   endif
+  assign has_copy = false
+  if section.settings.heading != blank or section.settings.body != blank
+    assign has_copy = true
+  endif
 -%}
-<section class="media-banner" data-media-banner>
+<section class="media-banner{% unless has_copy %} media-banner--image-only{% endunless %}" data-media-banner>
   <div class="media-banner__media" aria-hidden="true">
     {%- if has_video -%}
       {{ section.settings.video | video_tag: image_size: '2400x', autoplay: false, loop: true, muted: true, controls: false, class: 'media-banner__video', preload: 'none' }}
     {%- elsif section.settings.image != blank -%}
       {{ section.settings.image | image_url: width: 2400 | image_tag: widths: '900,1400,2000,2400', sizes: '100vw', loading: 'lazy', alt: '' }}
     {%- else -%}
-      <img src="{{ 'reu-hero.jpg' | asset_url }}" width="2000" height="1333" alt="" loading="lazy">
+      <img
+        src="{{ 'reu-media-banner.jpg' | asset_url }}"
+        width="1913"
+        height="822"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      >
     {%- endif -%}
   </div>
-  <div class="media-banner__overlay"></div>
-  <div class="media-banner__content">
-    {%- if section.settings.heading != blank -%}<h2 class="h2">{{ section.settings.heading }}</h2>{%- endif -%}
-    {%- if section.settings.body != blank -%}<p>{{ section.settings.body }}</p>{%- endif -%}
-  </div>
+  {%- if has_copy -%}
+    <div class="media-banner__overlay"></div>
+    <div class="media-banner__content">
+      {%- if section.settings.heading != blank -%}<h2 class="h2">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.body != blank -%}<p>{{ section.settings.body }}</p>{%- endif -%}
+    </div>
+  {%- endif -%}
   {%- if has_video -%}
     <div class="media-banner__controls">
       <button type="button" data-media-play aria-pressed="false" aria-label="Play video">

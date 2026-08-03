@@ -177,8 +177,8 @@
     "media_banner": {
       "type": "media-banner",
       "settings": {
-        "heading": "Wellness that moves with you.",
-        "body": "Simple rituals. Thoughtful products. A routine that feels entirely your own."
+        "heading": "",
+        "body": ""
       }
     },
     "preorder": {

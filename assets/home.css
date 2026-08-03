@@ -1429,9 +1429,23 @@
 .media-banner {
   position: relative; min-height: clamp(320px, 48vw, 520px);
   display: grid; place-items: end center; color: #fff; overflow: hidden;
+  width: 100%;
+}
+.media-banner--image-only {
+  min-height: 0;
+  display: block;
+  place-items: unset;
 }
 .media-banner__media { position: absolute; inset: 0; }
-.media-banner__media img, .media-banner__media video { width: 100%; height: 100%; object-fit: cover; }
+.media-banner--image-only .media-banner__media { position: relative; inset: auto; }
+.media-banner__media img, .media-banner__media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.media-banner--image-only .media-banner__media img,
+.media-banner--image-only .media-banner__media video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1913 / 822;
+  object-fit: cover;
+}
 .media-banner__overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(30,38,31,.72) 100%); }
 .media-banner__content { position: relative; z-index: 1; text-align: center; padding: 3rem var(--gutter); max-width: 46rem; }
 .media-banner__content .h2 { color: #fff; }
