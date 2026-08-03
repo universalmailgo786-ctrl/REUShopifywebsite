@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "type": "footer",
   "name": "Footer group",
@@ -27,7 +18,20 @@
         "menu_care": "footer-support",
         "disclaimer": "Information on this website is provided for general educational purposes and is not medical advice. Always follow the product label and consult a qualified healthcare professional when appropriate."
       }
+    },
+    "whatsapp_chat": {
+      "type": "whatsapp-chat",
+      "settings": {
+        "enable_widget": true,
+        "heading": "Chat with us",
+        "welcome_message": "Hi! How can we help you today? Send us a message on WhatsApp.",
+        "button_text": "Start Chat",
+        "prefill_message": "Hello! I need some help.",
+        "display_delay": 5,
+        "desktop_position": "bottom-right",
+        "mobile_position": "bottom-right"
+      }
     }
   },
-  "order": ["footer"]
+  "order": ["footer", "whatsapp_chat"]
 }

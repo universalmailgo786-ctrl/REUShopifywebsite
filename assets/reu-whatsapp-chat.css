@@ -1,0 +1,246 @@
+/* REÚ WhatsApp live-chat widget */
+.section-reu-whatsapp {
+  margin: 0;
+  padding: 0;
+}
+
+.reu-wa {
+  --reu-wa-green: #25D366;
+  --reu-wa-green-dark: #128C7E;
+  --reu-wa-brand: var(--reu-deep-green, var(--color-green, #223829));
+  --reu-wa-cream: var(--reu-warm-cream, var(--color-cream, #E3E1D5));
+  --reu-wa-rose: var(--reu-warm-rose, var(--color-rose, #BA6D64));
+  --reu-wa-ink: var(--reu-ink, #1E261F);
+  --reu-wa-offset-x: max(1rem, env(safe-area-inset-right, 0px));
+  --reu-wa-offset-y: max(1.15rem, env(safe-area-inset-bottom, 0px));
+  --reu-wa-gap: .85rem;
+  --reu-wa-fab: 3.5rem;
+  position: fixed;
+  z-index: 110;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--reu-wa-gap);
+  pointer-events: none;
+  bottom: var(--reu-wa-offset-y);
+  right: var(--reu-wa-offset-x);
+  left: auto;
+}
+
+/* Desktop positions */
+@media (min-width: 750px) {
+  .reu-wa--d-bottom-right {
+    right: max(1.35rem, env(safe-area-inset-right, 0px));
+    left: auto;
+    align-items: flex-end;
+  }
+  .reu-wa--d-bottom-left {
+    left: max(1.35rem, env(safe-area-inset-left, 0px));
+    right: auto;
+    align-items: flex-start;
+  }
+}
+
+/* Mobile positions */
+@media (max-width: 749px) {
+  .reu-wa--m-bottom-right {
+    right: max(1rem, env(safe-area-inset-right, 0px));
+    left: auto;
+    align-items: flex-end;
+  }
+  .reu-wa--m-bottom-left {
+    left: max(1rem, env(safe-area-inset-left, 0px));
+    right: auto;
+    align-items: flex-start;
+  }
+}
+
+/* Lift above sticky Add to Cart on product pages */
+body:has(.sticky-bar.is-visible) .reu-wa {
+  bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+}
+@media (min-width: 990px) {
+  body:has(.sticky-bar.is-visible) .reu-wa {
+    bottom: max(1.35rem, env(safe-area-inset-bottom, 0px));
+  }
+}
+
+.reu-wa__fab,
+.reu-wa__close,
+.reu-wa__cta,
+.reu-wa__panel {
+  pointer-events: auto;
+}
+
+.reu-wa__fab {
+  width: var(--reu-wa-fab);
+  height: var(--reu-wa-fab);
+  border: 0;
+  border-radius: 50%;
+  background: var(--reu-wa-green);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(34, 56, 41, .22);
+  transition: transform var(--dur, .3s) var(--ease, ease), background var(--dur, .3s) var(--ease, ease), box-shadow var(--dur, .3s) var(--ease, ease);
+}
+.reu-wa__fab:hover {
+  background: var(--reu-wa-green-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(34, 56, 41, .28);
+}
+.reu-wa__fab:focus-visible {
+  outline: 3px solid var(--reu-wa-rose);
+  outline-offset: 3px;
+}
+.reu-wa__fab-icon {
+  display: inline-flex;
+  width: 1.7rem;
+  height: 1.7rem;
+}
+.reu-wa__fab-icon .icon,
+.reu-wa__brand-icon .icon,
+.reu-wa__cta-icon .icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.reu-wa__panel {
+  width: min(20.5rem, calc(100vw - 2rem));
+  background: #fff;
+  color: var(--reu-wa-ink);
+  border-radius: calc(var(--card-radius, 16px) + 4px);
+  box-shadow: var(--shadow, 0 10px 36px rgba(34,56,41,.12));
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--reu-wa-brand) 10%, transparent);
+  transform-origin: bottom right;
+  opacity: 0;
+  transform: translateY(10px) scale(.98);
+  transition: opacity .28s var(--ease, ease), transform .28s var(--ease, ease), visibility .28s;
+  visibility: hidden;
+}
+.reu-wa--d-bottom-left .reu-wa__panel,
+.reu-wa--m-bottom-left .reu-wa__panel {
+  transform-origin: bottom left;
+}
+@media (max-width: 749px) {
+  .reu-wa--m-bottom-left .reu-wa__panel { transform-origin: bottom left; }
+  .reu-wa--m-bottom-right .reu-wa__panel { transform-origin: bottom right; }
+}
+.reu-wa__panel.is-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+}
+.reu-wa__panel[hidden] {
+  display: block !important;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.reu-wa__panel-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: .75rem;
+  align-items: start;
+  padding: 1rem 1rem .85rem;
+  background: var(--reu-wa-brand);
+  color: var(--reu-wa-cream);
+}
+.reu-wa__brand-icon {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+  background: var(--reu-wa-green);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  padding: .45rem;
+}
+.reu-wa__title {
+  margin: 0 0 .25rem;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.2;
+  color: #fff;
+}
+.reu-wa__message {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: .88rem;
+  line-height: 1.45;
+  color: color-mix(in srgb, #fff 86%, transparent);
+}
+.reu-wa__close {
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 50%;
+  background: color-mix(in srgb, #fff 14%, transparent);
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--dur, .3s) var(--ease, ease);
+}
+.reu-wa__close:hover { background: color-mix(in srgb, #fff 24%, transparent); }
+.reu-wa__close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.reu-wa__panel-actions {
+  padding: .95rem 1rem 1.05rem;
+  background: color-mix(in srgb, var(--reu-wa-cream) 55%, #fff);
+}
+.reu-wa__cta {
+  width: 100%;
+  justify-content: center;
+  gap: .55rem;
+  text-decoration: none;
+  --btn-bg: var(--reu-wa-green);
+  --btn-fg: #fff;
+  --btn-hover-bg: var(--reu-wa-green-dark);
+  --btn-hover-fg: #fff;
+  border-color: var(--reu-wa-green);
+  background: var(--reu-wa-green);
+  color: #fff;
+}
+.reu-wa__cta:hover {
+  background: var(--reu-wa-green-dark);
+  border-color: var(--reu-wa-green-dark);
+  color: #fff;
+}
+.reu-wa__cta[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: .92;
+}
+.reu-wa__cta-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  display: inline-flex;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reu-wa__fab,
+  .reu-wa__panel,
+  .reu-wa__close,
+  .reu-wa__cta {
+    transition: none !important;
+  }
+  .reu-wa__panel {
+    transform: none;
+  }
+  .reu-wa__panel.is-open {
+    transform: none;
+  }
+}
