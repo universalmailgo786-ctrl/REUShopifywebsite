@@ -323,7 +323,7 @@
 
 /* ——— Shop by collection ——— */
 .shop-collections {
-  background: var(--color-cream);
+  background: #dfe8df;
 }
 .shop-collections__head {
   padding-bottom: 1.15rem;
