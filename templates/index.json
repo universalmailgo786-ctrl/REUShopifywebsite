@@ -98,12 +98,6 @@
       },
       "block_order": ["t1", "t2", "t3", "t4", "t5", "t6"]
     },
-    "formats": {
-      "type": "daily-formats",
-      "settings": {
-        "image_alt": "REÚ pouches and single-serve sachets"
-      }
-    },
     "featured": {
       "type": "featured-products",
       "settings": {
@@ -237,7 +231,6 @@
     "hero",
     "brand_intro",
     "goals",
-    "formats",
     "routine",
     "standards",
     "featured",
