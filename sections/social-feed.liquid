@@ -3,12 +3,14 @@
 {%- endcomment -%}
 <section class="section {{ section.settings.bg_scheme }}">
   <div class="wrap">
-    <div class="section-head section-head--center">
+    <div class="section-head section-head--center social-feed__head">
       {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
       <h2 class="h2">{{ section.settings.heading }}</h2>
-      <p class="lede" style="margin-top:.5rem">
-        <a class="link-arrow" href="{{ settings.social_instagram | default: '#' }}">{{ section.settings.handle }}</a>
-      </p>
+      {%- if section.settings.handle != blank -%}
+        <p class="lede social-feed__handle">
+          <a class="link-arrow" href="{{ settings.social_instagram | default: '#' }}">{{ section.settings.handle }}</a>
+        </p>
+      {%- endif -%}
     </div>
     <div class="social-grid">
       {%- for block in section.blocks -%}
