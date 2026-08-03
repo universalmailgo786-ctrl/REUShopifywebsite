@@ -368,9 +368,25 @@
     align-items: stretch;
   }
 }
-.shop-collection-card--cream { background: var(--color-cream); }
-.shop-collection-card--blush { background: var(--color-blush); }
+.shop-collection-card--cream { background: #213929; }
+.shop-collection-card--blush { background: #BA6C63; }
 .shop-collection-card--lilac { background: var(--color-lilac); }
+.shop-collection-card--cream .shop-collection-card__title,
+.shop-collection-card--cream .shop-collection-card__kicker,
+.shop-collection-card--blush .shop-collection-card__title,
+.shop-collection-card--blush .shop-collection-card__kicker {
+  color: #fff;
+}
+.shop-collection-card--cream .shop-collection-card__text,
+.shop-collection-card--blush .shop-collection-card__text {
+  color: color-mix(in srgb, #fff 86%, transparent);
+}
+.shop-collection-card--cream .shop-collection-card__rule {
+  background: #BA6C63;
+}
+.shop-collection-card--blush .shop-collection-card__rule {
+  background: #fff;
+}
 .shop-collection-card__copy {
   display: flex;
   flex-direction: column;

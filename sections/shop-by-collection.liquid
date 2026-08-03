@@ -36,7 +36,7 @@
             {%- if block.settings.text != blank -%}
               <p class="shop-collection-card__text">{{ block.settings.text }}</p>
             {%- endif -%}
-            <a class="btn shop-collection-card__btn" href="{{ href }}">
+            <a class="btn btn--on-dark shop-collection-card__btn" href="{{ href }}">
               <span>{{ block.settings.cta | default: 'Shop now' }}</span>
               <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span>
             </a>
