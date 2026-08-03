@@ -127,17 +127,6 @@
         "microcopy": "Personalized product guidance, not medical advice."
       }
     },
-    "reviews": {
-      "type": "reviews",
-      "settings": {
-        "eyebrow": "Real REÚ routines",
-        "heading": "Real experiences from\nwomen building wellness\ntheir way.",
-        "launch_heading": "Be among the first to experience REÚ.",
-        "launch_copy": "Reserve your products from our first release and be one of the first women to make REÚ part of your routine.",
-        "cta_label": "Shop Pre-Order",
-        "cta_link": "shopify://collections/all"
-      }
-    },
     "journal": {
       "type": "journal-featured",
       "settings": {
@@ -229,7 +218,6 @@
     "standards",
     "featured",
     "quiz",
-    "reviews",
     "journal",
     "faq",
     "media_banner",
