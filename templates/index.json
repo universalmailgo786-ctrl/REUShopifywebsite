@@ -30,15 +30,38 @@
       "block_order": ["b1", "b2", "b3", "b4"]
     },
     "goals": {
-      "type": "shop-by-goal",
+      "type": "shop-by-collection",
       "settings": {
-        "eyebrow": "Shop by format",
-        "heading": "Choose how you\nwant to enjoy REÚ.",
-        "body": "Keep your favourites at home in a full-size pouch, or take the same ritual with you in single-serve sachets."
+        "heading": "Shop By Collection",
+        "subheading": "One routine. Two ways to enjoy it."
       },
       "blocks": {
-        "g1": { "type": "goal", "settings": { "number": "01", "fallback_asset": "reu-format-pouch.jpg", "title": "Pouch Collection", "text": "Full-size pouches for a consistent at-home wellness routine.", "cta": "Shop Pouches", "collection": "pouch-collection" } },
-        "g2": { "type": "goal", "settings": { "number": "02", "fallback_asset": "reu-format-sachet.jpg", "title": "Sachet Collection", "text": "Single-serve sachets for work, travel, gym bags, and busy days.", "cta": "Shop Sachets", "collection": "sachet-collection" } }
+        "g1": {
+          "type": "collection_card",
+          "settings": {
+            "tone": "cream",
+            "title": "Pouch Collection",
+            "kicker": "Your everyday staple",
+            "text": "Full-size favourites for a consistent at-home routine.",
+            "cta": "Shop Pouches",
+            "collection": "pouch-collection",
+            "link": "shopify://collections/pouch-collection",
+            "fallback_asset": "reu-collection-pouch.jpg"
+          }
+        },
+        "g2": {
+          "type": "collection_card",
+          "settings": {
+            "tone": "blush",
+            "title": "Sachet Collection",
+            "kicker": "Wellness, wherever you go",
+            "text": "Single-serve convenience for work, travel, gym bags, and busy days.",
+            "cta": "Shop Sachets",
+            "collection": "sachet-collection",
+            "link": "shopify://collections/sachet-collection",
+            "fallback_asset": "reu-collection-sachet.jpg"
+          }
+        }
       },
       "block_order": ["g1", "g2"]
     },
