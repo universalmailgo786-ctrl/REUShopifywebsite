@@ -190,12 +190,16 @@
       "type": "newsletter",
       "settings": {
         "eyebrow": "Join the REÚ community",
+        "heading_before": "A ",
+        "heading_accent": "better",
+        "heading_after": " routine starts here.",
         "heading": "A better routine\nstarts here.",
         "body": "Join the REÚ community for launch updates, wellness guidance, new products, and thoughtful offers.",
-        "placeholder": "Enter your email address",
+        "placeholder": "Your email...",
         "button_label": "Join the List",
         "consent": "By subscribing, you agree to receive marketing emails from REÚ. You may unsubscribe at any time.",
-        "privacy_link": "shopify://policies/privacy-policy"
+        "privacy_link": "shopify://policies/privacy-policy",
+        "image_alt": "REÚ packaging collection"
       }
     }
   },
