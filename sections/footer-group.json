@@ -1,24 +1,22 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Footer group",
   "sections": {
     "footer": {
       "type": "footer",
-      "settings": {
-        "tagline": "Live Better. Every Day.",
-        "contact_heading": "Contact us",
-        "support_phone": "",
-        "support_email": "hello@livewithreu.com",
-        "help_label": "Help Center",
-        "shop_heading": "Shop",
-        "menu_shop": "footer-shop",
-        "discover_heading": "Discover",
-        "menu_discover": "footer-learn",
-        "care_heading": "Customer Care",
-        "menu_care": "footer-support",
-        "disclaimer": "Information on this website is provided for general educational purposes and is not medical advice. Always follow the product label and consult a qualified healthcare professional when appropriate."
-      }
+      "settings": {}
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }
