@@ -1,0 +1,26 @@
+{%- comment -%}
+  Compact product row for search drawer.
+  Params: product
+{%- endcomment -%}
+{%- assign p = product -%}
+<a class="search-result-card" href="{{ p.url }}">
+  <span class="search-result-card__media" aria-hidden="true">
+    {%- if p.featured_media -%}
+      {{
+        p.featured_media
+        | image_url: width: 160
+        | image_tag:
+          widths: '80,120,160',
+          sizes: '64px',
+          loading: 'lazy',
+          alt: ''
+      }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </span>
+  <span class="search-result-card__body">
+    <span class="search-result-card__title">{{ p.title }}</span>
+    <span class="search-result-card__price">{% render 'price', product: p %}</span>
+  </span>
+</a>

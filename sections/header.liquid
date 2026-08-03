@@ -67,23 +67,60 @@
   </div>
 </div>
 
-{%- comment -%} Search drawer with predictive results {%- endcomment -%}
-<div id="SearchDrawer" class="drawer drawer--right" data-drawer hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+{%- comment -%} Search drawer with recommended + predictive results {%- endcomment -%}
+{%- liquid
+  assign recommend_collection = collections.all
+  if section.settings.search_collection != blank
+    assign recommend_collection = collections[section.settings.search_collection]
+  endif
+-%}
+<div id="SearchDrawer" class="drawer drawer--right search-drawer" data-drawer hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
   <div class="drawer__overlay" data-drawer-overlay></div>
   <div class="drawer__panel">
     <div class="drawer__header">
       <span class="drawer__title">{{ 'general.search.search' | t }}</span>
-      <button class="header-icon" data-drawer-close="SearchDrawer" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+      <button type="button" class="header-icon search-drawer__close" data-drawer-close="SearchDrawer" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
     </div>
-    <div class="drawer__body" data-predictive>
-      <form action="{{ routes.search_url }}" method="get" role="search">
-        <label class="visually-hidden" for="search-input">{{ 'general.search.search' | t }}</label>
-        <div style="display:flex;gap:.5rem">
-          <input class="input" id="search-input" type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" autocomplete="off">
-          <button class="btn" type="submit">{% render 'icon', name: 'search' %}</button>
+    <div class="drawer__body search-drawer__body" data-predictive>
+      <form class="search-drawer__form" action="{{ routes.search_url }}" method="get" role="search" data-search-form>
+        <input type="hidden" name="type" value="product,article,page">
+        <label class="visually-hidden" for="SearchDrawer-Input-{{ section.id }}">{{ 'general.search.search' | t }}</label>
+        <div class="search-drawer__field">
+          <input
+            class="search-drawer__input"
+            id="SearchDrawer-Input-{{ section.id }}"
+            type="search"
+            name="q"
+            value=""
+            placeholder="{{ 'general.search.placeholder' | t }}"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            data-search-input
+          >
+          <button class="search-drawer__submit" type="submit" aria-label="{{ 'general.search.search' | t }}">
+            {% render 'icon', name: 'search' %}
+          </button>
         </div>
       </form>
-      <div data-predictive-results hidden style="margin-top:1rem"></div>
+
+      <div class="search-drawer__results" data-predictive-results>
+        <div data-search-recommended>
+          {%- if recommend_collection != blank and recommend_collection.products_count > 0 -%}
+            <div class="search-drawer__group">
+              <p class="search-drawer__label">Recommended</p>
+              <div class="search-drawer__list">
+                {%- for product in recommend_collection.products limit: 6 -%}
+                  {% render 'search-result-card', product: product %}
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- else -%}
+            <p class="search-drawer__hint">Start typing to search products, journal articles, and pages.</p>
+          {%- endif -%}
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -93,7 +130,8 @@
   "name": "Header",
   "settings": [
     { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
-    { "type": "checkbox", "id": "sticky", "label": "Sticky header", "default": true }
+    { "type": "checkbox", "id": "sticky", "label": "Sticky header", "default": true },
+    { "type": "collection", "id": "search_collection", "label": "Recommended search products" }
   ]
 }
 {% endschema %}

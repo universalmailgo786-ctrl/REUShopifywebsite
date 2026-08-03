@@ -2,7 +2,8 @@
 (function () {
   'use strict';
   var REU = (window.REU = window.REU || {});
-  var routes = REU.routes || {};
+  function getRoutes() { return (window.REU && window.REU.routes) || REU.routes || {}; }
+  var routes = getRoutes();
   var strings = REU.strings || {};
 
   /* -------------------- helpers -------------------- */
@@ -54,6 +55,13 @@
     drawer._release = trapFocus(drawer, opener || null);
     drawer._onEsc = function (e) { if (e.key === 'Escape') closeDrawer(id); };
     document.addEventListener('keydown', drawer._onEsc);
+    if (id === 'SearchDrawer') {
+      var searchInput = drawer.querySelector('[data-search-input]');
+      if (searchInput) {
+        setTimeout(function () { searchInput.focus(); }, 60);
+      }
+      document.dispatchEvent(new CustomEvent('reu:search-open', { detail: { drawer: drawer } }));
+    }
   }
   function closeDrawer(id) {
     var drawer = document.getElementById(id);
@@ -264,28 +272,112 @@
 
   /* -------------------- predictive search -------------------- */
   function initSearch(ctx) {
-    var wrap = $('[data-predictive]', ctx) || $('[data-predictive]');
-    if (!wrap || wrap._bound) return; wrap._bound = true;
-    var input = wrap.querySelector('input[type="search"]');
+    var wrap = (ctx && ctx.querySelector) ? (ctx.querySelector('[data-predictive]') || $('[data-predictive]')) : $('[data-predictive]');
+    if (!wrap || wrap._bound) return;
+    wrap._bound = true;
+
+    var input = wrap.querySelector('[data-search-input], input[type="search"]');
     var results = wrap.querySelector('[data-predictive-results]');
-    if (!input || !results || !routes.predictive_search_url) return;
-    var t;
-    input.addEventListener('input', function () {
-      clearTimeout(t);
+    var form = wrap.querySelector('[data-search-form], form');
+    var recommended = wrap.querySelector('[data-search-recommended]');
+    if (!input || !results) return;
+
+    var recommendedHTML = recommended ? recommended.outerHTML : '';
+    var timer = null;
+    var controller = null;
+    var live = document.getElementById('reu-live');
+
+    function showRecommended() {
+      if (recommendedHTML) {
+        results.innerHTML = recommendedHTML;
+      } else {
+        results.innerHTML = '<p class="search-drawer__hint">Start typing to search products, journal articles, and pages.</p>';
+      }
+      results.hidden = false;
+    }
+
+    function setStatus(msg) {
+      if (live) live.textContent = msg || '';
+    }
+
+    function renderPredictive(html) {
+      var tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      var inner = tmp.querySelector('[data-predictive-inner]');
+      if (inner && inner.innerHTML.trim()) {
+        results.innerHTML = inner.innerHTML;
+        results.hidden = false;
+        setStatus('Search results updated');
+      } else {
+        results.innerHTML = '<p class="search-drawer__empty">No results found.</p>';
+        results.hidden = false;
+        setStatus('No results found');
+      }
+    }
+
+    function runPredictive(q) {
+      var api = getRoutes().predictive_search_url;
+      if (!api) {
+        showRecommended();
+        return;
+      }
+      if (controller && controller.abort) controller.abort();
+      controller = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+
+      var url = api
+        + '?q=' + encodeURIComponent(q)
+        + '&resources[type]=product,article,page'
+        + '&resources[limit]=8'
+        + '&resources[options][unavailable_products]=last'
+        + '&section_id=predictive-search';
+
+      results.classList.add('is-loading');
+      fetch(url, {
+        headers: { Accept: 'text/html' },
+        signal: controller ? controller.signal : undefined
+      })
+        .then(function (r) { return r.text(); })
+        .then(function (html) {
+          results.classList.remove('is-loading');
+          renderPredictive(html);
+        })
+        .catch(function (err) {
+          if (err && err.name === 'AbortError') return;
+          results.classList.remove('is-loading');
+          showRecommended();
+        });
+    }
+
+    function onInput() {
+      clearTimeout(timer);
       var q = input.value.trim();
-      if (q.length < 2) { results.hidden = true; results.innerHTML = ''; return; }
-      t = setTimeout(function () {
-        fetch(routes.predictive_search_url + '?q=' + encodeURIComponent(q) + '&resources[type]=product,article&section_id=predictive-search', { headers: { 'Accept': 'text/html' } })
-          .then(function (r) { return r.text(); })
-          .then(function (html) {
-            var tmp = document.createElement('div'); tmp.innerHTML = html;
-            var inner = tmp.querySelector('[data-predictive-inner]');
-            results.innerHTML = inner ? inner.innerHTML : '';
-            results.hidden = false;
-          });
-      }, 250);
+      if (q.length < 1) {
+        showRecommended();
+        setStatus('');
+        return;
+      }
+      timer = setTimeout(function () { runPredictive(q); }, 180);
+    }
+
+    input.addEventListener('input', onInput);
+    input.addEventListener('search', onInput);
+
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        var q = input.value.trim();
+        if (!q) {
+          e.preventDefault();
+          input.focus();
+          showRecommended();
+        }
+      });
+    }
+
+    document.addEventListener('reu:search-open', function () {
+      if (!input.value.trim()) showRecommended();
     });
-    document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) { results.hidden = true; } });
+
+    showRecommended();
   }
 
   /* -------------------- sticky product bar visibility -------------------- */
