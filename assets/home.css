@@ -1366,7 +1366,16 @@
 .quiz-teaser .h2 { color: #fff; }
 .quiz-teaser .lede { color: rgba(255,255,255,.82); }
 .quiz-teaser__visual { border-radius: var(--card-radius); overflow: hidden; min-height: 240px; background: rgba(255,255,255,.08); }
-.quiz-teaser__visual img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; }
+.quiz-teaser__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 4/3;
+  display: block;
+  filter: none;
+  image-rendering: auto;
+}
 .quiz-teaser__micro { font-size: .85rem; color: rgba(255,255,255,.7); margin-top: .85rem; }
 
 .iwt { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; }

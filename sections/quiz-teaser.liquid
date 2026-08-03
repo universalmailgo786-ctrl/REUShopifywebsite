@@ -14,9 +14,23 @@
       </div>
       <div class="quiz-teaser__visual">
         {%- if section.settings.image != blank -%}
-          {{ section.settings.image | image_url: width: 1200 | image_tag: widths: '600,900,1200', sizes: '(min-width:900px) 40vw, 100vw', loading: 'lazy', alt: section.settings.heading | escape }}
+          {{ section.settings.image
+            | image_url: width: 1600
+            | image_tag:
+              widths: '600,900,1200,1600',
+              sizes: '(min-width:900px) 40vw, 100vw',
+              loading: 'lazy',
+              alt: section.settings.heading | escape
+          }}
         {%- else -%}
-          <img src="{{ 'reu-hydration-watermelon.jpg' | asset_url }}" width="2000" height="1333" alt="" loading="lazy">
+          <img
+            src="{{ 'reu-quiz-visual.jpg' | asset_url }}"
+            width="2048"
+            height="1536"
+            alt="{{ section.settings.heading | default: 'Find your REÚ quiz' | escape }}"
+            loading="lazy"
+            decoding="async"
+          >
         {%- endif -%}
       </div>
     </div>
