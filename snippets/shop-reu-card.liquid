@@ -1,0 +1,65 @@
+{%- liquid
+  assign p = product
+  assign preorder = false
+  if settings.preorder_mode and p.available
+    assign preorder = true
+  endif
+  assign img = p.featured_media
+  if img == blank
+    assign img = p.featured_image
+  endif
+  assign variant = p.selected_or_first_available_variant
+-%}
+<article class="shop-reu-card" role="listitem">
+  <a class="shop-reu-card__media" href="{{ p.url }}" tabindex="-1" aria-hidden="true">
+    {%- if img != blank -%}
+      {{ img
+        | image_url: width: 800
+        | image_tag:
+          widths: '320,480,640,800',
+          sizes: '(min-width: 990px) 28vw, 70vw',
+          loading: 'lazy',
+          alt: p.title
+      }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'shop-reu-card__placeholder' }}
+    {%- endif -%}
+    <span class="shop-reu-card__badges">
+      {%- if preorder -%}
+        <span class="badge badge--preorder">{{ 'products.product.preorder' | t }}</span>
+      {%- elsif settings.preorder_mode -%}
+        <span class="badge badge--preorder">Pre-Order</span>
+      {%- endif -%}
+      {%- unless p.available -%}
+        <span class="badge">{{ 'products.product.sold_out' | t }}</span>
+      {%- endunless -%}
+    </span>
+  </a>
+
+  <div class="shop-reu-card__footer">
+    <div class="shop-reu-card__info">
+      <h3 class="shop-reu-card__title">
+        <a href="{{ p.url }}">{{ p.title }}</a>
+      </h3>
+      <p class="shop-reu-card__price">{% render 'price', product: p %}</p>
+    </div>
+
+    {%- if p.available and variant != blank -%}
+      <form method="post" action="{{ routes.cart_add_url }}" class="shop-reu-card__cart-form" data-product-form>
+        <input type="hidden" name="id" value="{{ variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <button
+          type="submit"
+          class="shop-reu-card__cart"
+          aria-label="{{ 'products.product.add_to_cart' | t | default: 'Add to cart' }} — {{ p.title | escape }}"
+        >
+          {% render 'icon', name: 'cart' %}
+        </button>
+      </form>
+    {%- else -%}
+      <a class="shop-reu-card__cart" href="{{ p.url }}" aria-label="{{ p.title | escape }}">
+        {% render 'icon', name: 'cart' %}
+      </a>
+    {%- endif -%}
+  </div>
+</article>

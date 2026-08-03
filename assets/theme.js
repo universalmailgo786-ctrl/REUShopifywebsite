@@ -483,6 +483,64 @@
     });
   }
 
+  /* -------------------- shop REÚ featured carousel -------------------- */
+  function initShopReu(ctx) {
+    $all('[data-shop-reu]', ctx || document).forEach(function (root) {
+      if (root.getAttribute('data-shop-reu-ready') === '1') return;
+      var track = root.querySelector('[data-shop-reu-track]');
+      var dotsHost = root.querySelector('[data-shop-reu-dots]');
+      if (!track || !dotsHost) return;
+      root.setAttribute('data-shop-reu-ready', '1');
+
+      function cards() {
+        return $all('.shop-reu-card', track);
+      }
+
+      function buildDots() {
+        dotsHost.innerHTML = '';
+        var items = cards();
+        if (items.length < 2) return;
+        items.forEach(function (_, i) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'shop-reu__dot' + (i === 0 ? ' is-active' : '');
+          btn.setAttribute('aria-label', 'Go to product ' + (i + 1));
+          btn.addEventListener('click', function () {
+            items[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+          });
+          dotsHost.appendChild(btn);
+        });
+      }
+
+      function syncDots() {
+        var items = cards();
+        var dots = $all('.shop-reu__dot', dotsHost);
+        if (!items.length || !dots.length) return;
+        var left = track.scrollLeft;
+        var active = 0;
+        var best = Infinity;
+        items.forEach(function (card, i) {
+          var dist = Math.abs(card.offsetLeft - left);
+          if (dist < best) {
+            best = dist;
+            active = i;
+          }
+        });
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle('is-active', i === active);
+        });
+      }
+
+      buildDots();
+      track.addEventListener('scroll', syncDots, { passive: true });
+      window.addEventListener('resize', function () {
+        buildDots();
+        syncDots();
+      });
+      syncDots();
+    });
+  }
+
   /* -------------------- init + Shopify design mode -------------------- */
   function initAll(ctx) {
     initAccordions(ctx);
@@ -493,6 +551,7 @@
     initMediaBanner(ctx);
     initGoalsCarousel(ctx);
     initWellnessCarousel(ctx);
+    initShopReu(ctx);
   }
   document.addEventListener('DOMContentLoaded', function () { initAll(document); });
 

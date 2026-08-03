@@ -1107,6 +1107,228 @@
 .format-card__body { padding: 1.35rem 1.35rem 1.5rem; display: flex; flex-direction: column; gap: .65rem; flex: 1; }
 .format-card__body .btn { align-self: flex-start; margin-top: auto; }
 
+/* ——— Shop REÚ / Featured products ——— */
+.shop-reu {
+  background: #E3E1D5;
+  background: var(--color-cream, #E3E1D5);
+}
+.shop-reu__head {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .shop-reu__head {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    column-gap: 2rem;
+  }
+  .shop-reu__cta {
+    margin-top: .35rem;
+    justify-self: end;
+  }
+}
+.shop-reu__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  margin: 0 0 .85rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(.68rem, 1vw, .78rem);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #BA6C63;
+  color: var(--color-rose, #BA6D64);
+}
+.shop-reu__sparkle {
+  display: inline-flex;
+  width: .95rem;
+  height: .95rem;
+}
+.shop-reu__sparkle .icon {
+  width: 100%;
+  height: 100%;
+}
+.shop-reu__heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  line-height: 1.12;
+  letter-spacing: -.02em;
+  color: #213929;
+  color: var(--color-green, #223829);
+}
+.shop-reu__body {
+  margin: .85rem 0 0;
+  max-width: 38rem;
+  font-size: clamp(.95rem, 1.15vw, 1.05rem);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+.shop-reu__cta {
+  border-radius: 999px;
+  min-height: 3rem;
+}
+.shop-reu__track {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 900px) {
+  .shop-reu__track {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+@media (max-width: 749px) {
+  .shop-reu__cta {
+    width: 100%;
+    justify-content: center;
+  }
+  .shop-reu__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(78%, 280px);
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: .9rem;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+  .shop-reu__track::-webkit-scrollbar { display: none; }
+  .shop-reu__track > * { scroll-snap-align: start; }
+}
+.shop-reu__dots {
+  display: none;
+  justify-content: center;
+  gap: .45rem;
+  margin-top: 1.15rem;
+}
+@media (max-width: 749px) {
+  .shop-reu__dots {
+    display: flex;
+  }
+}
+.shop-reu__dot {
+  width: .55rem;
+  height: .55rem;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  background: color-mix(in srgb, #213929 22%, #E3E1D5);
+  cursor: pointer;
+}
+.shop-reu__dot.is-active {
+  background: #213929;
+  background: var(--color-green, #223829);
+}
+.shop-reu-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #dfe8df;
+  border-radius: calc(var(--card-radius) + 8px);
+  overflow: hidden;
+  min-height: 100%;
+}
+.shop-reu-card__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  background: color-mix(in srgb, #dfe8df 70%, #fff);
+  overflow: hidden;
+}
+.shop-reu-card__media img,
+.shop-reu-card__placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.shop-reu-card__badges {
+  position: absolute;
+  top: .85rem;
+  left: .85rem;
+  z-index: 2;
+  display: flex;
+  gap: .35rem;
+}
+.shop-reu-card__badges .badge {
+  border-radius: 999px;
+  padding: .35em .75em;
+  font-size: .68rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  background: #213929;
+  background: var(--color-green, #223829);
+  color: #fff;
+}
+.shop-reu-card__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: 1rem 1rem 1.15rem;
+}
+.shop-reu-card__info {
+  min-width: 0;
+  flex: 1;
+}
+.shop-reu-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.2;
+  color: #213929;
+  color: var(--color-green, #223829);
+}
+.shop-reu-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+.shop-reu-card__price {
+  margin: .35rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: #213929;
+  color: var(--color-green, #223829);
+}
+.shop-reu-card__cart,
+.shop-reu-card__cart-form {
+  flex: none;
+}
+.shop-reu-card__cart {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 0;
+  background: #fff;
+  color: #213929;
+  color: var(--color-green, #223829);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(33, 57, 41, .12);
+  transition: transform var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.shop-reu-card__cart .icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.shop-reu-card__cart:hover {
+  transform: translateY(-2px);
+  background: #fff;
+}
+
 .product-card {
   background: #fff; border-radius: var(--card-radius); overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--color-green) 8%, transparent);
