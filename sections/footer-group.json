@@ -13,10 +13,21 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "settings": {}
+      "settings": {
+        "tagline": "Live Better. Every Day.",
+        "contact_heading": "Contact us",
+        "support_phone": "",
+        "support_email": "hello@livewithreu.com",
+        "help_label": "Help Center",
+        "shop_heading": "Shop",
+        "menu_shop": "footer-shop",
+        "discover_heading": "Discover",
+        "menu_discover": "footer-learn",
+        "care_heading": "Customer Care",
+        "menu_care": "footer-support",
+        "disclaimer": "Information on this website is provided for general educational purposes and is not medical advice. Always follow the product label and consult a qualified healthcare professional when appropriate."
+      }
     }
   },
-  "order": [
-    "footer"
-  ]
+  "order": ["footer"]
 }
