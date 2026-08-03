@@ -1,67 +1,127 @@
-<section class="section bg-cream">
-  <div class="wrap">
-    <div class="standards__top">
-      <div>
-        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
-        <h2 class="h2">{{ section.settings.heading | newline_to_br }}</h2>
-        {%- if section.settings.body != blank -%}<p class="lede" style="margin-top:1rem">{{ section.settings.body }}</p>{%- endif -%}
-      </div>
-      {%- if section.settings.stat_value != blank -%}
-        <div>
-          <p class="h1" style="font-size:clamp(3rem,6vw,4.5rem)">{{ section.settings.stat_value }}</p>
-          {%- if section.settings.stat_label != blank -%}<p class="text-muted">{{ section.settings.stat_label }}</p>{%- endif -%}
-        </div>
-      {%- endif -%}
-    </div>
+<section
+  class="standards section"
+  aria-labelledby="StandardsHeading-{{ section.id }}"
+>
+  <div class="wrap standards__layout">
     <div class="standards__visual">
       {%- if section.settings.image != blank -%}
-        {{ section.settings.image | image_url: width: 1800 | image_tag: widths: '800,1200,1800', sizes: '100vw', loading: 'lazy', alt: section.settings.heading | escape }}
+        {{ section.settings.image
+          | image_url: width: 1600
+          | image_tag:
+            widths: '640,960,1200,1600',
+            sizes: '(min-width: 990px) 42vw, 92vw',
+            loading: 'lazy',
+            alt: section.settings.heading | escape
+        }}
       {%- else -%}
-        <img src="{{ 'reu-greens-pineapple.jpg' | asset_url }}" width="2000" height="1333" alt="" loading="lazy">
+        <img
+          src="{{ 'reu-greens-pineapple.jpg' | asset_url }}"
+          width="2000"
+          height="1333"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        >
       {%- endif -%}
     </div>
-    <div class="standards-grid">
-      {%- for block in section.blocks -%}
-        <div class="standard-item" {{ block.shopify_attributes }}>
-          <div class="standard-item__icon">{% render 'icon', name: block.settings.icon %}</div>
-          <span>{{ block.settings.title }}</span>
+
+    <div class="standards__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="standards__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="standards__heading" id="StandardsHeading-{{ section.id }}">
+        {{ section.settings.heading | newline_to_br }}
+      </h2>
+      {%- if section.settings.body != blank -%}
+        <p class="standards__body">{{ section.settings.body }}</p>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="standards-grid">
+          {%- for block in section.blocks -%}
+            <div class="standard-item" {{ block.shopify_attributes }}>
+              <div class="standard-item__icon" aria-hidden="true">
+                {% render 'icon', name: block.settings.icon %}
+              </div>
+              <span>{{ block.settings.title }}</span>
+            </div>
+          {%- endfor -%}
         </div>
-      {%- endfor -%}
+      {%- endif -%}
     </div>
   </div>
 </section>
+
 {% schema %}
 {
   "name": "Trust standards",
   "tag": "section",
+  "class": "section-trust-standards",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The REÚ Standard" },
-    { "type": "textarea", "id": "heading", "label": "Heading", "default": "What belongs in your routine\nshould never be a mystery." },
-    { "type": "textarea", "id": "body", "label": "Body", "default": "We believe confidence starts with clarity. Every REÚ product clearly explains what is inside, how to use it, and what to expect—using verified product information only." },
-    { "type": "image_picker", "id": "image", "label": "Product family image" },
-    { "type": "text", "id": "stat_value", "label": "Statistic value", "info": "Leave blank unless verified data exists." },
-    { "type": "text", "id": "stat_label", "label": "Statistic label" }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The REÚ Standard"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What belongs in your routine\nshould never be a mystery."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "We believe confidence starts with clarity. Every REÚ product clearly explains what is inside, how to use it, and what to expect—using verified product information only."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Lifestyle image"
+    }
   ],
   "blocks": [
-    { "type": "standard", "name": "Standard", "settings": [
-      { "type": "select", "id": "icon", "label": "Icon", "options": [
-        { "value": "check", "label": "Check" }, { "value": "leaf", "label": "Leaf" },
-        { "value": "sparkle", "label": "Sparkle" }, { "value": "heart", "label": "Heart" },
-        { "value": "shield", "label": "Shield" }, { "value": "sun", "label": "Sun" }
-      ], "default": "check" },
-      { "type": "text", "id": "title", "label": "Title", "default": "Clearly Listed Ingredients" }
-    ]}
+    {
+      "type": "standard",
+      "name": "Standard",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "check", "label": "Check" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "sun", "label": "Sun" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Clearly Listed Ingredients"
+        }
+      ]
+    }
   ],
-  "presets": [{
-    "name": "Trust standards",
-    "blocks": [
-      { "type": "standard", "settings": { "icon": "check", "title": "Clearly Listed Ingredients" } },
-      { "type": "standard", "settings": { "icon": "sparkle", "title": "Easy-to-Follow Directions" } },
-      { "type": "standard", "settings": { "icon": "shield", "title": "Transparent Product Information" } },
-      { "type": "standard", "settings": { "icon": "leaf", "title": "Thoughtfully Created" } },
-      { "type": "standard", "settings": { "icon": "heart", "title": "Great-Tasting Formats" } },
-      { "type": "standard", "settings": { "icon": "sun", "title": "Designed for Everyday Routines" } }
-    ]
-  }]
+  "presets": [
+    {
+      "name": "Trust standards",
+      "blocks": [
+        { "type": "standard", "settings": { "icon": "check", "title": "Clearly Listed Ingredients" } },
+        { "type": "standard", "settings": { "icon": "sparkle", "title": "Easy-to-Follow Directions" } },
+        { "type": "standard", "settings": { "icon": "shield", "title": "Transparent Product Information" } },
+        { "type": "standard", "settings": { "icon": "leaf", "title": "Thoughtfully Created" } },
+        { "type": "standard", "settings": { "icon": "heart", "title": "Great-Tasting Formats" } },
+        { "type": "standard", "settings": { "icon": "sun", "title": "Designed for Everyday Routines" } }
+      ]
+    }
+  ]
 }
 {% endschema %}
