@@ -1,0 +1,36 @@
+{%- liquid
+  assign label = button_label | default: 'Pre-Order'
+  assign media = product.featured_media
+  if media == blank
+    assign media = product.featured_image
+  endif
+  if media == blank and product.media.size > 0
+    assign media = product.media.first
+  endif
+-%}
+<article class="everyday-wellness__card" role="listitem">
+  <a class="everyday-wellness__card-link" href="{{ product.url }}">
+    <div class="everyday-wellness__card-media">
+      {%- if media != blank -%}
+        {{ media
+          | image_url: width: 800
+          | image_tag:
+            widths: '320,480,640,800',
+            sizes: '(min-width: 990px) 18vw, (min-width: 750px) 28vw, 70vw',
+            loading: 'lazy',
+            alt: product.title
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'everyday-wellness__placeholder' }}
+      {%- endif -%}
+    </div>
+    <div class="everyday-wellness__card-copy">
+      <h3 class="everyday-wellness__card-title">{{ product.title }}</h3>
+      <p class="everyday-wellness__card-price">{{ product.price | money }}</p>
+    </div>
+  </a>
+  <a class="btn btn--on-dark everyday-wellness__card-btn" href="{{ product.url }}">
+    <span>{{ label }}</span>
+    <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span>
+  </a>
+</article>

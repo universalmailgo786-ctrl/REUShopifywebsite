@@ -1,9 +1,15 @@
 {%- liquid
-  assign limit = section.settings.limit | default: 12
+  assign limit = section.settings.limit | default: 24
   assign accent = section.settings.heading_accent | default: 'feeling your best'
   assign bg = section.settings.background_image
   assign collection = section.settings.collection
-  assign products = collection.products
+  assign products = collections.all.products
+
+  if products == blank or products.size == 0
+    if collection != blank
+      assign products = collection.products
+    endif
+  endif
 
   if products == blank or products.size == 0
     assign collection = collections['pouch-collection']
@@ -15,8 +21,10 @@
     assign products = collection.products
   endif
 
+  assign fallback_handles = 'collagen-mixed-berry-pouch,collagen-mixed-berry-sachet,hydration-electrolytes-lemon-lime-pouch,hydration-electrolytes-lemon-lime-sachet,hydration-electrolytes-watermelon-pouch,hydration-electrolytes-watermelon-sachet,hydration-electrolytes-coconut-pouch,hydration-electrolytes-coconut-sachet,greens-pineapple-pouch,greens-pineapple-sachet,daily-wellness-peach-mango-pouch,daily-wellness-peach-mango-sachet,gummies-mixed-berry-pouch,gummies-mixed-berry-sachet,weight-management-pink-lemonade-pouch,weight-management-pink-lemonade-sachet,premium-protein-chocolate-pouch,premium-protein-chocolate-sachet' | split: ','
+  assign use_fallback = false
   if products == blank or products.size == 0
-    assign products = collections.all.products
+    assign use_fallback = true
   endif
 -%}
 <section
@@ -47,8 +55,8 @@
   </div>
   <div class="everyday-wellness__overlay" aria-hidden="true"></div>
 
-  <div class="everyday-wellness__content">
-    <div class="wrap everyday-wellness__head">
+  <div class="everyday-wellness__content wrap">
+    <div class="everyday-wellness__head">
       {%- if section.settings.eyebrow != blank -%}
         <p class="everyday-wellness__eyebrow">
           {%- if section.settings.show_sparkle -%}
@@ -64,7 +72,7 @@
       </h2>
     </div>
 
-    <div class="everyday-wellness__carousel wrap">
+    <div class="everyday-wellness__carousel">
       <button
         type="button"
         class="everyday-wellness__nav everyday-wellness__nav--prev"
@@ -75,39 +83,27 @@
       </button>
 
       <div class="everyday-wellness__track" data-wellness-track tabindex="0" role="list">
-        {%- if products != blank and products.size > 0 -%}
+        {%- if use_fallback == false -%}
           {%- for product in products limit: limit -%}
-            <article class="everyday-wellness__card" role="listitem">
-              <a class="everyday-wellness__card-link" href="{{ product.url }}">
-                <div class="everyday-wellness__card-media">
-                  {%- if product.featured_media -%}
-                    {{ product.featured_media
-                      | image_url: width: 800
-                      | image_tag:
-                        widths: '320,480,640,800',
-                        sizes: '(min-width: 990px) 18vw, (min-width: 750px) 28vw, 70vw',
-                        loading: 'lazy',
-                        alt: product.title
-                    }}
-                  {%- else -%}
-                    {{ 'product-1' | placeholder_svg_tag: 'everyday-wellness__placeholder' }}
-                  {%- endif -%}
-                </div>
-                <div class="everyday-wellness__card-copy">
-                  <h3 class="everyday-wellness__card-title">{{ product.title }}</h3>
-                  <p class="everyday-wellness__card-price">{{ product.price | money }}</p>
-                </div>
-              </a>
-              <a class="btn btn--on-dark everyday-wellness__card-btn" href="{{ product.url }}">
-                <span>{{ section.settings.button_label | default: 'Pre-Order' }}</span>
-                <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span>
-              </a>
-            </article>
+            {%- if product != blank and product.title != blank -%}
+              {% render 'everyday-wellness-card', product: product, button_label: section.settings.button_label %}
+            {%- endif -%}
           {%- endfor -%}
         {%- else -%}
-          <div class="everyday-wellness__empty" role="listitem">
-            <p>Select a collection with products published to the Online Store.</p>
-          </div>
+          {%- assign shown = 0 -%}
+          {%- for handle in fallback_handles -%}
+            {%- if shown >= limit -%}{%- break -%}{%- endif -%}
+            {%- assign product = all_products[handle] -%}
+            {%- if product != blank and product.title != blank -%}
+              {% render 'everyday-wellness-card', product: product, button_label: section.settings.button_label %}
+              {%- assign shown = shown | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if shown == 0 -%}
+            <div class="everyday-wellness__empty" role="listitem">
+              <p>Publish products to the Online Store to show them here.</p>
+            </div>
+          {%- endif -%}
         {%- endif -%}
       </div>
 
@@ -165,16 +161,17 @@
     {
       "type": "collection",
       "id": "collection",
-      "label": "Product collection"
+      "label": "Product collection",
+      "info": "Leave blank to show all Online Store products."
     },
     {
       "type": "range",
       "id": "limit",
       "min": 4,
-      "max": 24,
+      "max": 50,
       "step": 1,
       "label": "Max products",
-      "default": 12
+      "default": 24
     },
     {
       "type": "text",
