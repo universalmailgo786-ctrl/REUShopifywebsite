@@ -31,9 +31,9 @@
     "goals": {
       "type": "shop-by-goal",
       "settings": {
-        "eyebrow": "Shop by goal",
-        "heading": "Start with what\nyou want to feel.",
-        "body": "Your routine should begin with your goals—not a crowded shelf. Choose the support that matters most to you today."
+        "eyebrow": "Shop by format",
+        "heading": "Choose how you\nwant to enjoy REÚ.",
+        "body": "Keep your favourites at home in a full-size pouch, or take the same ritual with you in single-serve sachets."
       },
       "blocks": {
         "g1": { "type": "goal", "settings": { "number": "01", "fallback_asset": "reu-format-pouch.jpg", "title": "Pouch Collection", "text": "Full-size pouches for a consistent at-home wellness routine.", "cta": "Shop Pouches", "collection": "pouch-collection" } },
