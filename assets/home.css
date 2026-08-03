@@ -155,7 +155,8 @@
 /* ——— Why REÚ / Brand introduction ——— */
 .brand-intro.section {
   padding-block: calc(var(--section-y) * 0.8);
-  background: var(--color-cream);
+  background: #E3E1D5;
+  background: var(--color-cream, #E3E1D5);
 }
 .brand-intro .eyebrow {
   font-size: clamp(.55rem, .8vw, .65rem);
