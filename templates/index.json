@@ -170,17 +170,6 @@
         "body": ""
       }
     },
-    "preorder": {
-      "type": "preorder-reassurance",
-      "settings": {
-        "eyebrow": "First release",
-        "heading": "Reserve your\nREÚ favourites.",
-        "body": "Pre-order today to secure your products from the first production release. We’ll keep you informed by email, and you may cancel for a full refund at any time before shipment.",
-        "ship_window": "September – October 2026",
-        "cta_label": "Shop Pre-Order",
-        "cta_link": "shopify://collections/all"
-      }
-    },
     "social": {
       "type": "social-feed",
       "settings": {
@@ -221,7 +210,6 @@
     "journal",
     "faq",
     "media_banner",
-    "preorder",
     "social",
     "newsletter"
   ]
