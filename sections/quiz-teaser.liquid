@@ -7,7 +7,7 @@
         {%- if section.settings.body != blank -%}<p class="lede" style="margin-top:1rem">{{ section.settings.body }}</p>{%- endif -%}
         {%- if section.settings.cta_label != blank -%}
           <div style="margin-top:1.5rem">
-            <a class="btn btn--on-dark" href="{{ section.settings.cta_link | default: routes.root_url }}">{{ section.settings.cta_label }} <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a>
+            <a class="btn" href="{{ section.settings.cta_link | default: routes.root_url }}">{{ section.settings.cta_label }} <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a>
           </div>
         {%- endif -%}
         {%- if section.settings.microcopy != blank -%}<p class="quiz-teaser__micro">{{ section.settings.microcopy }}</p>{%- endif -%}
