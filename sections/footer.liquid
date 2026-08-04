@@ -1,7 +1,6 @@
 {%- liquid
   assign menu_shop = section.settings.menu_shop
   assign menu_discover = section.settings.menu_discover
-  assign menu_care = section.settings.menu_care
   assign support_email = section.settings.support_email | default: settings.support_email
   assign support_phone = section.settings.support_phone
   assign help_label = section.settings.help_label
@@ -122,19 +121,15 @@
 
       <nav class="site-footer__nav" aria-label="{{ section.settings.care_heading | default: 'Policies' }}">
         <p class="site-footer__label">{{ section.settings.care_heading | default: 'Policies' }}</p>
-        {%- if menu_care != blank and menu_care.links.size > 0 -%}
-          {%- for link in menu_care.links -%}
-            {%- if link.url != blank and link.url != '#' -%}
-              <a href="{{ link.url }}">{{ link.title }}</a>
-            {%- endif -%}
-          {%- endfor -%}
-        {%- else -%}
-          <a href="{{ privacy_url }}">Privacy Policy</a>
-          <a href="{{ refund_url }}">Refund &amp; Cancellation Policy</a>
-          <a href="{{ shipping_url }}">Shipping &amp; Pre-Order Policy</a>
-          <a href="{{ terms_url }}">Terms &amp; Conditions</a>
-          {%- if faq_page != blank -%}<a href="{{ faq_page.url }}">{{ faq_page.title }}</a>{%- endif -%}
-          {%- if contact_page != blank -%}<a href="{{ contact_page.url }}">{{ contact_page.title }}</a>{%- endif -%}
+        <a href="{{ privacy_url }}">Privacy Policy</a>
+        <a href="{{ refund_url }}">Refund &amp; Cancellation Policy</a>
+        <a href="{{ shipping_url }}">Shipping &amp; Pre-Order Policy</a>
+        <a href="{{ terms_url }}">Terms &amp; Conditions</a>
+        {%- if faq_page != blank -%}
+          <a href="{{ faq_page.url }}">{{ faq_page.title }}</a>
+        {%- endif -%}
+        {%- if contact_page != blank -%}
+          <a href="{{ contact_page.url }}">{{ contact_page.title }}</a>
         {%- endif -%}
       </nav>
     </div>
@@ -190,7 +185,7 @@
     { "type": "text", "id": "discover_heading", "label": "Discover column label", "default": "Discover" },
     { "type": "link_list", "id": "menu_discover", "label": "Discover menu", "info": "Optional. If empty, only existing pages/blogs are listed." },
     { "type": "text", "id": "care_heading", "label": "Policies column label", "default": "Policies" },
-    { "type": "link_list", "id": "menu_care", "label": "Policies menu", "info": "Optional. If empty, only published Shopify policies and existing pages are listed." },
+    { "type": "paragraph", "content": "The Policies column always shows Privacy, Refund & Cancellation, Shipping & Pre-Order, and Terms & Conditions linking to Shopify’s native /policies routes." },
     { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "Information on this website is provided for general educational purposes and is not medical advice. Always follow the product label and consult a qualified healthcare professional when appropriate." }
   ]
 }
