@@ -256,12 +256,7 @@
         <a href="{{ refund_url }}">Refund &amp; Cancellation Policy</a>
         <a href="{{ shipping_url }}">Shipping &amp; Pre-Order Policy</a>
         <a href="{{ terms_url }}">Terms &amp; Conditions</a>
-        {%- if contact_page != blank -%}<a href="{{ contact_page.url }}">{{ contact_page.title }}</a>{%- endif -%}
       </nav>
-
-      <a class="site-footer__totop" href="#MainContent" aria-label="Back to top">
-        {% render 'icon', name: 'chevron-up' %}
-      </a>
     </div>
   </div>
 </footer>
