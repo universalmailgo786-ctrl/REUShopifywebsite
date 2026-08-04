@@ -12,35 +12,33 @@
     "hero": {
       "type": "page-hero",
       "settings": {
-        "fallback_asset": "reu-our-story.jpg",
         "eyebrow": "OUR STORY",
         "heading": "Wellness made for the way women really live.",
         "body": "<p>REÚ was created to make daily wellness feel simpler, more enjoyable and easier to make your own.</p>",
         "cta_label": "Find My Routine",
         "cta_link": "shopify://pages/find-your-reu",
+        "fallback_asset": "reu-our-story.jpg",
         "center": false,
         "narrow": false,
         "bg_scheme": "bg-blush"
       }
     },
-    "story": {
-      "type": "rich-text",
+    "story_mission": {
+      "type": "story-mission",
       "settings": {
-        "heading": "Our story",
-        "content": "<p>Wellness can feel crowded with complicated routines, unclear promises and products that are difficult to sustain. REÚ began with a more thoughtful idea: create high-quality, great-tasting supplements for women and present them through a modern experience built on clarity and confidence.</p><p>We consider every part of the journey—from formula and flavour to packaging and guidance—to help wellness fit more naturally into everyday life. Whether your focus is hydration, beauty, greens, performance, protein or a more consistent routine, REÚ is here to help you begin with intention and keep moving in a way that feels like you.</p>",
-        "narrow": true
-      }
-    },
-    "mission": {
-      "type": "rich-text",
-      "settings": {
-        "heading": "Our mission",
-        "content": "<p>To empower women to feel their best every day by making high-quality wellness simple, enjoyable and effective.</p>",
-        "narrow": true
+        "story_heading": "Our story",
+        "story_content": "<p>Wellness can feel crowded with complicated routines, unclear promises and products that are difficult to sustain. REÚ began with a more thoughtful idea: create high-quality, great-tasting supplements for women and present them through a modern experience built on clarity and confidence.</p><p>We consider every part of the journey—from formula and flavour to packaging and guidance—to help wellness fit more naturally into everyday life. Whether your focus is hydration, beauty, greens, performance, protein or a more consistent routine, REÚ is here to help you begin with intention and keep moving in a way that feels like you.</p>",
+        "mission_heading": "Our mission",
+        "mission_content": "<p>To empower women to feel their best every day by making high-quality wellness simple, enjoyable and effective.</p>",
+        "bg_scheme": ""
       }
     },
     "values": {
       "type": "values-grid",
+      "settings": {
+        "eyebrow": "Our values",
+        "heading": "What guides REÚ"
+      },
       "blocks": {
         "v1": {
           "type": "value",
@@ -84,70 +82,25 @@
         "v3",
         "v4",
         "v5"
-      ],
-      "settings": {
-        "eyebrow": "Our values",
-        "heading": "What guides REÚ"
-      }
+      ]
     },
     "standard": {
       "type": "trust-standards",
       "blocks": {
-        "t1": {
-          "type": "standard",
-          "settings": {
-            "icon": "check",
-            "title": "Clearly listed ingredients"
-          }
-        },
-        "t2": {
-          "type": "standard",
-          "settings": {
-            "icon": "sparkle",
-            "title": "Easy-to-follow directions"
-          }
-        },
-        "t3": {
-          "type": "standard",
-          "settings": {
-            "icon": "shield",
-            "title": "Transparent product information"
-          }
-        },
-        "t4": {
-          "type": "standard",
-          "settings": {
-            "icon": "leaf",
-            "title": "Thoughtfully created formats"
-          }
-        },
-        "t5": {
-          "type": "standard",
-          "settings": {
-            "icon": "heart",
-            "title": "Great-tasting options"
-          }
-        },
-        "t6": {
-          "type": "standard",
-          "settings": {
-            "icon": "sun",
-            "title": "Designed for everyday routines"
-          }
-        }
+        "t1": { "type": "standard", "settings": { "icon": "check", "title": "Clearly listed ingredients" } },
+        "t2": { "type": "standard", "settings": { "icon": "sparkle", "title": "Easy-to-follow directions" } },
+        "t3": { "type": "standard", "settings": { "icon": "shield", "title": "Transparent product information" } },
+        "t4": { "type": "standard", "settings": { "icon": "leaf", "title": "Thoughtfully created formats" } },
+        "t5": { "type": "standard", "settings": { "icon": "heart", "title": "Great-tasting options" } },
+        "t6": { "type": "standard", "settings": { "icon": "sun", "title": "Designed for everyday routines" } }
       },
-      "block_order": [
-        "t1",
-        "t2",
-        "t3",
-        "t4",
-        "t5",
-        "t6"
-      ],
+      "block_order": ["t1", "t2", "t3", "t4", "t5", "t6"],
       "settings": {
         "eyebrow": "The REÚ Standard",
         "heading": "What belongs in your routine\nshould never be a mystery.",
-        "body": "Confidence starts with clarity. Every product page clearly explains what is inside, how to use it and what to expect—using supplier-verified information only."
+        "body": "Confidence starts with clarity. Every product page clearly explains what is inside, how to use it and what to expect—using supplier-verified information only.",
+        "fallback_asset": "reu-standards-clarity.jpg",
+        "image_alt": "Woman preparing a REÚ Hydration Electrolytes drink on a court"
       }
     },
     "closing": {
@@ -156,19 +109,18 @@
         "eyebrow": "",
         "heading": "Your body. Your goals. Your REÚ.",
         "body": "<p>Wellness is personal. Your routine should be too.</p>",
-        "use_h1": false,
         "cta_label": "Find My Routine",
         "cta_link": "shopify://pages/find-your-reu",
         "cta2_label": "Shop All Products",
         "cta2_link": "shopify://collections/all",
-        "bg_scheme": "bg-cream"
+        "bg_scheme": "bg-cream",
+        "use_h1": false
       }
     }
   },
   "order": [
     "hero",
-    "story",
-    "mission",
+    "story_mission",
     "values",
     "standard",
     "closing"

@@ -1,0 +1,53 @@
+<section class="story-mission section {{ section.settings.bg_scheme }}">
+  <div class="wrap">
+    <div class="story-mission__grid">
+      <article class="story-mission__col">
+        {%- if section.settings.story_eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.story_eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.story_heading != blank -%}
+          <h2 class="h2 story-mission__heading">{{ section.settings.story_heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.story_content != blank -%}
+          <div class="story-mission__body rte">{{ section.settings.story_content }}</div>
+        {%- endif -%}
+      </article>
+
+      <article class="story-mission__col story-mission__col--mission">
+        {%- if section.settings.mission_eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.mission_eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.mission_heading != blank -%}
+          <h2 class="h2 story-mission__heading">{{ section.settings.mission_heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.mission_content != blank -%}
+          <div class="story-mission__body rte story-mission__body--mission">{{ section.settings.mission_content }}</div>
+        {%- endif -%}
+      </article>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Story + Mission",
+  "tag": "section",
+  "class": "section-story-mission",
+  "settings": [
+    { "type": "header", "content": "Our story" },
+    { "type": "text", "id": "story_eyebrow", "label": "Story eyebrow" },
+    { "type": "text", "id": "story_heading", "label": "Story heading", "default": "Our story" },
+    { "type": "richtext", "id": "story_content", "label": "Story content", "default": "<p>Wellness can feel crowded with complicated routines, unclear promises and products that are difficult to sustain.</p>" },
+    { "type": "header", "content": "Our mission" },
+    { "type": "text", "id": "mission_eyebrow", "label": "Mission eyebrow" },
+    { "type": "text", "id": "mission_heading", "label": "Mission heading", "default": "Our mission" },
+    { "type": "richtext", "id": "mission_content", "label": "Mission content", "default": "<p>To empower women to feel their best every day by making high-quality wellness simple, enjoyable and effective.</p>" },
+    { "type": "select", "id": "bg_scheme", "label": "Background", "options": [
+      { "value": "", "label": "White" },
+      { "value": "bg-cream", "label": "Cream" },
+      { "value": "bg-blush", "label": "Blush" },
+      { "value": "bg-lilac", "label": "Lilac" }
+    ], "default": "" }
+  ],
+  "presets": [{ "name": "Story + Mission" }]
+}
+{% endschema %}
