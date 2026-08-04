@@ -1238,11 +1238,13 @@
     grid-auto-columns: minmax(78%, 280px);
     grid-template-columns: none;
     overflow-x: auto;
+    overflow-y: visible;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     gap: .9rem;
     margin-inline: calc(var(--gutter) * -1);
     padding-inline: var(--gutter);
+    padding-bottom: .35rem;
     scrollbar-width: none;
   }
   .shop-reu__track::-webkit-scrollbar { display: none; }
