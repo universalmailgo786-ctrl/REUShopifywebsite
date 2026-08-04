@@ -283,12 +283,10 @@ h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
   pointer-events: none;
   background:
     linear-gradient(
-      90deg,
-      rgba(34, 56, 41, 0.46) 0%,
-      rgba(34, 56, 41, 0.24) 30%,
-      rgba(34, 56, 41, 0.06) 52%,
-      rgba(34, 56, 41, 0) 68%,
-      rgba(34, 56, 41, 0) 100%
+      180deg,
+      rgba(34, 56, 41, 0.28) 0%,
+      rgba(34, 56, 41, 0.18) 42%,
+      rgba(34, 56, 41, 0.34) 100%
     );
 }
 .contact-page__hero-inner {
@@ -297,10 +295,13 @@ h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding-block: clamp(3.25rem, 8vw, 5.5rem);
 }
 .contact-page__hero-copy {
-  max-width: min(36rem, 48%);
+  max-width: min(40rem, 92%);
+  margin-inline: auto;
+  text-align: center;
   color: #F7F4EE;
   text-shadow: 0 1px 16px rgba(20, 32, 24, 0.35);
 }
@@ -310,14 +311,14 @@ h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
 }
 .contact-page__hero-copy .h2 {
   color: #fff;
-  margin: 0;
-  max-width: 12ch;
+  margin: 0 auto;
+  max-width: 14ch;
   text-wrap: balance;
 }
 .contact-page__hero-copy .lede {
-  margin: .85rem 0 0;
+  margin: .85rem auto 0;
   color: rgba(247, 244, 238, 0.94);
-  max-width: 34rem;
+  max-width: 36rem;
 }
 @media (max-width: 899px) {
   .contact-page__hero {
