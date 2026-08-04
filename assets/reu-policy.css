@@ -251,11 +251,29 @@
 .reu-policy__help .btn {
   --btn-bg: #F4E2DB;
   --btn-fg: #223829;
-  --btn-hover-bg: #fff;
-  --btn-hover-fg: #223829;
+  --btn-hover-bg: #BA6D64;
+  --btn-hover-fg: #fff;
   background: #F4E2DB;
   color: #223829;
-  border-color: transparent;
+  border-color: #F4E2DB;
+  transition: background var(--dur, .25s) var(--ease, ease), color var(--dur, .25s) var(--ease, ease), border-color var(--dur, .25s) var(--ease, ease), transform var(--dur, .25s) var(--ease, ease), box-shadow var(--dur, .25s) var(--ease, ease);
+}
+.reu-policy__help .btn:hover,
+.reu-policy__help .btn:focus-visible {
+  background: #BA6D64;
+  border-color: #BA6D64;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+.reu-policy__help .btn .btn__arrow {
+  background: color-mix(in srgb, #223829 12%, transparent);
+  color: #223829;
+}
+.reu-policy__help .btn:hover .btn__arrow,
+.reu-policy__help .btn:focus-visible .btn__arrow {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
 }
 @media (max-width: 749px) {
   .reu-policy__hero-inner,
