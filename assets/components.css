@@ -881,7 +881,10 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
   object-fit: cover;
   object-position: right center;
   display: block;
-  filter: none;
+  filter: none !important;
+  -webkit-filter: none !important;
+  transform: none;
+  image-rendering: -webkit-optimize-contrast;
   image-rendering: auto;
 }
 .page-hero__banner-scrim {
@@ -889,14 +892,13 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  /* Light left shade only — keep the lifestyle photo sharp and vivid */
+  /* Minimal left shade for text — keep lifestyle photo crisp */
   background:
     linear-gradient(
       90deg,
-      rgba(34, 56, 41, 0.34) 0%,
-      rgba(34, 56, 41, 0.14) 28%,
-      rgba(34, 56, 41, 0.02) 48%,
-      rgba(34, 56, 41, 0) 64%,
+      rgba(34, 56, 41, 0.22) 0%,
+      rgba(34, 56, 41, 0.08) 26%,
+      rgba(34, 56, 41, 0) 48%,
       rgba(34, 56, 41, 0) 100%
     );
 }
@@ -952,10 +954,10 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
     background:
       linear-gradient(
         180deg,
-        rgba(34, 56, 41, 0.28) 0%,
-        rgba(34, 56, 41, 0.12) 38%,
-        rgba(34, 56, 41, 0.08) 68%,
-        rgba(34, 56, 41, 0.22) 100%
+        rgba(34, 56, 41, 0.16) 0%,
+        rgba(34, 56, 41, 0.04) 40%,
+        rgba(34, 56, 41, 0.04) 70%,
+        rgba(34, 56, 41, 0.14) 100%
       );
   }
   .page-hero__banner-copy {
