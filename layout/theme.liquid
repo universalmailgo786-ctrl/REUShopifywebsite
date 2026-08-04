@@ -73,7 +73,7 @@
         elsif request.page_type == 'page' and page != blank
           assign ph = page.handle | downcase
           assign pt = page.title | downcase
-          if ph contains 'privacy' or ph contains 'refund' or ph contains 'cancellation' or ph contains 'shipping' or ph contains 'terms' or ph contains 'pre-order' or pt contains 'privacy' or pt contains 'refund' or pt contains 'cancellation' or pt contains 'shipping' or pt contains 'terms' or pt contains 'pre-order'
+          if ph contains 'privacy' or ph contains 'refund' or ph contains 'cancellation' or ph contains 'shipping' or ph contains 'terms' or ph contains 'condition' or ph contains 'pre-order' or pt contains 'privacy' or pt contains 'refund' or pt contains 'cancellation' or pt contains 'shipping' or pt contains 'terms' or pt contains 'condition' or pt contains 'pre-order'
             assign reu_policy_route = true
           endif
         endif

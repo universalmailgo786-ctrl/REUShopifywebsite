@@ -16,12 +16,18 @@
   assign shipping = shop.shipping_policy
   assign terms = shop.terms_of_service
 
-  assign privacy_page = pages['privacy-policy']
+  assign privacy_page = section.settings.privacy_page
+  if privacy_page == blank
+    assign privacy_page = pages['privacy-policy']
+  endif
   if privacy_page == blank
     assign privacy_page = pages.privacy
   endif
 
-  assign refund_page = pages['refund-cancellation-policy']
+  assign refund_page = section.settings.refund_page
+  if refund_page == blank
+    assign refund_page = pages['refund-cancellation-policy']
+  endif
   if refund_page == blank
     assign refund_page = pages['refund-policy']
   endif
@@ -29,7 +35,10 @@
     assign refund_page = pages['refund-cancellation']
   endif
 
-  assign shipping_page = pages['shipping-pre-order-policy']
+  assign shipping_page = section.settings.shipping_page
+  if shipping_page == blank
+    assign shipping_page = pages['shipping-pre-order-policy']
+  endif
   if shipping_page == blank
     assign shipping_page = pages['shipping-policy']
   endif
@@ -37,36 +46,74 @@
     assign shipping_page = pages.shipping
   endif
 
-  assign terms_page = pages['terms-conditions']
+  comment
+    Terms page handles vary a lot ("Terms & Conditions", "Terms and Conditions", etc.).
+    Prefer Theme Editor pick, then common handles, and only keep a match if title/handle looks like Terms.
+  endcomment
+  assign terms_page = section.settings.terms_page
   if terms_page == blank
-    assign terms_page = pages['terms-of-service']
+    assign terms_page = pages['terms-conditions']
   endif
   if terms_page == blank
     assign terms_page = pages['terms-and-conditions']
   endif
   if terms_page == blank
+    assign terms_page = pages['terms-of-service']
+  endif
+  if terms_page == blank
+    assign terms_page = pages['terms-of-use']
+  endif
+  if terms_page == blank
+    assign terms_page = pages['terms-condition']
+  endif
+  if terms_page == blank
+    assign terms_page = pages['term-conditions']
+  endif
+  if terms_page == blank
+    assign terms_page = pages['store-terms']
+  endif
+  if terms_page == blank
     assign terms_page = pages.terms
   endif
 
-  if privacy_page != blank
-    assign privacy_url = privacy_page.url
-  else
-    assign privacy_url = privacy.url | default: '/policies/privacy-policy'
-  endif
-  if refund_page != blank
-    assign refund_url = refund_page.url
-  else
-    assign refund_url = refund.url | default: '/policies/refund-policy'
-  endif
-  if shipping_page != blank
-    assign shipping_url = shipping_page.url
-  else
-    assign shipping_url = shipping.url | default: '/policies/shipping-policy'
-  endif
   if terms_page != blank
-    assign terms_url = terms_page.url
+    assign terms_handle_check = terms_page.handle | default: '' | downcase
+    assign terms_title_check = terms_page.title | default: '' | downcase
+    unless terms_handle_check contains 'term' or terms_title_check contains 'term' or terms_title_check contains 'condition'
+      assign terms_page = blank
+    endunless
+  endif
+
+  if privacy_page != blank and privacy_page.url != blank
+    assign privacy_url = privacy_page.url
+  elsif privacy != blank and privacy.url != blank
+    assign privacy_url = privacy.url
   else
-    assign terms_url = terms.url | default: '/policies/terms-of-service'
+    assign privacy_url = '/policies/privacy-policy'
+  endif
+
+  if refund_page != blank and refund_page.url != blank
+    assign refund_url = refund_page.url
+  elsif refund != blank and refund.url != blank
+    assign refund_url = refund.url
+  else
+    assign refund_url = '/policies/refund-policy'
+  endif
+
+  if shipping_page != blank and shipping_page.url != blank
+    assign shipping_url = shipping_page.url
+  elsif shipping != blank and shipping.url != blank
+    assign shipping_url = shipping.url
+  else
+    assign shipping_url = '/policies/shipping-policy'
+  endif
+
+  if terms_page != blank and terms_page.url != blank
+    assign terms_url = terms_page.url
+  elsif terms != blank and terms.url != blank
+    assign terms_url = terms.url
+  else
+    assign terms_url = '/policies/terms-of-service'
   endif
 
   assign about_page = pages['about-reu']
@@ -233,7 +280,11 @@
     { "type": "text", "id": "discover_heading", "label": "Discover column label", "default": "Discover" },
     { "type": "link_list", "id": "menu_discover", "label": "Discover menu", "info": "Optional. If empty, only existing pages/blogs are listed." },
     { "type": "text", "id": "care_heading", "label": "Policies column label", "default": "Policies" },
-    { "type": "paragraph", "content": "Policies link to matching Online Store pages when they exist (same Privacy style), otherwise to Shopify /policies routes." },
+    { "type": "paragraph", "content": "Policies prefer Online Store pages (same Privacy style). If Terms still opens the wrong URL, pick the Terms page below." },
+    { "type": "page", "id": "privacy_page", "label": "Privacy Policy page" },
+    { "type": "page", "id": "refund_page", "label": "Refund & Cancellation page" },
+    { "type": "page", "id": "shipping_page", "label": "Shipping & Pre-Order page" },
+    { "type": "page", "id": "terms_page", "label": "Terms & Conditions page" },
     { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "Information on this website is provided for general educational purposes and is not medical advice. Always follow the product label and consult a qualified healthcare professional when appropriate." }
   ]
 }
