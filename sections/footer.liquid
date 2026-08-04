@@ -17,6 +17,11 @@
   assign shipping = shop.shipping_policy
   assign terms = shop.terms_of_service
 
+  assign privacy_url = privacy.url | default: '/policies/privacy-policy'
+  assign refund_url = refund.url | default: '/policies/refund-policy'
+  assign shipping_url = shipping.url | default: '/policies/shipping-policy'
+  assign terms_url = terms.url | default: '/policies/terms-of-service'
+
   assign about_page = pages['about-reu']
   if about_page == blank
     assign about_page = pages.about
@@ -124,10 +129,10 @@
             {%- endif -%}
           {%- endfor -%}
         {%- else -%}
-          {%- if privacy != blank -%}<a href="{{ privacy.url }}">Privacy Policy</a>{%- endif -%}
-          {%- if refund != blank -%}<a href="{{ refund.url }}">Refund &amp; Cancellation Policy</a>{%- endif -%}
-          {%- if shipping != blank -%}<a href="{{ shipping.url }}">Shipping &amp; Pre-Order Policy</a>{%- endif -%}
-          {%- if terms != blank -%}<a href="{{ terms.url }}">Terms &amp; Conditions</a>{%- endif -%}
+          <a href="{{ privacy_url }}">Privacy Policy</a>
+          <a href="{{ refund_url }}">Refund &amp; Cancellation Policy</a>
+          <a href="{{ shipping_url }}">Shipping &amp; Pre-Order Policy</a>
+          <a href="{{ terms_url }}">Terms &amp; Conditions</a>
           {%- if faq_page != blank -%}<a href="{{ faq_page.url }}">{{ faq_page.title }}</a>{%- endif -%}
           {%- if contact_page != blank -%}<a href="{{ contact_page.url }}">{{ contact_page.title }}</a>{%- endif -%}
         {%- endif -%}
@@ -157,10 +162,10 @@
       </div>
 
       <nav class="site-footer__legal" aria-label="Legal">
-        {%- if privacy != blank -%}<a href="{{ privacy.url }}">Privacy Policy</a>{%- endif -%}
-        {%- if refund != blank -%}<a href="{{ refund.url }}">Refund &amp; Cancellation Policy</a>{%- endif -%}
-        {%- if shipping != blank -%}<a href="{{ shipping.url }}">Shipping &amp; Pre-Order Policy</a>{%- endif -%}
-        {%- if terms != blank -%}<a href="{{ terms.url }}">Terms &amp; Conditions</a>{%- endif -%}
+        <a href="{{ privacy_url }}">Privacy Policy</a>
+        <a href="{{ refund_url }}">Refund &amp; Cancellation Policy</a>
+        <a href="{{ shipping_url }}">Shipping &amp; Pre-Order Policy</a>
+        <a href="{{ terms_url }}">Terms &amp; Conditions</a>
         {%- if contact_page != blank -%}<a href="{{ contact_page.url }}">{{ contact_page.title }}</a>{%- endif -%}
       </nav>
 
