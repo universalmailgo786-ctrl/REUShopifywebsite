@@ -91,21 +91,40 @@
     {%- if is_pouch or is_sachet or section.settings.show_benefits -%}
       <ul class="collection-benefits" role="list">
         {%- if is_pouch -%}
-          <li>Full-size everyday format</li>
-          <li>Easy to keep within reach</li>
-          <li>A consistent addition to your routine</li>
-          <li>Available across multiple wellness goals</li>
+          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>Full-size everyday format</span></li>
+          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>Easy to keep within reach</span></li>
+          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>A consistent addition to your routine</span></li>
+          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>Available across multiple wellness goals</span></li>
         {%- elsif is_sachet -%}
-          <li>Convenient single serves</li>
-          <li>Easy to carry and store</li>
-          <li>Made for movement and travel</li>
-          <li>A simple way to try different flavours</li>
+          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>Convenient single serves</span></li>
+          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>Easy to carry and store</span></li>
+          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>Made for movement and travel</span></li>
+          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>A simple way to try different flavours</span></li>
         {%- else -%}
           {%- for block in section.blocks -%}
-            {%- if block.type == 'benefit' -%}<li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>{%- endif -%}
+            {%- if block.type == 'benefit' -%}
+              <li {{ block.shopify_attributes }}>
+                <span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span>
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endif -%}
           {%- endfor -%}
         {%- endif -%}
       </ul>
+    {%- endif -%}
+
+    {%- if is_pouch or is_sachet -%}
+      <div class="discovery-bar collection-goal-bar" role="region" aria-label="Shop by goal">
+        <p class="discovery-bar__prompt">Filter by wellness goal</p>
+        <div class="discovery-bar__chips" role="list">
+          {%- assign goals = 'Hydration|Hydration,Beauty & Collagen|Beauty,Daily Wellness|Daily Wellness,Greens|Greens,Energy|Energy,Weight Management|Weight Management,Protein|Protein' | split: ',' -%}
+          {%- for g in goals -%}
+            {%- assign parts = g | split: '|' -%}
+            <a class="filter-chip" role="listitem" href="{{ col.url }}?filter.p.m.custom.goal={{ parts[1] | url_encode }}">{{ parts[0] }}</a>
+          {%- endfor -%}
+          <a class="filter-chip" href="{{ col.url }}">Clear all</a>
+        </div>
+      </div>
     {%- endif -%}
 
     <div class="section-head" id="CollectionGrid" style="scroll-margin-top:6rem">
@@ -136,16 +155,29 @@
     </div>
 
     <div class="collection-layout">
-      <aside class="facets-desktop desktop-only" aria-label="Filters">
-        {% render 'facets', results: col, sort_by: sort_by %}
+      <aside class="facets-desktop" aria-label="{{ 'products.facets.filter_and_sort' | t }}">
+        <p class="facets-desktop__title">{{ 'products.facets.filter_and_sort' | t }}</p>
+        {% render 'facets', results: col, sort_by: sort_by, mobile: false %}
       </aside>
 
-      <div>
+      <div class="collection-layout__main">
         <div class="facets-bar">
-          <button class="btn btn--secondary mobile-only" data-drawer-open="FacetsDrawer" aria-controls="FacetsDrawer">{% render 'icon', name: 'menu' %} {{ 'products.facets.filter_and_sort' | t }}</button>
+          <button
+            type="button"
+            class="btn btn--secondary facets-bar__toggle"
+            data-drawer-open="FacetsDrawer"
+            aria-controls="FacetsDrawer"
+          >
+            <span class="facets-bar__toggle-icon" aria-hidden="true">{% render 'icon', name: 'menu' %}</span>
+            {{ 'products.facets.filter_and_sort' | t }}
+          </button>
           <span class="text-muted">{{ 'products.facets.results' | t: count: col.products_count }}</span>
-          <form method="get" class="desktop-only">
-            {%- for f in col.filters -%}{%- for v in f.active_values -%}<input type="hidden" name="{{ v.param_name }}" value="{{ v.value }}">{%- endfor -%}{%- endfor -%}
+          <form method="get" class="facets-bar__sort" action="{{ col.url }}">
+            {%- for f in col.filters -%}
+              {%- for v in f.active_values -%}
+                <input type="hidden" name="{{ v.param_name }}" value="{{ v.value }}">
+              {%- endfor -%}
+            {%- endfor -%}
             <label class="visually-hidden" for="SortBy">{{ 'products.facets.sort_by' | t }}</label>
             <select class="select" id="SortBy" name="sort_by" onchange="this.form.submit()">
               {%- for option in col.sort_options -%}
@@ -221,12 +253,12 @@
 </section>
 {%- endif -%}
 
-<div id="FacetsDrawer" class="drawer drawer--right mobile-only" data-drawer hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'products.facets.filter_and_sort' | t }}">
+<div id="FacetsDrawer" class="drawer drawer--right" data-drawer hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'products.facets.filter_and_sort' | t }}">
   <div class="drawer__overlay" data-drawer-overlay></div>
   <div class="drawer__panel">
     <div class="drawer__header">
       <span class="drawer__title">{{ 'products.facets.filter_and_sort' | t }}</span>
-      <button class="header-icon" data-drawer-close="FacetsDrawer" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+      <button type="button" class="header-icon" data-drawer-close="FacetsDrawer" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
     </div>
     <div class="drawer__body">
       {% render 'facets', results: col, sort_by: sort_by, mobile: true %}

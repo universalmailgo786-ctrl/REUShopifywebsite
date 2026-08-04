@@ -50,6 +50,7 @@
     <span class="product-card__cta">
       <a class="btn btn--secondary btn--block" href="{{ p.url }}">
         {%- if preorder -%}{{ 'products.product.preorder' | t }}{%- else -%}{{ 'products.product.view_details' | t }}{%- endif -%}
+        <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span>
       </a>
     </span>
   </div>
