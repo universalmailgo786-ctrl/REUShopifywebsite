@@ -243,9 +243,34 @@ h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
 }
 
 /* Contact page — support details + quick help */
+.contact-page {
+  background: transparent;
+}
+.contact-page__band {
+  width: 100%;
+}
+.contact-page__band--cream {
+  background: var(--color-cream, #E2E1D6);
+  padding-block: clamp(2.75rem, 6vw, 4.25rem);
+}
+.contact-page__band--sage {
+  background: var(--color-sage, #E1E8E0);
+  padding-block: clamp(2.75rem, 6vw, 4.5rem);
+}
+.contact-page__band--cream .section-head {
+  margin-bottom: 0;
+}
+.contact-page__band--sage .input,
+.contact-page__band--sage .select,
+.contact-page__band--sage .textarea {
+  background: color-mix(in srgb, #fff 78%, var(--color-sage, #E1E8E0));
+}
 .contact-aside {
-  margin-top: var(--space-lg, 2rem);
+  margin-top: 0;
   padding: clamp(1.15rem, 2.5vw, 1.5rem);
+}
+.contact-aside + .contact-aside {
+  margin-top: 1.5rem;
 }
 .contact-aside--links {
   padding: 0;
