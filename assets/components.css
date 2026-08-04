@@ -227,6 +227,38 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
 
 /* -------------------- Quiz -------------------- */
 .quiz { max-width: 640px; margin-inline: auto; }
+.quiz-page {
+  background: transparent;
+}
+.quiz-page__band {
+  width: 100%;
+}
+.quiz-page__band--cream {
+  background: var(--color-cream, #E2E1D6);
+  padding-block: clamp(2.75rem, 6vw, 4.25rem);
+}
+.quiz-page__band--sage {
+  background: var(--color-sage, #E1E8E0);
+  padding-block: clamp(2.75rem, 6vw, 4.5rem);
+}
+.quiz-page__band--tight {
+  padding-block: clamp(1.75rem, 4vw, 2.5rem);
+}
+.quiz--intro .section-head {
+  margin-bottom: 0;
+}
+.quiz--footer {
+  max-width: 40rem;
+}
+.quiz-page__band--sage .quiz__option {
+  background: color-mix(in srgb, #fff 70%, var(--color-sage, #E1E8E0));
+}
+.quiz-page__band--sage .quiz__option:has(input:checked) {
+  background: color-mix(in srgb, var(--color-lilac, #EADEEA) 70%, #fff);
+}
+.quiz-page__band--sage .quiz__progress {
+  background: color-mix(in srgb, #fff 55%, var(--color-sage, #E1E8E0));
+}
 .quiz__progress { height: 6px; background: var(--color-cream); border-radius: var(--radius-pill); overflow: hidden; margin-bottom: var(--space-lg); }
 .quiz__progress span { display: block; height: 100%; background: var(--color-green); transition: width var(--dur) var(--ease); }
 .quiz__step { display: none; }
