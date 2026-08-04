@@ -3,15 +3,38 @@
   assign goal_link = s.goal_page_url | default: routes.all_products_collection_url
 -%}
 <section class="quiz-page" data-section-id="{{ section.id }}">
-  <div class="quiz-page__band quiz-page__band--cream">
-    <div class="wrap">
-      <div class="quiz quiz--intro">
-        <div class="section-head section-head--center">
-          {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
-          <h1 class="h2">{{ s.heading | newline_to_br }}</h1>
-          {%- if s.intro != blank -%}<p class="lede" style="margin-top:.75rem">{{ s.intro }}</p>{%- endif -%}
-          {%- if s.consent != blank -%}<p class="form-note" style="margin-top:.75rem">{{ s.consent }}</p>{%- endif -%}
-        </div>
+  <div class="quiz-page__hero">
+    <div class="quiz-page__hero-media" aria-hidden="true">
+      {%- if s.intro_image != blank -%}
+        {{
+          s.intro_image
+          | image_url: width: 2800
+          | image_tag:
+            widths: '900,1400,1800,2400,2800',
+            sizes: '100vw',
+            loading: 'eager',
+            fetchpriority: 'high',
+            alt: ''
+        }}
+      {%- else -%}
+        <img
+          src="{{ s.intro_fallback_asset | default: 'reu-quiz-hero.jpg' | asset_url }}"
+          width="1774"
+          height="887"
+          alt=""
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        >
+      {%- endif -%}
+    </div>
+    <div class="quiz-page__hero-scrim" aria-hidden="true"></div>
+    <div class="quiz-page__hero-inner wrap">
+      <div class="quiz-page__hero-copy">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+        <h1 class="h2">{{ s.heading | newline_to_br }}</h1>
+        {%- if s.intro != blank -%}<p class="lede">{{ s.intro }}</p>{%- endif -%}
+        {%- if s.consent != blank -%}<p class="quiz-page__hero-note">{{ s.consent }}</p>{%- endif -%}
       </div>
     </div>
   </div>
@@ -177,12 +200,14 @@
 {
   "name": "Quiz",
   "settings": [
+    { "type": "image_picker", "id": "intro_image", "label": "Intro banner image" },
+    { "type": "text", "id": "intro_fallback_asset", "label": "Intro fallback asset", "default": "reu-quiz-hero.jpg" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FIND YOUR REÚ" },
     { "type": "textarea", "id": "heading", "label": "Heading", "default": "Your routine starts\nwith you." },
     { "type": "textarea", "id": "intro", "label": "Intro", "default": "Tell us what you want from your wellness routine. In about 60 seconds, we will recommend a starting product and format based on your answers." },
     { "type": "textarea", "id": "consent", "label": "Consent note", "default": "This quiz provides general product guidance and is not medical advice. Marketing consent is optional and is not required to see results." },
     { "type": "url", "id": "goal_page_url", "label": "Shop by Goal link" },
-    { "type": "paragraph", "content": "Section backgrounds alternate cream → sage → cream, matching the About page rhythm." }
+    { "type": "paragraph", "content": "Intro uses a full-width lifestyle banner; questions sit on sage, results on cream." }
   ],
   "blocks": [
     { "type": "result", "name": "Result mapping", "settings": [
