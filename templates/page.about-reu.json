@@ -17,31 +17,29 @@
         "body": "<p>REÚ was created to make daily wellness feel simpler, more enjoyable and easier to make your own.</p>",
         "cta_label": "Find My Routine",
         "cta_link": "shopify://pages/find-your-reu",
+        "center": false,
+        "narrow": false,
         "bg_scheme": "bg-blush"
       }
     },
     "story": {
       "type": "rich-text",
       "settings": {
-        "narrow": true,
         "heading": "Our story",
-        "content": "<p>Wellness can feel crowded with complicated routines, unclear promises and products that are difficult to sustain. REÚ began with a more thoughtful idea: create high-quality, great-tasting supplements for women and present them through a modern experience built on clarity and confidence.</p><p>We consider every part of the journey—from formula and flavour to packaging and guidance—to help wellness fit more naturally into everyday life. Whether your focus is hydration, beauty, greens, performance, protein or a more consistent routine, REÚ is here to help you begin with intention and keep moving in a way that feels like you.</p>"
+        "content": "<p>Wellness can feel crowded with complicated routines, unclear promises and products that are difficult to sustain. REÚ began with a more thoughtful idea: create high-quality, great-tasting supplements for women and present them through a modern experience built on clarity and confidence.</p><p>We consider every part of the journey—from formula and flavour to packaging and guidance—to help wellness fit more naturally into everyday life. Whether your focus is hydration, beauty, greens, performance, protein or a more consistent routine, REÚ is here to help you begin with intention and keep moving in a way that feels like you.</p>",
+        "narrow": true
       }
     },
     "mission": {
       "type": "rich-text",
       "settings": {
-        "narrow": true,
         "heading": "Our mission",
-        "content": "<p>To empower women to feel their best every day by making high-quality wellness simple, enjoyable and effective.</p>"
+        "content": "<p>To empower women to feel their best every day by making high-quality wellness simple, enjoyable and effective.</p>",
+        "narrow": true
       }
     },
     "values": {
       "type": "values-grid",
-      "settings": {
-        "eyebrow": "Our values",
-        "heading": "What guides REÚ"
-      },
       "blocks": {
         "v1": {
           "type": "value",
@@ -85,14 +83,18 @@
         "v3",
         "v4",
         "v5"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "Our values",
+        "heading": "What guides REÚ"
+      }
     },
     "standard": {
       "type": "rich-text",
       "settings": {
-        "narrow": true,
         "heading": "What belongs in your routine should never be a mystery.",
-        "content": "<p>Confidence starts with clarity. Every product page clearly explains what is inside, how to use it and what to expect—using supplier-verified information only.</p><ul><li>Clearly listed ingredients</li><li>Easy-to-follow directions</li><li>Transparent product information</li><li>Thoughtfully created formats</li><li>Great-tasting options</li><li>Designed for everyday routines</li></ul>"
+        "content": "<p>Confidence starts with clarity. Every product page clearly explains what is inside, how to use it and what to expect—using supplier-verified information only.</p><ul><li>Clearly listed ingredients</li><li>Easy-to-follow directions</li><li>Transparent product information</li><li>Thoughtfully created formats</li><li>Great-tasting options</li><li>Designed for everyday routines</li></ul>",
+        "narrow": true
       }
     },
     "closing": {
@@ -101,12 +103,12 @@
         "eyebrow": "",
         "heading": "Your body. Your goals. Your REÚ.",
         "body": "<p>Wellness is personal. Your routine should be too.</p>",
+        "use_h1": false,
         "cta_label": "Find My Routine",
         "cta_link": "shopify://pages/find-your-reu",
         "cta2_label": "Shop All Products",
         "cta2_link": "shopify://collections/all",
-        "bg_scheme": "bg-cream",
-        "use_h1": false
+        "bg_scheme": "bg-cream"
       }
     }
   },
