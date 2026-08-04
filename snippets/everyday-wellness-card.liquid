@@ -24,7 +24,6 @@
         {{ 'product-1' | placeholder_svg_tag: 'everyday-wellness__placeholder' }}
       {%- endif -%}
     </div>
-    {% render 'reu-product-countdown', product: product, style: 'card' %}
     <div class="everyday-wellness__card-copy">
       <h3 class="everyday-wellness__card-title">{{ product.title }}</h3>
       <p class="everyday-wellness__card-price">{{ product.price | money }}</p>
