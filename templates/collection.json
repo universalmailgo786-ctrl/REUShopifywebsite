@@ -12,7 +12,6 @@
     "main": {
       "type": "main-collection",
       "settings": {
-        "show_discovery": true,
         "show_quiz_strip": true,
         "eyebrow": "SHOP REÚ",
         "heading": "Wellness that fits your day.",
