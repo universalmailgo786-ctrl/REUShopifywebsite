@@ -70,63 +70,6 @@
       </div>
     </header>
 
-    {%- if is_all or section.settings.show_discovery -%}
-      <div class="discovery-bar" role="region" aria-label="Shop by goal">
-        <p class="discovery-bar__prompt">{{ section.settings.discovery_prompt | default: 'What would you like to support today?' }}</p>
-        <div class="discovery-bar__chips" role="list">
-          {%- assign goals = 'Hydration|hydration,Beauty & Collagen|beauty-collagen,Daily Wellness|daily-wellness,Greens & Nutrition|greens-nutrition,Energy & Performance|energy-performance,Weight-Management Routine|weight-management,Protein & Recovery|protein-recovery' | split: ',' -%}
-          {%- for g in goals -%}
-            {%- assign parts = g | split: '|' -%}
-            {%- assign goal_col = collections[parts[1]] -%}
-            {%- assign href = col.url | append: '?filter.p.m.custom.goal=' | append: parts[0] | url_encode -%}
-            {%- if goal_col != blank -%}{%- assign href = goal_col.url -%}{%- endif -%}
-            <a class="filter-chip" role="listitem" href="{{ href }}">{{ parts[0] }}</a>
-          {%- endfor -%}
-          <a class="filter-chip" href="{{ col.url }}">Clear all</a>
-        </div>
-        <p class="visually-hidden" aria-live="polite" data-filter-announce></p>
-      </div>
-    {%- endif -%}
-
-    {%- if is_pouch or is_sachet or section.settings.show_benefits -%}
-      <ul class="collection-benefits" role="list">
-        {%- if is_pouch -%}
-          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>Full-size everyday format</span></li>
-          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>Easy to keep within reach</span></li>
-          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>A consistent addition to your routine</span></li>
-          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>Available across multiple wellness goals</span></li>
-        {%- elsif is_sachet -%}
-          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>Convenient single serves</span></li>
-          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>Easy to carry and store</span></li>
-          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>Made for movement and travel</span></li>
-          <li><span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span><span>A simple way to try different flavours</span></li>
-        {%- else -%}
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'benefit' -%}
-              <li {{ block.shopify_attributes }}>
-                <span class="collection-benefits__icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span>
-                <span>{{ block.settings.text }}</span>
-              </li>
-            {%- endif -%}
-          {%- endfor -%}
-        {%- endif -%}
-      </ul>
-    {%- endif -%}
-
-    {%- if is_pouch or is_sachet -%}
-      <div class="discovery-bar collection-goal-bar" role="region" aria-label="Shop by goal">
-        <p class="discovery-bar__prompt">Filter by wellness goal</p>
-        <div class="discovery-bar__chips" role="list">
-          {%- assign goals = 'Hydration|Hydration,Beauty & Collagen|Beauty,Daily Wellness|Daily Wellness,Greens|Greens,Energy|Energy,Weight Management|Weight Management,Protein|Protein' | split: ',' -%}
-          {%- for g in goals -%}
-            {%- assign parts = g | split: '|' -%}
-            <a class="filter-chip" role="listitem" href="{{ col.url }}?filter.p.m.custom.goal={{ parts[1] | url_encode }}">{{ parts[0] }}</a>
-          {%- endfor -%}
-          <a class="filter-chip" href="{{ col.url }}">Clear all</a>
-        </div>
-      </div>
-    {%- endif -%}
-
     <div class="section-head" id="CollectionGrid" style="scroll-margin-top:6rem">
       <h2 class="h3">
         {%- if section.settings.grid_heading != blank -%}
@@ -275,15 +218,7 @@
     { "type": "textarea", "id": "body", "label": "Hero body" },
     { "type": "text", "id": "grid_heading", "label": "Grid heading" },
     { "type": "textarea", "id": "grid_body", "label": "Grid supporting copy" },
-    { "type": "checkbox", "id": "show_discovery", "label": "Show discovery goal bar", "default": false },
-    { "type": "text", "id": "discovery_prompt", "label": "Discovery prompt", "default": "What would you like to support today?" },
-    { "type": "checkbox", "id": "show_benefits", "label": "Show benefit strip", "default": false },
     { "type": "checkbox", "id": "show_quiz_strip", "label": "Show quiz support strip", "default": false }
-  ],
-  "blocks": [
-    { "type": "benefit", "name": "Benefit", "settings": [
-      { "type": "text", "id": "text", "label": "Text", "default": "Full-size everyday format" }
-    ]}
   ]
 }
 {% endschema %}
