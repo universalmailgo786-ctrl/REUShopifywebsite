@@ -1,0 +1,284 @@
+/* REÚ native policy pages */
+.reu-policy {
+  background: transparent;
+}
+.reu-policy__hero {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(22rem, 48vw, 30rem);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: #223829;
+  color: #F7F4EE;
+}
+.reu-policy__hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.reu-policy__hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+.reu-policy__hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(34, 56, 41, 0.78) 0%,
+      rgba(34, 56, 41, 0.58) 36%,
+      rgba(34, 56, 41, 0.28) 62%,
+      rgba(34, 56, 41, 0.14) 100%
+    );
+}
+.reu-policy__hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 42rem;
+  margin-inline: 0 auto 0 0;
+  padding-block: clamp(3rem, 7vw, 4.75rem);
+  text-align: left;
+  justify-self: start;
+  align-self: center;
+}
+.reu-policy__hero-inner.wrap {
+  margin-inline: 0 auto 0 0;
+  margin-left: max(var(--gutter, 1.25rem), calc((100vw - var(--wrap, 1200px)) / 2 + var(--gutter, 1.25rem)));
+  margin-right: auto;
+  padding-inline: var(--gutter, 1.25rem);
+  max-width: 42rem;
+  width: min(42rem, 100%);
+  text-align: left;
+}
+.reu-policy__crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem;
+  margin: 0 0 1rem;
+  font-size: .88rem;
+  color: rgba(247, 244, 238, 0.78);
+}
+.reu-policy__crumbs a {
+  color: #F4E2DB;
+  text-decoration: underline;
+  text-underline-offset: .16em;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.reu-policy__crumbs a:hover,
+.reu-policy__crumbs a:focus-visible {
+  color: #fff;
+}
+.reu-policy__eyebrow {
+  color: #F4E2DB !important;
+}
+.reu-policy__title {
+  color: #fff;
+  margin: 0;
+  max-width: 16ch;
+  text-wrap: balance;
+  text-align: left;
+}
+.reu-policy__intro {
+  margin: .9rem 0 0;
+  color: rgba(247, 244, 238, 0.94);
+  max-width: 38rem;
+  text-align: left;
+}
+.reu-policy__updated {
+  margin: 1rem 0 0;
+  font-size: .92rem;
+  color: rgba(247, 244, 238, 0.82);
+  text-align: left;
+}
+.reu-policy__legal-note {
+  margin: .45rem 0 0;
+  font-size: .82rem;
+  color: rgba(247, 244, 238, 0.68);
+  max-width: 36rem;
+  text-align: left;
+}
+.reu-policy__band {
+  background: #E3E1D5;
+  background: var(--color-cream, #E3E1D5);
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+.reu-policy__layout {
+  display: grid;
+  gap: 1.5rem;
+}
+@media (min-width: 990px) {
+  .reu-policy__layout {
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 2.25rem;
+    align-items: start;
+  }
+}
+.reu-policy__toc {
+  background: color-mix(in srgb, #fff 70%, #E3E1D5);
+  border: 1px solid color-mix(in srgb, #223829 10%, transparent);
+  border-radius: 18px;
+  padding: 1rem 1.05rem 1.15rem;
+}
+@media (min-width: 990px) {
+  .reu-policy__toc {
+    position: sticky;
+    top: 6.25rem;
+  }
+}
+.reu-policy__toc-label {
+  margin: 0 0 .75rem;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #223829;
+}
+.reu-policy__toc-select {
+  width: 100%;
+  min-height: 44px;
+}
+@media (min-width: 990px) {
+  .reu-policy__toc-select { display: none; }
+}
+.reu-policy__toc-nav {
+  display: none;
+  flex-direction: column;
+  gap: .2rem;
+}
+@media (min-width: 990px) {
+  .reu-policy__toc-nav { display: flex; }
+}
+.reu-policy__toc-nav a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: .35rem .55rem;
+  border-radius: 10px;
+  color: #223829;
+  text-decoration: none;
+  font-size: .9rem;
+  line-height: 1.35;
+}
+.reu-policy__toc-nav a:hover,
+.reu-policy__toc-nav a:focus-visible,
+.reu-policy__toc-nav a.is-active {
+  background: #223829;
+  color: #E3E1D5;
+  outline: none;
+}
+.reu-policy__content {
+  background: color-mix(in srgb, #fff 78%, #E3E1D5);
+  border: 1px solid color-mix(in srgb, #223829 8%, transparent);
+  border-radius: 22px;
+  padding: clamp(1.35rem, 3vw, 2.15rem);
+  box-shadow: 0 10px 28px rgba(34, 56, 41, .05);
+}
+.reu-policy__section + .reu-policy__section {
+  margin-top: clamp(1.75rem, 3vw, 2.35rem);
+  padding-top: clamp(1.35rem, 2.5vw, 1.85rem);
+  border-top: 1px solid color-mix(in srgb, #223829 10%, transparent);
+}
+.reu-policy__section h2 {
+  margin: 0 0 .85rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  line-height: 1.2;
+  color: #223829;
+  scroll-margin-top: 6.5rem;
+}
+.reu-policy__section p,
+.reu-policy__section li {
+  font-family: var(--font-body);
+  color: #2C3A30;
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 68ch;
+}
+.reu-policy__section p { margin: 0 0 .85rem; }
+.reu-policy__section p:last-child { margin-bottom: 0; }
+.reu-policy__section ul {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+}
+.reu-policy__section li { margin: .35rem 0; }
+.reu-policy__section a {
+  color: #BA6D64;
+  text-underline-offset: .16em;
+}
+.reu-policy__section a:hover,
+.reu-policy__section a:focus-visible {
+  color: #223829;
+}
+.reu-policy__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 1.5rem;
+}
+.reu-policy__actions .btn {
+  min-height: 44px;
+}
+.reu-policy__help {
+  margin-top: 1.5rem;
+  background: #223829;
+  color: #F7F4EE;
+  border: 0;
+  border-radius: 22px;
+  padding: clamp(1.35rem, 3vw, 2rem);
+}
+.reu-policy__help .eyebrow {
+  color: #F4E2DB !important;
+}
+.reu-policy__help .h3,
+.reu-policy__help .lede {
+  color: #F7F4EE;
+}
+.reu-policy__help .lede {
+  color: rgba(247, 244, 238, 0.88);
+}
+.reu-policy__help .btn {
+  --btn-bg: #F4E2DB;
+  --btn-fg: #223829;
+  --btn-hover-bg: #fff;
+  --btn-hover-fg: #223829;
+  background: #F4E2DB;
+  color: #223829;
+  border-color: transparent;
+}
+@media (max-width: 749px) {
+  .reu-policy__hero-inner,
+  .reu-policy__hero-inner.wrap {
+    margin-left: 0;
+    margin-right: 0;
+    padding-inline: var(--gutter, 1.25rem);
+    max-width: none;
+    width: 100%;
+    text-align: left;
+  }
+  .reu-policy__title {
+    max-width: none;
+    font-size: clamp(1.85rem, 8vw, 2.4rem);
+  }
+  .reu-policy__toc {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reu-policy__toc-nav a,
+  .reu-policy__section a {
+    transition: none;
+  }
+}
