@@ -64,7 +64,6 @@
       <div class="collection-hero__ctas" style="display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.25rem">
         {%- if is_all -%}
           <a class="btn" href="{{ pages['find-your-reu'].url | default: pages.quiz.url | default: '/pages/find-your-reu' }}">Find My Routine <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a>
-          <a class="btn btn--secondary" href="{{ pages.collections.url | default: '/pages/collections' }}">Compare Formats</a>
         {%- elsif is_pouch or is_sachet -%}
           <a class="btn" href="#CollectionGrid">Explore {{ col.title }} <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a>
         {%- endif -%}

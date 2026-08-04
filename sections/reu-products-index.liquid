@@ -21,7 +21,6 @@
         <p class="lede" style="margin-top:.75rem;max-width:40rem;margin-inline:auto">{{ section.settings.body }}</p>
       {%- endif -%}
       <div style="display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center;margin-top:1.25rem">
-        <a class="btn btn--secondary" href="{{ pages.collections.url | default: '/pages/collections' }}">Compare Formats</a>
         <a class="btn" href="{{ pages['find-your-reu'].url | default: pages.quiz.url | default: '/pages/find-your-reu' }}">Find My Routine <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a>
       </div>
     </header>
