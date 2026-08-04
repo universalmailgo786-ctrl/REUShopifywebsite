@@ -254,6 +254,95 @@ h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
 .contact-page {
   background: transparent;
 }
+.contact-page__hero {
+  position: relative;
+  width: 100%;
+  min-height: clamp(26rem, 52vw, 36rem);
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  background: #223829;
+  color: #F7F4EE;
+}
+.contact-page__hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.contact-page__hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  display: block;
+}
+.contact-page__hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(34, 56, 41, 0.46) 0%,
+      rgba(34, 56, 41, 0.24) 30%,
+      rgba(34, 56, 41, 0.06) 52%,
+      rgba(34, 56, 41, 0) 68%,
+      rgba(34, 56, 41, 0) 100%
+    );
+}
+.contact-page__hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-block: clamp(3.25rem, 8vw, 5.5rem);
+}
+.contact-page__hero-copy {
+  max-width: min(36rem, 48%);
+  color: #F7F4EE;
+  text-shadow: 0 1px 16px rgba(20, 32, 24, 0.35);
+}
+.contact-page__hero-copy .eyebrow {
+  color: #F4E2DB;
+  color: var(--color-blush, #F4E2DB);
+}
+.contact-page__hero-copy .h2 {
+  color: #fff;
+  margin: 0;
+  max-width: 12ch;
+  text-wrap: balance;
+}
+.contact-page__hero-copy .lede {
+  margin: .85rem 0 0;
+  color: rgba(247, 244, 238, 0.94);
+  max-width: 34rem;
+}
+@media (max-width: 899px) {
+  .contact-page__hero {
+    min-height: clamp(28rem, 110vw, 40rem);
+  }
+  .contact-page__hero-media img {
+    object-position: 82% center;
+  }
+  .contact-page__hero-scrim {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(34, 56, 41, 0.28) 0%,
+        rgba(34, 56, 41, 0.12) 36%,
+        rgba(34, 56, 41, 0.2) 68%,
+        rgba(34, 56, 41, 0.48) 100%
+      );
+  }
+  .contact-page__hero-copy {
+    max-width: 100%;
+  }
+  .contact-page__hero-copy .h2 {
+    max-width: none;
+  }
+}
 .contact-page__band {
   width: 100%;
 }
