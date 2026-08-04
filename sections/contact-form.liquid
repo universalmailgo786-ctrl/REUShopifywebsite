@@ -36,24 +36,59 @@
     {%- endform -%}
 
     {%- if s.show_support_details -%}
-      <div class="card" style="padding:var(--space-md);margin-top:var(--space-lg)">
+      <div class="contact-aside card">
         <h2 class="h4">Support details</h2>
-        <ul class="stack" style="margin-top:.75rem">
-          {%- if settings.support_email != blank -%}<li>{% render 'icon', name: 'mail' %} <a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a></li>{%- endif -%}
-          {%- if s.hours != blank -%}<li>{% render 'icon', name: 'clock' %} {{ s.hours }}</li>{%- endif -%}
-          {%- if s.response_time != blank -%}<li>{% render 'icon', name: 'refresh' %} Response time: {{ s.response_time }}</li>{%- endif -%}
+        <ul class="contact-aside__list">
+          {%- if settings.support_email != blank -%}
+            <li class="contact-aside__item">
+              <span class="contact-aside__icon" aria-hidden="true">{% render 'icon', name: 'mail' %}</span>
+              <a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>
+            </li>
+          {%- endif -%}
+          {%- if s.hours != blank -%}
+            <li class="contact-aside__item">
+              <span class="contact-aside__icon" aria-hidden="true">{% render 'icon', name: 'clock' %}</span>
+              <span>{{ s.hours }}</span>
+            </li>
+          {%- endif -%}
+          {%- if s.response_time != blank -%}
+            <li class="contact-aside__item">
+              <span class="contact-aside__icon" aria-hidden="true">{% render 'icon', name: 'refresh' %}</span>
+              <span>Response time: {{ s.response_time }}</span>
+            </li>
+          {%- endif -%}
         </ul>
         {%- if request.design_mode and settings.support_email == blank -%}<p class="form-note" style="margin-top:.5rem">Set a support email in Theme settings → Pre-order. Dummy contact details are never shown.</p>{%- endif -%}
       </div>
     {%- endif -%}
 
-    <div style="margin-top:var(--space-lg)">
+    <div class="contact-aside contact-aside--links">
       <h2 class="h4">Quick help</h2>
-      <ul class="stack" style="margin-top:.75rem">
-        <li><a class="link-arrow" href="{{ routes.root_url }}policies/shipping-policy">Pre-order and shipping {% render 'icon', name: 'arrow' %}</a></li>
-        <li><a class="link-arrow" href="{{ routes.root_url }}policies/refund-policy">Returns and cancellations {% render 'icon', name: 'arrow' %}</a></li>
-        <li><a class="link-arrow" href="{{ pages.faq.url | default: '/pages/faq' }}">Common questions {% render 'icon', name: 'arrow' %}</a></li>
-        <li><a class="link-arrow" href="{{ pages['find-your-reu'].url | default: pages.quiz.url | default: '/pages/find-your-reu' }}">Find a product {% render 'icon', name: 'arrow' %}</a></li>
+      <ul class="contact-aside__list">
+        <li>
+          <a class="contact-aside__link" href="{{ routes.root_url }}policies/shipping-policy">
+            <span>Pre-order and shipping</span>
+            <span class="contact-aside__icon" aria-hidden="true">{% render 'icon', name: 'arrow' %}</span>
+          </a>
+        </li>
+        <li>
+          <a class="contact-aside__link" href="{{ routes.root_url }}policies/refund-policy">
+            <span>Returns and cancellations</span>
+            <span class="contact-aside__icon" aria-hidden="true">{% render 'icon', name: 'arrow' %}</span>
+          </a>
+        </li>
+        <li>
+          <a class="contact-aside__link" href="{{ pages.faq.url | default: '/pages/faq' }}">
+            <span>Common questions</span>
+            <span class="contact-aside__icon" aria-hidden="true">{% render 'icon', name: 'arrow' %}</span>
+          </a>
+        </li>
+        <li>
+          <a class="contact-aside__link" href="{{ pages['find-your-reu'].url | default: pages.quiz.url | default: '/pages/find-your-reu' }}">
+            <span>Find a product</span>
+            <span class="contact-aside__icon" aria-hidden="true">{% render 'icon', name: 'arrow' %}</span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
