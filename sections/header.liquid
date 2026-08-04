@@ -1,6 +1,31 @@
 {%- liquid
   assign menu = section.settings.menu
   assign sticky = section.settings.sticky
+  assign products_label = section.settings.products_nav_label | default: 'Products'
+  assign products_url = section.settings.products_nav_link
+  if products_url == blank
+    if pages.products != blank
+      assign products_url = pages.products.url
+    else
+      assign products_url = routes.all_products_collection_url
+    endif
+  endif
+  assign inject_products = section.settings.show_products_nav
+  assign products_already_in_menu = false
+  if menu != blank
+    for link in menu.links
+      assign t = link.title | downcase
+      if t == 'products' or t == 'shop all' or t == 'shop' or link.url == products_url or link.url == routes.all_products_collection_url
+        assign products_already_in_menu = true
+      endif
+      for child in link.links
+        assign ct = child.title | downcase
+        if ct == 'products' or child.url == products_url
+          assign products_already_in_menu = true
+        endif
+      endfor
+    endfor
+  endif
 -%}
 <header class="site-header{% if sticky %} is-sticky{% endif %}" data-site-header style="--logo-w: {{ settings.logo_width }}px">
   <div class="wrap">
@@ -18,18 +43,42 @@
       </a>
 
       <nav class="site-header__nav" aria-label="Primary">
-        {%- for link in menu.links -%}
-          {%- if link.links.size > 0 -%}
-            <div class="has-dropdown">
-              <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %} aria-haspopup="true">{{ link.title }} {% render 'icon', name: 'chevron-down' %}</a>
-              <div class="dropdown">
-                {%- for child in link.links -%}<a href="{{ child.url }}">{{ child.title }}</a>{%- endfor -%}
+        {%- if menu != blank and menu.links.size > 0 -%}
+          {%- assign inserted_products = false -%}
+          {%- for link in menu.links -%}
+            {%- if link.links.size > 0 -%}
+              <div class="has-dropdown">
+                <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %} aria-haspopup="true">{{ link.title }} {% render 'icon', name: 'chevron-down' %}</a>
+                <div class="dropdown">
+                  {%- for child in link.links -%}<a href="{{ child.url }}">{{ child.title }}</a>{%- endfor -%}
+                </div>
               </div>
-            </div>
-          {%- else -%}
-            <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
+            {%- else -%}
+              <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
+            {%- endif -%}
+
+            {%- liquid
+              assign link_title_l = link.title | downcase
+              assign is_collections_link = false
+              if link_title_l == 'collections' or link_title_l == 'shop by collection' or link.url contains '/pages/collections'
+                assign is_collections_link = true
+              endif
+            -%}
+            {%- if inject_products and is_collections_link and products_already_in_menu == false and inserted_products == false -%}
+              <a href="{{ products_url }}" {% if request.path == products_url or request.path == '/pages/products' %}aria-current="page"{% endif %}>{{ products_label }}</a>
+              {%- assign inserted_products = true -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if inject_products and products_already_in_menu == false and inserted_products == false -%}
+            <a href="{{ products_url }}" {% if request.path == products_url or request.path == '/pages/products' %}aria-current="page"{% endif %}>{{ products_label }}</a>
           {%- endif -%}
-        {%- endfor -%}
+        {%- else -%}
+          <a href="{{ routes.root_url }}">Home</a>
+          <a href="{{ pages.collections.url | default: '/pages/collections' }}">Collections</a>
+          <a href="{{ products_url }}">{{ products_label }}</a>
+          <a href="{{ pages['about-reu'].url | default: '/pages/about-reu' }}">About</a>
+          <a href="{{ pages['find-your-reu'].url | default: '/pages/find-your-reu' }}">Quiz</a>
+        {%- endif -%}
       </nav>
 
       <div class="site-header__actions">
@@ -55,14 +104,37 @@
       <button class="header-icon" data-drawer-close="MobileMenu" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
     </div>
     <nav class="drawer__body mobile-nav" aria-label="Mobile">
-      {%- for link in menu.links -%}
-        <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
-        {%- if link.links.size > 0 -%}
-          <div class="mobile-nav__sub">
-            {%- for child in link.links -%}<a href="{{ child.url }}">{{ child.title }}</a>{%- endfor -%}
-          </div>
+      {%- if menu != blank and menu.links.size > 0 -%}
+        {%- assign inserted_products_m = false -%}
+        {%- for link in menu.links -%}
+          <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
+          {%- if link.links.size > 0 -%}
+            <div class="mobile-nav__sub">
+              {%- for child in link.links -%}<a href="{{ child.url }}">{{ child.title }}</a>{%- endfor -%}
+            </div>
+          {%- endif -%}
+          {%- liquid
+            assign link_title_l = link.title | downcase
+            assign is_collections_link = false
+            if link_title_l == 'collections' or link_title_l == 'shop by collection' or link.url contains '/pages/collections'
+              assign is_collections_link = true
+            endif
+          -%}
+          {%- if inject_products and is_collections_link and products_already_in_menu == false and inserted_products_m == false -%}
+            <a href="{{ products_url }}">{{ products_label }}</a>
+            {%- assign inserted_products_m = true -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if inject_products and products_already_in_menu == false and inserted_products_m == false -%}
+          <a href="{{ products_url }}">{{ products_label }}</a>
         {%- endif -%}
-      {%- endfor -%}
+      {%- else -%}
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="{{ pages.collections.url | default: '/pages/collections' }}">Collections</a>
+        <a href="{{ products_url }}">{{ products_label }}</a>
+        <a href="{{ pages['about-reu'].url | default: '/pages/about-reu' }}">About</a>
+        <a href="{{ pages['find-your-reu'].url | default: '/pages/find-your-reu' }}">Quiz</a>
+      {%- endif -%}
     </nav>
   </div>
 </div>
@@ -131,6 +203,9 @@
   "settings": [
     { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
     { "type": "checkbox", "id": "sticky", "label": "Sticky header", "default": true },
+    { "type": "checkbox", "id": "show_products_nav", "label": "Insert Products link after Collections", "default": true, "info": "Adds Products to the main menu after Collections if it is not already in the menu. Create page handle products and assign template products, or leave blank to use Shop All." },
+    { "type": "text", "id": "products_nav_label", "label": "Products link label", "default": "Products" },
+    { "type": "url", "id": "products_nav_link", "label": "Products link URL", "info": "Optional. Defaults to /pages/products, then Shop All." },
     { "type": "collection", "id": "search_collection", "label": "Recommended search products" }
   ]
 }
