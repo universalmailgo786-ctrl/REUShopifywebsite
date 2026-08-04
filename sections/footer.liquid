@@ -51,10 +51,13 @@
   endcomment
   assign terms_page = section.settings.terms_page
   if terms_page == blank
-    assign terms_page = pages['terms-conditions']
+    assign terms_page = pages['terms-and-condition']
   endif
   if terms_page == blank
     assign terms_page = pages['terms-and-conditions']
+  endif
+  if terms_page == blank
+    assign terms_page = pages['terms-conditions']
   endif
   if terms_page == blank
     assign terms_page = pages['terms-condition']
@@ -93,7 +96,7 @@
   if terms_page != blank and terms_page.url != blank
     assign terms_url = terms_page.url
   else
-    assign terms_url = '/pages/terms-conditions'
+    assign terms_url = '/pages/terms-and-condition'
   endif
 
   assign about_page = pages['about-reu']
@@ -255,7 +258,7 @@
     { "type": "text", "id": "discover_heading", "label": "Discover column label", "default": "Discover" },
     { "type": "link_list", "id": "menu_discover", "label": "Discover menu", "info": "Optional. If empty, only existing pages/blogs are listed." },
     { "type": "text", "id": "care_heading", "label": "Policies column label", "default": "Policies" },
-    { "type": "paragraph", "content": "Terms & Conditions always links to your Online Store page (/pages/terms-conditions), not /policies/terms-of-service. If your Terms page uses a different handle, pick it in “Terms & Conditions page” below. Also set that page’s Theme template to “terms-conditions”." },
+    { "type": "paragraph", "content": "Terms & Conditions links to /pages/terms-and-condition by default (not /policies/terms-of-service). If your Terms page uses a different handle, pick it in “Terms & Conditions page” below." },
     { "type": "page", "id": "privacy_page", "label": "Privacy Policy page" },
     { "type": "page", "id": "refund_page", "label": "Refund & Cancellation page" },
     { "type": "page", "id": "shipping_page", "label": "Shipping & Pre-Order page" },

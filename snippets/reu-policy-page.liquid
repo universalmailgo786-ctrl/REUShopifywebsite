@@ -21,7 +21,7 @@
       assign policy_type = 'refund_policy'
     elsif path contains 'shipping-policy' or handle contains 'shipping' or title_down contains 'shipping' or title_down contains 'pre-order'
       assign policy_type = 'shipping_policy'
-    elsif path contains 'terms-of-service' or path contains 'terms-conditions' or path contains 'terms-and-conditions' or handle contains 'terms' or handle contains 'condition' or title_down contains 'terms' or title_down contains 'condition'
+    elsif path contains 'terms-of-service' or path contains 'terms-and-condition' or path contains 'terms-conditions' or path contains 'terms-and-conditions' or handle contains 'terms' or handle contains 'condition' or title_down contains 'terms' or title_down contains 'condition'
       assign policy_type = 'terms_of_service'
     else
       assign policy_type = 'terms_of_service'
