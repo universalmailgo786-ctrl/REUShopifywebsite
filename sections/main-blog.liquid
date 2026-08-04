@@ -1,13 +1,60 @@
-<section class="section bg-cream">
+{%- liquid
+  assign admin_store = shop.permanent_domain | remove: '.myshopify.com'
+  assign admin_articles_url = 'https://admin.shopify.com/store/' | append: admin_store | append: '/content/articles'
+  assign admin_new_url = admin_articles_url | append: '/new'
+  assign has_articles = false
+  if blog.articles_count > 0
+    assign has_articles = true
+  endif
+-%}
+
+<section class="section bg-cream journal-page" data-journal-blog>
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow">{{ section.settings.eyebrow }}</p>
       <h1 class="h1">{{ section.settings.heading | default: blog.title | default: "Wellness, made clearer." }}</h1>
-      {%- if section.settings.body != blank -%}<p class="lede" style="margin-top:.75rem;max-width:44rem">{{ section.settings.body }}</p>{%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <p class="lede" style="margin-top:.75rem;max-width:44rem">{{ section.settings.body }}</p>
+      {%- endif -%}
     </div>
 
+    {%- if request.design_mode or section.settings.show_manage_guide -%}
+      <aside class="journal-manage" aria-label="How to add Journal posts">
+        <div class="journal-manage__intro">
+          <p class="eyebrow">For store owners</p>
+          <h2 class="h3" style="margin:.35rem 0 .5rem">Add your own Journal posts</h2>
+          <p class="text-muted" style="margin:0;max-width:40rem">
+            Use Shopify’s Blog posts form to publish full articles with a title, body, and featured image.
+            New posts appear here and on the homepage Journal section automatically.
+          </p>
+        </div>
+        <ol class="journal-manage__steps">
+          <li>
+            <strong>Open Blog posts</strong>
+            <span>Shopify Admin → Content → Blog posts (or use the button below).</span>
+          </li>
+          <li>
+            <strong>Create a post</strong>
+            <span>Click <em>Add blog post</em>. Fill in title, write your article, and upload a featured image.</span>
+          </li>
+          <li>
+            <strong>Choose the Journal blog</strong>
+            <span>Set the blog to <strong>{{ blog.title | default: 'News' }}</strong> (handle: <code>{{ blog.handle }}</code>), then save and publish.</span>
+          </li>
+        </ol>
+        <div class="journal-manage__actions">
+          <a class="btn btn--primary" href="{{ admin_new_url }}" target="_blank" rel="noopener">
+            Add a Journal post
+          </a>
+          <a class="btn btn--secondary" href="{{ admin_articles_url }}" target="_blank" rel="noopener">
+            Manage all posts
+          </a>
+        </div>
+      </aside>
+    {%- endif -%}
+
     {%- if blog.all_tags.size > 0 and section.settings.show_tags -%}
-      <div class="active-filters">
+      <div class="active-filters" style="margin-top:1.5rem">
         <a class="filter-chip" href="{{ blog.url }}" {% unless current_tags %}style="background:var(--color-green);color:#fff"{% endunless %}>All</a>
         {%- for tag in blog.all_tags -%}
           <a class="filter-chip" href="{{ blog.url }}/tagged/{{ tag | handle }}" {% if current_tags contains tag %}style="background:var(--color-green);color:#fff"{% endif %}>{{ tag }}</a>
@@ -15,35 +62,66 @@
       </div>
     {%- endif -%}
 
-    {%- paginate blog.articles by 12 -%}
-      <div class="grid cols-3" role="list">
-        {%- for article in blog.articles -%}
-          <article class="card" role="listitem">
-            <a class="card__media" href="{{ article.url }}" tabindex="-1" aria-hidden="true">
-              {%- if article.image -%}{{ article.image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '300,500,700', sizes: '(min-width:750px) 30vw, 90vw', alt: article.image.alt | default: article.title | escape }}
-              {%- else -%}{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}{%- endif -%}
-            </a>
-            <div class="card__body">
+    {%- if has_articles -%}
+      {%- paginate blog.articles by 12 -%}
+        <div class="journal-grid journal-grid--page" role="list">
+          {%- for article in blog.articles -%}
+            <article class="journal-card" role="listitem">
+              <a class="journal-card__media" href="{{ article.url }}" tabindex="-1" aria-hidden="true">
+                {%- if article.image -%}
+                  {{ article.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '400,600,900', sizes: '(min-width:900px) 30vw, 90vw', alt: article.image.alt | default: article.title | escape }}
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </a>
               {%- if article.tags.size > 0 -%}<span class="badge">{{ article.tags.first }}</span>{%- endif -%}
-              <h2 class="h4" style="margin-top:.5rem"><a href="{{ article.url }}">{{ article.title }}</a></h2>
-              <p class="text-muted" style="margin-top:.4rem">{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>
-              <a class="link-arrow" style="margin-top:.75rem" href="{{ article.url }}">{{ 'blogs.article.read_more' | t }} {% render 'icon', name: 'arrow' %}</a>
-            </div>
-          </article>
-        {%- endfor -%}
+              <h2 class="h4" style="margin:0"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+              <p class="text-muted">{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>
+              <a class="link-arrow" href="{{ article.url }}">{{ 'blogs.article.read_more' | t }} {% render 'icon', name: 'arrow' %}</a>
+            </article>
+          {%- endfor -%}
+        </div>
+        {% render 'pagination', paginate: paginate %}
+      {%- endpaginate -%}
+    {%- else -%}
+      <div class="journal-empty">
+        <h2 class="h3" style="margin:0 0 .5rem">No Journal posts yet</h2>
+        <p class="text-muted" style="margin:0 0 1.25rem;max-width:36rem">
+          When you publish a blog post in Shopify Admin, it will show here with its image, title, and summary.
+        </p>
+        <a class="btn btn--primary" href="{{ admin_new_url }}" target="_blank" rel="noopener">
+          Create your first post
+        </a>
       </div>
-      {% render 'pagination', paginate: paginate %}
-    {%- endpaginate -%}
+    {%- endif -%}
   </div>
 </section>
+
 {% schema %}
 {
-  "name": "Blog",
+  "name": "Journal / Blog",
+  "tag": "section",
   "settings": [
+    {
+      "type": "paragraph",
+      "content": "Publish full articles in Shopify Admin → Content → Blog posts. Upload a featured image there. Posts appear on this page automatically."
+    },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE REÚ JOURNAL" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Wellness, made clearer." },
-    { "type": "textarea", "id": "body", "label": "Intro", "default": "Practical guidance to help you understand ingredients, build better routines and choose products with greater confidence." },
-    { "type": "checkbox", "id": "show_tags", "label": "Show category tags", "default": true }
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Intro",
+      "default": "Practical guidance to help you understand ingredients, build better routines and choose products with greater confidence."
+    },
+    { "type": "checkbox", "id": "show_tags", "label": "Show category tags", "default": true },
+    {
+      "type": "checkbox",
+      "id": "show_manage_guide",
+      "label": "Show “how to add posts” guide on the live page",
+      "info": "The guide always appears in the theme editor. Turn this on temporarily while training the client, then turn it off for shoppers.",
+      "default": false
+    }
   ]
 }
 {% endschema %}

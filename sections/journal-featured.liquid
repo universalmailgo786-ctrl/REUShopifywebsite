@@ -1,8 +1,17 @@
-{%- assign blog = blank -%}
-{%- if section.settings.blog != blank -%}
-  {%- assign blog = blogs[section.settings.blog] -%}
-{%- endif -%}
-<section class="section bg-sage">
+{%- liquid
+  assign blog = blank
+  if section.settings.blog != blank
+    assign blog = section.settings.blog
+  endif
+  assign use_blog = false
+  if blog != blank and blog.articles_count > 0 and section.settings.source != 'manual'
+    assign use_blog = true
+  endif
+  assign admin_store = shop.permanent_domain | remove: '.myshopify.com'
+  assign admin_new_url = 'https://admin.shopify.com/store/' | append: admin_store | append: '/content/articles/new'
+-%}
+
+<section class="section bg-sage" data-journal-featured>
   <div class="wrap">
     <div class="section-head section-head--row">
       <div class="section-head__copy">
@@ -14,8 +23,18 @@
         <a class="btn btn--secondary" href="{% if blog != blank %}{{ blog.url }}{% else %}{{ section.settings.cta_link | default: routes.root_url }}{% endif %}">{{ section.settings.cta_label }}</a>
       {%- endif -%}
     </div>
+
+    {%- if request.design_mode -%}
+      <p class="journal-editor-hint">
+        <strong>How to add posts:</strong>
+        Prefer real articles? Use
+        <a href="{{ admin_new_url }}" target="_blank" rel="noopener">Admin → Content → Blog posts</a>
+        (title, body, featured image). Or add a <em>Journal card</em> block below for a quick homepage teaser with image upload.
+      </p>
+    {%- endif -%}
+
     <div class="journal-grid">
-      {%- if blog != blank and blog.articles_count > 0 and section.blocks.size == 0 -%}
+      {%- if use_blog -%}
         {%- for article in blog.articles limit: section.settings.limit -%}
           <article class="journal-card">
             <a class="journal-card__media" href="{{ article.url }}">
@@ -26,10 +45,12 @@
               {%- endif -%}
             </a>
             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
-            {%- if article.excerpt != blank -%}<p class="text-muted">{{ article.excerpt | strip_html | truncate: 120 }}</p>{%- endif -%}
+            {%- if article.excerpt_or_content != blank -%}
+              <p class="text-muted">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+            {%- endif -%}
           </article>
         {%- endfor -%}
-      {%- else -%}
+      {%- elsif section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
           <article class="journal-card" {{ block.shopify_attributes }}>
             {%- if block.settings.link != blank -%}
@@ -57,34 +78,100 @@
               </div>
             {%- endif -%}
             <h3>{% if block.settings.link != blank %}<a href="{{ block.settings.link }}">{{ block.settings.title }}</a>{% else %}{{ block.settings.title }}{% endif %}</h3>
-            <p class="text-muted">{{ block.settings.text }}</p>
+            {%- if block.settings.text != blank -%}<p class="text-muted">{{ block.settings.text }}</p>{%- endif -%}
           </article>
         {%- endfor -%}
+      {%- else -%}
+        <div class="journal-empty journal-empty--inline">
+          <p class="text-muted" style="margin:0">
+            No Journal posts yet.
+            {%- if request.design_mode -%}
+              &nbsp;<a href="{{ admin_new_url }}" target="_blank" rel="noopener">Add a blog post</a>
+              or add a <strong>Journal card</strong> block in this section.
+            {%- endif -%}
+          </p>
+        </div>
       {%- endif -%}
     </div>
   </div>
 </section>
+
 {% schema %}
 {
   "name": "Journal featured",
   "tag": "section",
   "settings": [
+    {
+      "type": "paragraph",
+      "content": "OPTION A — Full articles: Shopify Admin → Content → Blog posts → Add blog post (includes image upload). Select that blog below. OPTION B — Homepage teasers: add Journal card blocks and fill the form (image, title, summary, link)."
+    },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The REÚ Journal" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Wellness, made clearer." },
-    { "type": "textarea", "id": "body", "label": "Body", "default": "Practical guidance to help you understand ingredients, build better routines, and choose products with greater confidence." },
-    { "type": "text", "id": "blog", "label": "Blog handle", "default": "news" },
-    { "type": "range", "id": "limit", "min": 2, "max": 6, "step": 1, "default": 3, "label": "Articles" },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Practical guidance to help you understand ingredients, build better routines, and choose products with greater confidence."
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Journal blog"
+    },
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Card source",
+      "options": [
+        { "value": "auto", "label": "Blog articles when available, otherwise cards" },
+        { "value": "manual", "label": "Manual Journal cards only" }
+      ],
+      "default": "auto"
+    },
+    { "type": "range", "id": "limit", "min": 2, "max": 6, "step": 1, "default": 3, "label": "Articles to show" },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Visit the Journal" },
     { "type": "url", "id": "cta_link", "label": "CTA fallback link" }
   ],
   "blocks": [
-    { "type": "card", "name": "Launch card", "settings": [
-      { "type": "image_picker", "id": "image", "label": "Image" },
-      { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename" },
-      { "type": "text", "id": "title", "label": "Title", "default": "How to Build a Wellness Routine You Can Actually Keep" },
-      { "type": "textarea", "id": "text", "label": "Text", "default": "Simple habits work best when they fit the life you already live." },
-      { "type": "url", "id": "link", "label": "Link" }
-    ]}
+    {
+      "type": "card",
+      "name": "Journal card",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Fill this form for one Journal teaser. Upload an image, add a title and short summary, then link to a blog post or page."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Featured image",
+          "info": "Upload or select an image (recommended 1200×900 or similar)."
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Fallback theme asset (optional)",
+          "info": "Only if no image is uploaded — e.g. reu-journal-1.jpg"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "How to Build a Wellness Routine You Can Actually Keep"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Short summary",
+          "default": "Simple habits work best when they fit the life you already live."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link to full article or page"
+        }
+      ]
+    }
   ],
   "presets": [{
     "name": "Journal featured",

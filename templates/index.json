@@ -247,6 +247,7 @@
         "heading": "Wellness, made clearer.",
         "body": "Practical guidance to help you understand ingredients, build better routines, and choose products with greater confidence.",
         "blog": "news",
+        "source": "auto",
         "limit": 3,
         "cta_label": "Visit the Journal",
         "cta_link": "shopify://blogs/news"
