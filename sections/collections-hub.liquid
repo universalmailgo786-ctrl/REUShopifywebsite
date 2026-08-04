@@ -44,17 +44,18 @@
     </div>
 
     {%- if section.settings.show_comparison -%}
-      <div class="format-compare" style="margin-top:var(--space-xl)">
+      <div class="format-compare">
         <div class="section-head section-head--center">
+          <p class="eyebrow">Compare formats</p>
           <h2 class="h3">{{ section.settings.compare_heading | default: 'Format comparison' }}</h2>
         </div>
         <div class="format-compare__table-wrap" role="region" aria-label="Format comparison" tabindex="0">
           <table class="format-compare__table">
             <thead>
               <tr>
-                <th scope="col">Feature</th>
-                <th scope="col">Pouches</th>
-                <th scope="col">Sachets</th>
+                <th scope="col" class="format-compare__feature">Feature</th>
+                <th scope="col" class="format-compare__pouch">Pouches</th>
+                <th scope="col" class="format-compare__sachet">Sachets</th>
               </tr>
             </thead>
             <tbody>
