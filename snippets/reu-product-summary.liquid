@@ -6,6 +6,11 @@
 {%- liquid
   assign p = product
   assign summary = p.metafields.custom.short_description.value | default: p.metafields.custom.short_description
+  if summary != blank
+    if summary contains '[EDITABLE' or summary contains 'editable placeholders'
+      assign summary = ''
+    endif
+  endif
   if summary == blank
     assign h = p.handle | downcase
     if h contains 'collagen'
@@ -27,7 +32,10 @@
     elsif h contains 'protein'
       assign summary = 'A rich chocolate protein blend made to support an active routine in a satisfying, easy-to-enjoy format.'
     elsif p.description != blank
-      assign summary = p.description | strip_html | truncatewords: 28
+      assign desc_plain = p.description | strip_html
+      unless desc_plain contains '[EDITABLE' or desc_plain contains 'editable placeholders'
+        assign summary = desc_plain | truncatewords: 28
+      endunless
     endif
   endif
 -%}

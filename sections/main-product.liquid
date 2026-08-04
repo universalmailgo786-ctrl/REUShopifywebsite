@@ -14,6 +14,13 @@
       assign format_label = 'Pouch'
     endif
   endif
+  assign desc_plain = p.description | strip_html
+  assign show_description = false
+  if p.description != blank
+    unless desc_plain contains '[EDITABLE' or desc_plain contains 'editable placeholders'
+      assign show_description = true
+    endunless
+  endif
 -%}
 <section class="reu-pdp" data-product-root data-preorder="{{ preorder }}">
   <div class="wrap">
@@ -158,7 +165,33 @@
     <div class="reu-pdp__details">
       <div class="reu-pdp__panel">
         <h2>Why you’ll love it</h2>
-        {%- if mf.key_benefits != blank -%}
+        {%- liquid
+          assign benefits_text = ''
+          if mf.key_benefits != blank
+            assign benefits_text = mf.key_benefits | metafield_text | strip_html
+          endif
+          assign how_text = ''
+          if mf.how_to_use != blank
+            assign how_text = mf.how_to_use | metafield_text | strip_html
+          elsif mf.directions != blank
+            assign how_text = mf.directions | metafield_text | strip_html
+          endif
+
+          assign show_benefits = false
+          if benefits_text != blank
+            unless benefits_text contains '[EDITABLE' or benefits_text contains 'editable placeholders'
+              assign show_benefits = true
+            endunless
+          endif
+
+          assign show_how = false
+          if how_text != blank
+            unless how_text contains '[EDITABLE' or how_text contains 'editable placeholders'
+              assign show_how = true
+            endunless
+          endif
+        -%}
+        {%- if show_benefits -%}
           <div class="rte">{{ mf.key_benefits | metafield_tag }}</div>
         {%- else -%}
           <ul class="reu-pdp__ritual">
@@ -170,14 +203,14 @@
         {%- endif -%}
 
         <h2 style="margin-top:1.75rem">Make it part of your day</h2>
-        {%- if mf.how_to_use != blank or mf.directions != blank -%}
+        {%- if show_how -%}
           <div class="rte">
             {%- if mf.how_to_use != blank -%}{{ mf.how_to_use | metafield_tag }}{%- else -%}{{ mf.directions | metafield_tag }}{%- endif -%}
           </div>
         {%- endif -%}
         <p class="reu-pdp__ritual form-note" style="margin-top:.65rem">Follow the serving size, mixing method, timing and frequency printed on the verified product label. Do not exceed the recommended use.</p>
 
-        {%- if p.description != blank -%}
+        {%- if show_description -%}
           <div class="rte" style="margin-top:1.5rem">{{ p.description }}</div>
         {%- endif -%}
       </div>
@@ -190,7 +223,17 @@
             {%- assign key = parts[0] -%}
             {%- assign label = parts[1] -%}
             {%- assign val = mf[key] -%}
+            {%- assign val_text = '' -%}
             {%- if val != blank -%}
+              {%- assign val_text = val | metafield_text | strip_html -%}
+            {%- endif -%}
+            {%- assign show_row = false -%}
+            {%- if val != blank -%}
+              {%- unless val_text contains '[EDITABLE' or val_text contains 'editable placeholders' -%}
+                {%- assign show_row = true -%}
+              {%- endunless -%}
+            {%- endif -%}
+            {%- if show_row -%}
               <div class="accordion__item">
                 <h3>
                   <button class="accordion__trigger" id="acc-{{ key }}" aria-expanded="false" aria-controls="acc-p-{{ key }}">
@@ -301,7 +344,7 @@
   "@context": "https://schema.org/",
   "@type": "Product",
   "name": {{ p.title | json }},
-  "description": {{ p.description | strip_html | truncatewords: 60 | json }},
+  "description": {% if show_description %}{{ desc_plain | truncatewords: 60 | json }}{% else %}{{ p.title | json }}{% endif %},
   "image": [{% for media in p.media limit: 3 %}{{ media | image_url: width: 1200 | prepend: 'https:' | json }}{% unless forloop.last %},{% endunless %}{% endfor %}],
   {% if p.vendor != blank %}"brand": { "@type": "Brand", "name": {{ p.vendor | json }} },{% endif %}
   "offers": {
