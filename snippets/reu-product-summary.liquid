@@ -1,0 +1,34 @@
+{%- comment -%}
+  REÚ product short summary fallback from approved blueprint copy.
+  Prefers metafield custom.short_description; otherwise matches product handle.
+  Params: product
+{%- endcomment -%}
+{%- liquid
+  assign p = product
+  assign summary = p.metafields.custom.short_description.value | default: p.metafields.custom.short_description
+  if summary == blank
+    assign h = p.handle | downcase
+    if h contains 'collagen'
+      assign summary = 'A bright mixed-berry collagen ritual created for women who want beauty-focused wellness to feel easy and enjoyable.'
+    elsif h contains 'lemon-lime'
+      assign summary = 'A crisp citrus hydration blend for refreshing support before, during or after the moments that move you.'
+    elsif h contains 'watermelon'
+      assign summary = 'A juicy watermelon hydration blend that brings a more enjoyable rhythm to everyday replenishment.'
+    elsif h contains 'coconut'
+      assign summary = 'A smooth tropical hydration blend designed for simple, refreshing support wherever your day goes.'
+    elsif h contains 'greens'
+      assign summary = 'A tropical pineapple greens blend that makes adding a simple green ritual to your day feel brighter.'
+    elsif h contains 'daily-wellness' or h contains 'peach-mango'
+      assign summary = 'A vibrant peach-mango blend designed to make everyday wellness support feel like a ritual—not another task.'
+    elsif h contains 'gummies'
+      assign summary = 'A mixed-berry wellness option created for women who prefer a simple, enjoyable daily format.'
+    elsif h contains 'weight'
+      assign summary = 'A refreshing pink-lemonade blend designed to complement an intentional wellness routine.'
+    elsif h contains 'protein'
+      assign summary = 'A rich chocolate protein blend made to support an active routine in a satisfying, easy-to-enjoy format.'
+    elsif p.description != blank
+      assign summary = p.description | strip_html | truncatewords: 28
+    endif
+  endif
+-%}
+{%- if summary != blank -%}<p class="reu-pdp__summary">{{ summary }}</p>{%- endif -%}

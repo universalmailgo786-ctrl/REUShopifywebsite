@@ -13,13 +13,6 @@
       "type": "main-product",
       "settings": {}
     },
-    "reviews": {
-      "type": "app-reviews",
-      "settings": {
-        "heading": "Reviews",
-        "bg_scheme": ""
-      }
-    },
     "recommendations": {
       "type": "product-recommendations",
       "settings": {
@@ -29,5 +22,5 @@
       }
     }
   },
-  "order": ["main", "reviews", "recommendations"]
+  "order": ["main", "recommendations"]
 }

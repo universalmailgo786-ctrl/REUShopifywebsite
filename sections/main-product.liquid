@@ -6,84 +6,120 @@
   endif
   assign mf = p.metafields.custom
   assign current = p.selected_or_first_available_variant
+  assign format_label = mf.format.value | default: mf.format
+  if format_label == blank
+    if p.handle contains 'sachet'
+      assign format_label = 'Sachet'
+    elsif p.handle contains 'pouch'
+      assign format_label = 'Pouch'
+    endif
+  endif
 -%}
-<section class="section" data-product-root data-preorder="{{ preorder }}">
+<section class="reu-pdp" data-product-root data-preorder="{{ preorder }}">
   <div class="wrap">
-    {% render 'breadcrumbs' %}
+    <div class="reu-pdp__banner">
+      {% render 'breadcrumbs' %}
+    </div>
 
-    <div class="product" data-sticky-anchor>
-      {%- comment -%} 2. Media gallery {%- endcomment -%}
-      <div class="product__media">
-        <div class="gallery" data-gallery>
-          <div class="gallery__main">
-            {%- if p.featured_media -%}
-              {{ p.featured_media | image_url: width: 1200 | image_tag:
-                widths: '500,700,900,1200', sizes: '(min-width:990px) 50vw, 100vw',
-                loading: 'eager', fetchpriority: 'high', id: 'gallery-main',
-                alt: p.featured_media.alt | default: p.title | escape }}
-            {%- else -%}{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}{%- endif -%}
+    <div class="reu-pdp__layout" data-sticky-anchor>
+      {%- comment -%} Gallery {%- endcomment -%}
+      <div class="reu-pdp__gallery" data-gallery>
+        <div class="reu-pdp__stage">
+          <div class="reu-pdp__badge-float">
+            {%- if preorder -%}
+              <span class="badge badge--preorder">{{ 'products.product.preorder' | t }}</span>
+              <span class="badge">First release</span>
+            {%- elsif p.available -%}
+              <span class="badge">Available</span>
+            {%- else -%}
+              <span class="badge">Sold out</span>
+            {%- endif -%}
           </div>
-          {%- if p.media.size > 1 -%}
-            <div class="gallery__thumbs" role="list">
-              {%- for media in p.media -%}
-                <button class="gallery__thumb" type="button" role="listitem" data-media-id="{{ media.id }}"
-                        aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
-                        aria-label="{{ media.alt | default: p.title | escape }}"
-                        onclick="var m=document.getElementById('gallery-main'); m.src=this.querySelector('img').src.replace(/width=\d+/,'width=1200'); m.srcset=''; this.parentNode.querySelectorAll('[aria-current]').forEach(function(b){b.setAttribute('aria-current','false')}); this.setAttribute('aria-current','true');">
-                  {{ media | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80,160', alt: media.alt | default: p.title | escape }}
-                </button>
-              {%- endfor -%}
-            </div>
+          {%- if p.featured_media -%}
+            {{ p.featured_media | image_url: width: 1400 | image_tag:
+              widths: '500,700,900,1200,1400',
+              sizes: '(min-width:990px) 48vw, 100vw',
+              loading: 'eager',
+              fetchpriority: 'high',
+              id: 'gallery-main',
+              alt: p.featured_media.alt | default: p.title | escape }}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
           {%- endif -%}
         </div>
+
+        {%- if p.media.size > 1 -%}
+          <div class="reu-pdp__thumbs" role="list">
+            {%- for media in p.media -%}
+              <button
+                class="reu-pdp__thumb"
+                type="button"
+                role="listitem"
+                data-media-id="{{ media.id }}"
+                aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+                aria-label="{{ media.alt | default: p.title | escape }}"
+                onclick="var m=document.getElementById('gallery-main'); if(!m) return; m.src=this.querySelector('img').src.replace(/width=\d+/,'width=1400'); m.srcset=''; this.parentNode.querySelectorAll('[aria-current]').forEach(function(b){b.setAttribute('aria-current','false')}); this.setAttribute('aria-current','true');"
+              >
+                {{ media | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90,180', alt: media.alt | default: p.title | escape }}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
       </div>
 
-      {%- comment -%} Info column {%- endcomment -%}
-      <div class="product__info">
-        {%- comment -%} 3. PRE-ORDER / First release badge before title {%- endcomment -%}
-        <div style="margin:0 0 .65rem">
-          {%- if p.metafields.reviews.rating.value != blank -%}
-            {%- assign rating = p.metafields.reviews.rating.value -%}
-            <span class="badge" aria-label="{{ 'accessibility.star_reviews' | t: rating: rating.rating }}">{% render 'icon', name: 'star' %} {{ rating.rating }} / 5 · {{ p.metafields.reviews.rating_count.value | default: 0 }} reviews</span>
-          {%- elsif preorder -%}
-            <span class="badge badge--preorder">{{ 'products.product.preorder' | t }}</span>
-            <span class="badge" style="margin-left:.35rem">First release</span>
+      {%- comment -%} Buy box {%- endcomment -%}
+      <div class="reu-pdp__info product__info">
+        <div class="reu-pdp__meta-row">
+          <span class="reu-pdp__stock">
+            <span class="reu-pdp__stock-dot" aria-hidden="true"></span>
+            {%- if preorder -%}Pre-order{%- elsif p.available -%}Ready to order{%- else -%}Unavailable{%- endif -%}
+          </span>
+          {%- if format_label != blank -%}
+            <span>Format: <strong>{{ format_label }}</strong></span>
+          {%- endif -%}
+          {%- if mf.goal != blank -%}
+            <span>Goal: <strong>{{ mf.goal }}</strong></span>
           {%- endif -%}
         </div>
 
-        {%- comment -%} 4. Title + flavour {%- endcomment -%}
-        <h1 class="h2" style="margin-bottom:.25rem">{{ p.title }}</h1>
-        {%- if mf.flavor != blank -%}<p class="text-muted" style="font-size:1.05rem">{{ mf.flavor }}{% if mf.goal != blank %} · {{ mf.goal }}{% endif %}</p>{%- endif -%}
-
-        {%- comment -%} 5. Price + payment timing {%- endcomment -%}
-        <div class="product__price">{% render 'price', product: p, variant: current, context: 'product' %}</div>
-        {%- if preorder -%}<p class="form-note">Payment timing is confirmed at checkout.</p>{%- endif -%}
-
-        {%- comment -%} 6. One-sentence value proposition {%- endcomment -%}
-        {%- if mf.short_description != blank -%}
-          <p class="lede" style="margin-top:1rem">{{ mf.short_description }}</p>
+        <h1 class="reu-pdp__title">{{ p.title }}</h1>
+        {%- if mf.flavor != blank -%}
+          <p class="reu-pdp__flavor">{{ mf.flavor }}{% if mf.goal != blank %} · {{ mf.goal }}{% endif %}</p>
         {%- endif -%}
+
+        {%- if p.metafields.reviews.rating.value != blank -%}
+          {%- assign rating = p.metafields.reviews.rating.value -%}
+          <p class="reu-pdp__meta-row" style="margin-top:-.35rem">
+            <span class="badge" aria-label="{{ 'accessibility.star_reviews' | t: rating: rating.rating }}">{% render 'icon', name: 'star' %} {{ rating.rating }} / 5 · {{ p.metafields.reviews.rating_count.value | default: 0 }} reviews</span>
+          </p>
+        {%- endif -%}
+
+        <div class="reu-pdp__price">{% render 'price', product: p, variant: current, context: 'product' %}</div>
+        {%- if preorder -%}<p class="form-note" style="margin:-.35rem 0 1rem">Payment timing is confirmed at checkout.</p>{%- endif -%}
+
+        {% render 'reu-product-summary', product: p %}
+
+        {% render 'reu-product-countdown', product: p, style: 'product' %}
 
         {%- if mf.also_available_handle != blank -%}
           {%- assign alt_product = all_products[mf.also_available_handle] -%}
           {%- if alt_product != blank -%}
-            <p class="also-format" style="margin-top:1rem">
+            <p class="reu-pdp__also">
               <a class="link-arrow" href="{{ alt_product.url }}">
-                {{ mf.also_available_label | default: 'Also Available in Another Format' }}
+                {{ mf.also_available_label | default: 'Also available in another format' }}
                 {% render 'icon', name: 'arrow' %}
               </a>
             </p>
           {%- endif -%}
         {%- endif -%}
 
-        {%- comment -%} Purchase form: 7 variant selector, 8 quantity, 9 pre-order button {%- endcomment -%}
-        <form data-product-form action="{{ routes.cart_add_url }}" method="post" style="margin-top:1.25rem">
+        <form class="reu-pdp__form" data-product-form action="{{ routes.cart_add_url }}" method="post">
           {%- unless p.has_only_default_variant -%}
             {%- for option in p.options_with_values -%}
               {%- assign option_index = forloop.index0 -%}
-              <div class="option-group" data-option-index="{{ option_index }}">
-                <span class="option-group__label">{{ option.name }}</span>
-                <div class="option-pills">
+              <div class="reu-pdp__options option-group" data-option-index="{{ option_index }}">
+                <span class="reu-pdp__option-label">{{ option.name }}</span>
+                <div class="reu-pdp__pills option-pills">
                   {%- for value in option.values -%}
                     {%- assign oid = 'opt-' | append: option_index | append: '-' | append: forloop.index0 -%}
                     <input type="radio" id="{{ oid }}" name="option-{{ option_index }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
@@ -96,16 +132,21 @@
 
           <input type="hidden" name="id" value="{{ current.id }}">
 
-          {% render 'reu-product-countdown', product: p, style: 'product' %}
-
-          <div class="purchase-row">
-            <div class="qty-control" data-qty>
+          <div class="reu-pdp__buy purchase-row">
+            <div class="reu-pdp__qty qty-control" data-qty>
               <button type="button" data-qty-step="-1" aria-label="{{ 'products.product.decrease' | t }}">–</button>
               <input type="number" name="quantity" value="1" min="1" aria-label="{{ 'products.product.quantity' | t }}">
               <button type="button" data-qty-step="1" aria-label="{{ 'products.product.increase' | t }}">+</button>
             </div>
-            <button type="submit" class="btn btn--lg" style="flex:1" data-add-btn {% unless current.available %}disabled{% endunless %}>
-              {%- if current.available -%}{% if preorder %}{{ 'products.product.preorder' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endif %}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+            <button type="submit" class="btn btn--lg reu-pdp__atc" data-add-btn {% unless current.available %}disabled{% endunless %}>
+              <span>
+                {%- if current.available -%}
+                  {% if preorder %}{{ 'products.product.preorder' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endif %}
+                {%- else -%}
+                  {{ 'products.product.sold_out' | t }}
+                {%- endif -%}
+              </span>
+              <span class="btn__arrow" aria-hidden="true">{% render 'icon', name: 'arrow' %}</span>
             </button>
           </div>
 
@@ -115,26 +156,45 @@
           {%- endif -%}
         </form>
 
-        {%- comment -%} Payment / support reassurance {%- endcomment -%}
-        <ul class="reassurance">
+        <ul class="reu-pdp__trust">
           <li>{% render 'icon', name: 'truck' %}<span>{% if mf.preorder_ship_window != blank %}Estimated shipping: {{ mf.preorder_ship_window }}.{% else %}Shipping window shown at checkout.{% endif %}</span></li>
           <li>{% render 'icon', name: 'refresh' %}<span>Cancel a pre-order for a full refund any time before shipment.</span></li>
           <li>{% render 'icon', name: 'shield' %}<span>Secure checkout. Questions? {% if settings.support_email != blank %}<a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>{% else %}Contact our support team.{% endif %}</span></li>
         </ul>
+      </div>
+    </div>
 
-        <div class="product-day-ritual" style="margin-top:var(--space-lg)">
-          <h2 class="h4">Make it part of your day</h2>
-          {%- if mf.how_to_use != blank or mf.directions != blank -%}
-            <div class="rte" style="margin-top:.5rem">
-              {%- if mf.how_to_use != blank -%}{{ mf.how_to_use | metafield_tag }}{%- else -%}{{ mf.directions | metafield_tag }}{%- endif -%}
-            </div>
-          {%- endif -%}
-          <p class="form-note" style="margin-top:.5rem">Follow the serving size, mixing method, timing and frequency printed on the verified product label. Do not exceed the recommended use.</p>
-        </div>
+    {%- comment -%} Detail panels {%- endcomment -%}
+    <div class="reu-pdp__details">
+      <div class="reu-pdp__panel">
+        <h2>Why you’ll love it</h2>
+        {%- if mf.key_benefits != blank -%}
+          <div class="rte">{{ mf.key_benefits | metafield_tag }}</div>
+        {%- else -%}
+          <ul class="reu-pdp__ritual">
+            <li>Made to support an everyday wellness goal.</li>
+            <li>A flavour designed to make consistency more enjoyable.</li>
+            <li>Available in a full-size pouch and convenient single serves where confirmed.</li>
+            <li>Clear directions and supplier-verified product information.</li>
+          </ul>
+        {%- endif -%}
 
-        {%- comment -%} Accordions. Empty rows hide cleanly. {%- endcomment -%}
-        <div class="accordion" data-accordion style="margin-top:var(--space-lg)">
-          {%- assign rows = 'key_benefits:Why you’ll love it,benefits:Benefits,how_to_use:How to Use,ingredients:Ingredients,supplement_facts:Supplement Facts,format_details:Flavour & Format,warnings_allergens:Warnings & Allergens' | split: ',' -%}
+        <h2 style="margin-top:1.75rem">Make it part of your day</h2>
+        {%- if mf.how_to_use != blank or mf.directions != blank -%}
+          <div class="rte">
+            {%- if mf.how_to_use != blank -%}{{ mf.how_to_use | metafield_tag }}{%- else -%}{{ mf.directions | metafield_tag }}{%- endif -%}
+          </div>
+        {%- endif -%}
+        <p class="reu-pdp__ritual form-note" style="margin-top:.65rem">Follow the serving size, mixing method, timing and frequency printed on the verified product label. Do not exceed the recommended use.</p>
+
+        {%- if p.description != blank -%}
+          <div class="rte" style="margin-top:1.5rem">{{ p.description }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="reu-pdp__panel">
+        <div class="accordion" data-accordion>
+          {%- assign rows = 'benefits:Benefits,ingredients:Ingredients,supplement_facts:Supplement Facts,how_to_use:How to Use,format_details:Flavour & Format,warnings_allergens:Warnings & Allergens' | split: ',' -%}
           {%- for row in rows -%}
             {%- assign parts = row | split: ':' -%}
             {%- assign key = parts[0] -%}
@@ -142,50 +202,145 @@
             {%- assign val = mf[key] -%}
             {%- if val != blank -%}
               <div class="accordion__item">
-                <h3><button class="accordion__trigger" id="acc-{{ key }}" aria-expanded="false" aria-controls="acc-p-{{ key }}"><span>{{ label }}</span>{% render 'icon', name: 'plus' %}</button></h3>
-                <div class="accordion__panel" id="acc-p-{{ key }}" role="region" aria-labelledby="acc-{{ key }}" hidden style="height:0"><div class="rte">{{ val | metafield_tag }}</div></div>
+                <h3>
+                  <button class="accordion__trigger" id="acc-{{ key }}" aria-expanded="false" aria-controls="acc-p-{{ key }}">
+                    <span>{{ label }}</span>{% render 'icon', name: 'plus' %}
+                  </button>
+                </h3>
+                <div class="accordion__panel" id="acc-p-{{ key }}" role="region" aria-labelledby="acc-{{ key }}" hidden style="height:0">
+                  <div class="rte">{{ val | metafield_tag }}</div>
+                </div>
               </div>
             {%- endif -%}
           {%- endfor -%}
 
-          {%- comment -%} Pre-Order & Shipping accordion {%- endcomment -%}
           <div class="accordion__item">
-            <h3><button class="accordion__trigger" id="acc-preorder" aria-expanded="false" aria-controls="acc-p-preorder"><span>Pre-Order &amp; Shipping</span>{% render 'icon', name: 'plus' %}</button></h3>
+            <h3>
+              <button class="accordion__trigger" id="acc-preorder" aria-expanded="false" aria-controls="acc-p-preorder">
+                <span>Pre-Order &amp; Shipping</span>{% render 'icon', name: 'plus' %}
+              </button>
+            </h3>
             <div class="accordion__panel" id="acc-p-preorder" role="region" aria-labelledby="acc-preorder" hidden style="height:0">
               <div class="rte">{% render 'preorder-notice', product: p %}</div>
             </div>
           </div>
 
-          {%- comment -%} Returns accordion {%- endcomment -%}
           <div class="accordion__item">
-            <h3><button class="accordion__trigger" id="acc-returns" aria-expanded="false" aria-controls="acc-p-returns"><span>Returns</span>{% render 'icon', name: 'plus' %}</button></h3>
+            <h3>
+              <button class="accordion__trigger" id="acc-returns" aria-expanded="false" aria-controls="acc-p-returns">
+                <span>Returns</span>{% render 'icon', name: 'plus' %}
+              </button>
+            </h3>
             <div class="accordion__panel" id="acc-p-returns" role="region" aria-labelledby="acc-returns" hidden style="height:0">
               <div class="rte"><p>Because supplements are ingestible goods, opened products cannot be returned unless defective, damaged, incorrect, or otherwise required by law. Contact support for return help.</p></div>
             </div>
           </div>
         </div>
 
-        {%- if p.collections.size > 0 -%}
-          <div style="margin-top:var(--space-md)">
-            <p class="product-card__meta" style="margin-bottom:.5rem">Shop collections</p>
-            <div class="snap-row" style="gap:.5rem">
-              {%- for col in p.collections limit: 6 -%}
-                <a class="filter-chip" href="{{ col.url }}">{{ col.title }}</a>
-              {%- endfor -%}
-            </div>
-          </div>
-        {%- endif -%}
-
         {% render 'supplement-disclaimer', compact: true %}
+      </div>
+    </div>
+
+    {%- comment -%} Full REÚ range — only this brand’s products {%- endcomment -%}
+    {%- liquid
+      assign range_col = collections['pouch-collection']
+      if range_col == blank
+        assign range_col = collections.pouches
+      endif
+      assign range_col_b = collections['sachet-collection']
+      if range_col_b == blank
+        assign range_col_b = collections.sachets
+      endif
+      assign shown_ids = ',' | append: p.id | append: ','
+    -%}
+    <div class="reu-pdp-range">
+      <div class="reu-pdp-range__head">
+        <div>
+          <h2>Shop the REÚ range</h2>
+          <p>Every pouch and sachet in the collection — same Soxa-inspired product presentation, only REÚ products.</p>
+        </div>
+        <a class="btn btn--secondary" href="{{ routes.all_products_collection_url }}">Shop All <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a>
+      </div>
+      <div class="reu-pdp-range__grid" role="list">
+        {%- if range_col != blank -%}
+          {%- for product in range_col.products -%}
+            {%- assign id_token = ',' | append: product.id | append: ',' -%}
+            {%- unless shown_ids contains id_token -%}
+              {%- assign shown_ids = shown_ids | append: product.id | append: ',' -%}
+              <a class="reu-pdp-card" href="{{ product.url }}" role="listitem">
+                <div class="reu-pdp-card__media">
+                  {%- if settings.preorder_mode and product.available -%}<span class="badge badge--preorder reu-pdp-card__badge">{{ 'products.product.preorder' | t }}</span>{%- endif -%}
+                  {%- if product.featured_media -%}
+                    {{ product.featured_media | image_url: width: 700 | image_tag: loading: 'lazy', widths: '280,420,700', sizes: '(min-width:1100px) 22vw, (min-width:750px) 30vw, 45vw', alt: product.title | escape }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="reu-pdp-card__body">
+                  <h3 class="reu-pdp-card__title">{{ product.title }}</h3>
+                  {%- if product.metafields.custom.flavor != blank -%}
+                    <p class="reu-pdp-card__meta">{{ product.metafields.custom.flavor.value | default: product.metafields.custom.flavor }}</p>
+                  {%- endif -%}
+                  <p class="reu-pdp-card__price">{% render 'price', product: product %}</p>
+                  <span class="reu-pdp-card__cta">View product →</span>
+                </div>
+              </a>
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
+        {%- if range_col_b != blank -%}
+          {%- for product in range_col_b.products -%}
+            {%- assign id_token = ',' | append: product.id | append: ',' -%}
+            {%- unless shown_ids contains id_token -%}
+              {%- assign shown_ids = shown_ids | append: product.id | append: ',' -%}
+              <a class="reu-pdp-card" href="{{ product.url }}" role="listitem">
+                <div class="reu-pdp-card__media">
+                  {%- if settings.preorder_mode and product.available -%}<span class="badge badge--preorder reu-pdp-card__badge">{{ 'products.product.preorder' | t }}</span>{%- endif -%}
+                  {%- if product.featured_media -%}
+                    {{ product.featured_media | image_url: width: 700 | image_tag: loading: 'lazy', widths: '280,420,700', sizes: '(min-width:1100px) 22vw, (min-width:750px) 30vw, 45vw', alt: product.title | escape }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="reu-pdp-card__body">
+                  <h3 class="reu-pdp-card__title">{{ product.title }}</h3>
+                  {%- if product.metafields.custom.flavor != blank -%}
+                    <p class="reu-pdp-card__meta">{{ product.metafields.custom.flavor.value | default: product.metafields.custom.flavor }}</p>
+                  {%- endif -%}
+                  <p class="reu-pdp-card__price">{% render 'price', product: product %}</p>
+                  <span class="reu-pdp-card__cta">View product →</span>
+                </div>
+              </a>
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
+        {%- if range_col == blank and range_col_b == blank -%}
+          {%- for product in collections.all.products limit: 18 -%}
+            {%- if product.id == p.id -%}{% continue %}{%- endif -%}
+            <a class="reu-pdp-card" href="{{ product.url }}" role="listitem">
+              <div class="reu-pdp-card__media">
+                {%- if settings.preorder_mode and product.available -%}<span class="badge badge--preorder reu-pdp-card__badge">{{ 'products.product.preorder' | t }}</span>{%- endif -%}
+                {%- if product.featured_media -%}
+                  {{ product.featured_media | image_url: width: 700 | image_tag: loading: 'lazy', widths: '280,420,700', sizes: '(min-width:1100px) 22vw, (min-width:750px) 30vw, 45vw', alt: product.title | escape }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="reu-pdp-card__body">
+                <h3 class="reu-pdp-card__title">{{ product.title }}</h3>
+                <p class="reu-pdp-card__price">{% render 'price', product: product %}</p>
+                <span class="reu-pdp-card__cta">View product →</span>
+              </div>
+            </a>
+          {%- endfor -%}
+        {%- endif -%}
       </div>
     </div>
   </div>
 
-  {%- comment -%} Product JSON for JS variant handling {%- endcomment -%}
   <script type="application/json" data-product-json>{{ p | json }}</script>
 </section>
 
-{%- comment -%} 11. Sticky mobile pre-order bar {%- endcomment -%}
 <div class="sticky-bar" data-sticky-bar>
   <div class="sticky-bar__img">
     {%- if p.featured_media -%}{{ p.featured_media | image_url: width: 88 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
@@ -199,7 +354,6 @@
   </button>
 </div>
 
-{%- comment -%} Product JSON-LD (real data only) {%- endcomment -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -228,7 +382,7 @@
   "tag": "section",
   "class": "section-main-product",
   "settings": [
-    { "type": "paragraph", "content": "Product copy is driven by the product’s custom metafields. Empty accordions hide automatically. See README for metafield definitions." }
+    { "type": "paragraph", "content": "Soxa-inspired REÚ product layout. Copy uses product metafields; blueprint short descriptions fill gaps by product handle." }
   ],
   "blocks": [
     { "type": "@app" }
