@@ -7,6 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
+
 {
   "sections": {
     "hero": {
@@ -19,7 +20,7 @@
         "cta_link": "shopify://collections/all",
         "cta2_label": "Find My Routine",
         "cta2_link": "shopify://pages/find-your-reu",
-        "disclosure": "Available for pre-order. Estimated shipping: September – October 2026. Cancel for a full refund any time before shipment."
+        "disclosure": "Available for pre-order. Estimated shipping: September \u2013 October 2026. Cancel for a full refund any time before shipment."
       }
     },
     "brand_intro": {
@@ -54,7 +55,7 @@
           "settings": {
             "icon": "sun",
             "title": "Created for Women",
-            "text": "A modern wellness experience shaped around women’s real lives."
+            "text": "A modern wellness experience shaped around women\u2019s real lives."
           }
         }
       },
@@ -65,10 +66,10 @@
         "b4"
       ],
       "settings": {
-        "eyebrow": "Why REÚ",
+        "eyebrow": "Why RE\u00da",
         "heading": "Wellness without\nthe guesswork.",
-        "body": "High-quality wellness should feel clear, enjoyable, and realistic enough for every day. REÚ creates great-tasting products designed to fit naturally into women’s real lives.",
-        "image_alt": "Woman holding REÚ greens, hydration, and protein pouches"
+        "body": "High-quality wellness should feel clear, enjoyable, and realistic enough for every day. RE\u00da creates great-tasting products designed to fit naturally into women\u2019s real lives.",
+        "image_alt": "Woman holding RE\u00da greens, hydration, and protein pouches"
       }
     },
     "goals": {
@@ -176,22 +177,22 @@
         "t6"
       ],
       "settings": {
-        "eyebrow": "The REÚ Standard",
+        "eyebrow": "The RE\u00da Standard",
         "heading": "What belongs in your routine\nshould never be a mystery.",
-        "body": "Confidence starts with clarity. Every product page clearly explains what is inside, how to use it and what to expect—using supplier-verified information only.",
+        "body": "Confidence starts with clarity. Every product page clearly explains what is inside, how to use it and what to expect\u2014using supplier-verified information only.",
         "fallback_asset": "reu-standards-clarity.jpg",
-        "image_alt": "Woman preparing a REÚ Hydration Electrolytes drink on a court"
+        "image_alt": "Woman preparing a RE\u00da Hydration Electrolytes drink on a court"
       }
     },
     "featured": {
       "type": "featured-products",
       "settings": {
-        "eyebrow": "Shop REÚ",
+        "eyebrow": "Shop RE\u00da",
         "heading": "Your daily essentials.",
         "heading_before": "Your ",
         "heading_accent": "daily essentials",
         "heading_after": ".",
-        "body": "Meet the REÚ favourites designed to fit smoothly into mornings, workouts, workdays, and everything between.",
+        "body": "Meet the RE\u00da favourites designed to fit smoothly into mornings, workouts, workdays, and everything between.",
         "limit": 6,
         "cta_label": "Shop All Products",
         "cta_link": "shopify://collections/all"
@@ -200,9 +201,9 @@
     "quiz": {
       "type": "quiz-teaser",
       "settings": {
-        "eyebrow": "Find your REÚ",
+        "eyebrow": "Find your RE\u00da",
         "heading": "Not sure where\nto begin?",
-        "body": "Answer a few quick questions about your goals, lifestyle, and preferences. We’ll guide you toward the products that best match what you want from your daily wellness routine.",
+        "body": "Answer a few quick questions about your goals, lifestyle, and preferences. We\u2019ll guide you toward the products that best match what you want from your daily wellness routine.",
         "cta_label": "Take the 60-Second Quiz",
         "cta_link": "shopify://pages/find-your-reu",
         "microcopy": "Personalized product guidance, not medical advice."
@@ -242,7 +243,7 @@
         "j3"
       ],
       "settings": {
-        "eyebrow": "The REÚ Journal",
+        "eyebrow": "The RE\u00da Journal",
         "heading": "Wellness, made clearer.",
         "body": "Practical guidance to help you understand ingredients, build better routines, and choose products with greater confidence.",
         "blog": "news",
@@ -257,8 +258,8 @@
         "q1": {
           "type": "qa",
           "settings": {
-            "question": "Is REÚ currently available?",
-            "answer": "<p>REÚ is currently available for pre-order. Products are expected to ship between September and October 2026.</p>"
+            "question": "Is RE\u00da currently available?",
+            "answer": "<p>RE\u00da is currently available for pre-order. Products are expected to ship between September and October 2026.</p>"
           }
         },
         "q2": {
@@ -285,8 +286,8 @@
         "q5": {
           "type": "qa",
           "settings": {
-            "question": "Can REÚ products treat a medical condition?",
-            "answer": "<p>No. REÚ products are not intended to diagnose, treat, cure, or prevent any disease.</p>"
+            "question": "Can RE\u00da products treat a medical condition?",
+            "answer": "<p>No. RE\u00da products are not intended to diagnose, treat, cure, or prevent any disease.</p>"
           }
         }
       },
@@ -299,7 +300,7 @@
       ],
       "settings": {
         "eyebrow": "Questions, answered",
-        "heading": "Your essential guide\nto choosing REÚ.",
+        "heading": "Your essential guide\nto choosing RE\u00da.",
         "body": "Clear information about our products, formats, pre-orders, shipping, and everyday use.",
         "cta_label": "View All FAQs",
         "cta_link": "shopify://pages/faq",
@@ -320,28 +321,28 @@
           "type": "image",
           "settings": {
             "fallback_asset": "reu-hydration-watermelon.jpg",
-            "alt": "REÚ Hydration"
+            "alt": "RE\u00da Hydration"
           }
         },
         "s2": {
           "type": "image",
           "settings": {
             "fallback_asset": "reu-collagen-mixed-berry.jpg",
-            "alt": "REÚ Collagen"
+            "alt": "RE\u00da Collagen"
           }
         },
         "s3": {
           "type": "image",
           "settings": {
             "fallback_asset": "reu-greens-pineapple.jpg",
-            "alt": "REÚ Greens"
+            "alt": "RE\u00da Greens"
           }
         },
         "s4": {
           "type": "image",
           "settings": {
             "fallback_asset": "reu-format-sachet.jpg",
-            "alt": "REÚ Sachets"
+            "alt": "RE\u00da Sachets"
           }
         }
       },
@@ -353,7 +354,7 @@
       ],
       "settings": {
         "eyebrow": "Follow along",
-        "heading": "@REÚ",
+        "heading": "@RE\u00da",
         "handle": "Follow us on Instagram",
         "bg_scheme": "bg-cream"
       }
@@ -364,16 +365,24 @@
         "r1": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-01.svg",
             "name": "Ava M.",
+            "date": "April 2, 2026",
+            "rating": 5,
+            "title": "A flavour I look forward to",
             "quote": "The mixed-berry collagen makes my morning routine feel like something I genuinely enjoy, not another task to finish.",
-            "product": "Collagen — Mixed Berry",
+            "product": "Collagen \u2014 Mixed Berry",
             "verified": true
           }
         },
         "r2": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-02.svg",
             "name": "Sofia R.",
+            "date": "March 21, 2026",
+            "rating": 5,
+            "title": "Perfect for busy days",
             "quote": "I keep the sachets in my work bag, so my routine can move with me from desk to evening plans.",
             "product": "Sachet Collection",
             "verified": true
@@ -382,7 +391,11 @@
         "r3": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-03.svg",
             "name": "Maya L.",
+            "date": "March 9, 2026",
+            "rating": 5,
+            "title": "Simple at-home staple",
             "quote": "Having the pouch beside my shaker makes everyday consistency feel much simpler.",
             "product": "Pouch Collection",
             "verified": true
@@ -391,16 +404,24 @@
         "r4": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-04.svg",
             "name": "Jordan K.",
+            "date": "February 26, 2026",
+            "rating": 5,
+            "title": "Clear starting point",
             "quote": "The quiz gave me a clear starting point without making wellness feel overwhelming.",
-            "product": "Find Your REÚ Quiz",
+            "product": "Find Your RE\u00da Quiz",
             "verified": true
           }
         },
         "r5": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-05.svg",
             "name": "Elena P.",
+            "date": "February 11, 2026",
+            "rating": 5,
+            "title": "Home and travel covered",
             "quote": "I like having a pouch at home and sachets ready for travel days. It fits the way I actually live.",
             "product": "Pouches and Sachets",
             "verified": true
@@ -409,79 +430,115 @@
         "r6": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-06.svg",
             "name": "Nora S.",
-            "quote": "Bright flavours and clear directions make REÚ easy to fit into my day.",
-            "product": "REÚ Daily Wellness",
+            "date": "January 29, 2026",
+            "rating": 4,
+            "title": "Easy to stay consistent",
+            "quote": "Bright flavours and clear directions make RE\u00da easy to fit into my day.",
+            "product": "RE\u00da Daily Wellness",
             "verified": true
           }
         },
         "r7": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-07.svg",
             "name": "Priya N.",
+            "date": "January 17, 2026",
+            "rating": 5,
+            "title": "Refreshing before a busy day",
             "quote": "The Watermelon Hydration flavour feels refreshing and is easy to prepare before a full schedule.",
-            "product": "Hydration Electrolytes — Watermelon",
+            "product": "Hydration Electrolytes \u2014 Watermelon",
             "verified": true
           }
         },
         "r8": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-08.svg",
             "name": "Chloe T.",
+            "date": "January 4, 2026",
+            "rating": 5,
+            "title": "Desk-drawer favourite",
             "quote": "Coconut sachets are convenient to keep at my desk for days when I am away from home.",
-            "product": "Hydration Electrolytes — Coconut",
+            "product": "Hydration Electrolytes \u2014 Coconut",
             "verified": true
           }
         },
         "r9": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-01.svg",
             "name": "Hannah B.",
+            "date": "December 18, 2025",
+            "rating": 5,
+            "title": "Crisp and workout-friendly",
             "quote": "Lemon Lime has become my preferred option around workouts because I enjoy the crisp citrus taste.",
-            "product": "Hydration Electrolytes — Lemon Lime",
+            "product": "Hydration Electrolytes \u2014 Lemon Lime",
             "verified": true
           }
         },
         "r10": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-02.svg",
             "name": "Isla W.",
+            "date": "December 3, 2025",
+            "rating": 5,
+            "title": "Morning setup made simple",
             "quote": "The Pineapple Greens pouch makes my morning setup feel simple and organised.",
-            "product": "Greens — Pineapple",
+            "product": "Greens \u2014 Pineapple",
             "verified": true
           }
         },
         "r11": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-03.svg",
             "name": "Amelia J.",
+            "date": "November 19, 2025",
+            "rating": 4,
+            "title": "Bright everyday option",
             "quote": "Peach Mango is bright, enjoyable and easy to include in my everyday routine.",
-            "product": "Daily Wellness — Peach Mango",
+            "product": "Daily Wellness \u2014 Peach Mango",
             "verified": true
           }
         },
         "r12": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-04.svg",
             "name": "Grace D.",
+            "date": "November 5, 2025",
+            "rating": 5,
+            "title": "Smooth post-workout pick",
             "quote": "The Chocolate Protein flavour is smooth and fits naturally into my post-workout routine.",
-            "product": "Premium Protein — Chocolate",
+            "product": "Premium Protein \u2014 Chocolate",
             "verified": true
           }
         },
         "r13": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-05.svg",
             "name": "Leah C.",
+            "date": "October 22, 2025",
+            "rating": 5,
+            "title": "A refreshing change",
             "quote": "Pink Lemonade adds a refreshing option when I want something different from plain water.",
-            "product": "Weight Management — Pink Lemonade",
+            "product": "Weight Management \u2014 Pink Lemonade",
             "verified": true
           }
         },
         "r14": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-06.svg",
             "name": "Olivia F.",
+            "date": "October 7, 2025",
+            "rating": 5,
+            "title": "Formats that fit my week",
             "quote": "Being able to choose between pouches and sachets makes the range work around my schedule.",
             "product": "Pouches and Sachets",
             "verified": true
@@ -490,18 +547,26 @@
         "r15": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-07.svg",
             "name": "Zoe H.",
+            "date": "September 16, 2025",
+            "rating": 5,
+            "title": "Clear and premium",
             "quote": "The packaging feels clear and premium, and every product and flavour is easy to recognise.",
-            "product": "REÚ Collection",
+            "product": "RE\u00da Collection",
             "verified": true
           }
         },
         "r16": {
           "type": "review",
           "settings": {
+            "avatar_asset": "reu-avatar-08.svg",
             "name": "Mia V.",
+            "date": "August 29, 2025",
+            "rating": 5,
+            "title": "Helpful product pages",
             "quote": "I appreciate that the product pages explain the format, directions and pre-order details clearly.",
-            "product": "REÚ Store Experience",
+            "product": "RE\u00da Store Experience",
             "verified": true
           }
         }
@@ -531,7 +596,7 @@
         "heading_accent": "real women",
         "heading_after": ".",
         "body": "",
-        "image_alt": "Woman holding REÚ sachet beside a branded water bottle",
+        "image_alt": "Woman holding RE\u00da sachet beside a branded water bottle",
         "overlay_strength": 30,
         "section_bg": "#223829",
         "card_bg": "#E2E1D6",
@@ -551,17 +616,17 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "eyebrow": "Join the REÚ community",
+        "eyebrow": "Join the RE\u00da community",
         "heading_before": "A ",
         "heading_accent": "better",
         "heading_after": " routine starts here.",
         "heading": "A better routine\nstarts here.",
-        "body": "Join the REÚ community for launch updates, wellness guidance, new products, and thoughtful offers.",
+        "body": "Join the RE\u00da community for launch updates, wellness guidance, new products, and thoughtful offers.",
         "placeholder": "Your email...",
         "button_label": "Join the List",
-        "consent": "By subscribing, you agree to receive marketing emails from REÚ. You may unsubscribe at any time.",
+        "consent": "By subscribing, you agree to receive marketing emails from RE\u00da. You may unsubscribe at any time.",
         "privacy_link": "shopify://policies/privacy-policy",
-        "image_alt": "REÚ packaging collection"
+        "image_alt": "RE\u00da packaging collection"
       }
     }
   },
