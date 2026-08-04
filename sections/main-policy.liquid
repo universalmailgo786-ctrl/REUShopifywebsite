@@ -1,13 +1,14 @@
 {%- comment -%}
   Native Shopify policy template (/policies/*).
-  Uses policy.title / policy.url and structured REÚ policy copy by policy.type.
-  Content is also provided as HTML in docs/policies for Shopify Admin → Settings → Policies.
+  Uses policy object + structured REÚ copy by policy.type.
+  theme-check-disable UndefinedObject
 {%- endcomment -%}
 {%- liquid
   assign p = policy
   assign policy_type = p.type | default: ''
   assign contact_url = pages.contact.url | default: '/pages/contact'
   assign last_updated = section.settings.last_updated | default: 'August 4, 2026'
+
 
   case policy_type
     when 'privacy_policy'
