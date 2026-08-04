@@ -118,7 +118,7 @@
 .hero__content {
   position: relative;
   z-index: 2;
-  padding: clamp(7.5rem, 14vw, 10rem) 0 clamp(3.5rem, 8vw, 5.5rem);
+  padding: clamp(7.5rem, 14vw, 10rem) 0 clamp(4.5rem, 9vw, 6.5rem);
   max-width: min(34rem, 40%);
   margin-right: auto;
   padding-right: clamp(1rem, 3vw, 2.5rem);
@@ -133,8 +133,14 @@
 }
 .hero__content .h1 { margin-bottom: 1rem; }
 .hero__content .lede { margin-bottom: 1.5rem; }
-.hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 1rem; }
-.hero__disclosure { font-size: .85rem; max-width: 34rem; opacity: .92; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 1.15rem; }
+.hero__disclosure {
+  font-size: .85rem;
+  max-width: 34rem;
+  opacity: .92;
+  margin: 0;
+  padding-bottom: .35rem;
+}
 .hero__actions .btn--secondary {
   --btn-fg: #fff;
   --btn-hover-bg: #fff;
@@ -173,7 +179,7 @@
   }
   .hero__content {
     max-width: 100%;
-    padding: 6.5rem 0 2.5rem;
+    padding: 6.5rem 0 3.75rem;
     padding-right: 0;
   }
 }
