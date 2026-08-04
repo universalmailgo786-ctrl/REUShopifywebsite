@@ -599,13 +599,14 @@
   position: relative;
   display: block;
   width: 100%;
+  padding-inline: clamp(2.75rem, 5vw, 4rem);
 }
 .everyday-wellness__nav {
   position: absolute;
   top: 42%;
   z-index: 6;
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 3.35rem;
+  height: 3.35rem;
   border-radius: 50%;
   border: 1px solid color-mix(in srgb, #fff 45%, transparent);
   background: color-mix(in srgb, var(--color-green) 55%, transparent);
@@ -618,15 +619,15 @@
 }
 .everyday-wellness__nav--prev {
   left: 0;
-  transform: translateX(-35%);
+  transform: translateX(-8%);
 }
 .everyday-wellness__nav--next {
   right: 0;
-  transform: translateX(35%);
+  transform: translateX(8%);
 }
 .everyday-wellness__nav .icon {
-  width: 1.05rem;
-  height: 1.05rem;
+  width: 1.35rem;
+  height: 1.35rem;
 }
 .everyday-wellness__nav:hover:not(:disabled) {
   background: color-mix(in srgb, var(--color-rose) 70%, transparent);
@@ -776,17 +777,21 @@
     object-position: 72% center;
   }
   .everyday-wellness__carousel {
-    padding-inline: 0;
+    padding-inline: 2.5rem;
   }
   .everyday-wellness__nav {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.85rem;
+    height: 2.85rem;
+  }
+  .everyday-wellness__nav .icon {
+    width: 1.2rem;
+    height: 1.2rem;
   }
   .everyday-wellness__nav--prev {
-    transform: translateX(-10%);
+    transform: translateX(-4%);
   }
   .everyday-wellness__nav--next {
-    transform: translateX(10%);
+    transform: translateX(4%);
   }
   .everyday-wellness__head {
     padding-inline: .9rem;
