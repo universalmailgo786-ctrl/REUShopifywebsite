@@ -122,7 +122,9 @@
         "cta2_label": "Shop All Products",
         "cta2_link": "shopify://collections/all",
         "bg_scheme": "bg-cream",
-        "use_h1": false
+        "use_h1": false,
+        "center": true,
+        "narrow": true
       }
     }
   },

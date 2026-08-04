@@ -304,6 +304,32 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
   position: relative;
   isolation: isolate;
 }
+.page-hero--plain {
+  padding-block: clamp(3.5rem, 8vw, 5.5rem);
+  margin-bottom: 0;
+}
+.page-hero--plain.section {
+  padding-block: clamp(3.5rem, 8vw, 5.5rem);
+}
+.page-hero__inner--center {
+  text-align: center;
+  margin-inline: auto;
+}
+.page-hero--plain .page-hero__heading {
+  max-width: 18ch;
+  margin-inline: auto;
+  color: var(--color-green, #223829);
+}
+.page-hero--plain .page-hero__body {
+  margin-top: 1rem;
+  color: var(--color-text, #2C3A30);
+}
+.page-hero--plain .page-hero__actions {
+  margin-top: 1.5rem;
+}
+.page-hero__actions--center {
+  justify-content: center;
+}
 .page-hero--split {
   padding: 0;
   background: #F4E2DB;
