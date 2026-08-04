@@ -92,8 +92,39 @@
   margin-top: 0;
 }
 .shop-reu-card .reu-countdown--card {
-  margin: .7rem .85rem .15rem;
-  width: auto;
+  margin: .25rem 0 .1rem;
+  width: 100%;
+  padding: .28rem .45rem;
+  min-height: 0;
+  gap: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  flex: 0 0 auto;
+}
+.shop-reu-card .reu-countdown--card .reu-countdown__label {
+  font-size: .62rem;
+  line-height: 1.1;
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.shop-reu-card .reu-countdown--card .reu-countdown__units {
+  gap: .12rem .22rem;
+}
+.shop-reu-card .reu-countdown--card .reu-countdown__value {
+  font-size: .72rem;
+}
+.shop-reu-card .reu-countdown--card .reu-countdown__key {
+  font-size: .58rem;
+}
+.shop-reu-card .reu-countdown--card .reu-countdown__sep {
+  font-size: .6rem;
+}
+.shop-reu-card:has(.reu-countdown) .shop-reu-card__footer {
+  padding-top: .55rem;
 }
 .everyday-wellness__card .reu-countdown--card {
   margin: .55rem .75rem .1rem;

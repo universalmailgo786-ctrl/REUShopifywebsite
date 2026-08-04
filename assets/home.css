@@ -1296,6 +1296,7 @@
   position: relative;
   display: block;
   aspect-ratio: 1;
+  flex: 0 0 auto;
   background: color-mix(in srgb, #E3E1D5 70%, #fff);
   border-radius: 14px;
   overflow: hidden;
