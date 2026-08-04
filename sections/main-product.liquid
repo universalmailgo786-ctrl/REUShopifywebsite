@@ -32,6 +32,7 @@
       <div class="reu-pdp__layout" data-sticky-anchor>
       {%- comment -%} Gallery {%- endcomment -%}
       <div class="reu-pdp__gallery" data-gallery>
+        {% render 'reu-product-countdown', product: p, style: 'product' %}
         <div class="reu-pdp__stage">
           {%- if p.featured_media -%}
             {{ p.featured_media | image_url: width: 1600 | image_tag:
@@ -94,8 +95,6 @@
 
         <div class="reu-pdp__price">{% render 'price', product: p, variant: current, context: 'product' %}</div>
         {%- if preorder -%}<p class="form-note" style="margin:-.35rem 0 1rem">Payment timing is confirmed at checkout.</p>{%- endif -%}
-
-        {% render 'reu-product-countdown', product: p, style: 'product' %}
 
         {% render 'reu-product-summary', product: p %}
 
