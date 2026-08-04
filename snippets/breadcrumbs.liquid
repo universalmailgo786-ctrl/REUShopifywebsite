@@ -10,16 +10,22 @@
   {%- case request.page_type -%}
     {%- when 'product' -%}
       {%- if crumb_collection != blank and crumb_collection.url != blank -%}
-        {% render 'icon', name: 'chevron-down' %}<a href="{{ crumb_collection.url }}">{{ crumb_collection.title }}</a>
+        <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+        <a href="{{ crumb_collection.url }}">{{ crumb_collection.title }}</a>
       {%- endif -%}
-      {% render 'icon', name: 'chevron-down' %}<span aria-current="page">{{ product.title }}</span>
+      <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+      <span aria-current="page">{{ product.title }}</span>
     {%- when 'collection' -%}
-      {% render 'icon', name: 'chevron-down' %}<span aria-current="page">{{ collection.title }}</span>
+      <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+      <span aria-current="page">{{ collection.title }}</span>
     {%- when 'article' -%}
-      {% render 'icon', name: 'chevron-down' %}<a href="{{ blog.url }}">{{ blog.title }}</a>
-      {% render 'icon', name: 'chevron-down' %}<span aria-current="page">{{ article.title }}</span>
+      <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+      <a href="{{ blog.url }}">{{ blog.title }}</a>
+      <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+      <span aria-current="page">{{ article.title }}</span>
     {%- when 'page' -%}
-      {% render 'icon', name: 'chevron-down' %}<span aria-current="page">{{ page.title }}</span>
+      <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+      <span aria-current="page">{{ page.title }}</span>
   {%- endcase -%}
 </nav>
 {%- if request.page_type == 'product' -%}
