@@ -19,9 +19,9 @@
       assign policy_type = 'privacy_policy'
     elsif path contains 'refund-policy' or handle contains 'refund' or handle contains 'cancellation' or title_down contains 'refund' or title_down contains 'cancellation'
       assign policy_type = 'refund_policy'
-    elsif path contains 'shipping-policy' or handle contains 'shipping' or handle contains 'pre-order' or title_down contains 'shipping' or title_down contains 'pre-order'
+    elsif path contains 'shipping-policy' or handle contains 'shipping' or title_down contains 'shipping' or title_down contains 'pre-order'
       assign policy_type = 'shipping_policy'
-    elsif path contains 'terms-of-service' or handle contains 'terms' or title_down contains 'terms'
+    elsif path contains 'terms-of-service' or path contains 'terms-conditions' or path contains 'terms-and-conditions' or handle contains 'terms' or handle contains 'condition' or title_down contains 'terms' or title_down contains 'condition'
       assign policy_type = 'terms_of_service'
     else
       assign policy_type = 'terms_of_service'

@@ -14,7 +14,6 @@
   assign privacy = shop.privacy_policy
   assign refund = shop.refund_policy
   assign shipping = shop.shipping_policy
-  assign terms = shop.terms_of_service
 
   assign privacy_page = section.settings.privacy_page
   if privacy_page == blank
@@ -47,8 +46,8 @@
   endif
 
   comment
-    Terms page handles vary a lot ("Terms & Conditions", "Terms and Conditions", etc.).
-    Prefer Theme Editor pick, then common handles, and only keep a match if title/handle looks like Terms.
+    Terms footer must open the Online Store page (same as Refund/Shipping), never
+    /policies/terms-of-service — that native route stays empty without Admin policy HTML.
   endcomment
   assign terms_page = section.settings.terms_page
   if terms_page == blank
@@ -58,13 +57,10 @@
     assign terms_page = pages['terms-and-conditions']
   endif
   if terms_page == blank
-    assign terms_page = pages['terms-of-service']
+    assign terms_page = pages['terms-condition']
   endif
   if terms_page == blank
     assign terms_page = pages['terms-of-use']
-  endif
-  if terms_page == blank
-    assign terms_page = pages['terms-condition']
   endif
   if terms_page == blank
     assign terms_page = pages['term-conditions']
@@ -76,44 +72,28 @@
     assign terms_page = pages.terms
   endif
 
-  if terms_page != blank
-    assign terms_handle_check = terms_page.handle | default: '' | downcase
-    assign terms_title_check = terms_page.title | default: '' | downcase
-    unless terms_handle_check contains 'term' or terms_title_check contains 'term' or terms_title_check contains 'condition'
-      assign terms_page = blank
-    endunless
-  endif
-
   if privacy_page != blank and privacy_page.url != blank
     assign privacy_url = privacy_page.url
-  elsif privacy != blank and privacy.url != blank
-    assign privacy_url = privacy.url
   else
-    assign privacy_url = '/policies/privacy-policy'
+    assign privacy_url = '/pages/privacy-policy'
   endif
 
   if refund_page != blank and refund_page.url != blank
     assign refund_url = refund_page.url
-  elsif refund != blank and refund.url != blank
-    assign refund_url = refund.url
   else
-    assign refund_url = '/policies/refund-policy'
+    assign refund_url = '/pages/refund-cancellation-policy'
   endif
 
   if shipping_page != blank and shipping_page.url != blank
     assign shipping_url = shipping_page.url
-  elsif shipping != blank and shipping.url != blank
-    assign shipping_url = shipping.url
   else
-    assign shipping_url = '/policies/shipping-policy'
+    assign shipping_url = '/pages/shipping-pre-order-policy'
   endif
 
   if terms_page != blank and terms_page.url != blank
     assign terms_url = terms_page.url
-  elsif terms != blank and terms.url != blank
-    assign terms_url = terms.url
   else
-    assign terms_url = '/policies/terms-of-service'
+    assign terms_url = '/pages/terms-conditions'
   endif
 
   assign about_page = pages['about-reu']
@@ -275,7 +255,7 @@
     { "type": "text", "id": "discover_heading", "label": "Discover column label", "default": "Discover" },
     { "type": "link_list", "id": "menu_discover", "label": "Discover menu", "info": "Optional. If empty, only existing pages/blogs are listed." },
     { "type": "text", "id": "care_heading", "label": "Policies column label", "default": "Policies" },
-    { "type": "paragraph", "content": "Policies prefer Online Store pages (same Privacy style). If Terms still opens the wrong URL, pick the Terms page below." },
+    { "type": "paragraph", "content": "Terms & Conditions always links to your Online Store page (/pages/terms-conditions), not /policies/terms-of-service. If your Terms page uses a different handle, pick it in “Terms & Conditions page” below. Also set that page’s Theme template to “terms-conditions”." },
     { "type": "page", "id": "privacy_page", "label": "Privacy Policy page" },
     { "type": "page", "id": "refund_page", "label": "Refund & Cancellation page" },
     { "type": "page", "id": "shipping_page", "label": "Shipping & Pre-Order page" },
