@@ -12,6 +12,7 @@
     "hero": {
       "type": "page-hero",
       "settings": {
+        "fallback_asset": "reu-our-story.jpg",
         "eyebrow": "OUR STORY",
         "heading": "Wellness made for the way women really live.",
         "body": "<p>REÚ was created to make daily wellness feel simpler, more enjoyable and easier to make your own.</p>",
@@ -90,11 +91,63 @@
       }
     },
     "standard": {
-      "type": "rich-text",
+      "type": "trust-standards",
+      "blocks": {
+        "t1": {
+          "type": "standard",
+          "settings": {
+            "icon": "check",
+            "title": "Clearly listed ingredients"
+          }
+        },
+        "t2": {
+          "type": "standard",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Easy-to-follow directions"
+          }
+        },
+        "t3": {
+          "type": "standard",
+          "settings": {
+            "icon": "shield",
+            "title": "Transparent product information"
+          }
+        },
+        "t4": {
+          "type": "standard",
+          "settings": {
+            "icon": "leaf",
+            "title": "Thoughtfully created formats"
+          }
+        },
+        "t5": {
+          "type": "standard",
+          "settings": {
+            "icon": "heart",
+            "title": "Great-tasting options"
+          }
+        },
+        "t6": {
+          "type": "standard",
+          "settings": {
+            "icon": "sun",
+            "title": "Designed for everyday routines"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6"
+      ],
       "settings": {
-        "heading": "What belongs in your routine should never be a mystery.",
-        "content": "<p>Confidence starts with clarity. Every product page clearly explains what is inside, how to use it and what to expect—using supplier-verified information only.</p><ul><li>Clearly listed ingredients</li><li>Easy-to-follow directions</li><li>Transparent product information</li><li>Thoughtfully created formats</li><li>Great-tasting options</li><li>Designed for everyday routines</li></ul>",
-        "narrow": true
+        "eyebrow": "The REÚ Standard",
+        "heading": "What belongs in your routine\nshould never be a mystery.",
+        "body": "Confidence starts with clarity. Every product page clearly explains what is inside, how to use it and what to expect—using supplier-verified information only."
       }
     },
     "closing": {

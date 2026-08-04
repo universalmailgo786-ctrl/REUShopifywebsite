@@ -128,42 +128,42 @@
           "type": "standard",
           "settings": {
             "icon": "check",
-            "title": "Clearly Listed Ingredients"
+            "title": "Clearly listed ingredients"
           }
         },
         "t2": {
           "type": "standard",
           "settings": {
             "icon": "sparkle",
-            "title": "Easy-to-Follow Directions"
+            "title": "Easy-to-follow directions"
           }
         },
         "t3": {
           "type": "standard",
           "settings": {
             "icon": "shield",
-            "title": "Transparent Product Information"
+            "title": "Transparent product information"
           }
         },
         "t4": {
           "type": "standard",
           "settings": {
             "icon": "leaf",
-            "title": "Thoughtfully Created"
+            "title": "Thoughtfully created formats"
           }
         },
         "t5": {
           "type": "standard",
           "settings": {
             "icon": "heart",
-            "title": "Great-Tasting Formats"
+            "title": "Great-tasting options"
           }
         },
         "t6": {
           "type": "standard",
           "settings": {
             "icon": "sun",
-            "title": "Designed for Everyday Routines"
+            "title": "Designed for everyday routines"
           }
         }
       },
@@ -178,7 +178,7 @@
       "settings": {
         "eyebrow": "The REÚ Standard",
         "heading": "What belongs in your routine\nshould never be a mystery.",
-        "body": "We believe confidence starts with clarity. Every REÚ product clearly explains what is inside, how to use it, and what to expect—using verified product information only."
+        "body": "Confidence starts with clarity. Every product page clearly explains what is inside, how to use it and what to expect—using supplier-verified information only."
       }
     },
     "featured": {
@@ -359,24 +359,153 @@
     "moving_reviews": {
       "type": "reu-moving-reviews",
       "blocks": {
-        "r1": { "type": "review", "settings": { "name": "", "quote": "The mixed-berry flavour makes my routine feel like something I genuinely look forward to.", "product": "Collagen — Mixed Berry" } },
-        "r2": { "type": "review", "settings": { "name": "", "quote": "I keep the sachets in my work bag, so my routine can move with me.", "product": "Sachet Collection" } },
-        "r3": { "type": "review", "settings": { "name": "", "quote": "The pouch beside my shaker makes everyday consistency feel much simpler.", "product": "Pouch Collection" } },
-        "r4": { "type": "review", "settings": { "name": "", "quote": "The quiz gave me a clear starting point without making wellness feel overwhelming.", "product": "REÚ Recommendation Quiz" } },
-        "r5": { "type": "review", "settings": { "name": "", "quote": "I like having a pouch at home and sachets ready for travel days.", "product": "Pouches and Sachets" } },
-        "r6": { "type": "review", "settings": { "name": "", "quote": "Bright flavours and clear directions make REÚ easy to fit into my day.", "product": "REÚ Daily Wellness" } },
-        "r7": { "type": "review", "settings": { "name": "", "quote": "The Watermelon Hydration flavour feels refreshing and is easy to prepare before a busy day.", "product": "Hydration Electrolytes — Watermelon" } },
-        "r8": { "type": "review", "settings": { "name": "", "quote": "Coconut sachets are convenient to keep at my desk for days when I am away from home.", "product": "Hydration Electrolytes — Coconut" } },
-        "r9": { "type": "review", "settings": { "name": "", "quote": "Lemon Lime has become my preferred option around workouts because I enjoy the crisp citrus taste.", "product": "Hydration Electrolytes — Lemon Lime" } },
-        "r10": { "type": "review", "settings": { "name": "", "quote": "The Pineapple Greens pouch makes my morning setup feel simple and organised.", "product": "Greens — Pineapple" } },
-        "r11": { "type": "review", "settings": { "name": "", "quote": "Peach Mango is bright, enjoyable and easy to include in my everyday routine.", "product": "Daily Wellness — Peach Mango" } },
-        "r12": { "type": "review", "settings": { "name": "", "quote": "The Chocolate Protein flavour is smooth and fits naturally into my post-workout routine.", "product": "Premium Protein — Chocolate" } },
-        "r13": { "type": "review", "settings": { "name": "", "quote": "Pink Lemonade adds a refreshing option when I want something different from plain water.", "product": "Weight Management — Pink Lemonade" } },
-        "r14": { "type": "review", "settings": { "name": "", "quote": "Being able to choose between pouches and sachets makes the range work around my schedule.", "product": "Pouches and Sachets" } },
-        "r15": { "type": "review", "settings": { "name": "", "quote": "The packaging feels clear and premium, and every product and flavour is easy to recognise.", "product": "REÚ Collection" } },
-        "r16": { "type": "review", "settings": { "name": "", "quote": "I appreciate that the product pages explain the format, directions and pre-order details clearly.", "product": "REÚ Store Experience" } }
+        "r1": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "The mixed-berry flavour makes my routine feel like something I genuinely look forward to.",
+            "product": "Collagen — Mixed Berry"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "I keep the sachets in my work bag, so my routine can move with me.",
+            "product": "Sachet Collection"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "The pouch beside my shaker makes everyday consistency feel much simpler.",
+            "product": "Pouch Collection"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "The quiz gave me a clear starting point without making wellness feel overwhelming.",
+            "product": "REÚ Recommendation Quiz"
+          }
+        },
+        "r5": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "I like having a pouch at home and sachets ready for travel days.",
+            "product": "Pouches and Sachets"
+          }
+        },
+        "r6": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "Bright flavours and clear directions make REÚ easy to fit into my day.",
+            "product": "REÚ Daily Wellness"
+          }
+        },
+        "r7": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "The Watermelon Hydration flavour feels refreshing and is easy to prepare before a busy day.",
+            "product": "Hydration Electrolytes — Watermelon"
+          }
+        },
+        "r8": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "Coconut sachets are convenient to keep at my desk for days when I am away from home.",
+            "product": "Hydration Electrolytes — Coconut"
+          }
+        },
+        "r9": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "Lemon Lime has become my preferred option around workouts because I enjoy the crisp citrus taste.",
+            "product": "Hydration Electrolytes — Lemon Lime"
+          }
+        },
+        "r10": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "The Pineapple Greens pouch makes my morning setup feel simple and organised.",
+            "product": "Greens — Pineapple"
+          }
+        },
+        "r11": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "Peach Mango is bright, enjoyable and easy to include in my everyday routine.",
+            "product": "Daily Wellness — Peach Mango"
+          }
+        },
+        "r12": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "The Chocolate Protein flavour is smooth and fits naturally into my post-workout routine.",
+            "product": "Premium Protein — Chocolate"
+          }
+        },
+        "r13": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "Pink Lemonade adds a refreshing option when I want something different from plain water.",
+            "product": "Weight Management — Pink Lemonade"
+          }
+        },
+        "r14": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "Being able to choose between pouches and sachets makes the range work around my schedule.",
+            "product": "Pouches and Sachets"
+          }
+        },
+        "r15": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "The packaging feels clear and premium, and every product and flavour is easy to recognise.",
+            "product": "REÚ Collection"
+          }
+        },
+        "r16": {
+          "type": "review",
+          "settings": {
+            "name": "",
+            "quote": "I appreciate that the product pages explain the format, directions and pre-order details clearly.",
+            "product": "REÚ Store Experience"
+          }
+        }
       },
-      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16"],
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6",
+        "r7",
+        "r8",
+        "r9",
+        "r10",
+        "r11",
+        "r12",
+        "r13",
+        "r14",
+        "r15",
+        "r16"
+      ],
       "settings": {
         "eyebrow": "Trusted wellness reviews",
         "heading": "Real routines shared by real women.",
