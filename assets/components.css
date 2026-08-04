@@ -378,7 +378,7 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
 .quiz__why { padding-left: 1.1rem; color: var(--color-text, #2C3A30); }
 .quiz__why li { margin: .35rem 0; }
 
-/* Page hero — two-column Our Story split */
+/* Page hero — split or full-bleed banner */
 .page-hero {
   position: relative;
   isolation: isolate;
@@ -409,6 +409,110 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
 .page-hero__actions--center {
   justify-content: center;
 }
+
+/* Full-bleed background banner — text left on dark green field */
+.page-hero--banner {
+  padding: 0;
+  overflow: hidden;
+  background: #223829;
+}
+.page-hero__banner {
+  position: relative;
+  min-height: clamp(28rem, 62vw, 40rem);
+  display: flex;
+  align-items: stretch;
+}
+.page-hero__banner-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.page-hero__banner-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  display: block;
+}
+.page-hero__banner-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(34, 56, 41, 0.78) 0%,
+      rgba(34, 56, 41, 0.55) 32%,
+      rgba(34, 56, 41, 0.18) 58%,
+      rgba(34, 56, 41, 0) 78%
+    );
+}
+.page-hero__banner-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-block: clamp(3rem, 8vw, 5.5rem);
+}
+.page-hero__banner-copy {
+  max-width: min(34rem, 52%);
+  color: #F7F4EE;
+}
+.page-hero--banner .page-hero__eyebrow {
+  color: #F4E2DB;
+  color: var(--color-blush, #F4E2DB);
+}
+.page-hero--banner .page-hero__heading {
+  color: #fff;
+  max-width: 14ch;
+}
+.page-hero--banner .page-hero__body {
+  color: rgba(247, 244, 238, 0.92);
+  max-width: 28rem;
+}
+.page-hero--banner .page-hero__btn {
+  background: #F4E2DB;
+  background: var(--color-blush, #F4E2DB);
+  color: #223829;
+  color: var(--color-green, #223829);
+  border-color: transparent;
+}
+.page-hero--banner .page-hero__btn:hover {
+  background: #fff;
+  color: #223829;
+}
+.page-hero--banner .page-hero__btn-secondary {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+}
+@media (max-width: 899px) {
+  .page-hero__banner {
+    min-height: clamp(30rem, 118vw, 40rem);
+  }
+  .page-hero__banner-media img {
+    object-position: 72% center;
+  }
+  .page-hero__banner-scrim {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(34, 56, 41, 0.82) 0%,
+        rgba(34, 56, 41, 0.55) 42%,
+        rgba(34, 56, 41, 0.2) 72%,
+        rgba(34, 56, 41, 0.35) 100%
+      );
+  }
+  .page-hero__banner-copy {
+    max-width: 100%;
+  }
+  .page-hero--banner .page-hero__heading {
+    max-width: none;
+  }
+}
+
 .page-hero--split {
   padding: 0;
   background: #E2E1D6;

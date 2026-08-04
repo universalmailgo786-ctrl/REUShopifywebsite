@@ -17,7 +17,8 @@
         "body": "<p>REÚ was created to make daily wellness feel simpler, more enjoyable and easier to make your own.</p>",
         "cta_label": "Find My Routine",
         "cta_link": "shopify://pages/find-your-reu",
-        "fallback_asset": "reu-our-story.jpg",
+        "fallback_asset": "reu-our-story-hero.jpg",
+        "layout": "banner",
         "center": false,
         "narrow": false,
         "bg_scheme": "bg-cream"
