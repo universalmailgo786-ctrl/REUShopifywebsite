@@ -1,14 +1,33 @@
 {%- comment -%}
   Native Shopify policy template (/policies/*).
-  Uses policy object + structured REÚ copy by policy.type.
+  PolicyDrop exposes title/body/url — not type — so we detect by URL.
   theme-check-disable UndefinedObject
 {%- endcomment -%}
 {%- liquid
   assign p = policy
-  assign policy_type = p.type | default: ''
   assign contact_url = pages.contact.url | default: '/pages/contact'
   assign last_updated = section.settings.last_updated | default: 'August 4, 2026'
+  assign path = request.path | default: '' | downcase
+  assign policy_url = p.url | default: path | downcase
+  assign policy_type = ''
 
+  if path contains 'privacy-policy' or policy_url contains 'privacy-policy'
+    assign policy_type = 'privacy_policy'
+  elsif path contains 'refund-policy' or policy_url contains 'refund-policy'
+    assign policy_type = 'refund_policy'
+  elsif path contains 'shipping-policy' or policy_url contains 'shipping-policy'
+    assign policy_type = 'shipping_policy'
+  elsif path contains 'terms-of-service' or policy_url contains 'terms-of-service'
+    assign policy_type = 'terms_of_service'
+  elsif shop.privacy_policy != blank and p.id == shop.privacy_policy.id
+    assign policy_type = 'privacy_policy'
+  elsif shop.refund_policy != blank and p.id == shop.refund_policy.id
+    assign policy_type = 'refund_policy'
+  elsif shop.shipping_policy != blank and p.id == shop.shipping_policy.id
+    assign policy_type = 'shipping_policy'
+  elsif shop.terms_of_service != blank and p.id == shop.terms_of_service.id
+    assign policy_type = 'terms_of_service'
+  endif
 
   case policy_type
     when 'privacy_policy'
@@ -37,7 +56,7 @@
       assign fallback_asset = section.settings.terms_fallback | default: 'reu-quiz-hero.jpg'
     else
       assign eyebrow = 'POLICIES'
-      assign page_title = p.title
+      assign page_title = p.title | default: 'Store policy'
       assign intro = p.body | strip_html | truncate: 180
       assign cta_label = 'Contact REÚ'
       assign fallback_asset = 'reu-contact-hero.jpg'
@@ -107,8 +126,15 @@
             {%- when 'terms_of_service' -%}
               {% render 'policy-terms' %}
             {%- else -%}
-              <div class="rte">{{ p.body }}</div>
-            {%- endcase -%}
+              {%- if p.body != blank -%}
+                <div class="rte">{{ p.body }}</div>
+              {%- else -%}
+                <div class="reu-policy__section">
+                  <h2>Policy unavailable</h2>
+                  <p>This policy has not been published yet. Please contact REÚ if you need help.</p>
+                </div>
+              {%- endif -%}
+          {%- endcase -%}
         </article>
 
         <div class="reu-policy__actions">
