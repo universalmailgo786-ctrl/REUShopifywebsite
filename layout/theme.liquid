@@ -66,12 +66,20 @@
     {% sections 'header-group' %}
 
     <main id="MainContent" role="main" tabindex="-1">
-      {%- comment -%}
-        Shopify still serves default policy HTML from Admin for /policies/*.
-        Intercept those routes so the branded REÚ policy section always renders.
-      {%- endcomment -%}
-      {%- if request.page_type == 'policy' or request.path contains '/policies/' -%}
-        {% section 'main-policy' %}
+      {%- liquid
+        assign reu_policy_route = false
+        if request.page_type == 'policy' or request.path contains '/policies/'
+          assign reu_policy_route = true
+        elsif request.page_type == 'page' and page != blank
+          assign ph = page.handle | downcase
+          assign pt = page.title | downcase
+          if ph contains 'privacy' or ph contains 'refund' or ph contains 'cancellation' or ph contains 'shipping' or ph contains 'terms' or ph contains 'pre-order' or pt contains 'privacy' or pt contains 'refund' or pt contains 'cancellation' or pt contains 'shipping' or pt contains 'terms' or pt contains 'pre-order'
+            assign reu_policy_route = true
+          endif
+        endif
+      -%}
+      {%- if reu_policy_route -%}
+        {% render 'reu-policy-page' %}
       {%- else -%}
         {{ content_for_layout }}
       {%- endif -%}

@@ -16,10 +16,58 @@
   assign shipping = shop.shipping_policy
   assign terms = shop.terms_of_service
 
-  assign privacy_url = privacy.url | default: '/policies/privacy-policy'
-  assign refund_url = refund.url | default: '/policies/refund-policy'
-  assign shipping_url = shipping.url | default: '/policies/shipping-policy'
-  assign terms_url = terms.url | default: '/policies/terms-of-service'
+  assign privacy_page = pages['privacy-policy']
+  if privacy_page == blank
+    assign privacy_page = pages.privacy
+  endif
+
+  assign refund_page = pages['refund-cancellation-policy']
+  if refund_page == blank
+    assign refund_page = pages['refund-policy']
+  endif
+  if refund_page == blank
+    assign refund_page = pages['refund-cancellation']
+  endif
+
+  assign shipping_page = pages['shipping-pre-order-policy']
+  if shipping_page == blank
+    assign shipping_page = pages['shipping-policy']
+  endif
+  if shipping_page == blank
+    assign shipping_page = pages.shipping
+  endif
+
+  assign terms_page = pages['terms-conditions']
+  if terms_page == blank
+    assign terms_page = pages['terms-of-service']
+  endif
+  if terms_page == blank
+    assign terms_page = pages['terms-and-conditions']
+  endif
+  if terms_page == blank
+    assign terms_page = pages.terms
+  endif
+
+  if privacy_page != blank
+    assign privacy_url = privacy_page.url
+  else
+    assign privacy_url = privacy.url | default: '/policies/privacy-policy'
+  endif
+  if refund_page != blank
+    assign refund_url = refund_page.url
+  else
+    assign refund_url = refund.url | default: '/policies/refund-policy'
+  endif
+  if shipping_page != blank
+    assign shipping_url = shipping_page.url
+  else
+    assign shipping_url = shipping.url | default: '/policies/shipping-policy'
+  endif
+  if terms_page != blank
+    assign terms_url = terms_page.url
+  else
+    assign terms_url = terms.url | default: '/policies/terms-of-service'
+  endif
 
   assign about_page = pages['about-reu']
   if about_page == blank
@@ -185,7 +233,7 @@
     { "type": "text", "id": "discover_heading", "label": "Discover column label", "default": "Discover" },
     { "type": "link_list", "id": "menu_discover", "label": "Discover menu", "info": "Optional. If empty, only existing pages/blogs are listed." },
     { "type": "text", "id": "care_heading", "label": "Policies column label", "default": "Policies" },
-    { "type": "paragraph", "content": "The Policies column always shows Privacy, Refund & Cancellation, Shipping & Pre-Order, and Terms & Conditions linking to Shopify’s native /policies routes." },
+    { "type": "paragraph", "content": "Policies link to matching Online Store pages when they exist (same Privacy style), otherwise to Shopify /policies routes." },
     { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "Information on this website is provided for general educational purposes and is not medical advice. Always follow the product label and consult a qualified healthcare professional when appropriate." }
   ]
 }

@@ -1,21 +1,31 @@
 {%- comment -%}
-  Branded REÚ policy page body for /policies/*.
-  Path-only detection — never depends on policy.type or Admin HTML.
+  Branded REÚ policy page — same layout for /policies/* and Online Store pages.
+  Optional param: force_type (privacy_policy|refund_policy|shipping_policy|terms_of_service)
 {%- endcomment -%}
 {%- liquid
   assign contact_url = pages.contact.url | default: '/pages/contact'
   assign last_updated = 'August 4, 2026'
   assign path = request.path | default: '' | downcase
-  assign policy_type = 'terms_of_service'
+  assign handle = ''
+  assign title_down = ''
+  if page != blank
+    assign handle = page.handle | default: '' | downcase
+    assign title_down = page.title | default: '' | downcase
+  endif
+  assign policy_type = force_type | default: ''
 
-  if path contains 'privacy-policy'
-    assign policy_type = 'privacy_policy'
-  elsif path contains 'refund-policy'
-    assign policy_type = 'refund_policy'
-  elsif path contains 'shipping-policy'
-    assign policy_type = 'shipping_policy'
-  elsif path contains 'terms-of-service'
-    assign policy_type = 'terms_of_service'
+  if policy_type == blank
+    if path contains 'privacy-policy' or handle contains 'privacy' or title_down contains 'privacy'
+      assign policy_type = 'privacy_policy'
+    elsif path contains 'refund-policy' or handle contains 'refund' or handle contains 'cancellation' or title_down contains 'refund' or title_down contains 'cancellation'
+      assign policy_type = 'refund_policy'
+    elsif path contains 'shipping-policy' or handle contains 'shipping' or handle contains 'pre-order' or title_down contains 'shipping' or title_down contains 'pre-order'
+      assign policy_type = 'shipping_policy'
+    elsif path contains 'terms-of-service' or handle contains 'terms' or title_down contains 'terms'
+      assign policy_type = 'terms_of_service'
+    else
+      assign policy_type = 'terms_of_service'
+    endif
   endif
 
   case policy_type
@@ -78,8 +88,8 @@
     <div class="wrap reu-policy__layout">
       <aside class="reu-policy__toc" aria-label="On this page">
         <p class="reu-policy__toc-label">On this page</p>
-        <label class="visually-hidden" for="PolicyTocSelect">Jump to section</label>
-        <select class="select reu-policy__toc-select" id="PolicyTocSelect" data-policy-toc-select></select>
+        <label class="visually-hidden" for="PolicyTocSelect-{{ policy_type }}">Jump to section</label>
+        <select class="select reu-policy__toc-select" id="PolicyTocSelect-{{ policy_type }}" data-policy-toc-select></select>
         <nav class="reu-policy__toc-nav" data-policy-toc-nav></nav>
       </aside>
 

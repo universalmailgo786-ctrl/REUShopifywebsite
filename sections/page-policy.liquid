@@ -1,0 +1,23 @@
+{% render 'reu-policy-page', force_type: section.settings.policy_type %}
+
+{% schema %}
+{
+  "name": "Policy page content",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "policy_type",
+      "label": "Policy",
+      "options": [
+        { "value": "privacy_policy", "label": "Privacy Policy" },
+        { "value": "refund_policy", "label": "Refund & Cancellation" },
+        { "value": "shipping_policy", "label": "Shipping & Pre-Order" },
+        { "value": "terms_of_service", "label": "Terms & Conditions" }
+      ],
+      "default": "refund_policy"
+    }
+  ],
+  "presets": [{ "name": "Policy page content" }]
+}
+{% endschema %}
