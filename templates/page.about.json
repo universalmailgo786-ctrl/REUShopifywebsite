@@ -74,6 +74,13 @@
             "title": "Empowerment",
             "text": "We offer guidance that supports women’s choices without pressure or unrealistic promises."
           }
+        },
+        "v6": {
+          "type": "value",
+          "settings": {
+            "title": "Confidence",
+            "text": "We provide clear, thoughtful guidance so women can choose and enjoy their wellness routines with confidence."
+          }
         }
       },
       "block_order": [
@@ -81,7 +88,8 @@
         "v2",
         "v3",
         "v4",
-        "v5"
+        "v5",
+        "v6"
       ]
     },
     "standard": {

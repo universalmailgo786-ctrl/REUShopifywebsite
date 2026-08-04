@@ -1,15 +1,15 @@
-<section class="section {{ section.settings.bg_scheme }}">
+<section class="values-grid section {{ section.settings.bg_scheme }}">
   <div class="wrap">
     <div class="section-head section-head--center">
       {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
       <h2 class="h2">{{ section.settings.heading }}</h2>
     </div>
-    <div class="grid cols-3">
+    <div class="values-grid__list">
       {%- for block in section.blocks -%}
-        <div class="card" style="padding:var(--space-md)" {{ block.shopify_attributes }}>
-          <h3 class="h4">{{ block.settings.title }}</h3>
-          <p class="text-muted" style="margin-top:.4rem">{{ block.settings.text }}</p>
-        </div>
+        <article class="values-grid__card" {{ block.shopify_attributes }}>
+          <h3 class="values-grid__title">{{ block.settings.title }}</h3>
+          <p class="values-grid__text">{{ block.settings.text }}</p>
+        </article>
       {%- endfor -%}
     </div>
     {%- if section.settings.cta_label != blank -%}
@@ -35,7 +35,7 @@
       { "type": "textarea", "id": "text", "label": "Text", "default": "We choose products and partners with care and publish only verified product information." }
     ]}
   ],
-  "max_blocks": 6,
+  "max_blocks": 8,
   "presets": [{
     "name": "Values grid",
     "blocks": [
@@ -43,7 +43,8 @@
       { "type": "value", "settings": { "title": "Transparency", "text": "We make ingredients, directions, policies, and expectations easy to understand." } },
       { "type": "value", "settings": { "title": "Innovation", "text": "We look for smarter, more enjoyable ways to support modern routines." } },
       { "type": "value", "settings": { "title": "Simplicity", "text": "We remove unnecessary friction from choosing, using, and reordering wellness products." } },
-      { "type": "value", "settings": { "title": "Empowerment", "text": "We offer guidance that supports women’s choices without pressure or unrealistic promises." } }
+      { "type": "value", "settings": { "title": "Empowerment", "text": "We offer guidance that supports women’s choices without pressure or unrealistic promises." } },
+      { "type": "value", "settings": { "title": "Confidence", "text": "We provide clear, thoughtful guidance so women can choose and enjoy their wellness routines with confidence." } }
     ]
   }]
 }
