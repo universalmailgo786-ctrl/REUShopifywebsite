@@ -200,7 +200,7 @@
 
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "section_bg", "label": "Section background", "default": "#223829" },
-    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#E3E1D5" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#E2E1D6" },
     { "type": "color", "id": "text_color", "label": "Heading text", "default": "#E3E1D5" },
     { "type": "color", "id": "accent_color", "label": "Accent", "default": "#BA6D64" },
     { "type": "color", "id": "review_text_color", "label": "Review text", "default": "#223829" },
@@ -222,13 +222,17 @@
       "type": "review",
       "name": "Review",
       "settings": [
-        { "type": "image_picker", "id": "avatar", "label": "Customer image" },
-        { "type": "text", "id": "name", "label": "Customer name", "default": "Sample routine" },
-        { "type": "text", "id": "role", "label": "Role or location" },
+        { "type": "image_picker", "id": "avatar", "label": "Customer photo" },
+        { "type": "text", "id": "avatar_asset", "label": "Fallback avatar asset", "default": "reu-avatar-01.svg", "info": "Theme asset filename used when no photo is uploaded." },
+        { "type": "text", "id": "name", "label": "Customer name", "default": "Ava M." },
+        { "type": "text", "id": "date", "label": "Review date", "default": "March 12, 2026" },
+        { "type": "text", "id": "role", "label": "Role or location (fallback under name)" },
+        { "type": "range", "id": "rating", "min": 1, "max": 5, "step": 1, "label": "Star rating", "default": 5 },
+        { "type": "text", "id": "title", "label": "Review headline", "default": "Easy to love" },
         { "type": "textarea", "id": "quote", "label": "Review text", "default": "A preview of how REÚ can become part of simple, enjoyable everyday routines." },
         { "type": "text", "id": "product", "label": "Product name" },
         { "type": "url", "id": "product_link", "label": "Product link" },
-        { "type": "checkbox", "id": "verified", "label": "Verified review", "default": false }
+        { "type": "checkbox", "id": "verified", "label": "Verified review", "default": true }
       ]
     }
   ],

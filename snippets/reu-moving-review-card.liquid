@@ -8,10 +8,17 @@
   if is_dup
     assign card_id = card_id | append: '-dup'
   endif
-  assign has_person = false
-  if block.settings.avatar != blank or block.settings.name != blank or block.settings.role != blank or block.settings.verified
-    assign has_person = true
+
+  assign rating = block.settings.rating | default: 5
+  if rating < 1
+    assign rating = 1
   endif
+  if rating > 5
+    assign rating = 5
+  endif
+
+  assign avatar_asset = block.settings.avatar_asset | default: 'reu-avatar-01.svg'
+  assign display_name = block.settings.name | default: 'REÚ customer'
 -%}
 <article
   class="reu-mr-card"
@@ -19,12 +26,53 @@
   {% unless is_dup %}{{ block.shopify_attributes }}{% endunless %}
   {% if is_dup %}tabindex="-1"{% else %}tabindex="0"{% endif %}
 >
-  <div class="reu-mr-card__top">
-    <span class="reu-mr-card__quote" aria-hidden="true">“</span>
+  <header class="reu-mr-card__header">
+    <span class="reu-mr-card__avatar" aria-hidden="true">
+      {%- if block.settings.avatar != blank -%}
+        {{
+          block.settings.avatar
+          | image_url: width: 120
+          | image_tag:
+            widths: '60,90,120',
+            sizes: '48px',
+            loading: 'lazy',
+            alt: ''
+        }}
+      {%- else -%}
+        <img
+          src="{{ avatar_asset | asset_url }}"
+          width="80"
+          height="80"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        >
+      {%- endif -%}
+    </span>
+    <span class="reu-mr-card__identity">
+      <span class="reu-mr-card__name">{{ display_name }}</span>
+      {%- if block.settings.date != blank -%}
+        <span class="reu-mr-card__date">{{ block.settings.date }}</span>
+      {%- elsif block.settings.role != blank -%}
+        <span class="reu-mr-card__date">{{ block.settings.role }}</span>
+      {%- endif -%}
+    </span>
     {%- if show_sample -%}
       <span class="reu-mr-card__sample">Sample</span>
     {%- endif -%}
+  </header>
+
+  <div class="reu-mr-card__stars" aria-label="{{ rating }} out of 5 stars">
+    {%- for i in (1..5) -%}
+      <span class="reu-mr-card__star{% if i <= rating %} is-on{% endif %}" aria-hidden="true">
+        {% render 'icon', name: 'star' %}
+      </span>
+    {%- endfor -%}
   </div>
+
+  {%- if block.settings.title != blank -%}
+    <h3 class="reu-mr-card__title">{{ block.settings.title }}</h3>
+  {%- endif -%}
 
   {%- if block.settings.quote != blank -%}
     <p class="reu-mr-card__text">{{ block.settings.quote }}</p>
@@ -38,42 +86,5 @@
         {{ block.settings.product }}
       {%- endif -%}
     </p>
-  {%- endif -%}
-
-  {%- if has_person -%}
-    <div class="reu-mr-card__footer">
-      <div class="reu-mr-card__person">
-        {%- if block.settings.avatar != blank or block.settings.name != blank -%}
-          <span class="reu-mr-card__avatar" aria-hidden="true">
-            {%- if block.settings.avatar != blank -%}
-              {{
-                block.settings.avatar
-                | image_url: width: 96
-                | image_tag:
-                  widths: '48,72,96',
-                  sizes: '40px',
-                  loading: 'lazy',
-                  alt: ''
-              }}
-            {%- elsif block.settings.name != blank -%}
-              <span class="reu-mr-card__avatar-fallback">
-                {{ block.settings.name | slice: 0 | upcase }}
-              </span>
-            {%- endif -%}
-          </span>
-        {%- endif -%}
-        <span class="reu-mr-card__meta">
-          {%- if block.settings.name != blank -%}
-            <span class="reu-mr-card__name">{{ block.settings.name }}</span>
-          {%- endif -%}
-          {%- if block.settings.role != blank -%}
-            <span class="reu-mr-card__role">{{ block.settings.role }}</span>
-          {%- endif -%}
-          {%- if block.settings.verified -%}
-            <span class="reu-mr-card__verified">Verified</span>
-          {%- endif -%}
-        </span>
-      </div>
-    </div>
   {%- endif -%}
 </article>

@@ -211,9 +211,9 @@
 .reu-mr-card {
   background: var(--reu-mr-card);
   color: var(--reu-mr-review);
-  border-radius: 1rem;
-  padding: 1.05rem 1.1rem 1.1rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+  border-radius: 1.15rem;
+  padding: 1.15rem 1.2rem 1.25rem;
+  box-shadow: 0 10px 28px rgba(34, 56, 41, .14);
   display: flex;
   flex-direction: column;
   gap: .7rem;
@@ -223,18 +223,50 @@
 .reu-mr-card:focus-visible {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--reu-mr-accent) 70%, #fff);
 }
-.reu-mr-card__top {
+.reu-mr-card__header {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
   gap: .75rem;
+  min-width: 0;
 }
-.reu-mr-card__quote {
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  line-height: 1;
+.reu-mr-card__avatar {
+  width: 2.85rem;
+  height: 2.85rem;
+  border-radius: 50%;
+  overflow: hidden;
+  flex: none;
+  background: var(--color-lilac, #EADEEA);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid color-mix(in srgb, #fff 70%, var(--reu-mr-card));
+}
+.reu-mr-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.reu-mr-card__identity {
+  display: flex;
+  flex-direction: column;
+  gap: .12rem;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.reu-mr-card__name {
+  font-family: var(--font-body);
+  font-size: .95rem;
+  font-weight: 600;
   color: var(--reu-mr-review);
-  opacity: .85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reu-mr-card__date {
+  font-family: var(--font-body);
+  font-size: .78rem;
+  color: color-mix(in srgb, var(--reu-mr-review) 58%, transparent);
 }
 .reu-mr-card__sample {
   flex: none;
@@ -250,17 +282,41 @@
   letter-spacing: .08em;
   text-transform: uppercase;
 }
+.reu-mr-card__stars {
+  display: inline-flex;
+  align-items: center;
+  gap: .18rem;
+}
+.reu-mr-card__star {
+  display: inline-flex;
+  color: color-mix(in srgb, var(--reu-mr-review) 18%, transparent);
+}
+.reu-mr-card__star.is-on {
+  color: var(--reu-mr-accent);
+}
+.reu-mr-card__star .icon {
+  width: .95rem;
+  height: .95rem;
+}
+.reu-mr-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.25;
+  color: var(--reu-mr-review);
+}
 .reu-mr-card__text {
   margin: 0;
   font-family: var(--font-body);
   font-size: clamp(.88rem, 1.1vw, .98rem);
   line-height: 1.5;
-  color: var(--reu-mr-review);
+  color: color-mix(in srgb, var(--reu-mr-review) 88%, transparent);
 }
 .reu-mr-card__product {
-  margin: 0;
+  margin: .1rem 0 0;
   font-family: var(--font-body);
-  font-size: .78rem;
+  font-size: .76rem;
   font-weight: 600;
   letter-spacing: .02em;
   color: var(--reu-mr-accent);
@@ -270,71 +326,11 @@
   text-decoration: underline;
   text-underline-offset: 2px;
 }
-.reu-mr-card__footer {
-  margin-top: .15rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: .75rem;
-}
-.reu-mr-card__person {
-  display: flex;
-  align-items: center;
-  gap: .65rem;
-  min-width: 0;
-}
-.reu-mr-card__avatar {
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 50%;
-  overflow: hidden;
-  flex: none;
-  background: color-mix(in srgb, var(--reu-mr-review) 12%, #fff);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.reu-mr-card__avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.reu-mr-card__avatar-fallback {
-  font-family: var(--font-body);
-  font-size: .85rem;
-  font-weight: 600;
-  color: var(--reu-mr-review);
-}
-.reu-mr-card__meta {
-  display: flex;
-  flex-direction: column;
-  gap: .1rem;
-  min-width: 0;
-}
-.reu-mr-card__name {
-  font-family: var(--font-body);
-  font-size: .88rem;
-  font-weight: 600;
-  color: var(--reu-mr-review);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.reu-mr-card__role,
-.reu-mr-card__verified {
-  font-family: var(--font-body);
-  font-size: .75rem;
-  color: color-mix(in srgb, var(--reu-mr-review) 65%, transparent);
-}
-.reu-mr-card__verified {
-  color: var(--reu-mr-accent);
-  font-weight: 600;
-}
 
 @media (max-width: 989px) {
   .reu-mr__heading { max-width: 16ch; font-size: clamp(1.55rem, 7vw, 2.1rem); }
   .reu-mr__marquee { gap: max(12px, var(--reu-mr-gap)); }
-  .reu-mr-card { padding: .9rem .95rem 1rem; }
+  .reu-mr-card { padding: 1rem 1.05rem 1.1rem; }
 }
 @media (max-width: 430px) {
   .reu-mr {
@@ -344,3 +340,4 @@
     padding-inline: max(16px, var(--gutter, 1.25rem));
   }
 }
+
