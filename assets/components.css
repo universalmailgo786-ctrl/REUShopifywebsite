@@ -423,7 +423,7 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
 
 /* Story + Mission two-column */
 .story-mission {
-  background: #fff;
+  background: var(--color-cream, #E3E1D5);
 }
 .story-mission__grid {
   display: grid;
