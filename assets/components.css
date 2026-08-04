@@ -261,8 +261,16 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
 }
 .quiz__progress { height: 6px; background: var(--color-cream); border-radius: var(--radius-pill); overflow: hidden; margin-bottom: var(--space-lg); }
 .quiz__progress span { display: block; height: 100%; background: var(--color-green); transition: width var(--dur) var(--ease); }
-.quiz__step { display: none; }
+.quiz__step { display: none; border: 0; margin: 0; padding: 0; min-inline-size: 0; }
 .quiz__step.is-active { display: block; animation: quizIn .35s var(--ease); }
+.quiz__step legend {
+  padding: 0;
+  float: left;
+  width: 100%;
+}
+.quiz__step legend + * {
+  clear: both;
+}
 @keyframes quizIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .quiz__options { display: grid; gap: .6rem; margin-block: var(--space-md); }
 .quiz__option { display: flex; align-items: center; gap: .75rem; padding: 1rem; border: 1.5px solid var(--color-line); border-radius: var(--radius); cursor: pointer; transition: all var(--dur) var(--ease); }
