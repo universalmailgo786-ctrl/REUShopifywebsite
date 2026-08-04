@@ -821,7 +821,7 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
   }
 }
 
-/* Our values — deep green cards */
+/* Our values — deep green cards, rose secondary on hover */
 .values-grid__list {
   display: grid;
   gap: 1rem;
@@ -840,15 +840,29 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
   }
 }
 .values-grid__card {
-  background: #223829 !important;
-  background: var(--color-green, #223829) !important;
+  --values-card-bg: var(--color-green, #223829);
+  --values-card-bg-hover: var(--color-rose, #BA6D64);
+  background: var(--values-card-bg) !important;
   color: #E3E1D5;
   color: var(--color-cream, #E3E1D5);
   border-radius: calc(var(--card-radius, 16px) + 2px);
   padding: clamp(1.35rem, 2.5vw, 1.75rem);
   min-height: 100%;
   border: 0;
-  box-shadow: none;
+  box-shadow: 0 0 0 transparent;
+  transform: translateY(0);
+  transition:
+    background-color .35s var(--ease, cubic-bezier(.22,.61,.36,1)),
+    transform .35s var(--ease, cubic-bezier(.22,.61,.36,1)),
+    box-shadow .35s var(--ease, cubic-bezier(.22,.61,.36,1));
+  cursor: default;
+  will-change: transform, background-color;
+}
+.values-grid__card:hover,
+.values-grid__card:focus-within {
+  background: var(--values-card-bg-hover) !important;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px color-mix(in srgb, var(--color-rose, #BA6D64) 32%, transparent);
 }
 .values-grid__title {
   margin: 0;
@@ -857,6 +871,7 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
   line-height: 1.2;
   color: #E3E1D5 !important;
   color: var(--color-cream, #E3E1D5) !important;
+  transition: color .35s var(--ease, cubic-bezier(.22,.61,.36,1));
 }
 .values-grid__text {
   margin: .55rem 0 0;
@@ -864,5 +879,20 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
   font-size: .95rem;
   line-height: 1.5;
   color: color-mix(in srgb, #E3E1D5 84%, #fff);
+  transition: color .35s var(--ease, cubic-bezier(.22,.61,.36,1));
+}
+.values-grid__card:hover .values-grid__text,
+.values-grid__card:focus-within .values-grid__text {
+  color: color-mix(in srgb, #fff 92%, var(--color-cream, #E3E1D5));
+}
+@media (prefers-reduced-motion: reduce) {
+  .values-grid__card {
+    transition: background-color .2s ease;
+    will-change: auto;
+  }
+  .values-grid__card:hover,
+  .values-grid__card:focus-within {
+    transform: none;
+  }
 }
 
