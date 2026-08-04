@@ -168,13 +168,27 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "Shows a shared deadline timer on product cards and product pages. Create product metafields: custom.countdown_end (Date and time), custom.countdown_label (Single line text), custom.countdown_enabled (True or false). Product metafields override these defaults. Leave countdown_end empty to hide the timer for that product."
+        "content": "Built-in REÚ countdown (does not need the Essential Countdown app). Shows on product pages and product cards. Optional product metafields: custom.countdown_end, custom.countdown_label, custom.countdown_enabled (false hides one product)."
       },
       {
         "type": "checkbox",
         "id": "countdown_enable",
         "label": "Enable product countdown timers",
         "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "countdown_all_products",
+        "label": "Show on all products",
+        "info": "Uses the default deadline below when a product has no countdown_end metafield.",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "countdown_default_end",
+        "label": "Default deadline (all products)",
+        "info": "Format: YYYY-MM-DD HH:MM:SS (store timezone). Example: 2026-10-15 23:59:59",
+        "default": "2026-10-15 23:59:59"
       },
       {
         "type": "text",

@@ -95,6 +95,8 @@
         <div class="reu-pdp__price">{% render 'price', product: p, variant: current, context: 'product' %}</div>
         {%- if preorder -%}<p class="form-note" style="margin:-.35rem 0 1rem">Payment timing is confirmed at checkout.</p>{%- endif -%}
 
+        {% render 'reu-product-countdown', product: p, style: 'product' %}
+
         {% render 'reu-product-summary', product: p %}
 
         {%- if mf.also_available_handle != blank -%}
@@ -127,8 +129,6 @@
           {%- endunless -%}
 
           <input type="hidden" name="id" value="{{ current.id }}">
-
-          {% render 'reu-product-countdown', product: p, style: 'product' %}
 
           <div class="reu-pdp__buy purchase-row">
             <div class="reu-pdp__qty qty-control" data-qty>

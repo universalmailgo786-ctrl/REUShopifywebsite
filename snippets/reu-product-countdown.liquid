@@ -1,14 +1,8 @@
 {%- comment -%}
-  REÚ product countdown timer — one reusable snippet for cards + PDP.
-  Params:
-    - product (required)
-    - style: 'card' (default) | 'product'
-  Metafields (product):
-    - custom.countdown_end (date_time) — required for display; empty = no timer
-    - custom.countdown_label (single_line_text_field) — optional override
-    - custom.countdown_enabled (boolean) — false hides timer
-  Deadline is converted to UNIX seconds via Liquid (shop timezone → absolute epoch),
-  so every customer sees the same genuine end time (no reset-on-refresh fake timers).
+  REÚ product countdown — cards + PDP.
+  Uses product metafield custom.countdown_end when set; otherwise the Theme Setting
+  default deadline so every product can show the same genuine offer end time.
+  custom.countdown_enabled = false hides the timer for that product.
 {%- endcomment -%}
 {%- if settings.countdown_enable and product != blank -%}
   {%- liquid
@@ -16,18 +10,22 @@
     assign enabled_mf = product.metafields.custom.countdown_enabled
     assign label_mf = product.metafields.custom.countdown_label
     assign show_timer = false
+    assign end_raw = blank
 
-    if end_mf != blank and end_mf.value != blank
-      assign show_timer = true
-    endif
     if enabled_mf != blank and enabled_mf.value == false
       assign show_timer = false
-    endif
+    else
+      if end_mf != blank and end_mf.value != blank
+        assign end_raw = end_mf.value
+      elsif settings.countdown_all_products and settings.countdown_default_end != blank
+        assign end_raw = settings.countdown_default_end
+      endif
 
-    if show_timer
-      assign end_ts = end_mf.value | date: '%s'
-      if end_ts == blank or end_ts == '0'
-        assign show_timer = false
+      if end_raw != blank
+        assign end_ts = end_raw | date: '%s'
+        if end_ts != blank and end_ts != '0'
+          assign show_timer = true
+        endif
       endif
     endif
 

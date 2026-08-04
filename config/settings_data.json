@@ -9,9 +9,9 @@
  */
 {
   "current": {
-    "logo_width": 130,
     "brand_tagline": "Live Better. Every Day.",
     "brand_statement": "<p>REÚ makes daily wellness simple, enjoyable, and designed around women. Live Better. Every Day.</p>",
+    "logo_width": 130,
     "color_green": "#223829",
     "color_rose": "#BA6D64",
     "color_mauve": "#8B6D93",
@@ -36,20 +36,14 @@
     "card_show_vendor": false,
     "card_image_ratio": "square",
     "countdown_enable": true,
+    "countdown_all_products": true,
+    "countdown_default_end": "2026-10-15 23:59:59",
     "countdown_default_label": "Pre-Order Offer Ends In",
     "countdown_expired_message": "Offer Ended",
     "countdown_expired_behavior": "message",
     "countdown_bg": "#F4E2DB",
     "countdown_text": "#223829",
-    "countdown_accent": "#BA6D64",
-    "content_for_index": [],
-    "blocks": {
-      "12657775114333427046": {
-        "type": "shopify://apps/essential-countdown-timer/blocks/app_embed/722378e8-5a70-4eae-aa89-9e44e8e9f6de",
-        "disabled": false,
-        "settings": {}
-      }
-    }
+    "countdown_accent": "#BA6D64"
   },
   "presets": {
     "REU": {
