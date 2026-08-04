@@ -1,11 +1,43 @@
-<section class="section {{ section.settings.bg_scheme }}">
-  <div class="wrap">
-    <div class="section-head section-head--center">
-      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
-      <h1 class="h2">{{ section.settings.heading }}</h1>
-      {%- if section.settings.body != blank -%}<p class="lede" style="margin-top:.75rem;max-width:42rem;margin-inline:auto">{{ section.settings.body }}</p>{%- endif -%}
+<section class="collections-hub-page">
+  <div class="reu-products-hero">
+    <div class="reu-products-hero__media">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 2800
+          | image_tag:
+            widths: '900,1400,1800,2400,2800',
+            sizes: '100vw',
+            loading: 'eager',
+            fetchpriority: 'high',
+            alt: section.settings.heading | default: 'REÚ collections' | escape
+        }}
+      {%- else -%}
+        <img
+          src="{{ section.settings.fallback_asset | default: 'reu-collections-banner.jpg' | asset_url }}"
+          width="2800"
+          height="1200"
+          alt="{{ section.settings.heading | default: 'REÚ collections' | escape }}"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        >
+      {%- endif -%}
     </div>
+  </div>
 
+  <div class="collections-hub-intro section bg-cream">
+    <div class="wrap">
+      <div class="section-head section-head--center collections-hub-intro__head">
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h1 class="h2">{{ section.settings.heading }}</h1>
+        {%- if section.settings.body != blank -%}<p class="lede" style="margin-top:.75rem;max-width:42rem;margin-inline:auto">{{ section.settings.body }}</p>{%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="section {{ section.settings.bg_scheme | default: 'bg-sage' }}">
+  <div class="wrap">
     <div class="grid cols-2 collections-hub__cards">
       {%- for block in section.blocks -%}
         {%- if block.type == 'collection_card' -%}
@@ -112,11 +144,14 @@
       {%- endif -%}
     </div>
   </div>
+  </div>
 </section>
 {% schema %}
 {
   "name": "Collections hub",
   "settings": [
+    { "type": "image_picker", "id": "image", "label": "Banner image" },
+    { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename", "default": "reu-collections-banner.jpg" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "SHOP BY COLLECTION" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "One routine. Two ways to enjoy it." },
     { "type": "textarea", "id": "body", "label": "Body", "default": "Keep your daily favourites at home in full-size pouches, take convenient single serves with you, or build a routine with both." },
@@ -126,9 +161,9 @@
     { "type": "textarea", "id": "closing_body", "label": "Closing body", "default": "Tell us what your day looks like and we will recommend a product and format to begin with." },
     { "type": "text", "id": "closing_cta_label", "label": "Closing CTA", "default": "Find My REÚ Routine" },
     { "type": "url", "id": "closing_cta_link", "label": "Closing CTA link" },
-    { "type": "select", "id": "bg_scheme", "label": "Background", "options": [
+    { "type": "select", "id": "bg_scheme", "label": "Collections background", "options": [
       { "value": "bg-cream", "label": "Cream" }, { "value": "bg-sage", "label": "Sage" }
-    ], "default": "bg-cream" }
+    ], "default": "bg-sage" }
   ],
   "blocks": [
     { "type": "collection_card", "name": "Collection card", "settings": [

@@ -11,17 +11,6 @@
   "sections": {
     "hub": {
       "type": "collections-hub",
-      "settings": {
-        "eyebrow": "SHOP BY COLLECTION",
-        "heading": "One routine. Two ways to enjoy it.",
-        "body": "Keep your daily favourites at home in full-size pouches, take convenient single serves with you, or build a routine with both.",
-        "show_comparison": true,
-        "closing_heading": "Still deciding?",
-        "closing_body": "Tell us what your day looks like and we will recommend a product and format to begin with.",
-        "closing_cta_label": "Find My REÚ Routine",
-        "closing_cta_link": "shopify://pages/find-your-reu",
-        "bg_scheme": "bg-cream"
-      },
       "blocks": {
         "pouch": {
           "type": "collection_card",
@@ -51,7 +40,18 @@
       "block_order": [
         "pouch",
         "sachet"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "SHOP BY COLLECTION",
+        "heading": "One routine. Two ways to enjoy it.",
+        "body": "Keep your daily favourites at home in full-size pouches, take convenient single serves with you, or build a routine with both.",
+        "show_comparison": true,
+        "closing_heading": "Still deciding?",
+        "closing_body": "Tell us what your day looks like and we will recommend a product and format to begin with.",
+        "closing_cta_label": "Find My REÚ Routine",
+        "closing_cta_link": "shopify://pages/find-your-reu",
+        "bg_scheme": "bg-sage"
+      }
     }
   },
   "order": [

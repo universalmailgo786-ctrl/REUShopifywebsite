@@ -457,6 +457,18 @@
 .reu-products-index.section {
   padding-block: clamp(2.5rem, 5vw, 4rem);
 }
+.collections-hub-page {
+  background: transparent;
+}
+.collections-hub-intro.section {
+  padding-block: clamp(2.25rem, 5vw, 3.5rem);
+}
+.collections-hub-intro__head {
+  margin-bottom: 0;
+}
+.collections-hub__cards {
+  margin-top: 0;
+}
 @media (max-width: 749px) {
   .reu-products-hero__media img {
     min-height: clamp(12rem, 58vw, 20rem);
