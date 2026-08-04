@@ -1542,6 +1542,16 @@
 
 .faq-split { display: grid; gap: 2rem; align-items: start; }
 @media (min-width: 900px) { .faq-split { grid-template-columns: .85fr 1.15fr; gap: 3rem; } }
+.faq-split .btn {
+  --btn-hover-bg: var(--reu-deep-green, var(--color-green, #223829));
+  --btn-hover-fg: #fff;
+}
+.faq-split .btn:hover {
+  background: var(--color-green, #223829);
+  border-color: var(--color-green, #223829);
+  color: #fff;
+  filter: brightness(1.08);
+}
 
 .media-banner {
   position: relative; min-height: clamp(320px, 48vw, 520px);

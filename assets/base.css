@@ -356,13 +356,36 @@ h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
   padding: 1.15rem 1.1rem; background: color-mix(in srgb, var(--color-cream) 70%, #fff);
   border: 0; border-radius: 12px; text-align: left; margin-bottom: .55rem;
   font-family: var(--font-body); font-size: 1rem; font-weight: 500; color: var(--color-heading); cursor: pointer;
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
 }
 .accordion--faq .accordion__item { border: 0; }
 .accordion--faq .accordion__panel { background: transparent; }
-.accordion__trigger .icon { width: 1.1rem; height: 1.1rem; flex: none; transition: transform var(--dur) var(--ease); }
+.accordion--faq .accordion__trigger:hover,
+.accordion--faq .accordion__trigger:focus-visible,
+.accordion--faq .accordion__trigger[aria-expanded="true"] {
+  background: var(--color-green, #223829);
+  color: var(--color-cream, #E3E1D5);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--color-green, #223829) 22%, transparent);
+}
+.accordion--faq .accordion__trigger:hover .icon,
+.accordion--faq .accordion__trigger:focus-visible .icon,
+.accordion--faq .accordion__trigger[aria-expanded="true"] .icon {
+  color: var(--color-cream, #E3E1D5);
+}
+.accordion--faq .accordion__trigger:hover {
+  transform: translateY(-1px);
+}
+.accordion__trigger .icon { width: 1.1rem; height: 1.1rem; flex: none; transition: transform var(--dur) var(--ease), color var(--dur) var(--ease); }
 .accordion__trigger[aria-expanded="true"] .icon { transform: rotate(45deg); }
 .accordion__panel { overflow: hidden; }
 .accordion__panel > div { padding: 0 .35rem 1rem 1.1rem; color: var(--color-text-muted); }
+@media (prefers-reduced-motion: reduce) {
+  .accordion--faq .accordion__trigger:hover { transform: none; }
+}
 
 .field { display: block; margin-bottom: var(--space-sm); }
 .field > label { display: block; font-weight: 500; margin-bottom: .4em; font-size: .95rem; }
