@@ -9,10 +9,23 @@
   --reu-pdp-mauve: var(--color-mauve, #8B6D93);
   --reu-pdp-lilac: var(--color-lilac, #EADEEA);
   --reu-pdp-sage: var(--color-sage, #E1E8E0);
-  background: var(--reu-pdp-soft);
-  padding-bottom: clamp(3rem, 6vw, 5rem);
+  background: transparent;
+  padding-bottom: 0;
   color: var(--color-text, #2C3A30);
   font-family: var(--font-body);
+}
+
+/* Full-bleed cream / sage bands — same rhythm as About page */
+.reu-pdp__band {
+  width: 100%;
+}
+.reu-pdp__band--cream {
+  background: var(--reu-pdp-soft);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.reu-pdp__band--sage {
+  background: var(--reu-pdp-sage);
+  padding-block: clamp(2.75rem, 6vw, 4.5rem);
 }
 
 .reu-pdp__banner {
@@ -298,9 +311,9 @@
 
 /* Range strip — all REÚ products */
 .reu-pdp-range {
-  margin-top: clamp(2.75rem, 6vw, 4.5rem);
-  padding-top: clamp(2rem, 4vw, 3rem);
-  border-top: 1px solid color-mix(in srgb, var(--reu-pdp-green) 10%, transparent);
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 .reu-pdp-range__head {
   display: flex;

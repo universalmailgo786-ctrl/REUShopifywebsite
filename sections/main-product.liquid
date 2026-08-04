@@ -23,12 +23,13 @@
   endif
 -%}
 <section class="reu-pdp" data-product-root data-preorder="{{ preorder }}">
-  <div class="wrap">
-    <div class="reu-pdp__banner">
-      {% render 'breadcrumbs' %}
-    </div>
+  <div class="reu-pdp__band reu-pdp__band--cream">
+    <div class="wrap">
+      <div class="reu-pdp__banner">
+        {% render 'breadcrumbs' %}
+      </div>
 
-    <div class="reu-pdp__layout" data-sticky-anchor>
+      <div class="reu-pdp__layout" data-sticky-anchor>
       {%- comment -%} Gallery {%- endcomment -%}
       <div class="reu-pdp__gallery" data-gallery>
         <div class="reu-pdp__stage">
@@ -273,19 +274,23 @@
         {% render 'supplement-disclaimer', compact: true %}
       </div>
     </div>
+    </div>
+  </div>
 
-    {%- comment -%} Full REÚ range — only this brand’s products {%- endcomment -%}
-    {%- liquid
-      assign range_col = collections['pouch-collection']
-      if range_col == blank
-        assign range_col = collections.pouches
-      endif
-      assign range_col_b = collections['sachet-collection']
-      if range_col_b == blank
-        assign range_col_b = collections.sachets
-      endif
-      assign shown_ids = ',' | append: p.id | append: ','
-    -%}
+  {%- comment -%} Full REÚ range — sage band (matches About page cream/sage rhythm) {%- endcomment -%}
+  {%- liquid
+    assign range_col = collections['pouch-collection']
+    if range_col == blank
+      assign range_col = collections.pouches
+    endif
+    assign range_col_b = collections['sachet-collection']
+    if range_col_b == blank
+      assign range_col_b = collections.sachets
+    endif
+    assign shown_ids = ',' | append: p.id | append: ','
+  -%}
+  <div class="reu-pdp__band reu-pdp__band--sage">
+    <div class="wrap">
     <div class="reu-pdp-range">
       <div class="reu-pdp-range__head">
         <div>
@@ -320,6 +325,7 @@
           {%- endfor -%}
         {%- endif -%}
       </div>
+    </div>
     </div>
   </div>
 
