@@ -418,101 +418,51 @@
   backdrop-filter: blur(8px);
 }
 
-/* Products index — full-bleed lifestyle banner with left copy */
+/* Products index — full-bleed product banner, then copy, then grid */
 .reu-products-page {
   background: transparent;
 }
 .reu-products-hero {
-  position: relative;
-  min-height: clamp(26rem, 58vw, 38rem);
+  width: 100%;
   overflow: hidden;
-  background: var(--color-blush, #F4E2DB);
-  display: flex;
-  align-items: stretch;
+  background: var(--color-sage, #E1E8E0);
 }
 .reu-products-hero__media {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+  width: 100%;
+  line-height: 0;
 }
 .reu-products-hero__media img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: clamp(14rem, 36vw, 28rem);
+  max-height: min(70vh, 40rem);
   object-fit: cover;
-  object-position: right center;
+  object-position: center center;
   display: block;
   filter: none;
 }
-.reu-products-hero__scrim {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(244, 226, 219, 0.55) 0%,
-      rgba(244, 226, 219, 0.28) 28%,
-      rgba(244, 226, 219, 0.06) 48%,
-      rgba(244, 226, 219, 0) 66%,
-      rgba(244, 226, 219, 0) 100%
-    );
+.reu-products-intro.section {
+  padding-block: clamp(2.25rem, 5vw, 3.5rem);
 }
-.reu-products-hero__inner {
-  position: relative;
-  z-index: 2;
-  width: 100%;
+.reu-products-intro__head {
+  margin-bottom: 0;
+}
+.reu-products-intro__actions {
   display: flex;
-  align-items: center;
-  padding-block: clamp(3rem, 8vw, 5.5rem);
-}
-.reu-products-hero__copy {
-  max-width: min(34rem, 44%);
-  color: var(--color-green, #223829);
-}
-.reu-products-hero__eyebrow {
-  margin: 0 0 .85rem;
-  color: var(--color-rose, #BA6D64);
-}
-.reu-products-hero__heading {
-  margin: 0;
-  color: var(--color-green, #223829);
-  text-wrap: balance;
-  max-width: 12ch;
-}
-.reu-products-hero__body {
-  margin: 1rem 0 0;
-  max-width: 30rem;
-  color: var(--color-text, #2C3A30);
-}
-.reu-products-hero__actions {
-  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  gap: .65rem;
+  justify-content: center;
+  margin-top: 1.25rem;
 }
 .reu-products-index.section {
   padding-block: clamp(2.5rem, 5vw, 4rem);
 }
-@media (max-width: 899px) {
-  .reu-products-hero {
-    min-height: clamp(28rem, 112vw, 38rem);
-  }
+@media (max-width: 749px) {
   .reu-products-hero__media img {
-    object-position: 72% center;
-  }
-  .reu-products-hero__scrim {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(244, 226, 219, 0.72) 0%,
-        rgba(244, 226, 219, 0.4) 42%,
-        rgba(244, 226, 219, 0.08) 72%,
-        rgba(244, 226, 219, 0.18) 100%
-      );
-  }
-  .reu-products-hero__copy {
-    max-width: 100%;
-  }
-  .reu-products-hero__heading {
-    max-width: none;
+    min-height: clamp(12rem, 58vw, 20rem);
+    max-height: none;
+    object-position: center 45%;
   }
 }
+
 

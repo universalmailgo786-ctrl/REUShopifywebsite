@@ -15,11 +15,10 @@
         "eyebrow": "SHOP REÚ",
         "heading": "All products",
         "body": "Explore every REÚ pouch and sachet. Open any product for the full pre-order details.",
-        "bg_scheme": "bg-cream"
+        "fallback_asset": "reu-products-hero.jpg",
+        "bg_scheme": "bg-sage"
       }
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main"]
 }

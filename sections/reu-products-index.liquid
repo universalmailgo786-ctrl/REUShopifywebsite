@@ -15,48 +15,50 @@
 -%}
 <section class="reu-products-page">
   <div class="reu-products-hero">
-    <div class="reu-products-hero__media" aria-hidden="true">
+    <div class="reu-products-hero__media">
       {%- if section.settings.image != blank -%}
         {{
           section.settings.image
-          | image_url: width: 2400
+          | image_url: width: 2800
           | image_tag:
-            widths: '900,1400,1800,2400',
+            widths: '900,1400,1800,2400,2800',
             sizes: '100vw',
             loading: 'eager',
             fetchpriority: 'high',
-            alt: ''
+            alt: section.settings.heading | default: 'REÚ products' | escape
         }}
       {%- else -%}
         <img
           src="{{ section.settings.fallback_asset | default: 'reu-products-hero.jpg' | asset_url }}"
-          width="2400"
+          width="2800"
           height="1200"
-          alt=""
+          alt="{{ section.settings.heading | default: 'REÚ products' | escape }}"
           loading="eager"
           fetchpriority="high"
           decoding="async"
         >
       {%- endif -%}
     </div>
-    <div class="reu-products-hero__scrim" aria-hidden="true"></div>
-    <div class="reu-products-hero__inner wrap">
-      <div class="reu-products-hero__copy">
+  </div>
+
+  <div class="reu-products-intro section bg-cream">
+    <div class="wrap">
+      <header class="section-head section-head--center reu-products-intro__head">
         {%- if section.settings.eyebrow != blank -%}
-          <p class="reu-products-hero__eyebrow eyebrow">{{ section.settings.eyebrow }}</p>
+          <p class="eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
-        <h1 class="reu-products-hero__heading h2">{{ section.settings.heading | default: page.title | default: 'Shop REÚ Products' }}</h1>
+        <h1 class="h2">{{ section.settings.heading | default: page.title | default: 'Shop REÚ Products' }}</h1>
         {%- if section.settings.body != blank -%}
-          <p class="reu-products-hero__body lede">{{ section.settings.body }}</p>
+          <p class="lede" style="margin-top:.75rem;max-width:40rem;margin-inline:auto">{{ section.settings.body }}</p>
         {%- endif -%}
-        <div class="reu-products-hero__actions">
+        <div class="reu-products-intro__actions">
           <a class="btn" href="{{ quiz_url }}">Find My Routine <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a>
         </div>
-      </div>
+      </header>
     </div>
   </div>
 
-  <div class="reu-products-index section {{ section.settings.bg_scheme | default: 'bg-cream' }}">
+  <div class="reu-products-index section {{ section.settings.bg_scheme | default: 'bg-sage' }}">
     <div class="wrap">
       <div class="reu-pdp-range__grid" role="list">
         {%- assign rendered = 0 -%}
@@ -99,7 +101,7 @@
     { "type": "textarea", "id": "body", "label": "Body", "default": "Explore every REÚ pouch and sachet. Open any product for the full pre-order details." },
     { "type": "select", "id": "bg_scheme", "label": "Product grid background", "options": [
       { "value": "bg-cream", "label": "Cream" }, { "value": "bg-sage", "label": "Sage" }
-    ], "default": "bg-cream" }
+    ], "default": "bg-sage" }
   ],
   "presets": [{ "name": "Products index" }]
 }
