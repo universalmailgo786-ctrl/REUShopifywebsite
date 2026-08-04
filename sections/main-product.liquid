@@ -25,19 +25,9 @@
       {%- comment -%} Gallery {%- endcomment -%}
       <div class="reu-pdp__gallery" data-gallery>
         <div class="reu-pdp__stage">
-          <div class="reu-pdp__badge-float">
-            {%- if preorder -%}
-              <span class="badge badge--preorder">{{ 'products.product.preorder' | t }}</span>
-              <span class="badge">First release</span>
-            {%- elsif p.available -%}
-              <span class="badge">Available</span>
-            {%- else -%}
-              <span class="badge">Sold out</span>
-            {%- endif -%}
-          </div>
           {%- if p.featured_media -%}
-            {{ p.featured_media | image_url: width: 1400 | image_tag:
-              widths: '500,700,900,1200,1400',
+            {{ p.featured_media | image_url: width: 1600 | image_tag:
+              widths: '600,900,1200,1600',
               sizes: '(min-width:990px) 48vw, 100vw',
               loading: 'eager',
               fetchpriority: 'high',
@@ -58,7 +48,7 @@
                 data-media-id="{{ media.id }}"
                 aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
                 aria-label="{{ media.alt | default: p.title | escape }}"
-                onclick="var m=document.getElementById('gallery-main'); if(!m) return; m.src=this.querySelector('img').src.replace(/width=\d+/,'width=1400'); m.srcset=''; this.parentNode.querySelectorAll('[aria-current]').forEach(function(b){b.setAttribute('aria-current','false')}); this.setAttribute('aria-current','true');"
+                onclick="var m=document.getElementById('gallery-main'); if(!m) return; m.src=this.querySelector('img').src.replace(/width=\d+/,'width=1600'); m.srcset=''; this.parentNode.querySelectorAll('[aria-current]').forEach(function(b){b.setAttribute('aria-current','false')}); this.setAttribute('aria-current','true');"
               >
                 {{ media | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90,180', alt: media.alt | default: p.title | escape }}
               </button>
