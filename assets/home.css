@@ -1005,6 +1005,9 @@
   background: var(--color-cream);
   padding-block: clamp(2.75rem, 6vw, 5rem);
 }
+.standards.bg-sage {
+  background: var(--color-sage, #E1E8E0);
+}
 .standards__layout {
   display: grid;
   gap: clamp(1.75rem, 4vw, 3rem);

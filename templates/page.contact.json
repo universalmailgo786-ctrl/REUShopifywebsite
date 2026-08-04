@@ -18,7 +18,8 @@
         "show_support_details": true,
         "privacy_note": "Please do not submit sensitive medical information. Product guidance is general and does not replace professional medical advice.",
         "success_message": "Thank you—your message has been received. A member of the REÚ team will reply using the email address you provided.",
-        "error_message": "We could not send your message. Check the highlighted fields and try again. If the problem continues, contact us using the support email shown on this page."
+        "error_message": "We could not send your message. Check the highlighted fields and try again. If the problem continues, contact us using the support email shown on this page.",
+        "bg_scheme": "bg-cream"
       }
     }
   },

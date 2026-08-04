@@ -20,7 +20,7 @@
         "fallback_asset": "reu-our-story.jpg",
         "center": false,
         "narrow": false,
-        "bg_scheme": "bg-blush"
+        "bg_scheme": "bg-cream"
       }
     },
     "story_mission": {
@@ -30,7 +30,7 @@
         "story_content": "<p>Wellness can feel crowded with complicated routines, unclear promises and products that are difficult to sustain. REÚ began with a more thoughtful idea: create high-quality, great-tasting supplements for women and present them through a modern experience built on clarity and confidence.</p><p>We consider every part of the journey—from formula and flavour to packaging and guidance—to help wellness fit more naturally into everyday life. Whether your focus is hydration, beauty, greens, performance, protein or a more consistent routine, REÚ is here to help you begin with intention and keep moving in a way that feels like you.</p>",
         "mission_heading": "Our mission",
         "mission_content": "<p>To empower women to feel their best every day by making high-quality wellness simple, enjoyable and effective.</p>",
-        "bg_scheme": "bg-cream"
+        "bg_scheme": "bg-sage"
       }
     },
     "values": {
@@ -38,7 +38,7 @@
       "settings": {
         "eyebrow": "Our values",
         "heading": "What guides REÚ",
-        "bg_scheme": "bg-lilac"
+        "bg_scheme": "bg-cream"
       },
       "blocks": {
         "v1": {
@@ -84,14 +84,7 @@
           }
         }
       },
-      "block_order": [
-        "v1",
-        "v2",
-        "v3",
-        "v4",
-        "v5",
-        "v6"
-      ]
+      "block_order": ["v1", "v2", "v3", "v4", "v5", "v6"]
     },
     "standard": {
       "type": "trust-standards",
@@ -109,7 +102,8 @@
         "heading": "What belongs in your routine\nshould never be a mystery.",
         "body": "Confidence starts with clarity. Every product page clearly explains what is inside, how to use it and what to expect—using supplier-verified information only.",
         "fallback_asset": "reu-standards-clarity.jpg",
-        "image_alt": "Woman preparing a REÚ Hydration Electrolytes drink on a court"
+        "image_alt": "Woman preparing a REÚ Hydration Electrolytes drink on a court",
+        "bg_scheme": "bg-sage"
       }
     },
     "closing": {
@@ -122,18 +116,12 @@
         "cta_link": "shopify://pages/find-your-reu",
         "cta2_label": "Shop All Products",
         "cta2_link": "shopify://collections/all",
-        "bg_scheme": "bg-blush",
+        "bg_scheme": "bg-cream",
         "use_h1": false,
         "center": true,
         "narrow": true
       }
     }
   },
-  "order": [
-    "hero",
-    "story_mission",
-    "values",
-    "standard",
-    "closing"
-  ]
+  "order": ["hero", "story_mission", "values", "standard", "closing"]
 }

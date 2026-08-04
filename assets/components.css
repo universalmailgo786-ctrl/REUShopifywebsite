@@ -332,8 +332,8 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
 }
 .page-hero--split {
   padding: 0;
-  background: #F4E2DB;
-  background: var(--color-blush, #F4E2DB);
+  background: #E2E1D6;
+  background: var(--color-cream, #E2E1D6);
   overflow: hidden;
 }
 .page-hero__grid {
@@ -440,7 +440,10 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
 .story-mission__col--mission {
   padding: clamp(1.5rem, 3vw, 2.25rem);
   border-radius: calc(var(--card-radius, 16px) + 4px);
-  background: var(--color-blush, #F4E2DB);
+  background: var(--color-sage, #E1E8E0);
+}
+.story-mission.bg-sage .story-mission__col--mission {
+  background: var(--color-cream, #E2E1D6);
 }
 @media (min-width: 900px) {
   .story-mission__col--mission {

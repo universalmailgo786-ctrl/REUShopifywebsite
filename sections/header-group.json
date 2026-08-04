@@ -25,12 +25,11 @@
       "type": "header",
       "settings": {
         "menu": "main-menu",
-        "sticky": true
+        "sticky": true,
+        "show_products_nav": true,
+        "products_nav_label": "Products"
       }
     }
   },
-  "order": [
-    "announcement-bar",
-    "header"
-  ]
+  "order": ["announcement-bar", "header"]
 }

@@ -53,7 +53,7 @@
       { "type": "color", "id": "color_green", "label": "Deep Green", "default": "#223829" },
       { "type": "color", "id": "color_rose", "label": "Warm Rose", "default": "#BA6D64" },
       { "type": "color", "id": "color_mauve", "label": "Muted Mauve", "default": "#8B6D93" },
-      { "type": "color", "id": "color_cream", "label": "Warm Cream", "default": "#E3E1D5" },
+      { "type": "color", "id": "color_cream", "label": "Warm Cream", "default": "#E2E1D6" },
       { "type": "color", "id": "color_blush", "label": "Blush", "default": "#F4E2DB" },
       { "type": "color", "id": "color_lilac", "label": "Pale Lilac", "default": "#EADEEA" },
       { "type": "header", "content": "Interface" },

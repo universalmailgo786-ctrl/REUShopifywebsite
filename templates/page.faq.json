@@ -15,7 +15,7 @@
         "eyebrow": "QUESTIONS, ANSWERED",
         "heading": "Clear information before you choose.",
         "body": "<p>Browse product, pre-order, shipping and routine questions or contact us if you need more help.</p>",
-        "bg_scheme": "bg-blush"
+        "bg_scheme": "bg-cream"
       }
     },
     "faq": {
@@ -27,15 +27,15 @@
         "center": false,
         "show_categories": true,
         "faq_schema": true,
-        "bg_scheme": ""
+        "bg_scheme": "bg-sage"
       },
       "blocks": {
         "q1": {
           "type": "qa",
           "settings": {
             "category": "Products and routines",
-            "question": "What is REÚ?",
-            "answer": "<p>REÚ is a premium wellness supplement brand created for women. Our products are designed to make everyday wellness simple, enjoyable and easier to fit into real life.</p>"
+            "question": "What is RE\u00da?",
+            "answer": "<p>RE\u00da is a premium wellness supplement brand created for women. Our products are designed to make everyday wellness simple, enjoyable and easier to fit into real life.</p>"
           }
         },
         "q2": {
@@ -74,7 +74,7 @@
           "type": "qa",
           "settings": {
             "category": "Products and routines",
-            "question": "Can I use more than one REÚ product?",
+            "question": "Can I use more than one RE\u00da product?",
             "answer": "<p>Suitability depends on the verified ingredients and your circumstances. Compare labels and speak with a qualified healthcare professional if you take medication, have a health condition or are unsure.</p>"
           }
         },
@@ -82,7 +82,7 @@
           "type": "qa",
           "settings": {
             "category": "Products and routines",
-            "question": "Are REÚ products suitable during pregnancy or nursing?",
+            "question": "Are RE\u00da products suitable during pregnancy or nursing?",
             "answer": "<p>Speak with a qualified healthcare professional before using any supplement during pregnancy or while nursing.</p>"
           }
         },
@@ -162,7 +162,7 @@
           "type": "qa",
           "settings": {
             "category": "Shipping, returns and support",
-            "question": "How do I contact REÚ?",
+            "question": "How do I contact RE\u00da?",
             "answer": "<p>Use the Contact page or the verified support email shown in the footer.</p>"
           }
         }

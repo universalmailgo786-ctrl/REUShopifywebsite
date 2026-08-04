@@ -17,6 +17,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
+/* Non-homepage pages use the cream/sage system (homepage keeps its own section fills). */
+body:not(.template-index) {
+  background: var(--color-cream, #E2E1D6);
+}
 img, picture, svg, video { max-width: 100%; height: auto; display: block; }
 button, input, select, textarea { font: inherit; color: inherit; }
 a { color: inherit; text-decoration: none; }
@@ -33,9 +37,10 @@ h1, h2, h3, h4, h5, h6, p, figure { margin: 0; }
   --reu-deep-green: #223829;
   --reu-warm-rose: #BA6D64;
   --reu-muted-mauve: #8B6D93;
-  --reu-warm-cream: #E3E1D5;
+  --reu-warm-cream: #E2E1D6;
   --reu-blush: #F4E2DB;
   --reu-pale-lilac: #EADEEA;
+  --reu-sage: #E1E8E0;
   --reu-white: #FFFFFF;
   --reu-ink: #1E261F;
 
@@ -141,7 +146,7 @@ h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
 .bg-cream { background: var(--color-cream); }
 .bg-blush { background: var(--color-blush); }
 .bg-lilac { background: var(--color-lilac); }
-.bg-sage { background: #dfe8df; }
+.bg-sage { background: var(--color-sage, var(--reu-sage, #E1E8E0)); }
 .bg-green { background: var(--color-green); color: var(--color-on-green); }
 .bg-green .h1, .bg-green .h2, .bg-green .h3, .bg-green h1, .bg-green h2, .bg-green h3 { color: var(--color-on-green); }
 .bg-green .eyebrow { color: var(--color-blush); }
