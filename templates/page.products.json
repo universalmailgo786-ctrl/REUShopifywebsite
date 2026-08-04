@@ -14,9 +14,12 @@
       "settings": {
         "eyebrow": "SHOP REÚ",
         "heading": "All products",
-        "body": "Explore every REÚ pouch and sachet. Open any product for the full pre-order details."
+        "body": "Explore every REÚ pouch and sachet. Open any product for the full pre-order details.",
+        "bg_scheme": "bg-cream"
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
