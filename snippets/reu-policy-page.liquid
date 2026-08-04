@@ -1,0 +1,118 @@
+{%- comment -%}
+  Branded REÚ policy page body for /policies/*.
+  Path-only detection — never depends on policy.type or Admin HTML.
+{%- endcomment -%}
+{%- liquid
+  assign contact_url = pages.contact.url | default: '/pages/contact'
+  assign last_updated = 'August 4, 2026'
+  assign path = request.path | default: '' | downcase
+  assign policy_type = 'terms_of_service'
+
+  if path contains 'privacy-policy'
+    assign policy_type = 'privacy_policy'
+  elsif path contains 'refund-policy'
+    assign policy_type = 'refund_policy'
+  elsif path contains 'shipping-policy'
+    assign policy_type = 'shipping_policy'
+  elsif path contains 'terms-of-service'
+    assign policy_type = 'terms_of_service'
+  endif
+
+  case policy_type
+    when 'privacy_policy'
+      assign eyebrow = 'YOUR PRIVACY'
+      assign page_title = 'Privacy Policy'
+      assign intro = 'Your trust matters to us. This Privacy Policy explains how REÚ collects, uses, shares and protects information when you browse our website, place an order, join our email list, contact us or use our Product Recommendation Quiz.'
+      assign cta_label = 'Contact REÚ'
+      assign fallback_asset = 'reu-contact-hero.jpg'
+    when 'refund_policy'
+      assign eyebrow = 'RETURNS & SUPPORT'
+      assign page_title = 'Refund & Cancellation Policy'
+      assign intro = 'We want every REÚ customer to understand their options clearly. This policy explains pre-order cancellations, eligible returns, damaged products and refunds.'
+      assign cta_label = 'Request Support'
+      assign fallback_asset = 'reu-faq-banner.jpg'
+    when 'shipping_policy'
+      assign eyebrow = 'ORDER INFORMATION'
+      assign page_title = 'Shipping & Pre-Order Policy'
+      assign intro = 'REÚ will launch selected products through pre-order. This policy explains availability, payment, estimated shipping, delays and delivery expectations.'
+      assign cta_label = 'Contact Our Support Team'
+      assign fallback_asset = 'reu-collections-banner.jpg'
+    else
+      assign eyebrow = 'STORE TERMS'
+      assign page_title = 'Terms & Conditions'
+      assign intro = 'These Terms govern the use of the REÚ website and purchases made through our Shopify store. By using the website or placing an order, you agree to these Terms and the policies linked from them.'
+      assign cta_label = 'Contact REÚ'
+      assign fallback_asset = 'reu-quiz-hero.jpg'
+  endcase
+-%}
+
+<section class="reu-policy" data-policy-type="{{ policy_type }}" data-reu-policy>
+  <div class="reu-policy__hero">
+    <div class="reu-policy__hero-media" aria-hidden="true">
+      <img
+        src="{{ fallback_asset | asset_url }}"
+        width="2400"
+        height="1000"
+        alt=""
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      >
+    </div>
+    <div class="reu-policy__hero-scrim" aria-hidden="true"></div>
+    <div class="reu-policy__hero-inner wrap">
+      <nav class="reu-policy__crumbs" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">Home</a>
+        <span aria-hidden="true">/</span>
+        <span>{{ page_title }}</span>
+      </nav>
+      <p class="eyebrow reu-policy__eyebrow">{{ eyebrow }}</p>
+      <h1 class="h1 reu-policy__title">{{ page_title }}</h1>
+      <p class="lede reu-policy__intro">{{ intro }}</p>
+      <p class="reu-policy__updated">Last updated: {{ last_updated }}</p>
+      <p class="reu-policy__legal-note">These drafts must receive jurisdiction-specific legal review before launch.</p>
+    </div>
+  </div>
+
+  <div class="reu-policy__band">
+    <div class="wrap reu-policy__layout">
+      <aside class="reu-policy__toc" aria-label="On this page">
+        <p class="reu-policy__toc-label">On this page</p>
+        <label class="visually-hidden" for="PolicyTocSelect">Jump to section</label>
+        <select class="select reu-policy__toc-select" id="PolicyTocSelect" data-policy-toc-select></select>
+        <nav class="reu-policy__toc-nav" data-policy-toc-nav></nav>
+      </aside>
+
+      <div class="reu-policy__main">
+        <article class="reu-policy__content" data-policy-content>
+          {%- case policy_type -%}
+            {%- when 'privacy_policy' -%}
+              {% render 'policy-privacy' %}
+            {%- when 'refund_policy' -%}
+              {% render 'policy-refund' %}
+            {%- when 'shipping_policy' -%}
+              {% render 'policy-shipping' %}
+            {%- else -%}
+              {% render 'policy-terms' %}
+          {%- endcase -%}
+        </article>
+
+        <div class="reu-policy__actions">
+          <a class="btn btn--secondary" href="{{ routes.root_url }}">Back to Home</a>
+          <a class="btn" href="{{ contact_url }}">{{ cta_label }} <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a>
+        </div>
+
+        <aside class="reu-policy__help">
+          <p class="eyebrow">Need help?</p>
+          <h2 class="h3">Questions about this policy?</h2>
+          <p class="lede" style="margin-top:.65rem">Send us a message and our team will respond during published support hours.</p>
+          <div style="margin-top:1.15rem">
+            <a class="btn" href="{{ contact_url }}">Contact REÚ <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'reu-policy.js' | asset_url }}" defer></script>

@@ -1,10 +1,6 @@
 {% comment %}
-  Native Shopify policy routes:
-  /policies/privacy-policy
-  /policies/refund-policy
-  /policies/shipping-policy
-  /policies/terms-of-service
-
-  JSON templates are not supported for policy — this Liquid template hosts the reusable REÚ policy section.
+  Native Shopify policy routes — content is rendered from theme.liquid via
+  snippets/reu-policy-page.liquid. Kept as a safe fallback if layout intercept
+  is unavailable.
 {% endcomment %}
-{% section 'main-policy' %}
+{% render 'reu-policy-page' %}
