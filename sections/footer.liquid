@@ -4,30 +4,51 @@
   assign menu_care = section.settings.menu_care
   assign support_email = section.settings.support_email | default: settings.support_email
   assign support_phone = section.settings.support_phone
-  assign help_label = section.settings.help_label | default: 'Help Center'
+  assign help_label = section.settings.help_label
   assign help_link = section.settings.help_link
-  if help_link == blank
-    assign help_link = pages.faq.url | default: '/pages/faq'
-  endif
+
   assign ig = settings.social_instagram
   assign tt = settings.social_tiktok
   assign fb = settings.social_facebook
   assign yt = settings.social_youtube
 
-  assign privacy_url = shop.privacy_policy.url | default: '/policies/privacy-policy'
-  assign refund_url = shop.refund_policy.url | default: '/policies/refund-policy'
-  assign shipping_url = shop.shipping_policy.url | default: '/policies/shipping-policy'
-  assign terms_url = shop.terms_of_service.url | default: '/policies/terms-of-service'
+  assign privacy = shop.privacy_policy
+  assign refund = shop.refund_policy
+  assign shipping = shop.shipping_policy
+  assign terms = shop.terms_of_service
 
-  assign about_url = pages['about-reu'].url | default: pages.about.url | default: '/pages/about-reu'
-  assign contact_url = pages.contact.url | default: '/pages/contact'
-  assign faq_url = pages.faq.url | default: '/pages/faq'
-  assign quiz_url = pages['find-your-reu'].url | default: pages.quiz.url | default: '/pages/find-your-reu'
-  assign collections_url = pages.collections.url | default: '/pages/collections'
-  assign products_url = pages.products.url | default: routes.all_products_collection_url
-  assign journal_url = blogs.journal.url | default: blogs.news.url | default: '/blogs/journal'
-  assign pouches_url = collections.pouches.url | default: collections['pouch-collection'].url | default: '/collections/pouches'
-  assign sachets_url = collections.sachets.url | default: collections['sachet-collection'].url | default: '/collections/sachets'
+  assign about_page = pages['about-reu']
+  if about_page == blank
+    assign about_page = pages.about
+  endif
+  assign contact_page = pages.contact
+  assign faq_page = pages.faq
+  assign quiz_page = pages['find-your-reu']
+  if quiz_page == blank
+    assign quiz_page = pages.quiz
+  endif
+  assign collections_page = pages.collections
+  assign products_page = pages.products
+  assign journal_blog = blogs.journal
+  if journal_blog == blank
+    assign journal_blog = blogs.news
+  endif
+
+  assign pouch_col = collections['pouch-collection']
+  if pouch_col == blank
+    assign pouch_col = collections.pouches
+  endif
+  assign sachet_col = collections['sachet-collection']
+  if sachet_col == blank
+    assign sachet_col = collections.sachets
+  endif
+
+  if help_link == blank and faq_page != blank
+    assign help_link = faq_page.url
+  endif
+  if help_link == blank
+    assign help_label = blank
+  endif
 -%}
 <footer class="site-footer">
   <div class="wrap">
@@ -48,118 +69,68 @@
         {%- if support_email != blank -%}
           <a class="site-footer__email" href="mailto:{{ support_email }}">{{ support_email }}</a>
         {%- endif -%}
-        {%- if help_label != blank -%}
+        {%- if help_label != blank and help_link != blank -%}
           <a class="site-footer__help" href="{{ help_link }}">
             {{ help_label }}
             <span class="site-footer__help-icon" aria-hidden="true">{% render 'icon', name: 'arrow-up-right' %}</span>
           </a>
         {%- endif -%}
-        <a class="site-footer__help" href="{{ contact_url }}" style="margin-top:.55rem">Contact page</a>
+        {%- if contact_page != blank -%}
+          <a class="site-footer__help" href="{{ contact_page.url }}" style="margin-top:.55rem">{{ contact_page.title }}</a>
+        {%- endif -%}
       </div>
 
-      {%- comment -%} Discover {%- endcomment -%}
       <nav class="site-footer__nav" aria-label="{{ section.settings.discover_heading | default: 'Discover' }}">
         <p class="site-footer__label">{{ section.settings.discover_heading | default: 'Discover' }}</p>
         {%- if menu_discover != blank and menu_discover.links.size > 0 -%}
           {%- for link in menu_discover.links -%}
-            <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- if link.url != blank and link.url != '#' -%}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- endif -%}
           {%- endfor -%}
+        {%- else -%}
+          {%- if about_page != blank -%}<a href="{{ about_page.url }}">{{ about_page.title }}</a>{%- endif -%}
+          {%- if journal_blog != blank -%}<a href="{{ journal_blog.url }}">The REÚ Journal</a>{%- endif -%}
+          {%- if faq_page != blank -%}<a href="{{ faq_page.url }}">{{ faq_page.title }}</a>{%- endif -%}
+          {%- if quiz_page != blank -%}<a href="{{ quiz_page.url }}">{{ quiz_page.title }}</a>{%- endif -%}
+          {%- if contact_page != blank -%}<a href="{{ contact_page.url }}">{{ contact_page.title }}</a>{%- endif -%}
         {%- endif -%}
-        {%- liquid
-          assign discover_blob = ''
-          if menu_discover != blank
-            for link in menu_discover.links
-              assign discover_blob = discover_blob | append: link.url | append: '|' | append: link.title | downcase | append: '||'
-            endfor
-          endif
-        -%}
-        {%- unless discover_blob contains about_url or discover_blob contains 'about' -%}
-          <a href="{{ about_url }}">About REÚ</a>
-        {%- endunless -%}
-        {%- unless discover_blob contains journal_url or discover_blob contains 'journal' -%}
-          <a href="{{ journal_url }}">The REÚ Journal</a>
-        {%- endunless -%}
-        {%- unless discover_blob contains faq_url or discover_blob contains 'faq' -%}
-          <a href="{{ faq_url }}">FAQs</a>
-        {%- endunless -%}
-        {%- unless discover_blob contains quiz_url or discover_blob contains 'quiz' or discover_blob contains 'find-your' -%}
-          <a href="{{ quiz_url }}">Find Your REÚ</a>
-        {%- endunless -%}
-        {%- unless discover_blob contains contact_url or discover_blob contains 'contact' -%}
-          <a href="{{ contact_url }}">Contact us</a>
-        {%- endunless -%}
       </nav>
 
-      {%- comment -%} Shop {%- endcomment -%}
       <nav class="site-footer__nav" aria-label="{{ section.settings.shop_heading | default: 'Shop' }}">
         <p class="site-footer__label">{{ section.settings.shop_heading | default: 'Shop' }}</p>
         {%- if menu_shop != blank and menu_shop.links.size > 0 -%}
           {%- for link in menu_shop.links -%}
-            <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- if link.url != blank and link.url != '#' -%}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- endif -%}
           {%- endfor -%}
-        {%- endif -%}
-        {%- liquid
-          assign shop_blob = ''
-          if menu_shop != blank
-            for link in menu_shop.links
-              assign shop_blob = shop_blob | append: link.url | append: '|' | append: link.title | downcase | append: '||'
-            endfor
-          endif
-        -%}
-        {%- unless shop_blob contains '/collections/all' or shop_blob contains 'shop all' -%}
+        {%- else -%}
           <a href="{{ routes.all_products_collection_url }}">Shop All</a>
-        {%- endunless -%}
-        {%- unless shop_blob contains products_url or shop_blob contains 'products' -%}
-          <a href="{{ products_url }}">Products</a>
-        {%- endunless -%}
-        {%- unless shop_blob contains collections_url or shop_blob contains 'collections' -%}
-          <a href="{{ collections_url }}">Collections</a>
-        {%- endunless -%}
-        {%- unless shop_blob contains pouches_url or shop_blob contains 'pouch' -%}
-          <a href="{{ pouches_url }}">Pouch Collection</a>
-        {%- endunless -%}
-        {%- unless shop_blob contains sachets_url or shop_blob contains 'sachet' -%}
-          <a href="{{ sachets_url }}">Sachet Collection</a>
-        {%- endunless -%}
-        {%- unless shop_blob contains quiz_url or shop_blob contains 'quiz' -%}
-          <a href="{{ quiz_url }}">Take the Quiz</a>
-        {%- endunless -%}
+          {%- if products_page != blank -%}<a href="{{ products_page.url }}">{{ products_page.title }}</a>{%- endif -%}
+          {%- if collections_page != blank -%}<a href="{{ collections_page.url }}">{{ collections_page.title }}</a>{%- endif -%}
+          {%- if pouch_col != blank -%}<a href="{{ pouch_col.url }}">{{ pouch_col.title }}</a>{%- endif -%}
+          {%- if sachet_col != blank -%}<a href="{{ sachet_col.url }}">{{ sachet_col.title }}</a>{%- endif -%}
+          {%- if quiz_page != blank -%}<a href="{{ quiz_page.url }}">Take the Quiz</a>{%- endif -%}
+        {%- endif -%}
       </nav>
 
-      {%- comment -%} Policies / Customer care — always complete {%- endcomment -%}
       <nav class="site-footer__nav" aria-label="{{ section.settings.care_heading | default: 'Policies' }}">
         <p class="site-footer__label">{{ section.settings.care_heading | default: 'Policies' }}</p>
         {%- if menu_care != blank and menu_care.links.size > 0 -%}
           {%- for link in menu_care.links -%}
-            <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- if link.url != blank and link.url != '#' -%}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- endif -%}
           {%- endfor -%}
+        {%- else -%}
+          {%- if privacy != blank -%}<a href="{{ privacy.url }}">{{ privacy.title }}</a>{%- endif -%}
+          {%- if refund != blank -%}<a href="{{ refund.url }}">{{ refund.title }}</a>{%- endif -%}
+          {%- if shipping != blank -%}<a href="{{ shipping.url }}">{{ shipping.title }}</a>{%- endif -%}
+          {%- if terms != blank -%}<a href="{{ terms.url }}">{{ terms.title }}</a>{%- endif -%}
+          {%- if faq_page != blank -%}<a href="{{ faq_page.url }}">{{ faq_page.title }}</a>{%- endif -%}
+          {%- if contact_page != blank -%}<a href="{{ contact_page.url }}">{{ contact_page.title }}</a>{%- endif -%}
         {%- endif -%}
-        {%- liquid
-          assign care_blob = ''
-          if menu_care != blank
-            for link in menu_care.links
-              assign care_blob = care_blob | append: link.url | append: '|' | append: link.title | downcase | append: '||'
-            endfor
-          endif
-        -%}
-        {%- unless care_blob contains 'privacy' or care_blob contains privacy_url -%}
-          <a href="{{ privacy_url }}">{{ shop.privacy_policy.title | default: 'Privacy Policy' }}</a>
-        {%- endunless -%}
-        {%- unless care_blob contains 'refund' or care_blob contains 'return' or care_blob contains 'cancel' or care_blob contains refund_url -%}
-          <a href="{{ refund_url }}">{{ shop.refund_policy.title | default: 'Refund & Cancellation Policy' }}</a>
-        {%- endunless -%}
-        {%- unless care_blob contains 'shipping' or care_blob contains shipping_url -%}
-          <a href="{{ shipping_url }}">{{ shop.shipping_policy.title | default: 'Shipping & Pre-Order Policy' }}</a>
-        {%- endunless -%}
-        {%- unless care_blob contains 'terms' or care_blob contains terms_url -%}
-          <a href="{{ terms_url }}">{{ shop.terms_of_service.title | default: 'Terms & Conditions' }}</a>
-        {%- endunless -%}
-        {%- unless care_blob contains faq_url or care_blob contains 'faq' -%}
-          <a href="{{ faq_url }}">FAQs</a>
-        {%- endunless -%}
-        {%- unless care_blob contains contact_url or care_blob contains 'contact' -%}
-          <a href="{{ contact_url }}">Contact</a>
-        {%- endunless -%}
       </nav>
     </div>
 
@@ -183,29 +154,20 @@
         {%- if yt != blank -%}
           <a href="{{ yt }}" aria-label="YouTube" target="_blank" rel="noopener">{% render 'icon', name: 'youtube' %}</a>
         {%- endif -%}
-        {%- if fb == blank and ig == blank and tt == blank and yt == blank -%}
-          <a href="{{ contact_url }}" aria-label="Contact">{% render 'icon', name: 'mail' %}</a>
-          <a href="{{ faq_url }}" aria-label="FAQ">{% render 'icon', name: 'sparkle' %}</a>
-        {%- endif -%}
       </div>
 
       <nav class="site-footer__legal" aria-label="Legal">
-        <a href="{{ privacy_url }}">Privacy Policy</a>
-        <a href="{{ refund_url }}">Refunds</a>
-        <a href="{{ shipping_url }}">Shipping</a>
-        <a href="{{ terms_url }}">Terms &amp; Conditions</a>
-        <a href="{{ contact_url }}">Contact</a>
+        {%- if privacy != blank -%}<a href="{{ privacy.url }}">{{ privacy.title }}</a>{%- endif -%}
+        {%- if refund != blank -%}<a href="{{ refund.url }}">Refunds</a>{%- endif -%}
+        {%- if shipping != blank -%}<a href="{{ shipping.url }}">Shipping</a>{%- endif -%}
+        {%- if terms != blank -%}<a href="{{ terms.url }}">Terms &amp; Conditions</a>{%- endif -%}
+        {%- if contact_page != blank -%}<a href="{{ contact_page.url }}">{{ contact_page.title }}</a>{%- endif -%}
       </nav>
 
       <a class="site-footer__totop" href="#MainContent" aria-label="Back to top">
         {% render 'icon', name: 'chevron-up' %}
       </a>
     </div>
-
-    <p class="site-footer__credit">
-      Designed by
-      <a href="https://www.owlisticstudio.com" target="_blank" rel="noopener noreferrer">Owlistic Studio</a>
-    </p>
   </div>
 </footer>
 {% schema %}
@@ -216,14 +178,14 @@
     { "type": "text", "id": "contact_heading", "label": "Contact heading", "default": "Contact us" },
     { "type": "text", "id": "support_phone", "label": "Support phone" },
     { "type": "text", "id": "support_email", "label": "Support email", "default": "hello@livewithreu.com" },
-    { "type": "text", "id": "help_label", "label": "Help link label", "default": "Help Center" },
-    { "type": "url", "id": "help_link", "label": "Help link" },
+    { "type": "text", "id": "help_label", "label": "Help link label", "default": "Help Center", "info": "Only shown when Help link points to a real store page (or FAQ exists)." },
+    { "type": "url", "id": "help_link", "label": "Help link", "info": "Pick a store page. Leave blank to use FAQ when that page exists." },
     { "type": "text", "id": "shop_heading", "label": "Shop column label", "default": "Shop" },
-    { "type": "link_list", "id": "menu_shop", "label": "Shop menu", "info": "Optional. Missing core shop links are added automatically." },
+    { "type": "link_list", "id": "menu_shop", "label": "Shop menu", "info": "Optional. If empty, only existing collections/pages are listed." },
     { "type": "text", "id": "discover_heading", "label": "Discover column label", "default": "Discover" },
-    { "type": "link_list", "id": "menu_discover", "label": "Discover menu", "info": "Optional. Missing core discover links are added automatically." },
+    { "type": "link_list", "id": "menu_discover", "label": "Discover menu", "info": "Optional. If empty, only existing pages/blogs are listed." },
     { "type": "text", "id": "care_heading", "label": "Policies column label", "default": "Policies" },
-    { "type": "link_list", "id": "menu_care", "label": "Policies / customer care menu", "info": "Optional. Privacy, Refunds, Shipping and Terms are always shown." },
+    { "type": "link_list", "id": "menu_care", "label": "Policies menu", "info": "Optional. If empty, only published Shopify policies and existing pages are listed." },
     { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "Information on this website is provided for general educational purposes and is not medical advice. Always follow the product label and consult a qualified healthcare professional when appropriate." }
   ]
 }
