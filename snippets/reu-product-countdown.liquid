@@ -1,12 +1,14 @@
 {%- comment -%}
-  REÚ product countdown timer.
+  REÚ product countdown timer — one reusable snippet for cards + PDP.
   Params:
     - product (required)
     - style: 'card' (default) | 'product'
-  Metafields:
-    - custom.countdown_end (date_time)
-    - custom.countdown_label (single_line_text_field)
-    - custom.countdown_enabled (boolean)
+  Metafields (product):
+    - custom.countdown_end (date_time) — required for display; empty = no timer
+    - custom.countdown_label (single_line_text_field) — optional override
+    - custom.countdown_enabled (boolean) — false hides timer
+  Deadline is converted to UNIX seconds via Liquid (shop timezone → absolute epoch),
+  so every customer sees the same genuine end time (no reset-on-refresh fake timers).
 {%- endcomment -%}
 {%- if settings.countdown_enable and product != blank -%}
   {%- liquid
@@ -54,7 +56,7 @@
       aria-live="polite"
     >
       {%- if label != blank -%}
-        <p class="reu-countdown__label">{{ label }}</p>
+        <p class="reu-countdown__label">{{ label | escape }}</p>
       {%- endif -%}
 
       <div class="reu-countdown__units" data-reu-countdown-units>
@@ -79,7 +81,7 @@
         </div>
       </div>
 
-      <p class="reu-countdown__ended" data-reu-countdown-ended hidden>{{ expired_msg }}</p>
+      <p class="reu-countdown__ended" data-reu-countdown-ended hidden>{{ expired_msg | escape }}</p>
     </div>
   {%- endif -%}
 {%- endif -%}
