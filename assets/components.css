@@ -504,6 +504,51 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
   justify-content: center;
 }
 
+/* Text first, full-bleed image below */
+.page-hero--below {
+  padding: 0;
+  overflow: hidden;
+}
+.page-hero--below .page-hero__below-copy.section {
+  padding-block: clamp(3rem, 7vw, 4.75rem);
+  margin: 0;
+}
+.page-hero--below .page-hero__heading {
+  max-width: 18ch;
+  color: var(--color-green, #223829);
+}
+.page-hero--below .page-hero__inner--center .page-hero__heading {
+  margin-inline: auto;
+}
+.page-hero--below .page-hero__body {
+  margin-top: 1rem;
+  color: var(--color-text, #2C3A30);
+}
+.page-hero--below .page-hero__actions {
+  margin-top: 1.5rem;
+}
+.page-hero__below-media {
+  width: 100%;
+  min-height: clamp(18rem, 48vw, 32rem);
+  background: var(--color-green, #223829);
+  overflow: hidden;
+}
+.page-hero__below-media img {
+  width: 100%;
+  height: 100%;
+  min-height: clamp(18rem, 48vw, 32rem);
+  object-fit: cover;
+  object-position: 68% center;
+  display: block;
+  filter: none;
+}
+@media (max-width: 749px) {
+  .page-hero__below-media img {
+    object-position: 78% center;
+    min-height: clamp(16rem, 72vw, 24rem);
+  }
+}
+
 /* Full-bleed background banner — text left on dark green field */
 .page-hero--banner {
   padding: 0;
