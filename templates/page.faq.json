@@ -16,10 +16,11 @@
         "heading": "Clear information before you choose.",
         "body": "<p>Browse product, pre-order, shipping and routine questions or contact us if you need more help.</p>",
         "fallback_asset": "reu-faq-banner.jpg",
-        "layout": "image_below",
-        "center": true,
-        "narrow": true,
-        "bg_scheme": "bg-cream"
+        "layout": "banner",
+        "center": false,
+        "narrow": false,
+        "bg_scheme": "bg-cream",
+        "use_h1": true
       }
     },
     "faq": {
