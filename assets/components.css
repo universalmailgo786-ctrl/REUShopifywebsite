@@ -299,114 +299,100 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
 .quiz__why { padding-left: 1.1rem; color: var(--color-text, #2C3A30); }
 .quiz__why li { margin: .35rem 0; }
 
-/* Page hero — full-width Our Story / banner treatment */
+/* Page hero — two-column Our Story split */
 .page-hero {
   position: relative;
   isolation: isolate;
 }
-.page-hero--media {
-  display: flex;
-  align-items: center;
-  min-height: clamp(22rem, 52vw, 34rem);
-  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+.page-hero--split {
+  padding: 0;
+  background: #F4E2DB;
+  background: var(--color-blush, #F4E2DB);
   overflow: hidden;
-  background: #223829;
-  color: #E3E1D5;
 }
-.page-hero__media {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+.page-hero__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: clamp(22rem, 48vw, 34rem);
 }
-.page-hero__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 72% center;
-  display: block;
+@media (min-width: 900px) {
+  .page-hero__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  }
+  .page-hero__grid--image-left .page-hero__copy { order: 2; }
+  .page-hero__grid--image-left .page-hero__media { order: 1; }
 }
-.page-hero__shade {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(34, 56, 41, 0.92) 0%,
-      rgba(34, 56, 41, 0.78) 34%,
-      rgba(34, 56, 41, 0.35) 58%,
-      rgba(34, 56, 41, 0.12) 78%,
-      rgba(34, 56, 41, 0.08) 100%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(34, 56, 41, 0.28) 0%,
-      transparent 28%,
-      transparent 72%,
-      rgba(34, 56, 41, 0.45) 100%
-    );
+.page-hero__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 5vw, 5.5rem);
+  color: #223829;
+  color: var(--color-green, #223829);
 }
-.page-hero__inner {
-  position: relative;
-  z-index: 2;
-  max-width: 40rem;
-  margin-inline: 0;
-}
-.page-hero--media .page-hero__eyebrow {
-  color: #F4E2DB;
+.page-hero__eyebrow {
+  margin: 0 0 .85rem;
+  color: #BA6D64;
+  color: var(--color-rose, #BA6D64);
   letter-spacing: 0.14em;
 }
-.page-hero--media .page-hero__heading {
-  color: #E3E1D5;
+.page-hero__heading {
+  margin: 0;
+  color: #223829;
+  color: var(--color-green, #223829);
   text-wrap: balance;
-  max-width: 16ch;
+  max-width: 14ch;
 }
-.page-hero--media .page-hero__body {
+.page-hero__body {
   margin-top: 1rem;
-  color: color-mix(in srgb, #E3E1D5 90%, #fff);
   max-width: 34rem;
+  color: #2C3A30;
+  color: var(--color-text, #2C3A30);
 }
-.page-hero--media .page-hero__body p {
+.page-hero__body p {
   color: inherit;
 }
 .page-hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: .65rem;
-  margin-top: 1.35rem;
+  margin-top: 1.5rem;
 }
-.page-hero--media .page-hero__actions .btn--on-dark {
+.page-hero__media {
+  position: relative;
+  min-height: clamp(14rem, 52vw, 22rem);
   background: #E3E1D5;
-  color: #223829;
+  background: var(--color-cream, #E3E1D5);
 }
-.page-hero--media .page-hero__actions .btn--on-dark:hover {
-  background: #F4E2DB;
+@media (min-width: 900px) {
+  .page-hero__media {
+    min-height: 100%;
+  }
 }
-@media (max-width: 749px) {
-  .page-hero--media {
-    min-height: clamp(26rem, 88vw, 32rem);
-    align-items: flex-end;
+.page-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 68% center;
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+@media (max-width: 899px) {
+  .page-hero__grid {
+    min-height: 0;
   }
-  .page-hero__media img {
-    object-position: 68% 20%;
+  .page-hero__copy {
+    order: 1;
+    padding-block: clamp(2.25rem, 7vw, 3.25rem);
   }
-  .page-hero__shade {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(34, 56, 41, 0.25) 0%,
-        rgba(34, 56, 41, 0.45) 38%,
-        rgba(34, 56, 41, 0.88) 72%,
-        rgba(34, 56, 41, 0.94) 100%
-      );
+  .page-hero__media {
+    order: 2;
+    min-height: clamp(16rem, 58vw, 24rem);
   }
-  .page-hero__inner {
+  .page-hero__heading {
     max-width: none;
-    padding-bottom: .25rem;
-  }
-  .page-hero--media .page-hero__heading {
-    max-width: none;
   }
 }
+
 
