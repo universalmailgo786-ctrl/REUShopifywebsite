@@ -267,6 +267,7 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
 .quiz__step.is-active { display: block; animation: quizIn .35s var(--ease); }
 .quiz__step legend {
   padding: 0;
+  margin: 0 0 1.25rem;
   float: left;
   width: 100%;
 }
@@ -274,7 +275,12 @@ body.scroll-locked { position: fixed; width: 100%; overflow: hidden; }
   clear: both;
 }
 @keyframes quizIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-.quiz__options { display: grid; gap: .6rem; margin-block: var(--space-md); }
+.quiz__options {
+  display: grid;
+  gap: .6rem;
+  margin: 0;
+  padding-top: .15rem;
+}
 .quiz__option { display: flex; align-items: center; gap: .75rem; padding: 1rem; border: 1.5px solid var(--color-line); border-radius: var(--radius); cursor: pointer; transition: all var(--dur) var(--ease); }
 .quiz__option:hover { border-color: var(--color-mauve); }
 .quiz__option input { accent-color: var(--color-green); width: 20px; height: 20px; }
