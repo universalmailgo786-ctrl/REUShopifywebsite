@@ -124,10 +124,10 @@
             {%- endif -%}
           {%- endfor -%}
         {%- else -%}
-          {%- if privacy != blank -%}<a href="{{ privacy.url }}">{{ privacy.title }}</a>{%- endif -%}
-          {%- if refund != blank -%}<a href="{{ refund.url }}">{{ refund.title }}</a>{%- endif -%}
-          {%- if shipping != blank -%}<a href="{{ shipping.url }}">{{ shipping.title }}</a>{%- endif -%}
-          {%- if terms != blank -%}<a href="{{ terms.url }}">{{ terms.title }}</a>{%- endif -%}
+          {%- if privacy != blank -%}<a href="{{ privacy.url }}">Privacy Policy</a>{%- endif -%}
+          {%- if refund != blank -%}<a href="{{ refund.url }}">Refund &amp; Cancellation Policy</a>{%- endif -%}
+          {%- if shipping != blank -%}<a href="{{ shipping.url }}">Shipping &amp; Pre-Order Policy</a>{%- endif -%}
+          {%- if terms != blank -%}<a href="{{ terms.url }}">Terms &amp; Conditions</a>{%- endif -%}
           {%- if faq_page != blank -%}<a href="{{ faq_page.url }}">{{ faq_page.title }}</a>{%- endif -%}
           {%- if contact_page != blank -%}<a href="{{ contact_page.url }}">{{ contact_page.title }}</a>{%- endif -%}
         {%- endif -%}
@@ -157,9 +157,9 @@
       </div>
 
       <nav class="site-footer__legal" aria-label="Legal">
-        {%- if privacy != blank -%}<a href="{{ privacy.url }}">{{ privacy.title }}</a>{%- endif -%}
-        {%- if refund != blank -%}<a href="{{ refund.url }}">Refunds</a>{%- endif -%}
-        {%- if shipping != blank -%}<a href="{{ shipping.url }}">Shipping</a>{%- endif -%}
+        {%- if privacy != blank -%}<a href="{{ privacy.url }}">Privacy Policy</a>{%- endif -%}
+        {%- if refund != blank -%}<a href="{{ refund.url }}">Refund &amp; Cancellation Policy</a>{%- endif -%}
+        {%- if shipping != blank -%}<a href="{{ shipping.url }}">Shipping &amp; Pre-Order Policy</a>{%- endif -%}
         {%- if terms != blank -%}<a href="{{ terms.url }}">Terms &amp; Conditions</a>{%- endif -%}
         {%- if contact_page != blank -%}<a href="{{ contact_page.url }}">{{ contact_page.title }}</a>{%- endif -%}
       </nav>

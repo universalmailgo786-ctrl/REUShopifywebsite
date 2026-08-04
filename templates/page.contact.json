@@ -15,10 +15,11 @@
         "eyebrow": "CONTACT REÚ",
         "heading": "We’re here to help.",
         "body": "Questions about products, pre-orders, your routine or an existing order? Send us a message and our team will respond during published support hours.",
+        "intro_fallback_asset": "reu-contact-hero.jpg",
+        "show_support_details": true,
         "privacy_note": "Please do not submit sensitive medical information. Product guidance is general and does not replace professional medical advice.",
         "success_message": "Thank you—your message has been received. A member of the REÚ team will reply using the email address you provided.",
-        "error_message": "We could not send your message. Check the highlighted fields and try again. If the problem continues, contact us using the support email shown on this page.",
-        "show_support_details": true
+        "error_message": "We could not send your message. Check the highlighted fields and try again. If the problem continues, contact us using the support email shown on this page."
       }
     }
   },

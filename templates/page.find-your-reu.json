@@ -11,6 +11,14 @@
   "sections": {
     "quiz": {
       "type": "quiz",
+      "settings": {
+        "eyebrow": "FIND YOUR REÚ",
+        "heading": "Your routine starts\nwith you.",
+        "intro": "Tell us what you want from your wellness routine. In about 60 seconds, we will recommend a starting product and format based on your answers.",
+        "consent": "This quiz provides general product guidance and is not medical advice. Marketing consent is optional and is not required to see results.",
+        "intro_fallback_asset": "reu-quiz-hero.jpg",
+        "goal_page_url": "shopify://pages/collections"
+      },
       "blocks": {
         "hydration": {
           "type": "result",
@@ -84,14 +92,7 @@
         "performance",
         "weight",
         "protein"
-      ],
-      "settings": {
-        "eyebrow": "FIND YOUR REÚ",
-        "heading": "Your routine starts\nwith you.",
-        "intro": "Tell us what you want from your wellness routine. In about 60 seconds, we will recommend a starting product and format based on your answers.",
-        "consent": "This quiz provides general product guidance and is not medical advice. Marketing consent is optional and is not required to see results.",
-        "goal_page_url": "shopify://pages/collections"
-      }
+      ]
     }
   },
   "order": [

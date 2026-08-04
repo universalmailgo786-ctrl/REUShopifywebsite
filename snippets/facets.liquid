@@ -1,46 +1,138 @@
 {%- comment -%}
   Storefront filtering UI. Params: results (collection/search), sort_by, mobile (bool)
-  Uses native Shopify filters (collection.filters) — no fake client-side filtering.
+  Uses native Shopify filters when configured; falls back to tag filters + sort so the sidebar always works.
 {%- endcomment -%}
-<form method="get">
+{%- liquid
+  assign sort_value = sort_by | default: results.sort_by | default: results.default_sort_by
+  assign has_native_filters = false
+  if results.filters != blank and results.filters.size > 0
+    assign has_native_filters = true
+  endif
+  assign form_id = 'FacetsForm'
+  if mobile
+    assign form_id = 'FacetsFormMobile'
+  endif
+-%}
+<form id="{{ form_id }}" class="facets-form" method="get" action="{{ results.url }}">
   {%- if mobile -%}
-    <div class="facet-group">
-      <label class="option-group__label" for="MobileSort">{{ 'products.facets.sort_by' | t }}</label>
-      <select class="select" id="MobileSort" name="sort_by">
+    <div class="facet-group facet-group--open">
+      <p class="facet-group__heading">{{ 'products.facets.sort_by' | t }}</p>
+      <label class="visually-hidden" for="{{ form_id }}-sort">{{ 'products.facets.sort_by' | t }}</label>
+      <select class="select facets-form__select" id="{{ form_id }}-sort" name="sort_by" onchange="this.form.submit()">
         {%- for option in results.sort_options -%}
-          <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+          <option value="{{ option.value }}" {% if option.value == sort_value %}selected{% endif %}>{{ option.name }}</option>
         {%- endfor -%}
       </select>
     </div>
+  {%- elsif has_native_filters -%}
+    <input type="hidden" name="sort_by" value="{{ sort_value }}">
   {%- endif -%}
 
-  {%- for f in results.filters -%}
-    {%- case f.type -%}
-      {%- when 'list', 'boolean' -%}
-        <details class="facet-group" {% if f.active_values.size > 0 %}open{% endif %}>
-          <summary>{{ f.label }} {% render 'icon', name: 'chevron-down' %}</summary>
-          <div style="padding-top:.5rem">
-            {%- for v in f.values -%}
-              <label class="facet-option">
-                <input type="checkbox" name="{{ v.param_name }}" value="{{ v.value }}" {% if v.active %}checked{% endif %} {% if v.count == 0 and v.active == false %}disabled{% endif %}>
-                <span>{{ v.label }} <span class="text-muted">({{ v.count }})</span></span>
-              </label>
-            {%- endfor -%}
-          </div>
-        </details>
-      {%- when 'price_range' -%}
-        <details class="facet-group" {% if f.min_value.value or f.max_value.value %}open{% endif %}>
-          <summary>{{ f.label }} {% render 'icon', name: 'chevron-down' %}</summary>
-          <div style="display:flex;gap:.5rem;padding-top:.5rem">
-            <input class="input" type="number" inputmode="decimal" name="{{ f.min_value.param_name }}" value="{{ f.min_value.value | money_without_currency | strip }}" placeholder="{{ 0 | money }}" aria-label="Minimum price">
-            <input class="input" type="number" inputmode="decimal" name="{{ f.max_value.param_name }}" value="{{ f.max_value.value | money_without_currency | strip }}" placeholder="{{ f.range_max | money }}" aria-label="Maximum price">
-          </div>
-        </details>
-    {%- endcase -%}
-  {%- endfor -%}
+  {%- if has_native_filters -%}
+    {%- for f in results.filters -%}
+      {%- case f.type -%}
+        {%- when 'list', 'boolean' -%}
+          <details class="facet-group" open>
+            <summary>
+              <span>{{ f.label }}</span>
+              <span class="facet-group__chevron" aria-hidden="true">{% render 'icon', name: 'chevron-down' %}</span>
+            </summary>
+            <div class="facet-group__body">
+              {%- for v in f.values -%}
+                <label class="facet-option{% if v.count == 0 and v.active == false %} is-disabled{% endif %}">
+                  <input
+                    type="checkbox"
+                    name="{{ v.param_name }}"
+                    value="{{ v.value }}"
+                    {% if v.active %}checked{% endif %}
+                    {% if v.count == 0 and v.active == false %}disabled{% endif %}
+                    onchange="this.form.submit()"
+                  >
+                  <span class="facet-option__label">{{ v.label }}</span>
+                  <span class="facet-option__count">({{ v.count }})</span>
+                </label>
+              {%- endfor -%}
+            </div>
+          </details>
+        {%- when 'price_range' -%}
+          <details class="facet-group" open>
+            <summary>
+              <span>{{ f.label }}</span>
+              <span class="facet-group__chevron" aria-hidden="true">{% render 'icon', name: 'chevron-down' %}</span>
+            </summary>
+            <div class="facet-group__body facet-group__body--price">
+              <input
+                class="input"
+                type="number"
+                inputmode="decimal"
+                name="{{ f.min_value.param_name }}"
+                value="{{ f.min_value.value | money_without_currency | strip }}"
+                placeholder="Min"
+                aria-label="Minimum price"
+              >
+              <span class="facet-price-sep" aria-hidden="true">–</span>
+              <input
+                class="input"
+                type="number"
+                inputmode="decimal"
+                name="{{ f.max_value.param_name }}"
+                value="{{ f.max_value.value | money_without_currency | strip }}"
+                placeholder="Max"
+                aria-label="Maximum price"
+              >
+            </div>
+          </details>
+      {%- endcase -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- unless mobile -%}
+      <div class="facet-group facet-group--open">
+        <p class="facet-group__heading">{{ 'products.facets.sort_by' | t }}</p>
+        <label class="visually-hidden" for="{{ form_id }}-sort-fallback">{{ 'products.facets.sort_by' | t }}</label>
+        <select class="select facets-form__select" id="{{ form_id }}-sort-fallback" name="sort_by" onchange="this.form.submit()">
+          {%- for option in results.sort_options -%}
+            <option value="{{ option.value }}" {% if option.value == sort_value %}selected{% endif %}>{{ option.name }}</option>
+          {%- endfor -%}
+        </select>
+      </div>
+    {%- endunless -%}
 
-  <div style="display:flex;gap:.5rem;margin-top:var(--space-md)">
-    <button type="submit" class="btn btn--block">{{ 'products.facets.apply' | t }}</button>
-    <a class="btn btn--secondary" href="{{ results.url }}">{{ 'products.facets.clear' | t }}</a>
+    {%- if results.all_tags != blank and results.all_tags.size > 0 -%}
+      <div class="facet-group facet-group--open">
+        <p class="facet-group__heading">{{ 'products.facets.filter' | t }} by tag</p>
+        <div class="facet-group__body">
+          <a class="facet-link{% if current_tags == blank %} is-active{% endif %}" href="{{ results.url }}">All</a>
+          {%- for tag in results.all_tags -%}
+            {%- if current_tags contains tag -%}
+              <a class="facet-link is-active" href="{{ results.url }}">
+                {{ tag }}
+                <span class="facet-link__icon" aria-hidden="true">{% render 'icon', name: 'close' %}</span>
+              </a>
+            {%- else -%}
+              <a class="facet-link" href="{{ results.url }}/{{ tag | handleize }}">{{ tag }}</a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="facet-group facet-group--open">
+      <p class="facet-group__heading">Shop by goal</p>
+      <div class="facet-group__body">
+        {%- assign goal_filters = 'Hydration|Hydration,Beauty & Collagen|Beauty,Daily Wellness|Daily Wellness,Greens|Greens,Energy & Performance|Energy,Weight Management|Weight Management,Protein & Recovery|Protein' | split: ',' -%}
+        {%- for item in goal_filters -%}
+          {%- assign parts = item | split: '|' -%}
+          <a class="facet-link" href="{{ results.url }}?filter.p.m.custom.goal={{ parts[1] | url_encode }}">{{ parts[0] }}</a>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="facets-form__actions">
+    <button type="submit" class="btn btn--block">
+      {{ 'products.facets.apply' | t }}
+      <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span>
+    </button>
+    <a class="btn btn--secondary btn--block" href="{{ results.url }}">{{ 'products.facets.clear' | t }}</a>
   </div>
 </form>
