@@ -9,13 +9,73 @@
   if layout == 'banner' and has_media
     assign is_banner = true
   endif
+  assign is_image_below = false
+  if layout == 'image_below' and has_media
+    assign is_image_below = true
+  endif
   assign image_right = true
   if layout == 'image_left'
     assign image_right = false
   endif
 -%}
-<section class="page-hero{% if is_banner %} page-hero--banner{% elsif has_media %} page-hero--split{% else %} section page-hero--plain{% endif %} {% unless has_media %}{{ section.settings.bg_scheme }}{% endunless %}">
-  {%- if is_banner -%}
+<section class="page-hero{% if is_banner %} page-hero--banner{% elsif is_image_below %} page-hero--below {{ section.settings.bg_scheme }}{% elsif has_media %} page-hero--split{% else %} section page-hero--plain {{ section.settings.bg_scheme }}{% endif %}">
+  {%- if is_image_below -%}
+    <div class="page-hero__below-copy section">
+      <div class="page-hero__inner wrap{% if section.settings.narrow %} wrap--narrow{% endif %}{% if section.settings.center %} page-hero__inner--center text-center{% endif %}">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="page-hero__eyebrow eyebrow{% if section.settings.center %} text-center{% endif %}">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.use_h1 -%}
+          <h1 class="page-hero__heading h1">{{ section.settings.heading | default: page.title }}</h1>
+        {%- else -%}
+          <h2 class="page-hero__heading h2">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.body != blank -%}
+          <div class="page-hero__body lede rte"{% if section.settings.center %} style="margin-inline:auto;max-width:44rem"{% endif %}>{{ section.settings.body }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.cta_label != blank or section.settings.cta2_label != blank -%}
+          <div class="page-hero__actions{% if section.settings.center %} page-hero__actions--center{% endif %}">
+            {%- if section.settings.cta_label != blank -%}
+              <a class="btn" href="{{ section.settings.cta_link | default: quiz_url }}">
+                {{ section.settings.cta_label }}
+                <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.cta2_label != blank -%}
+              <a class="btn btn--secondary" href="{{ section.settings.cta2_link | default: routes.all_products_collection_url }}">{{ section.settings.cta2_label }}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="page-hero__below-media">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 2400
+          | image_tag:
+            widths: '900,1400,1800,2400',
+            sizes: '100vw',
+            loading: 'eager',
+            fetchpriority: 'high',
+            alt: section.settings.heading | default: page.title | escape
+        }}
+      {%- else -%}
+        <img
+          src="{{ section.settings.fallback_asset | asset_url }}"
+          width="1672"
+          height="941"
+          alt="{{ section.settings.heading | default: page.title | escape }}"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        >
+      {%- endif -%}
+    </div>
+  {%- elsif is_banner -%}
     <div class="page-hero__banner">
       <div class="page-hero__banner-media" aria-hidden="true">
         {%- if section.settings.image != blank -%}
@@ -168,9 +228,10 @@
   "name": "Page hero",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename", "info": "Theme asset filename, e.g. reu-our-story-hero.jpg" },
+    { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename", "info": "Theme asset filename, e.g. reu-faq-banner.jpg" },
     { "type": "select", "id": "layout", "label": "Layout", "options": [
       { "value": "banner", "label": "Full-width background (text left)" },
+      { "value": "image_below", "label": "Text then full-width image below" },
       { "value": "image_right", "label": "Split — image right" },
       { "value": "image_left", "label": "Split — image left" }
     ], "default": "banner" },
@@ -182,9 +243,9 @@
     { "type": "url", "id": "cta_link", "label": "Primary CTA link" },
     { "type": "text", "id": "cta2_label", "label": "Secondary CTA label" },
     { "type": "url", "id": "cta2_link", "label": "Secondary CTA link" },
-    { "type": "checkbox", "id": "center", "label": "Center (text-only layout)", "default": true },
-    { "type": "checkbox", "id": "narrow", "label": "Narrow width (text-only layout)", "default": true },
-    { "type": "select", "id": "bg_scheme", "label": "Background (text-only layout)", "options": [
+    { "type": "checkbox", "id": "center", "label": "Center (text-only / image-below)", "default": true },
+    { "type": "checkbox", "id": "narrow", "label": "Narrow width (text-only / image-below)", "default": true },
+    { "type": "select", "id": "bg_scheme", "label": "Background (text-only / image-below)", "options": [
       { "value": "bg-cream", "label": "Cream" },
       { "value": "bg-sage", "label": "Sage" }
     ], "default": "bg-cream" }
