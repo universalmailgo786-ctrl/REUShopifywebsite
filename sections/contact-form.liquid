@@ -100,13 +100,13 @@
         <h2 class="h4">Quick help</h2>
         <ul class="contact-aside__list">
           <li>
-            <a class="contact-aside__link" href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">
+            <a class="contact-aside__link" href="{% if pages['shipping-pre-order-policy'] != blank %}{{ pages['shipping-pre-order-policy'].url }}{% elsif pages['shipping-policy'] != blank %}{{ pages['shipping-policy'].url }}{% else %}{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}{% endif %}">
               <span>Pre-order and shipping</span>
               <span class="contact-aside__icon" aria-hidden="true">{% render 'icon', name: 'arrow' %}</span>
             </a>
           </li>
           <li>
-            <a class="contact-aside__link" href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">
+            <a class="contact-aside__link" href="{% if pages['refund-cancellation-policy'] != blank %}{{ pages['refund-cancellation-policy'].url }}{% elsif pages['refund-policy'] != blank %}{{ pages['refund-policy'].url }}{% else %}{{ shop.refund_policy.url | default: '/policies/refund-policy' }}{% endif %}">
               <span>Returns and cancellations</span>
               <span class="contact-aside__icon" aria-hidden="true">{% render 'icon', name: 'arrow' %}</span>
             </a>
