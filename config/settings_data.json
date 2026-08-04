@@ -34,7 +34,14 @@
     "cart_type": "drawer",
     "cart_show_note": false,
     "card_show_vendor": false,
-    "card_image_ratio": "square"
+    "card_image_ratio": "square",
+    "countdown_enable": true,
+    "countdown_default_label": "Pre-Order Offer Ends In",
+    "countdown_expired_message": "Offer Ended",
+    "countdown_expired_behavior": "message",
+    "countdown_bg": "#F4E2DB",
+    "countdown_text": "#223829",
+    "countdown_accent": "#BA6D64"
   },
   "presets": {
     "REU": {

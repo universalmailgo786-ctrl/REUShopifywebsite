@@ -28,8 +28,8 @@
       {%- unless p.available -%}<span class="badge">{{ 'products.product.sold_out' | t }}</span>{%- endunless -%}
     </span>
   </a>
-  {% render 'reu-product-countdown', product: p, style: 'card' %}
   <div class="product-card__body">
+    {% render 'reu-product-countdown', product: p, style: 'card' %}
     {%- if settings.card_show_vendor and p.vendor != blank -%}
       <span class="product-card__meta">{{ p.vendor }}</span>
     {%- endif -%}

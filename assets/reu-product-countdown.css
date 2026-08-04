@@ -1,0 +1,176 @@
+/* REÚ product countdown */
+.reu-countdown {
+  --reu-cd-bg: #F4E2DB;
+  --reu-cd-text: #223829;
+  --reu-cd-accent: #BA6D64;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: .55rem .7rem;
+  border-radius: calc(var(--card-radius, 16px) - 4px);
+  background: var(--reu-cd-bg);
+  color: var(--reu-cd-text);
+  border: 1px solid color-mix(in srgb, var(--reu-cd-accent) 35%, transparent);
+  min-height: 2.65rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .2rem;
+}
+.reu-countdown[hidden] { display: none !important; }
+
+.reu-countdown__label {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: .02em;
+  color: var(--reu-cd-accent);
+}
+
+.reu-countdown__units {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .2rem .35rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--reu-cd-text);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.reu-countdown__unit {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .2rem;
+  white-space: nowrap;
+}
+
+.reu-countdown__value {
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  min-width: 1.35ch;
+  font-variant-numeric: tabular-nums;
+}
+
+.reu-countdown__key {
+  font-size: .68rem;
+  font-weight: 500;
+  opacity: .85;
+}
+
+.reu-countdown__sep {
+  font-size: .75rem;
+  opacity: .45;
+  user-select: none;
+}
+
+.reu-countdown__ended {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--reu-cd-accent);
+}
+
+.reu-countdown__ended[hidden],
+.reu-countdown.is-ended .reu-countdown__units {
+  display: none !important;
+}
+.reu-countdown.is-ended .reu-countdown__ended[hidden] {
+  display: block !important;
+}
+
+/* Compact card placement */
+.reu-countdown--card {
+  margin: .55rem 0 .45rem;
+}
+.product-card__body > .reu-countdown--card:first-child {
+  margin-top: 0;
+}
+.shop-reu-card .reu-countdown--card {
+  margin: .7rem .85rem .15rem;
+  width: auto;
+}
+.everyday-wellness__card .reu-countdown--card {
+  margin: .55rem .75rem .1rem;
+  width: auto;
+}
+.reu-pdp-card .reu-countdown--card {
+  margin: .65rem .85rem .1rem;
+  width: auto;
+}
+
+/* Compact search-drawer rows */
+.search-result-card .reu-countdown--card {
+  margin: .35rem 0 0;
+  padding: .4rem .5rem;
+  min-height: 0;
+  border-radius: 10px;
+}
+.search-result-card .reu-countdown__label {
+  font-size: .65rem;
+}
+.search-result-card .reu-countdown__value { font-size: .72rem; }
+.search-result-card .reu-countdown__key { font-size: .6rem; }
+.search-result-card .reu-countdown__sep { font-size: .65rem; }
+
+/* Product page expanded */
+.reu-countdown--product {
+  margin: 0 0 1rem;
+  padding: .95rem 1rem 1rem;
+  gap: .55rem;
+  min-height: 5.25rem;
+}
+.reu-countdown--product .reu-countdown__label {
+  font-size: clamp(.85rem, 1.2vw, 1rem);
+}
+.reu-countdown--product .reu-countdown__units {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .5rem;
+  align-items: stretch;
+}
+.reu-countdown--product .reu-countdown__sep {
+  display: none;
+}
+.reu-countdown--product .reu-countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .2rem;
+  padding: .55rem .35rem;
+  border-radius: 12px;
+  background: color-mix(in srgb, #fff 55%, var(--reu-cd-bg));
+  white-space: normal;
+}
+.reu-countdown--product .reu-countdown__value {
+  font-size: clamp(1.25rem, 2.4vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1;
+  min-width: 2ch;
+  text-align: center;
+}
+.reu-countdown--product .reu-countdown__key {
+  font-size: .72rem;
+  text-transform: none;
+  letter-spacing: .02em;
+}
+
+@media (max-width: 429px) {
+  .reu-countdown--card .reu-countdown__units {
+    gap: .15rem .28rem;
+  }
+  .reu-countdown--card .reu-countdown__value { font-size: .78rem; }
+  .reu-countdown--card .reu-countdown__key { font-size: .64rem; }
+  .reu-countdown--product .reu-countdown__unit { padding: .45rem .2rem; }
+  .reu-countdown--product .reu-countdown__value { font-size: 1.15rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reu-countdown { scroll-margin: 0; }
+}

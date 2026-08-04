@@ -1,0 +1,47 @@
+{%- comment -%}
+  Compact product card (Products index + Shop the REÚ range).
+  Params:
+    - product (required)
+    - heading_tag: 'h2' | 'h3' (default 'h3')
+    - cta_label: optional override
+{%- endcomment -%}
+{%- liquid
+  assign p = product
+  assign tag = heading_tag | default: 'h3'
+  assign cta = cta_label
+  if cta == blank
+    if settings.preorder_mode
+      assign cta = 'Pre-Order →'
+    else
+      assign cta = 'View product →'
+    endif
+  endif
+-%}
+<a class="reu-pdp-card" href="{{ p.url }}" role="listitem">
+  <div class="reu-pdp-card__media">
+    {%- if settings.preorder_mode and p.available -%}
+      <span class="badge badge--preorder reu-pdp-card__badge">{{ 'products.product.preorder' | t }}</span>
+    {%- endif -%}
+    {%- if p.featured_media -%}
+      {{ p.featured_media
+        | image_url: width: 700
+        | image_tag:
+          loading: 'lazy',
+          widths: '280,420,700',
+          sizes: '(min-width:1100px) 22vw, (min-width:750px) 30vw, 45vw',
+          alt: p.title | escape
+      }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  {% render 'reu-product-countdown', product: p, style: 'card' %}
+  <div class="reu-pdp-card__body">
+    <{{ tag }} class="reu-pdp-card__title">{{ p.title }}</{{ tag }}>
+    {%- if p.metafields.custom.flavor != blank -%}
+      <p class="reu-pdp-card__meta">{{ p.metafields.custom.flavor.value | default: p.metafields.custom.flavor }}</p>
+    {%- endif -%}
+    <p class="reu-pdp-card__price">{% render 'price', product: p %}</p>
+    <span class="reu-pdp-card__cta">{{ cta }}</span>
+  </div>
+</a>

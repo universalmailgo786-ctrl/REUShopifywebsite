@@ -20,8 +20,8 @@
     {%- endif -%}
   </span>
   <span class="search-result-card__body">
+    {% render 'reu-product-countdown', product: p, style: 'card' %}
     <span class="search-result-card__title">{{ p.title }}</span>
     <span class="search-result-card__price">{% render 'price', product: p %}</span>
-    {% render 'reu-product-countdown', product: p, style: 'card' %}
   </span>
 </a>
