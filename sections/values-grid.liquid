@@ -5,12 +5,39 @@
       <h2 class="h2">{{ section.settings.heading }}</h2>
     </div>
     <div class="values-grid__list">
-      {%- for block in section.blocks -%}
-        <article class="values-grid__card" {{ block.shopify_attributes }}>
-          <h3 class="values-grid__title">{{ block.settings.title }}</h3>
-          <p class="values-grid__text">{{ block.settings.text }}</p>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <article class="values-grid__card" {{ block.shopify_attributes }}>
+            <h3 class="values-grid__title">{{ block.settings.title }}</h3>
+            <p class="values-grid__text">{{ block.settings.text }}</p>
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        <article class="values-grid__card">
+          <h3 class="values-grid__title">Quality</h3>
+          <p class="values-grid__text">We choose products and partners with care and publish only verified product information.</p>
         </article>
-      {%- endfor -%}
+        <article class="values-grid__card">
+          <h3 class="values-grid__title">Transparency</h3>
+          <p class="values-grid__text">We make ingredients, directions, policies and expectations easy to understand.</p>
+        </article>
+        <article class="values-grid__card">
+          <h3 class="values-grid__title">Innovation</h3>
+          <p class="values-grid__text">We look for smarter, more enjoyable ways to support modern routines.</p>
+        </article>
+        <article class="values-grid__card">
+          <h3 class="values-grid__title">Simplicity</h3>
+          <p class="values-grid__text">We remove unnecessary friction from choosing, using and reordering wellness products.</p>
+        </article>
+        <article class="values-grid__card">
+          <h3 class="values-grid__title">Empowerment</h3>
+          <p class="values-grid__text">We offer guidance that supports women’s choices without pressure or unrealistic promises.</p>
+        </article>
+        <article class="values-grid__card">
+          <h3 class="values-grid__title">Confidence</h3>
+          <p class="values-grid__text">We provide clear, thoughtful guidance so women can choose and enjoy their wellness routines with confidence.</p>
+        </article>
+      {%- endif -%}
     </div>
     {%- if section.settings.cta_label != blank -%}
       <div class="text-center" style="margin-top:var(--space-lg)"><a class="btn" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label }}</a></div>
@@ -40,9 +67,9 @@
     "name": "Values grid",
     "blocks": [
       { "type": "value", "settings": { "title": "Quality", "text": "We choose products and partners with care and publish only verified product information." } },
-      { "type": "value", "settings": { "title": "Transparency", "text": "We make ingredients, directions, policies, and expectations easy to understand." } },
+      { "type": "value", "settings": { "title": "Transparency", "text": "We make ingredients, directions, policies and expectations easy to understand." } },
       { "type": "value", "settings": { "title": "Innovation", "text": "We look for smarter, more enjoyable ways to support modern routines." } },
-      { "type": "value", "settings": { "title": "Simplicity", "text": "We remove unnecessary friction from choosing, using, and reordering wellness products." } },
+      { "type": "value", "settings": { "title": "Simplicity", "text": "We remove unnecessary friction from choosing, using and reordering wellness products." } },
       { "type": "value", "settings": { "title": "Empowerment", "text": "We offer guidance that supports women’s choices without pressure or unrealistic promises." } },
       { "type": "value", "settings": { "title": "Confidence", "text": "We provide clear, thoughtful guidance so women can choose and enjoy their wellness routines with confidence." } }
     ]
