@@ -17,10 +17,10 @@
         "body": "Keep your daily favourites at home in full-size pouches, take convenient single serves with you, or build a routine with both.",
         "fallback_asset": "reu-collections-banner.jpg",
         "show_comparison": true,
-        "closing_heading": "Still deciding?",
-        "closing_body": "Tell us what your day looks like and we will recommend a product and format to begin with.",
-        "closing_cta_label": "Find My REÚ Routine",
-        "closing_cta_link": "shopify://pages/find-your-reu",
+        "closing_heading": "",
+        "closing_body": "",
+        "closing_cta_label": "",
+        "closing_cta_link": "",
         "bg_scheme": "bg-sage"
       },
       "blocks": {
@@ -53,9 +53,21 @@
         "pouch",
         "sachet"
       ]
+    },
+    "quiz_callout": {
+      "type": "quiz-teaser",
+      "settings": {
+        "eyebrow": "NOT SURE WHERE TO START?",
+        "heading": "Find Your REÚ Routine",
+        "body": "Answer a few simple questions about your wellness goals and discover the products that best fit your everyday routine.",
+        "cta_label": "Find My Routine",
+        "cta_link": "shopify://pages/find-your-reu",
+        "microcopy": "Personalized product guidance, not medical advice."
+      }
     }
   },
   "order": [
-    "hub"
+    "hub",
+    "quiz_callout"
   ]
 }

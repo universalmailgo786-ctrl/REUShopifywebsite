@@ -20,7 +20,18 @@
         "limit": 4,
         "bg_scheme": "bg-cream"
       }
+    },
+    "quiz_callout": {
+      "type": "quiz-teaser",
+      "settings": {
+        "eyebrow": "NOT SURE WHERE TO START?",
+        "heading": "Find Your REÚ Routine",
+        "body": "Answer a few simple questions about your wellness goals and discover the products that best fit your everyday routine.",
+        "cta_label": "Find My Routine",
+        "cta_link": "shopify://pages/find-your-reu",
+        "microcopy": "Personalized product guidance, not medical advice."
+      }
     }
   },
-  "order": ["main", "recommendations"]
+  "order": ["main", "recommendations", "quiz_callout"]
 }

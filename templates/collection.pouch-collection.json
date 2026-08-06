@@ -12,15 +12,28 @@
     "main": {
       "type": "main-collection",
       "settings": {
+        "show_quiz_strip": false,
         "eyebrow": "POUCH COLLECTION",
         "heading": "Your everyday ritual, ready when you are.",
         "body": "Explore full-size REÚ favourites created for a consistent, great-tasting wellness routine at home.",
         "grid_heading": "Find your pouch",
         "grid_body": "Start with your goal, then choose the flavour you will look forward to."
       }
+    },
+    "quiz_callout": {
+      "type": "quiz-teaser",
+      "settings": {
+        "eyebrow": "NOT SURE WHERE TO START?",
+        "heading": "Find Your REÚ Routine",
+        "body": "Answer a few simple questions about your wellness goals and discover the products that best fit your everyday routine.",
+        "cta_label": "Find My Routine",
+        "cta_link": "shopify://pages/find-your-reu",
+        "microcopy": "Personalized product guidance, not medical advice."
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "quiz_callout"
   ]
 }

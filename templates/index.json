@@ -201,10 +201,10 @@
     "quiz": {
       "type": "quiz-teaser",
       "settings": {
-        "eyebrow": "Find your RE\u00da",
-        "heading": "Not sure where\nto begin?",
-        "body": "Answer a few quick questions about your goals, lifestyle, and preferences. We\u2019ll guide you toward the products that best match what you want from your daily wellness routine.",
-        "cta_label": "Take the 60-Second Quiz",
+        "eyebrow": "NOT SURE WHERE TO START?",
+        "heading": "Find Your RE\u00da Routine",
+        "body": "Answer a few simple questions about your wellness goals and discover the products that best fit your everyday routine.",
+        "cta_label": "Find My Routine",
         "cta_link": "shopify://pages/find-your-reu",
         "microcopy": "Personalized product guidance, not medical advice."
       }

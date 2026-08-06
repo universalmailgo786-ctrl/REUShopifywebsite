@@ -21,9 +21,21 @@
         "success_message": "Thank you—your message has been received. A member of the REÚ team will reply using the email address you provided.",
         "error_message": "We could not send your message. Check the highlighted fields and try again. If the problem continues, contact us using the support email shown on this page."
       }
+    },
+    "quiz_callout": {
+      "type": "quiz-teaser",
+      "settings": {
+        "eyebrow": "NOT SURE WHERE TO START?",
+        "heading": "Find Your REÚ Routine",
+        "body": "Answer a few simple questions about your wellness goals and discover the products that best fit your everyday routine.",
+        "cta_label": "Find My Routine",
+        "cta_link": "shopify://pages/find-your-reu",
+        "microcopy": "Personalized product guidance, not medical advice."
+      }
     }
   },
   "order": [
-    "contact"
+    "contact",
+    "quiz_callout"
   ]
 }

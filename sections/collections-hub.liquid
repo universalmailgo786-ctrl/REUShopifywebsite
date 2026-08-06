@@ -132,17 +132,21 @@
       </div>
     {%- endif -%}
 
-    <div class="section-head section-head--center" style="margin-top:var(--space-xl)">
-      <h2 class="h3">{{ section.settings.closing_heading | default: 'Still deciding?' }}</h2>
-      {%- if section.settings.closing_body != blank -%}
-        <p class="lede" style="margin-top:.75rem;max-width:40rem;margin-inline:auto">{{ section.settings.closing_body }}</p>
-      {%- endif -%}
-      {%- if section.settings.closing_cta_label != blank -%}
-        <div style="margin-top:1.25rem">
-          <a class="btn" href="{{ section.settings.closing_cta_link | default: pages['find-your-reu'].url | default: '/pages/find-your-reu' }}">{{ section.settings.closing_cta_label }} <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a>
-        </div>
-      {%- endif -%}
-    </div>
+    {%- if section.settings.closing_heading != blank or section.settings.closing_body != blank or section.settings.closing_cta_label != blank -%}
+      <div class="section-head section-head--center" style="margin-top:var(--space-xl)">
+        {%- if section.settings.closing_heading != blank -%}
+          <h2 class="h3">{{ section.settings.closing_heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.closing_body != blank -%}
+          <p class="lede" style="margin-top:.75rem;max-width:40rem;margin-inline:auto">{{ section.settings.closing_body }}</p>
+        {%- endif -%}
+        {%- if section.settings.closing_cta_label != blank -%}
+          <div style="margin-top:1.25rem">
+            <a class="btn" href="{{ section.settings.closing_cta_link | default: pages['find-your-reu'].url | default: pages.quiz.url | default: '/pages/find-your-reu' }}">{{ section.settings.closing_cta_label }} <span class="btn__arrow">{% render 'icon', name: 'arrow' %}</span></a>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
   </div>
   </div>
 </section>

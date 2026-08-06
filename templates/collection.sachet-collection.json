@@ -12,15 +12,28 @@
     "main": {
       "type": "main-collection",
       "settings": {
+        "show_quiz_strip": false,
         "eyebrow": "SACHET COLLECTION",
         "heading": "Your routine, wherever life takes you.",
         "body": "Slip a single-serve REÚ sachet into your work bag, gym bag or carry-on and keep your routine moving.",
         "grid_heading": "Find your sachet",
         "grid_body": "Choose the support and flavour that fit the way you move through your day."
       }
+    },
+    "quiz_callout": {
+      "type": "quiz-teaser",
+      "settings": {
+        "eyebrow": "NOT SURE WHERE TO START?",
+        "heading": "Find Your REÚ Routine",
+        "body": "Answer a few simple questions about your wellness goals and discover the products that best fit your everyday routine.",
+        "cta_label": "Find My Routine",
+        "cta_link": "shopify://pages/find-your-reu",
+        "microcopy": "Personalized product guidance, not medical advice."
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "quiz_callout"
   ]
 }

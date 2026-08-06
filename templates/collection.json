@@ -12,16 +12,28 @@
     "main": {
       "type": "main-collection",
       "settings": {
-        "show_quiz_strip": true,
+        "show_quiz_strip": false,
         "eyebrow": "SHOP REÚ",
         "heading": "Wellness that fits your day.",
         "body": "Explore great-tasting daily wellness products created for women. Shop by goal, flavour or format and find the routine that feels right for you.",
         "grid_heading": "Find your everyday essentials",
         "grid_body": "Choose the goal, flavour and format that fit naturally into your routine."
       }
+    },
+    "quiz_callout": {
+      "type": "quiz-teaser",
+      "settings": {
+        "eyebrow": "NOT SURE WHERE TO START?",
+        "heading": "Find Your REÚ Routine",
+        "body": "Answer a few simple questions about your wellness goals and discover the products that best fit your everyday routine.",
+        "cta_label": "Find My Routine",
+        "cta_link": "shopify://pages/find-your-reu",
+        "microcopy": "Personalized product guidance, not medical advice."
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "quiz_callout"
   ]
 }

@@ -192,21 +192,21 @@
         "q17"
       ]
     },
-    "cta": {
-      "type": "page-hero",
+    "quiz_callout": {
+      "type": "quiz-teaser",
       "settings": {
-        "heading": "Still unsure?",
-        "body": "<p>Find a starting point that fits your day.</p>",
+        "eyebrow": "NOT SURE WHERE TO START?",
+        "heading": "Find Your REÚ Routine",
+        "body": "Answer a few simple questions about your wellness goals and discover the products that best fit your everyday routine.",
         "cta_label": "Find My Routine",
         "cta_link": "shopify://pages/find-your-reu",
-        "bg_scheme": "bg-cream",
-        "use_h1": false
+        "microcopy": "Personalized product guidance, not medical advice."
       }
     }
   },
   "order": [
     "hero",
     "faq",
-    "cta"
+    "quiz_callout"
   ]
 }
